@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="width=device-width,user-scalable=no" name="viewport"/>
+        <title>BattleCity</title>
+        <style>
+            * {
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            .app {
+                margin-top: 50px;
+                width: 512px;
+                height: 448px;
+                position: relative;
+                background: #000000;
+                overflow: hidden;
+            }
+
+            .button {
+                width: 64px;
+                height: 64px;
+                border: none;
+                background: #000000;
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+<body style="background: #ffffff;">
+    <div style="width: 550px; margin-top: 20px;">
+        <span>上：w</span>
+        <span>右：d</span>
+        <span>下：s</span>
+        <span>左：a</span>
+        <span>开始：enter</span>
+        <span>开火：j</span>
+        <span>连发：u</span>
+        <span>作弊：ctrl + m</span>
+    </div>
+    <div id="app" class="app"></div>
+    <div style="width: 512px; margin-top: 50px;">
+        <div style="float: left">
+            <input id="up" class="button" style="margin-left: 50px;" type="button" value="上" />
+            <br />
+            <br />
+            <input id="left" class="button" type="button" value="左" />
+            <input id="right" style="margin-left: 55px;" class="button" type="button" value="右" />
+            <br />
+            <br />
+            <input id="down" class="button" style="margin-left: 50px;" type="button" value="下" />
+        </div>
+        <div style="float: left; padding-top: 50px;">
+            <input id="start" class="button" style="width: 50px; margin-left: 30px;" type="button" value="开始" />
+            <input id="select" class="button" style="width: 50px; margin-left: 30px;" type="button" value="选择" />
+        </div>
+        <div style="float: left; padding-top: 50px;">
+            <input id="a" class="button" style="margin-left: 30px;" type="button" value="A" />
+            <input id="b" class="button" style="margin-left: 30px;" type="button" value="B" />
+        </div>
+    </div>
+
+    <script src="./Scripts/Hammer/hammer.js"></script>
+
+    <script type="text/javascript">
+        window.release = true;
+
+        var up = new Hammer(document.getElementById("up"));
+        up.get("press").set({ time: 0 });
+        up.on("press", function () { Input.keyPress(InputAction.UP); });
+        up.on("pressup", function () { Input.keyRelease(InputAction.UP); });
+
+        var right = new Hammer(document.getElementById("right"));
+        right.get("press").set({ time: 0 });
+        right.on("press", function () { Input.keyPress(InputAction.RIGHT); });
+        right.on("pressup", function () { Input.keyRelease(InputAction.RIGHT); });
+
+        var left = new Hammer(document.getElementById("left"));
+        left.get("press").set({ time: 0 });
+        left.on("press", function () { Input.keyPress(InputAction.LEFT); });
+        left.on("pressup", function () { Input.keyRelease(InputAction.LEFT); });
+
+        var down = new Hammer(document.getElementById("down"));
+        down.get("press").set({ time: 0 });
+        down.on("press", function () { Input.keyPress(InputAction.DOWN); });
+        down.on("pressup", function () { Input.keyRelease(InputAction.DOWN); });
+
+        var start = new Hammer(document.getElementById("start"));
+        start.get("press").set({ time: 0 });
+        start.on("press", function () { Input.keyPress(InputAction.START); });
+        start.on("pressup", function () { Input.keyRelease(InputAction.START); });
+
+        var select = new Hammer(document.getElementById("select"));
+        select.get("press").set({ time: 0 });
+        select.on("press", function () { Input.keyPress(InputAction.SELECT); });
+        select.on("pressup", function () { Input.keyRelease(InputAction.SELECT); });
+
+        var a = new Hammer(document.getElementById("a"));
+        a.get("press").set({ time: 0 });
+        a.on("press", function () { Input.keyPress(InputAction.GAME_A); });
+        a.on("pressup", function () { Input.keyRelease(InputAction.GAME_A); });
+
+        var b = new Hammer(document.getElementById("b"));
+        b.get("press").set({ time: 0 });
+        b.on("press", function () { Input.keyPress(InputAction.GAME_B); });
+        b.on("pressup", function () { Input.keyRelease(InputAction.GAME_B); });
+
+    </script>
+
+    <script src="./Scripts/Basic/Const.js"></script>
+    <script src="./Scripts/Basic/Counter.js"></script>
+    <script src="./Scripts/Basic/ImgLoader.js"></script>
+    <script src="./Scripts/Basic/Input.js"></script>
+    <script src="./Scripts/Basic/ClassFactory.js"></script>
+
+
+    <script src="./Scripts/Basic/Layer.js"></script>
+    <script src="./Scripts/Basic/TileLayer.js"></script>
+    <script src="./Scripts/Basic/Label.js"></script>
+    <script src="./Scripts/Basic/Sprite.js"></script>
+
+    <script src="./Scripts/Object/GameObject.js"></script>
+    <script src="./Scripts/Object/Bonus.js"></script>
+    <script src="./Scripts/Object/Block.js"></script>
+    <script src="./Scripts/Object/Bomb.js"></script>
+    <script src="./Scripts/Object/Bullet.js"></script>
+    <script src="./Scripts/Object/Tank.js"></script>
+
+    <script src="./Scripts/Map.js"></script>
+
+    <script src="./Scripts/UI/UIBase.js"></script>
+    <script src="./Scripts/UI/OpeningUI.js"></script>
+    <script src="./Scripts/UI/StageUI.js"></script>
+    <script src="./Scripts/UI/ScoreUI.js"></script>
+    <script src="./Scripts/UI/GameUI.js"></script>
+    <script src="./Scripts/UI/EndingUI.js"></script>
+
+    <script src="./Scripts/App.js"></script>
+
+    <script type="text/javascript">
+        App.run();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3B68D90-A260-48AB-8CFF-A460F54F683B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Game</RootNamespace>
+    <AssemblyName>Game</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BattleCity\Images\Boom.png" />
+    <Content Include="BattleCity\Images\Frag.png" />
+    <Content Include="BattleCity\Images\Map\1.jpg" />
+    <Content Include="BattleCity\Images\Map\10.jpg" />
+    <Content Include="BattleCity\Images\Map\11.jpg" />
+    <Content Include="BattleCity\Images\Map\12.jpg" />
+    <Content Include="BattleCity\Images\Map\13.jpg" />
+    <Content Include="BattleCity\Images\Map\14.jpg" />
+    <Content Include="BattleCity\Images\Map\15.jpg" />
+    <Content Include="BattleCity\Images\Map\16.jpg" />
+    <Content Include="BattleCity\Images\Map\17.jpg" />
+    <Content Include="BattleCity\Images\Map\18.jpg" />
+    <Content Include="BattleCity\Images\Map\19.jpg" />
+    <Content Include="BattleCity\Images\Map\2.jpg" />
+    <Content Include="BattleCity\Images\Map\20.jpg" />
+    <Content Include="BattleCity\Images\Map\21.jpg" />
+    <Content Include="BattleCity\Images\Map\22.jpg" />
+    <Content Include="BattleCity\Images\Map\23.jpg" />
+    <Content Include="BattleCity\Images\Map\24.jpg" />
+    <Content Include="BattleCity\Images\Map\25.jpg" />
+    <Content Include="BattleCity\Images\Map\26.jpg" />
+    <Content Include="BattleCity\Images\Map\27.jpg" />
+    <Content Include="BattleCity\Images\Map\28.jpg" />
+    <Content Include="BattleCity\Images\Map\29.jpg" />
+    <Content Include="BattleCity\Images\Map\3.jpg" />
+    <Content Include="BattleCity\Images\Map\30.jpg" />
+    <Content Include="BattleCity\Images\Map\31.jpg" />
+    <Content Include="BattleCity\Images\Map\32.jpg" />
+    <Content Include="BattleCity\Images\Map\33.jpg" />
+    <Content Include="BattleCity\Images\Map\34.jpg" />
+    <Content Include="BattleCity\Images\Map\35.jpg" />
+    <Content Include="BattleCity\Images\Map\4.jpg" />
+    <Content Include="BattleCity\Images\Map\5.jpg" />
+    <Content Include="BattleCity\Images\Map\6.jpg" />
+    <Content Include="BattleCity\Images\Map\8.jpg" />
+    <Content Include="BattleCity\Images\Map\9.jpg" />
+    <Content Include="BattleCity\Images\Map\background.png" />
+    <Content Include="BattleCity\Images\Misc.png" />
+    <Content Include="BattleCity\Images\Tank.png" />
+    <Content Include="BattleCity\Images\Terr.png" />
+    <Content Include="BattleCity\Images\UI.png" />
+    <Content Include="BattleCity\Index.html" />
+    <Content Include="BattleCity\Scripts\App.js" />
+    <Content Include="BattleCity\Scripts\Basic\ClassFactory.js" />
+    <Content Include="BattleCity\Scripts\Basic\Const.js" />
+    <Content Include="BattleCity\Scripts\Basic\Counter.js" />
+    <Content Include="BattleCity\Scripts\Basic\ImgLoader.js" />
+    <Content Include="BattleCity\Scripts\Basic\Input.js" />
+    <Content Include="BattleCity\Scripts\Basic\Label.js" />
+    <Content Include="BattleCity\Scripts\Basic\Layer.js" />
+    <Content Include="BattleCity\Scripts\Basic\Sprite.js" />
+    <Content Include="BattleCity\Scripts\Basic\TileLayer.js" />
+    <Content Include="BattleCity\Scripts\Hammer\hammer.js" />
+    <Content Include="BattleCity\Scripts\Map.js" />
+    <Content Include="BattleCity\Scripts\Object\Block.js" />
+    <Content Include="BattleCity\Scripts\Object\Bomb.js" />
+    <Content Include="BattleCity\Scripts\Object\Bonus.js" />
+    <Content Include="BattleCity\Scripts\Object\Bullet.js" />
+    <Content Include="BattleCity\Scripts\Object\GameObject.js" />
+    <Content Include="BattleCity\Scripts\Object\Tank.js" />
+    <Content Include="BattleCity\Scripts\QUnit\qunit-1.15.0.css" />
+    <Content Include="BattleCity\Scripts\QUnit\qunit-1.15.0.js" />
+    <Content Include="BattleCity\Scripts\Test\ClassFactoryTest.js" />
+    <Content Include="BattleCity\Scripts\Test\LayerTest.js" />
+    <Content Include="BattleCity\Scripts\UI\EndingUI.js" />
+    <Content Include="BattleCity\Scripts\UI\GameUI.js" />
+    <Content Include="BattleCity\Scripts\UI\OpeningUI.js" />
+    <Content Include="BattleCity\Scripts\UI\ScoreUI.js" />
+    <Content Include="BattleCity\Scripts\UI\StageUI.js" />
+    <Content Include="BattleCity\Scripts\UI\UIBase.js" />
+    <Content Include="BattleCity\UI\EndingUI.html" />
+    <Content Include="BattleCity\UI\GameUI.html" />
+    <Content Include="BattleCity\UI\Map.html" />
+    <Content Include="BattleCity\UI\OpeningUI.html" />
+    <Content Include="BattleCity\UI\ScoreUI.html" />
+    <Content Include="BattleCity\UI\StageUI.html" />
+    <Content Include="BattleCity\UI\Test.html" />
+    <Content Include="SuperMario\Images\Enemies.png" />
+    <Content Include="SuperMario\Images\MarioBros4.png" />
+    <Content Include="SuperMario\Images\Items.png" />
+    <Content Include="SuperMario\Images\MarioBros.png" />
+    <Content Include="SuperMario\Images\TileSet.png" />
+    <Content Include="SuperMario\Images\World1_1.png" />
+    <Content Include="SuperMario\Scripts\App.js" />
+    <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
+    <Content Include="SuperMario\Scripts\Basic\Const.js" />
+    <Content Include="SuperMario\Scripts\Basic\Counter.js" />
+    <Content Include="SuperMario\Scripts\Basic\ImgLoader.js" />
+    <Content Include="SuperMario\Scripts\Basic\Input.js" />
+    <Content Include="SuperMario\Scripts\Basic\Label.js" />
+    <Content Include="SuperMario\Scripts\Basic\Layer.js" />
+    <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
+    <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
+    <Content Include="SuperMario\Scripts\Hammer\hammer.js" />
+    <Content Include="SuperMario\Scripts\Object\Enemy.js" />
+    <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
+    <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.css" />
+    <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.js" />
+    <Content Include="SuperMario\Scripts\UI\UIBase.js" />
+    <Content Include="SuperMario\UI\TestUI.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SuperMario\Scripts\Test\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:26158/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

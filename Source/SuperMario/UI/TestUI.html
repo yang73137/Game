@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+         #app {
+             margin-top: 200px;
+             width: 512px;
+             height: 448px;
+             position: relative;
+             background: #000000;
+             overflow: hidden;
+         }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script src="../Scripts/Basic/ClassFactory.js"></script>
+    <script src="../Scripts/Basic/Const.js"></script>
+    <script src="../Scripts/Basic/Counter.js"></script>
+    <script src="../Scripts/Basic/Input.js"></script>
+    <script src="../Scripts/Basic/Layer.js"></script>
+    <script src="../Scripts/Basic/Sprite.js"></script>
+    <script src="../Scripts/Basic/Label.js"></script>
+    <script src="../Scripts/Object/MarioBros.js"></script>
+    <script src="../Scripts/Object/Enemy.js"></script>
+    
+    <script type="text/javascript">
+
+        var app = document.getElementById("app");
+
+        var world = new Layer();
+        world.setSize(512, 448);
+        world.setBackgroundImage("../Images/World1_1.png");
+        world.setBackgroundPosition(0, 0);
+        world.show();
+        world.appendTo(app);
+
+        var mario = new MarioBors();
+        mario.setPosition(200, 338);
+
+        var enemy = new Enemy();
+        enemy.setPosition(480, 370);
+
+        setInterval(function () {
+enemy.update();
+            mario.update();
+            
+        }, 16);
+        
+    </script>
+</body>
+</html>
