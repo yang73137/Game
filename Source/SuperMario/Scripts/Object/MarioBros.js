@@ -128,13 +128,15 @@
             this.speed = 2;
             this.moveSprite.setFrameCounter(4);
         }
-
+        
+        world.scrolling = false;
         if (Input.isPressed(InputAction.RIGHT)) {
             if (!this.jumpingUp && !this.jumpingDown) {
                 this.faceToRight = true;
                 this.moveSprite.setFrameSequence([1, 2, 3]);
                 this.currentSprite = this.moveSprite;
             }
+            
             if (!this.squating) {
                 this.x += this.speed;
                 if (this.x > 220) {
@@ -143,7 +145,7 @@
                         world.setBackgroundX(6784 - 512);
                     } else {
                         this.x = 220;
-                        enemy.speed = 1 + this.speed;
+                        world.scrolling = true;
                     }
                 }
             }
