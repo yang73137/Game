@@ -1,4 +1,4 @@
-﻿Enemy = ClassFactory.createClass({
+﻿Enemy = ClassFactory.createClass(GameObject, {
     init: function () {
 
         this.x = 0;

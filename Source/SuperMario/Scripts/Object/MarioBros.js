@@ -1,4 +1,4 @@
-﻿MarioBors = ClassFactory.createClass({
+﻿MarioBors = ClassFactory.createClass(GameObject, {
     init: function () {
 
         this.jumping = false;
