@@ -32,6 +32,7 @@
     setFrameOffset: function (x, y) {
         this.frameOffsetX = x;
         this.frameOffsetY = y;
+        this.updateFrame();
     },
     setFrameCounter: function (count) {
         this.frameCounter.setCount(count);

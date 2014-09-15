@@ -72,6 +72,7 @@
         this.setBackgroundX(y);
     },
     setBackgroundImage: function (src) {
+        this.backgroundImage = src;
         this.style.backgroundImage = "url(" + src + ")";
     },
     setBackground: function (value) {

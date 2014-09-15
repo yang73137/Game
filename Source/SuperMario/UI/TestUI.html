@@ -31,6 +31,7 @@
     <script src="../Scripts/Object/GameObject.js"></script>
     <script src="../Scripts/Object/MarioBros.js"></script>
     <script src="../Scripts/Object/Enemy.js"></script>
+    <script src="../Scripts/Object/Item.js"></script>
     
     <script type="text/javascript">
 
@@ -44,13 +45,17 @@
         world.appendTo(app);
 
         var mario = new MarioBors();
-        mario.setPosition(200, 338);
+        mario.setPosition(50, 370);
+        
+        var item = new Item();
+        item.setPosition(300, 370);
 
         var enemy = new Enemy();
         enemy.setPosition(480, 370);
 
         setInterval(function () {
-enemy.update();
+            item.update();
+            enemy.update();
             mario.update();
             
         }, 16);
