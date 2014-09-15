@@ -137,6 +137,7 @@
     <Content Include="SuperMario\Scripts\Hammer\hammer.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
+    <Content Include="SuperMario\Scripts\Object\Item.js" />
     <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.css" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.js" />
