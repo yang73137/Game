@@ -6,10 +6,6 @@
 
         // 帧属性
         this.frameIndex = -1;
-        this.frameCols = 0;
-        this.frameRows = 0;
-        this.frameOffsetX = 0;
-        this.frameOffsetY = 0;
         this.frameSequence = [];
 
         // 重复计数器，默认值播放1次
@@ -51,7 +47,7 @@
         }
     },
     moveToNextFrame: function () {
-
+        
         if (this.frameCounter.countdown()) {
             return true;
         }
@@ -87,14 +83,12 @@
     },
     updateFrame: function () {
         var currentFrame = this.frameSequence[this.frameIndex];
-        //var col = (currentFrame % this.frameCols);
-        //var row = (currentFrame / this.frameRows) >> 0;
+        if (!currentFrame || currentFrame.x === undefined || currentFrame.y === undefined) {
+            return;
+        }
 
-        //var left = -col * this.width;
-        //var top = -row * this.height;
-        
-        var left = -this.frameOffsetX - currentFrame * this.width;
-        var top = -this.frameOffsetY;
+        var left = -currentFrame.x;
+        var top = -currentFrame.y;
 
         this.style.backgroundPositionX = isNaN(left) ? 0 : left + "px";
         this.style.backgroundPositionY = isNaN(top) ? 0 : top + "px";

@@ -11,8 +11,7 @@
         this.normalSprite.setRepeat(0);
         this.normalSprite.setFrameCounter(5);
         this.normalSprite.setSize(32, 32);
-        this.normalSprite.setFrameOffset(0, 32);
-        this.normalSprite.setFrameSequence([0, 36]);
+        this.normalSprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
         this.normalSprite.show();
 
         world.append(this.normalSprite);
@@ -33,21 +32,12 @@
         this.normalSprite.setPosition(this.x, this.y);
         this.normalSprite.moveToNextFrame();
 
-        if (world.scrolling) {
-            this.onScroll();
-        }
-
         this.x -= this.speed;
         this.normalSprite.setX(this.x);
         if (this.normalSprite.collidesWith(mario.currentSprite)) {
             this.hit = true;
             this.normalSprite.hide();
             mario.state = MarioState.ChangingBig;
-            
         }
-    },
-    onScroll: function () {
-        this.x -= mario.speed;
-        this.normalSprite.setX(this.x);
     }
 });

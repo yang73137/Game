@@ -11,16 +11,14 @@
         this.normalSprite.setRepeat(0);
         this.normalSprite.setFrameCounter(5);
         this.normalSprite.setSize(32, 32);
-        this.normalSprite.setFrameOffset(0, 32);
-        this.normalSprite.setFrameSequence([0, 1]);
+        this.normalSprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
         this.normalSprite.show();
 
         this.deadSprite = new Sprite();
         this.deadSprite.setBackgroundImage("../Images/Enemies.png");
         this.deadSprite.setRepeat(0);
         this.deadSprite.setSize(32, 16);
-        this.deadSprite.setFrameOffset(64, 48);
-        this.deadSprite.setFrameSequence([0]);
+        this.deadSprite.setFrameSequence([{x:64, y: 48}]);
         this.deadSprite.show();
 
         world.append(this.normalSprite);
@@ -39,7 +37,6 @@
         this.y = y;
     },
     update: function () {
-
         this.normalSprite.hide();
         this.deadSprite.hide();
 

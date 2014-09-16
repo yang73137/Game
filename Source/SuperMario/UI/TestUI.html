@@ -18,48 +18,49 @@
          }
     </style>
 </head>
-<body>
-    <div id="app"></div>
+    <body>
+        <div style="width: 20px; height: 32px; background: url(../Images/TileSet.png) repeat 0 0; "></div>
+        <div id="app"></div>
     
-    <script src="../Scripts/Basic/ClassFactory.js"></script>
-    <script src="../Scripts/Basic/Const.js"></script>
-    <script src="../Scripts/Basic/Counter.js"></script>
-    <script src="../Scripts/Basic/Input.js"></script>
-    <script src="../Scripts/Basic/Layer.js"></script>
-    <script src="../Scripts/Basic/Sprite.js"></script>
-    <script src="../Scripts/Basic/Label.js"></script>
-    <script src="../Scripts/Object/GameObject.js"></script>
-    <script src="../Scripts/Object/MarioBros.js"></script>
-    <script src="../Scripts/Object/Enemy.js"></script>
-    <script src="../Scripts/Object/Item.js"></script>
+        <script src="../Scripts/Basic/ClassFactory.js"></script>
+        <script src="../Scripts/Basic/Const.js"></script>
+        <script src="../Scripts/Basic/Counter.js"></script>
+        <script src="../Scripts/Basic/Input.js"></script>
+        <script src="../Scripts/Basic/Layer.js"></script>
+        <script src="../Scripts/Basic/Sprite.js"></script>
+        <script src="../Scripts/Basic/Label.js"></script>
+        <script src="../Scripts/Object/GameObject.js"></script>
+        <script src="../Scripts/Object/MarioBros.js"></script>
+        <script src="../Scripts/Object/Enemy.js"></script>
+        <script src="../Scripts/Object/Item.js"></script>
     
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        var app = document.getElementById("app");
+            var app = document.getElementById("app");
 
-        var world = new Layer();
-        world.setSize(6784, 448);
-        world.setBackgroundImage("../Images/World1_1.png");
-        world.setBackgroundPosition(0, 0);
-        world.show();
-        world.appendTo(app);
+            var world = new Layer();
+            world.setSize(6784, 448);
+            world.setBackgroundImage("../Images/World1_1.png");
+            world.setBackgroundPosition(0, 0);
+            world.show();
+            world.appendTo(app);
 
-        var mario = new MarioBors();
-        mario.setPosition(50, 370);
+            var mario = new MarioBors();
+            mario.setPosition(50, 370);
         
-        var item = new Item();
-        item.setPosition(300, 370);
+            var item = new Item();
+            item.setPosition(300, 370);
 
-        var enemy = new Enemy();
-        enemy.setPosition(480, 370);
+            var enemy = new Enemy();
+            enemy.setPosition(480, 370);
 
-        setInterval(function () {
-            item.update();
-            enemy.update();
-            mario.update();
+            setInterval(function () {
+                item.update();
+                enemy.update();
+                mario.update();
             
-        }, 16);
+            }, 16);
         
-    </script>
-</body>
+        </script>
+    </body>
 </html>

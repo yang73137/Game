@@ -4,6 +4,14 @@
     Flower: 3
 };
 
+MarioSprite = {
+    Stand: 1,
+    Move: 2,
+    Jump: 3,
+    Squat: 4,
+    Dead: 5
+};
+
 MarioState = {
     Live: 1,
     ChangingSmall: 2,
@@ -40,56 +48,28 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.jumpCounter = new Counter(2, true, true);
 
-        this.standSprite = new Sprite();
-        this.standSprite.setBackgroundImage("../Images/MarioBros4.png");
-        this.standSprite.setFrameSequence([0]);
-        this.standSprite.setRepeat([0]);
-        this.standSprite.show();
-        this.standSprite.start();
-        world.append(this.standSprite);
-        
-        this.squatSprite = new Sprite();
-        this.squatSprite.setBackgroundImage("../Images/MarioBros4.png");
-        this.squatSprite.setFrameSequence([6]);
-        this.squatSprite.setRepeat([0]);
-        this.squatSprite.show();
-        this.squatSprite.start();
-        world.append(this.squatSprite);
-        
-        this.jumpSprite = new Sprite();
-        this.jumpSprite.setBackgroundImage("../Images/MarioBros4.png");
-        this.jumpSprite.setFrameOffset(0, 0);
-        this.jumpSprite.setRepeat([0]);
-        this.jumpSprite.show();
-        this.jumpSprite.start();
-        world.append(this.jumpSprite);
+        this.currentSprite = new Sprite();
+        this.currentSprite.setBackgroundImage("../Images/MarioBros4.png");
+        this.currentSprite.setFrameSequence([{ x: 0, y: 64 }]);
+        this.currentSprite.setRepeat([0]);
+        this.currentSprite.show();
+        this.currentSprite.start();
+        world.append(this.currentSprite);
 
-        this.moveSprite = new Sprite();
-        this.moveSprite.setBackgroundImage("../Images/MarioBros4.png");
-        this.moveSprite.setFrameSequence([1, 2, 3]);
-        this.moveSprite.setRepeat(0);
-        this.moveSprite.setFrameCounter(4);
-        this.moveSprite.show();
-        this.moveSprite.start();
-        world.append(this.moveSprite);
+        this.spriteType = MarioSprite.Stand;
 
-        this.currentSprite = this.standSprite;
-        this.type = MarioBors.Small;
+        this.type = MarioType.Small;
         this.setType(MarioType.Small);
+        this.setSprite(MarioSprite.Stand);
 
         this.changeCounter = new Counter(30, false, true);
         this.changeCounter.setEnabled(true);
 
     },
     update: function () {
-        this.standSprite.hide();
-        this.squatSprite.hide();
-        this.jumpSprite.hide();
-        this.moveSprite.hide();
 
-        this.standSprite.setFrameSequence([this.faceToRight ? 0 : 41]);
-        this.currentSprite = this.standSprite;
-        
+        this.currentSprite.hide();
+        var spriteType = MarioSprite.Stand;
 
         if (!this.jumpingUp && !this.jumpingDown) {
             if (Input.isPressed(InputAction.GAME_D)) {
@@ -100,8 +80,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         
         if (this.jumpingUp) {
-            this.jumpSprite.setFrameSequence([this.faceToRight ? 5 : 36]);
-            this.currentSprite = this.jumpSprite;
+            spriteType = MarioSprite.Jump;
             if (Input.isPressed(InputAction.GAME_D)) {
                 this.jumpPressedTime++;
             } else {
@@ -122,31 +101,29 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         
         if (this.jumpingDown) {
-            this.jumpSprite.setFrameSequence([this.faceToRight ? 5 : 36]);
-            this.currentSprite = this.jumpSprite;
+            spriteType = MarioSprite.Jump;
             if (this.y + this.currentSprite.height <= 402) {
-                this.currentSprite = this.jumpSprite;
+                this.spriteType = MarioSprite.Jump;
                 this.y += 7;
             } else {
                 this.y = 402 - this.currentSprite.height;
                 this.jumpingDown = false;
-                this.currentSprite = this.standSprite;
+                this.spriteType = MarioSprite.Stand;
             }
         }
 
         if (Input.isPressed(InputAction.GAME_C)) {
             this.speed = 3;
-            this.moveSprite.setFrameCounter(2);
+            this.currentSprite.setFrameCounter(2);
         } else {
             this.speed = 2;
-            this.moveSprite.setFrameCounter(4);
+            this.currentSprite.setFrameCounter(4);
         }
         
         if (Input.isPressed(InputAction.RIGHT)) {
             if (!this.jumpingUp && !this.jumpingDown) {
                 this.faceToRight = true;
-                this.moveSprite.setFrameSequence([1, 2, 3]);
-                this.currentSprite = this.moveSprite;
+                spriteType = MarioSprite.Move;
             }
             
             if (!this.squating) {
@@ -159,6 +136,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         this.x = -world.x + 220;
                     }
                 }
+                if (this.x + world.x + this.currentSprite.width > 512) {
+                    this.x = -world.x + 512 - this.currentSprite.width;
+                }
             }
         }
         
@@ -166,12 +146,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
             if (!this.jumpingUp && !this.jumpingDown) {
                 this.faceToRight = false;
-                this.moveSprite.setFrameSequence([40, 39, 38]);
-                this.currentSprite = this.moveSprite;
+                spriteType = MarioSprite.Move;
             }
             if (!this.squating) {
                 this.x -= this.speed;
-                this.x = Math.max(this.x, 0);
+                if (this.x + world.x <= 0) {
+                    this.x = -world.x;
+                }
             }
         }
         
@@ -189,21 +170,24 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 this.state = MarioState.Live;
             }
+            spriteType = MarioSprite.Stand;
         }
 
-        this.currentSprite.setPosition(this.x, this.y);
-        
         if (Input.isPressed(InputAction.DOWN) && this.type != MarioType.Small) {
             this.squating = true;
-            this.squatSprite.setFrameSequence([this.faceToRight ? 6 : 35]);
-            this.currentSprite = this.squatSprite;
-            this.currentSprite.setPosition(this.x, this.y + 16);
+            spriteType = MarioSprite.Squat;
         } else {
             this.squating = false;
         }
         
+        this.setSprite(spriteType);
+        this.currentSprite.setPosition(this.x, this.y);
         this.currentSprite.show();
-        this.currentSprite.moveToNextFrame();
+
+        
+        if (!this.currentSprite.moveToNextFrame()) {
+            console.log(1);
+        }
     },
     setPosition: function (x, y) {
         this.x = x;
@@ -211,53 +195,76 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     setType: function (type) {
         if (type == MarioType.Small) {
-            this.standSprite.setSize(32, 32);
-            this.standSprite.setFrameOffset(0, 64);
-            
-            this.jumpSprite.setSize(32, 32);
-            this.jumpSprite.setFrameOffset(0, 64);
-            
-            this.moveSprite.setSize(32, 32);
-            this.moveSprite.setFrameOffset(0, 64);
-            
+            this.currentSprite.setSize(32, 32);
             if (this.type != MarioType.Small) {
                 this.y += 32;
             }
         }
         else if (type == MarioType.Big) {
-            this.standSprite.setSize(32, 64);
-            this.standSprite.setFrameOffset(0, 0);
-            
-            this.squatSprite.setSize(32, 48);
-            this.squatSprite.setFrameOffset(0, 16);
-
-            this.jumpSprite.setSize(32, 64);
-            this.jumpSprite.setFrameOffset(0, 0);
-
-            this.moveSprite.setSize(32, 64);
-            this.moveSprite.setFrameOffset(0, 0);
-            
+            this.currentSprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
             }
         }
         else if (type == MarioType.Flower) {
-            this.standSprite.setSize(32, 64);
-            this.standSprite.setFrameOffset(0, 192);
-
-            this.squatSprite.setSize(32, 48);
-            this.squatSprite.setFrameOffset(0, 192 + 16);
-
-            this.jumpSprite.setSize(32, 64);
-            this.jumpSprite.setFrameOffset(0, 192);
-
-            this.moveSprite.setSize(32, 64);
-            this.moveSprite.setFrameOffset(0, 192);
-            
+            this.currentSprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
             }
         }
         this.type = type;
+    },
+    setSprite: function (spriteType) {
+        if (this.spriteType != spriteType) {
+            this.currentSprite.frameIndex = 0;
+            this.spriteType = spriteType;
+        }
+        switch (spriteType) {
+            case MarioSprite.Stand:
+                this.currentSprite.setFrameCounter(0);
+                if (this.type == MarioType.Small) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 }] : [{ x: 32 * 41, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 0 }] : [{ x: 32 * 41, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 * 3 }] : [{ x: 32 * 41, y: 64 * 3 }]);
+                }
+                break;
+            case MarioSprite.Move:
+                this.currentSprite.setFrameCounter(2);
+                if (this.type == MarioType.Small) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 0 }, { x: 32 * 2, y: 0 }, { x: 32 * 3, y: 0 }] : [{ x: 32 * 40, y: 0 }, { x: 32 * 39, y: 0 }, { x: 32 * 38, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 192 }, { x: 32 * 2, y: 192 }, { x: 32 * 3, y: 192 }] : [{ x: 32 * 40, y: 192 }, { x: 32 * 39, y: 192 }, { x: 32 * 38, y: 192 }]);
+                }
+                break;
+            case MarioSprite.Jump:
+                this.currentSprite.setFrameCounter(0);
+                if (this.type == MarioType.Small) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 5 * 32, y: 64 }] : [{ x: 36 * 32, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 5 * 32, y: 0 }] : [{ x: 36 * 32, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 5 * 32, y: 192 }] : [{ x: 36 * 32, y: 192 }]);
+                }
+                break;
+            case MarioSprite.Squat:
+                this.currentSprite.setFrameCounter(0);
+                if (this.type == MarioType.Big) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 0 }] : [{ x: 35 * 32, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 192 }] : [{ x: 35 * 32, y: 192 }]);
+                }
+                break;
+        }
     }
 });
