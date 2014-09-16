@@ -52,9 +52,6 @@
         this.currentSprite.setPosition(this.x, this.y);
         this.currentSprite.moveToNextFrame();
 
-        if (world.scrolling) {
-            this.onScroll();
-        }
 
         if (this.currentSprite == this.normalSprite) {
             this.x -= 1;
@@ -71,9 +68,5 @@
                 }
             }
         }
-    },
-    onScroll: function() {
-        this.x -= mario.speed;
-        this.currentSprite.setX(this.x);
     }
 });

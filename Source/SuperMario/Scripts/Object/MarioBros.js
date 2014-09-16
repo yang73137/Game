@@ -46,7 +46,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.standSprite.setRepeat([0]);
         this.standSprite.show();
         this.standSprite.start();
-        this.standSprite.appendTo(app);
+        world.append(this.standSprite);
         
         this.squatSprite = new Sprite();
         this.squatSprite.setBackgroundImage("../Images/MarioBros4.png");
@@ -54,7 +54,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.squatSprite.setRepeat([0]);
         this.squatSprite.show();
         this.squatSprite.start();
-        this.squatSprite.appendTo(app);
+        world.append(this.squatSprite);
         
         this.jumpSprite = new Sprite();
         this.jumpSprite.setBackgroundImage("../Images/MarioBros4.png");
@@ -62,7 +62,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.jumpSprite.setRepeat([0]);
         this.jumpSprite.show();
         this.jumpSprite.start();
-        this.jumpSprite.appendTo(app);
+        world.append(this.jumpSprite);
 
         this.moveSprite = new Sprite();
         this.moveSprite.setBackgroundImage("../Images/MarioBros4.png");
@@ -71,7 +71,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.moveSprite.setFrameCounter(4);
         this.moveSprite.show();
         this.moveSprite.start();
-        this.moveSprite.appendTo(app);
+        world.append(this.moveSprite);
 
         this.currentSprite = this.standSprite;
         this.type = MarioBors.Small;
@@ -142,7 +142,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.moveSprite.setFrameCounter(4);
         }
         
-        world.scrolling = false;
         if (Input.isPressed(InputAction.RIGHT)) {
             if (!this.jumpingUp && !this.jumpingDown) {
                 this.faceToRight = true;
@@ -152,18 +151,15 @@ MarioBors = ClassFactory.createClass(GameObject, {
             
             if (!this.squating) {
                 this.x += this.speed;
-                if (this.x > 220) {
-                    world.setBackgroundX(world.backgroundX + this.speed);
-                    if (world.backgroundX >= 6784 - 512) {
-                        world.setBackgroundX(6784 - 512);
+                if (this.x + world.x > 220) {
+                    if (-world.x >= 6784 - 512) {
+                        world.setX(-(6784 - 512));
                     } else {
-                        this.x = 220;
-                        world.scrolling = true;
+                        world.setX(world.x - this.speed);
+                        this.x = -world.x + 220;
                     }
                 }
             }
-        } else {
-            enemy.speed = 1;
         }
         
         if (Input.isPressed(InputAction.LEFT)) {
