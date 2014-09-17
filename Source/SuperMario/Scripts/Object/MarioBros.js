@@ -35,6 +35,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.currentJumpHeight = 0;
         
         this.speed = 2;
+        this.speedUp = false;
         this.direction = 0;
         
 
@@ -114,10 +115,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         if (Input.isPressed(InputAction.GAME_C)) {
             this.speed = 3;
-            this.currentSprite.setFrameCounter(2);
+            this.speedUp = true;
         } else {
             this.speed = 2;
-            this.currentSprite.setFrameCounter(4);
+            this.speedUp = false;
         }
         
         if (Input.isPressed(InputAction.RIGHT)) {
@@ -233,7 +234,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Move:
-                this.currentSprite.setFrameCounter(2);
+                this.currentSprite.setFrameCounter(this.speedUp ? 2 : 4);
                 if (this.type == MarioType.Small) {
                     this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
                 }
