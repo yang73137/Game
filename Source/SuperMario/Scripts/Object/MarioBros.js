@@ -233,7 +233,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Move:
-                this.currentSprite.setFrameCounter(2);
+                this.currentSprite.setFrameCounter(4);
                 if (this.type == MarioType.Small) {
                     this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
                 }
