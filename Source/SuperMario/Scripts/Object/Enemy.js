@@ -54,7 +54,7 @@
             this.x -= 1;
             this.normalSprite.setX(this.x);
             if (this.normalSprite.collidesWith(mario.currentSprite)) {
-                if (mario.jumpingDown && (mario.y + mario.currentSprite.height < this.y + this.currentSprite.height / 2)) {
+                if ((mario.y + mario.currentSprite.height < this.y + this.currentSprite.height / 2)) {
                     this.currentSprite = this.deadSprite;
                     this.setPosition(this.x, this.y + 16);
                     this.deadCounter.setEnabled(true);

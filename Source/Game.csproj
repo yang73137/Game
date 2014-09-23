@@ -123,6 +123,7 @@
     <Content Include="SuperMario\Images\Items.png" />
     <Content Include="SuperMario\Images\MarioBros.png" />
     <Content Include="SuperMario\Images\TileSet.png" />
+    <Content Include="SuperMario\Images\Brick.png" />
     <Content Include="SuperMario\Images\World1_1.png" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />

@@ -69,7 +69,7 @@
     },
     setBackgroundPosition: function (x, y) {
         this.setBackgroundX(x);
-        this.setBackgroundX(y);
+        this.setBackgroundY(y);
     },
     setBackgroundImage: function (src) {
         this.backgroundImage = src;

@@ -23,13 +23,11 @@ MarioState = {
 MarioBors = ClassFactory.createClass(GameObject, {
     init: function () {
 
-        this.jumping = false;
-        this.jumpPressed = false;
-        this.jumpPressedUp = false;
-
         this.jumpPressedTime = 0;
         this.jumpingUp = false;
-        this.jumpingDown = false;
+        this.falling = true;
+        this.jumpCounter = new Counter(0, false, true);
+        this.jumpCounter.setEnabled(false);
 
         this.maxJumpHeight = 10;
         this.currentJumpHeight = 0;
@@ -46,8 +44,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.faceToRight = true;
         this.squating = false;
-
-        this.jumpCounter = new Counter(2, true, true);
 
         this.currentSprite = new Sprite();
         this.currentSprite.setBackgroundImage("../Images/MarioBros4.png");
@@ -72,13 +68,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.currentSprite.hide();
         var spriteType = MarioSprite.Stand;
 
-        if (!this.jumpingUp && !this.jumpingDown) {
+        if (!this.jumpCounter.enabled && !this.falling) {
             if (Input.isPressed(InputAction.GAME_D)) {
                 this.maxJumpHeight = 55;
                 this.jumpPressedTime = 0;
                 this.jumpingUp = true;
+                this.jumpCounter.setEnabled(true);
             }
         }
+        
+        this.fallDown();
         
         if (this.jumpingUp) {
             spriteType = MarioSprite.Jump;
@@ -88,30 +87,27 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.jumpPressedTime = -1;
             }
             if (this.jumpPressedTime % 9 == 0) {
-                this.maxJumpHeight += 30;
-                
+                this.maxJumpHeight += 40; 
             }
-            this.maxJumpHeight = Math.min(this.maxJumpHeight, 140);
-            this.currentJumpHeight += 6;
-            this.y -= 6; 
-            if (this.currentJumpHeight >= this.maxJumpHeight) {
-                this.currentJumpHeight = 0;
-                this.jumpingUp = false;
-                this.jumpingDown = true;
-            }
-        }
-        
-        if (this.jumpingDown) {
-            spriteType = MarioSprite.Jump;
-            if (this.y + this.currentSprite.height <= 402) {
-                this.spriteType = MarioSprite.Jump;
-                this.y += 7;
-            } else {
-                this.y = 402 - this.currentSprite.height;
-                this.jumpingDown = false;
-                this.spriteType = MarioSprite.Stand;
+            this.maxJumpHeight = Math.min(this.maxJumpHeight, 160);
+            for (var i = 0; i < 6; i++) {
+                this.currentJumpHeight += 1;
+                this.y -= 1;
+                this.currentSprite.y -= 1;
+                for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+                    var block = blocks[blockIndex];
+                    if (this.currentSprite.collidesWith(block) && this.y > block.y) {
+                        this.y = block.y + block.height;
+                        this.jumpingUp = false;
+                    }
+                }
+                if (this.currentJumpHeight >= this.maxJumpHeight) {
+                    this.currentJumpHeight = 0;
+                    this.jumpingUp = false;
+                }
             }
         }
+
 
         if (Input.isPressed(InputAction.GAME_C)) {
             this.speed = 3;
@@ -122,37 +118,62 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         
         if (Input.isPressed(InputAction.RIGHT)) {
-            if (!this.jumpingUp && !this.jumpingDown) {
+            if (!this.jumpingUp && !this.falling) {
                 this.faceToRight = true;
                 spriteType = MarioSprite.Move;
             }
             
             if (!this.squating) {
-                this.x += this.speed;
-                if (this.x + world.x > 220) {
-                    if (-world.x >= 6784 - 512) {
-                        world.setX(-(6784 - 512));
-                    } else {
-                        world.setX(world.x - this.speed);
-                        this.x = -world.x + 220;
+                for (var i = 0; i < this.speed; i++) {
+                    this.x += 1;
+                    this.currentSprite.x += 1;
+                    for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+                        var block = blocks[blockIndex];
+                        if (this.currentSprite.collidesWith(block) && this.currentSprite.x < block.x) {
+                            this.x -= 1;
+                            this.currentSprite.x -= 1;
+                            break;
+                        }
                     }
-                }
-                if (this.x + world.x + this.currentSprite.width > 512) {
-                    this.x = -world.x + 512 - this.currentSprite.width;
+                    if (this.x + world.x > 220) {
+                        if (-world.x >= 6784 - 512) {
+                            world.setX(-(6784 - 512));
+                        } else {
+                            world.setX(world.x - 1);
+                            this.x = -world.x + 220;
+                        }
+                    }
+                    if (this.x + world.x + this.currentSprite.width > 512) {
+                        this.x = -world.x + 512 - this.currentSprite.width;
+                        break;
+                    }
                 }
             }
         }
         
         if (Input.isPressed(InputAction.LEFT)) {
 
-            if (!this.jumpingUp && !this.jumpingDown) {
+            if (!this.jumpingUp && !this.falling) {
                 this.faceToRight = false;
                 spriteType = MarioSprite.Move;
             }
             if (!this.squating) {
-                this.x -= this.speed;
-                if (this.x + world.x <= 0) {
-                    this.x = -world.x;
+                for (var i = 0; i < this.speed; i++) {
+                    this.x -= 1;
+                    this.currentSprite.x -= 1;
+                    for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+                        var block = blocks[blockIndex];
+                        if (this.currentSprite.collidesWith(block) && this.currentSprite.x > block.x) {
+                            this.x += 1;
+                            this.currentSprite.x += 1;
+                            break;
+                        }
+                    }
+                    if (this.x < -world.x) {
+                        this.x = -world.x;
+                        this.currentSprite.x += this.x;
+                        break;
+                    }
                 }
             }
         }
@@ -180,12 +201,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
         } else {
             this.squating = false;
         }
-        
+
         this.setSprite(spriteType);
         this.currentSprite.setPosition(this.x, this.y);
         this.currentSprite.show();
 
-        
         if (!this.currentSprite.moveToNextFrame()) {
             console.log(1);
         }
@@ -266,6 +286,27 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 192 }] : [{ x: 35 * 32, y: 192 }]);
                 }
                 break;
+        }
+    },
+    fallDown: function () {
+        this.falling = true;
+        if (!this.jumpingUp) {
+            for (var i = 0; i < 7; i++) {
+                this.y += 1;
+                this.currentSprite.y = this.y;
+                for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+                    var block = blocks[blockIndex];
+                    if (this.currentSprite.collidesWith(block) && (this.y < block.y)) {
+                        if (!this.jumpCounter.countdown()) {
+                            this.jumpCounter.setEnabled(false);
+                        }
+                        this.y = block.y - this.currentSprite.height;
+                        this.currentSprite.y = this.y;
+                        this.falling = false;
+                        return;
+                    }
+                }
+            }
         }
     }
 });

@@ -53,11 +53,101 @@
             var enemy = new Enemy();
             enemy.setPosition(480, 370);
 
+            var blocks = [];
+
+            var block1 = new Sprite();
+            block1.setSize(2208, 48);
+            block1.setPosition(0, 448 - 48);
+            block1.setBackgroundImage("../Images/TileSet_01_01.png");
+            block1.show();
+            world.append(block1);
+            blocks.push(block1);
+            
+            var block2 = new Sprite();
+            block2.setSize(480, 48);
+            block2.setPosition(2272, 448 - 48);
+            block2.setBackgroundImage("../Images/TileSet_01_01.png");
+            block2.show();
+            world.append(block2);
+            blocks.push(block2);
+            
+            var block3 = new Sprite();
+            block3.setSize(32, 32);
+            block3.setPosition(512, 272);
+            block3.setBackgroundImage("../Images/TileSet.png");
+            block3.setBackgroundPosition(32 * 24, 0);
+            block3.show();
+            world.append(block3);
+            blocks.push(block3);
+            
+            var block4 = new Sprite();
+            block4.setSize(32, 32);
+            block4.setPosition(640, 272);
+            block4.setBackgroundImage("../Images/TileSet.png");
+            block4.setBackgroundPosition(32 * 1, 0);
+            block4.show();
+            world.append(block4);
+            blocks.push(block4);
+            
+            var block5 = new Sprite();
+            block5.setSize(32, 32);
+            block5.setPosition(672, 272);
+            block5.setBackgroundImage("../Images/TileSet.png");
+            block5.setBackgroundPosition(32 * 24, 0);
+            block5.show();
+            world.append(block5);
+            blocks.push(block5);
+            
+            var block6 = new Sprite();
+            block6.setSize(32, 32);
+            block6.setPosition(704, 272);
+            block6.setBackgroundImage("../Images/TileSet.png");
+            block6.setBackgroundPosition(32 * 1, 0);
+            block6.show();
+            world.append(block6);
+            blocks.push(block6);
+            
+            var block6 = new Sprite();
+            block6.setSize(32, 32);
+            block6.setPosition(736, 272);
+            block6.setBackgroundImage("../Images/TileSet.png");
+            block6.setBackgroundPosition(32 * 24, 0);
+            block6.show();
+            world.append(block6);
+            blocks.push(block6);
+            
+            var block7 = new Sprite();
+            block7.setSize(32, 32);
+            block7.setPosition(768, 272);
+            block7.setBackgroundImage("../Images/TileSet.png");
+            block7.setBackgroundPosition(32 * 1, 0);
+            block7.show();
+            world.append(block7);
+            blocks.push(block7);
+            
+            var block8 = new Sprite();
+            block8.setSize(32, 32);
+            block8.setPosition(704, 144);
+            block8.setBackgroundImage("../Images/TileSet.png");
+            block8.setBackgroundPosition(32 * 24, 0);
+            block8.show();
+            world.append(block8);
+            blocks.push(block8);
+            
+            var block9 = new Sprite();
+            block9.setSize(64, 64);
+            block9.setPosition(896, 336);
+            block9.setBackgroundImage("../Images/TileSet.png");
+            block9.setBackgroundPosition(0, 32 * 8);
+            block9.show();
+            world.append(block9);
+            blocks.push(block9);
+
+
             setInterval(function () {
                 item.update();
                 enemy.update();
                 mario.update();
-            
             }, 16);
         
         </script>
