@@ -177,7 +177,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
         }
         
-        if (Input.isPressed(InputAction.RIGHT) || Input.isPressed(InputAction.LEFT) && Input.isPressed(InputAction.GAME_C)) {
+        if ((Input.isPressed(InputAction.RIGHT) || Input.isPressed(InputAction.LEFT)) && Input.isPressed(InputAction.GAME_C)) {
             this.speedUpPressedTime++;
             if (this.speedUpPressedTime == 15) {
                 this.speed = 3;
