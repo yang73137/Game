@@ -91,13 +91,13 @@ Input = function () {
             if (!arrPress[key]) {
                 return false;
             }
-
+            /*
             var iTime = +new Date();
             if (iTime - arrQuery[key] < arrRepeat[key]) {
                 return false;
             }
 
-            arrQuery[key] = iTime;
+            arrQuery[key] = iTime;*/
             return true;
         }
     };

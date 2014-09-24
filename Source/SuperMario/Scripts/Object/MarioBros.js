@@ -24,16 +24,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
     init: function () {
 
         this.jumpPressedTime = 0;
-        this.jumpingUp = false;
+        this.jumping = false;
         this.falling = true;
-        this.jumpCounter = new Counter(0, false, true);
-        this.jumpCounter.setEnabled(false);
 
         this.maxJumpHeight = 10;
         this.currentJumpHeight = 0;
         
         this.speed = 2;
-        this.speedUp = false;
+        this.speedUpLevel = 0;
+        this.speedUpPressedTime = 0;
+        
         this.direction = 0;
         
 
@@ -68,28 +68,36 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.currentSprite.hide();
         var spriteType = MarioSprite.Stand;
 
-        if (!this.jumpCounter.enabled && !this.falling) {
-            if (Input.isPressed(InputAction.GAME_D)) {
-                this.maxJumpHeight = 55;
+        if (Input.isPressed(InputAction.GAME_D)) {
+            if (!this.falling && this.jumpPressedTime == 0) {
+                this.maxJumpHeight = 160;
                 this.jumpPressedTime = 0;
-                this.jumpingUp = true;
-                this.jumpCounter.setEnabled(true);
+                this.jumping = true;
+            }
+        } else {
+            if (!this.falling) {
+                this.jumpPressedTime = 0;
             }
         }
-        
+
         this.fallDown();
         
-        if (this.jumpingUp) {
+        if (this.jumping) {
             spriteType = MarioSprite.Jump;
             if (Input.isPressed(InputAction.GAME_D)) {
                 this.jumpPressedTime++;
-            } else {
-                this.jumpPressedTime = -1;
             }
-            if (this.jumpPressedTime % 9 == 0) {
-                this.maxJumpHeight += 40; 
+            else {
+                if (this.jumpPressedTime >= 30) {
+                    this.maxJumpHeight = 160;
+                }
+                else if (this.jumpPressedTime < 30 && this.jumpPressedTime >= 20) {
+                    this.maxJumpHeight = 120;
+                } else {
+                    this.maxJumpHeight = 80;
+                }
             }
-            this.maxJumpHeight = Math.min(this.maxJumpHeight, 160);
+            this.maxJumpHeight = Math.max(this.currentJumpHeight, this.maxJumpHeight);
             for (var i = 0; i < 6; i++) {
                 this.currentJumpHeight += 1;
                 this.y -= 1;
@@ -98,27 +106,35 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     var block = blocks[blockIndex];
                     if (this.currentSprite.collidesUpWith(block)) {
                         this.y = block.y + block.height;
-                        this.jumpingUp = false;
+                        this.jumping = false;
                     }
                 }
                 if (this.currentJumpHeight >= this.maxJumpHeight) {
                     this.currentJumpHeight = 0;
-                    this.jumpingUp = false;
+                    this.jumping = false;
                 }
             }
         }
 
 
         if (Input.isPressed(InputAction.GAME_C)) {
-            this.speed = 3;
-            this.speedUp = true;
+            this.speedUpPressedTime++;
+            if (this.speedUpPressedTime == 15) {
+                this.speed = 3;
+                this.speedUpLevel = 1;
+            }
+            else if (this.speedUpPressedTime > 25) {
+                this.speed = 4;
+                this.speedUpLevel = 2;
+            }
         } else {
             this.speed = 2;
-            this.speedUp = false;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
         }
         
         if (Input.isPressed(InputAction.RIGHT)) {
-            if (!this.jumpingUp && !this.falling) {
+            if (!this.jumping && !this.falling) {
                 this.faceToRight = true;
                 spriteType = MarioSprite.Move;
             }
@@ -153,7 +169,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         
         if (Input.isPressed(InputAction.LEFT)) {
 
-            if (!this.jumpingUp && !this.falling) {
+            if (!this.jumping && !this.falling) {
                 this.faceToRight = false;
                 spriteType = MarioSprite.Move;
             }
@@ -254,7 +270,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Move:
-                this.currentSprite.setFrameCounter(this.speedUp ? 2 : 4);
+                this.currentSprite.setFrameCounter(3 - this.speedUpLevel);
                 if (this.type == MarioType.Small) {
                     this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
                 }
@@ -290,16 +306,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     fallDown: function () {
         this.falling = true;
-        if (!this.jumpingUp) {
+        if (!this.jumping) {
             for (var i = 0; i < 7; i++) {
                 this.y += 1;
                 this.currentSprite.y = this.y;
                 for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
                     var block = blocks[blockIndex];
                     if (this.currentSprite.collidesDownWith(block)) {
-                        if (!this.jumpCounter.countdown()) {
-                            this.jumpCounter.setEnabled(false);
-                        }
                         this.y = block.y - this.currentSprite.height;
                         this.currentSprite.y = this.y;
                         this.falling = false;
