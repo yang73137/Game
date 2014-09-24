@@ -90,5 +90,52 @@
     },
     appendTo: function (dom) {
         dom.appendChild(this.div);
+    },
+    collidesWith: function (s) {
+        if (!s.visible) {
+            return false;
+        }
+
+        //自身精灵坐标
+        var x1 = this.x;
+        var y1 = this.y;
+        var w1 = this.width;
+        var h1 = this.height;
+
+        //目标精灵
+        var x2 = s.x;
+        var y2 = s.y;
+        var w2 = s.width;
+        var h2 = s.height;
+
+        return (x1 - x2 < w2 && x2 < x1 + w1) && (y1 - y2 < h2 && y2 < y1 + h1);
+    },
+    collidesUpWith: function (s) {
+        if (!this.collidesWith(s)) {
+            return false;
+        }
+
+        return (this.y > s.y) && (this.y < s.y + s.height);
+    },
+    collidesDownWith: function (s) {
+        if (!this.collidesWith(s)) {
+            return false;
+        }
+
+        return (this.y < s.y) && (this.y + this.height > s.y);
+    },
+    collidesLeftWith: function (s) {
+        if (!this.collidesWith(s)) {
+            return false;
+        }
+
+        return this.x > s.x && this.x < s.x + s.width;
+    },
+    collidesRightWith: function (s) {
+        if (!this.collidesWith(s)) {
+            return false;
+        }
+
+        return (this.x < s.x) && (this.x + this.width > s.x);
     }
 });

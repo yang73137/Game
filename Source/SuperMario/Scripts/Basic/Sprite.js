@@ -93,25 +93,6 @@
         this.style.backgroundPositionX = isNaN(left) ? 0 : left + "px";
         this.style.backgroundPositionY = isNaN(top) ? 0 : top + "px";
     },
-    collidesWith: function (s) {
-        if (!s.visible) {
-            return false;
-        }
-
-        //自身精灵坐标
-        var x1 = this.x;
-        var y1 = this.y;
-        var w1 = this.width;
-        var h1 = this.height;
-
-        //目标精灵
-        var x2 = s.x;
-        var y2 = s.y;
-        var w2 = s.width;
-        var h2 = s.height;
-
-        return (x1 - x2 < w2 && x2 < x1 + w1) && (y1 - y2 < h2 && y2 < y1 + h1);
-    },
     reset: function () {
         this.frameIndex = -1;
         this.setVisible(false);

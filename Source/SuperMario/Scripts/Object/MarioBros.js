@@ -96,7 +96,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.currentSprite.y -= 1;
                 for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
                     var block = blocks[blockIndex];
-                    if (this.currentSprite.collidesWith(block) && this.y > block.y) {
+                    if (this.currentSprite.collidesUpWith(block)) {
                         this.y = block.y + block.height;
                         this.jumpingUp = false;
                     }
@@ -129,7 +129,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.currentSprite.x += 1;
                     for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
                         var block = blocks[blockIndex];
-                        if (this.currentSprite.collidesWith(block) && this.currentSprite.x < block.x) {
+                        if (this.currentSprite.collidesRightWith(block)) {
                             this.x -= 1;
                             this.currentSprite.x -= 1;
                             break;
@@ -163,7 +163,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.currentSprite.x -= 1;
                     for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
                         var block = blocks[blockIndex];
-                        if (this.currentSprite.collidesWith(block) && this.currentSprite.x > block.x) {
+                        if (this.currentSprite.collidesLeftWith(block)) {
                             this.x += 1;
                             this.currentSprite.x += 1;
                             break;
@@ -296,7 +296,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.currentSprite.y = this.y;
                 for (var blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
                     var block = blocks[blockIndex];
-                    if (this.currentSprite.collidesWith(block) && (this.y < block.y)) {
+                    if (this.currentSprite.collidesDownWith(block)) {
                         if (!this.jumpCounter.countdown()) {
                             this.jumpCounter.setEnabled(false);
                         }
