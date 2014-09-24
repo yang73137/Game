@@ -116,23 +116,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
         }
 
-
-        if (Input.isPressed(InputAction.GAME_C)) {
-            this.speedUpPressedTime++;
-            if (this.speedUpPressedTime == 15) {
-                this.speed = 3;
-                this.speedUpLevel = 1;
-            }
-            else if (this.speedUpPressedTime > 25) {
-                this.speed = 4;
-                this.speedUpLevel = 2;
-            }
-        } else {
-            this.speed = 2;
-            this.speedUpLevel = 0;
-            this.speedUpPressedTime = 0;
-        }
-        
         if (Input.isPressed(InputAction.RIGHT)) {
             if (!this.jumping && !this.falling) {
                 this.faceToRight = true;
@@ -192,6 +175,22 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     }
                 }
             }
+        }
+        
+        if (Input.isPressed(InputAction.RIGHT) || Input.isPressed(InputAction.LEFT) && Input.isPressed(InputAction.GAME_C)) {
+            this.speedUpPressedTime++;
+            if (this.speedUpPressedTime == 15) {
+                this.speed = 3;
+                this.speedUpLevel = 1;
+            }
+            else if (this.speedUpPressedTime > 25) {
+                this.speed = 4;
+                this.speedUpLevel = 2;
+            }
+        } else {
+            this.speed = 2;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
         }
         
         if (this.state == MarioState.ChangingSmall || this.state == MarioState.ChangingBig) {
