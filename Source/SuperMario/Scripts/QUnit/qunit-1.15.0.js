@@ -305,7 +305,7 @@ config = {
 		}
 	}
 
-	// Figure out if we're running the tests from a server or not
+	// Figure out if we're moving the tests from a server or not
 	QUnit.isLocal = location.protocol === "file:";
 }());
 
@@ -2358,7 +2358,7 @@ QUnit.testStart(function( details ) {
 		li = document.createElement( "li" );
 		li.appendChild( b );
 		li.appendChild( a );
-		li.className = "running";
+		li.className = "moving";
 		li.id = "qunit-test-output" + details.testNumber;
 
 		assertList = document.createElement( "ol" );
