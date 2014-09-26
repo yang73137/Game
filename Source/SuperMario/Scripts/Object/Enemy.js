@@ -40,6 +40,10 @@
         this.normalSprite.hide();
         this.deadSprite.hide();
 
+        if (this.x < Math.abs(world.x) || this.x >= (Math.abs(world.x) + 512)) {
+            return;
+        }
+
         if (this.deadCounter.enabled && !this.deadCounter.countdown()) {
             return;
         }

@@ -9,7 +9,8 @@ MarioSprite = {
     Move: 2,
     Jump: 3,
     Squat: 4,
-    Dead: 5
+    Stay: 5,
+    Dead: 6
 };
 
 MarioState = {
@@ -30,6 +31,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.falling = true;
         this.moving = false;
         this.staying = false;
+        this.stayToRight = false;
         this.moveCounter = new Counter(3, false, true);
 
         this.maxJumpHeight = 10;
@@ -38,11 +40,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.speed = 2;
         this.speedUpLevel = 0;
         this.speedUpPressedTime = 0;
-        
-        this.direction = 0;
-        
-
-        this.direction = Const.DIRECTION_NONE;
 
         this.x = 0;
         this.y = 0;
@@ -124,41 +121,52 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (Input.isPressed(InputAction.RIGHT)) {
+
             if (this.moving && !this.faceToRight) {
                 this.speed = 2;
                 this.speedUpLevel = 0;
                 this.speedUpPressedTime = 0;
+                this.staying = true;
+                this.stayToRight = false;
             }
+
             if (!this.jumping) {
                 this.faceToRight = true;
                 this.moving = true;
+                this.stayToRight = false;
                 if (!this.falling) {
                     spriteType = MarioSprite.Move;
                 }
             }
+
             if (!this.squating && !this.staying) {
                 this.moveToRight();
             }
         }
 
         if (Input.isPressed(InputAction.LEFT)) {
+            
             if (this.moving && this.faceToRight) {
                 this.speed = 2;
                 this.speedUpLevel = 0;
                 this.speedUpPressedTime = 0;
+                this.staying = true;
+                this.stayToRight = true;
             }
+
             if (!this.jumping) {
                 this.faceToRight = false;
                 this.moving = true;
+                this.stayToRight = true;
                 if (!this.falling) {
                     spriteType = MarioSprite.Move;
                 }
             }
+
             if (!this.squating && !this.staying) {
                 this.moveToLeft();
             }
         }
-
 
         if ((Input.isPressed(InputAction.RIGHT) || Input.isPressed(InputAction.LEFT)) && Input.isPressed(InputAction.GAME_C)) {
             this.speedUpPressedTime++;
@@ -170,13 +178,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.speed = 4;
                 this.speedUpLevel = 2;
             }
-           
-            this.moveCounter.setCount(3 + this.speedUpLevel * 13);
-        } else {
-            this.speed = 2;
-            this.speedUpLevel = 0;
-            this.speedUpPressedTime = 0;
-        }
+            if (!this.staying) {
+                this.moveCounter.setCount(3 + this.speedUpLevel * 5);
+            }
+        } 
 
         if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT) && this.moving) {
             this.moving = false;
@@ -184,13 +189,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (this.staying) {
+            console.log(this.moveCounter.currentCount);
             if (!this.moveCounter.countdown()) {
                 this.staying = false;
                 this.moveCounter.setCount(3);
+                this.speed = 2;
+                this.speedUpLevel = 0;
+                this.speedUpPressedTime = 0;
             } else {
-                spriteType = MarioSprite.Move;
-                this.faceToRight ? this.moveToRight() : this.moveToLeft();
-                
+                spriteType = MarioSprite.Stay;
+                this.stayToRight ? this.moveToLeft() : this.moveToRight();
             }
         }
         
@@ -301,6 +309,18 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 else if (this.type == MarioType.Flower) {
                     this.currentSprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 192 }] : [{ x: 35 * 32, y: 192 }]);
+                }
+                break;
+            case MarioSprite.Stay:
+                this.currentSprite.setFrameCounter(0);
+                if (this.type == MarioType.Small) {
+                    this.currentSprite.setFrameSequence(this.stayToRight ? [{ x: 37 * 32, y: 64 }] : [{ x: 4 * 32, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.currentSprite.setFrameSequence(this.stayToRight ? [{ x: 37 * 32, y: 0 }] : [{ x: 4 * 32, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.currentSprite.setFrameSequence(this.stayToRight ? [{ x: 37 * 32, y: 192 }] : [{ x: 4 * 32, y: 192 }]);
                 }
                 break;
         }
