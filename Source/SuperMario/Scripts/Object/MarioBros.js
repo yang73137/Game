@@ -30,6 +30,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
         
         this.falling = true;
         this.moving = false;
+        this.movingToLeft = false;
+        this.movingToRight = false;
         this.staying = false;
         this.stayToRight = false;
         this.moveCounter = new Counter(3, false, true);
@@ -121,54 +123,54 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (Input.isPressed(InputAction.RIGHT)) {
+            if (!this.movingToLeft) {
+                if (this.moving && !this.faceToRight) {
+                    this.staying = true;
+                    this.stayToRight = false;
+                }
 
-            if (this.moving && !this.faceToRight) {
-                this.speed = 2;
-                this.speedUpLevel = 0;
-                this.speedUpPressedTime = 0;
-                this.staying = true;
-                this.stayToRight = false;
-            }
-
-            if (!this.jumping) {
-                this.faceToRight = true;
-                this.moving = true;
-                this.stayToRight = false;
-                if (!this.falling) {
-                    spriteType = MarioSprite.Move;
+                if (!this.jumping) {
+                    this.faceToRight = true;
+                    this.moving = true;
+                    if (!this.falling) {
+                        spriteType = MarioSprite.Move;
+                    }
+                }
+                
+                if (!this.squating && !this.staying) {
+                    this.movingToRight = true;
+                    this.moveToRight();
                 }
             }
-
-            if (!this.squating && !this.staying) {
-                this.moveToRight();
-            }
+        } else {
+            this.movingToRight = false;
         }
 
         if (Input.isPressed(InputAction.LEFT)) {
-            
-            if (this.moving && this.faceToRight) {
-                this.speed = 2;
-                this.speedUpLevel = 0;
-                this.speedUpPressedTime = 0;
-                this.staying = true;
-                this.stayToRight = true;
-            }
+            if (!this.movingToRight) {
+                if (this.moving && this.faceToRight) {
+                    this.staying = true;
+                    this.stayToRight = true;
+                }
 
-            if (!this.jumping) {
-                this.faceToRight = false;
-                this.moving = true;
-                this.stayToRight = true;
-                if (!this.falling) {
-                    spriteType = MarioSprite.Move;
+                if (!this.jumping) {
+                    this.faceToRight = false;
+                    this.moving = true;
+                    if (!this.falling) {
+                        spriteType = MarioSprite.Move;
+                    }
+                }
+                
+                if (!this.squating && !this.staying) {
+                    this.movingToLeft = true;
+                    this.moveToLeft();
                 }
             }
-
-            if (!this.squating && !this.staying) {
-                this.moveToLeft();
-            }
+        } else {
+            this.movingToLeft = false;
         }
 
-        if ((Input.isPressed(InputAction.RIGHT) || Input.isPressed(InputAction.LEFT)) && Input.isPressed(InputAction.GAME_C)) {
+        if (Input.isPressed(InputAction.GAME_C) && this.moving && !this.squating) {
             this.speedUpPressedTime++;
             if (this.speedUpPressedTime == 15) {
                 this.speed = 3;
@@ -179,29 +181,18 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.speedUpLevel = 2;
             }
             if (!this.staying) {
-                this.moveCounter.setCount(3 + this.speedUpLevel * 5);
+                this.moveCounter.setCount(this.speedUpLevel * 8);
             }
         } 
 
-        if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT) && this.moving) {
+        if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT)) {
             this.moving = false;
-            this.staying = true;
+            if (this.speedUpLevel > 0) {
+                this.staying = true;
+                this.stayToRight = this.faceToRight;
+            }     
         }
 
-        if (this.staying) {
-            console.log(this.moveCounter.currentCount);
-            if (!this.moveCounter.countdown()) {
-                this.staying = false;
-                this.moveCounter.setCount(3);
-                this.speed = 2;
-                this.speedUpLevel = 0;
-                this.speedUpPressedTime = 0;
-            } else {
-                spriteType = MarioSprite.Stay;
-                this.stayToRight ? this.moveToLeft() : this.moveToRight();
-            }
-        }
-        
         if (this.state == MarioState.ChangingSmall || this.state == MarioState.ChangingBig) {
             if (this.changeCounter.countdown()) {
                 if (this.changeCounter.currentCount % 4 == 0) {
@@ -220,12 +211,37 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (Input.isPressed(InputAction.DOWN)) {
+            if (this.speedUpLevel > 0) {
+                this.staying = true;
+                this.stayToRight = this.faceToRight;
+            }
             if (this.type != MarioType.Small) {
                 this.squating = true;
                 spriteType = MarioSprite.Squat;
             }
         } else {
             this.squating = false;
+        }
+
+        if (this.staying) {
+            this.speed = 2;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
+            if (!this.moveCounter.countdown()) {
+                this.staying = false;
+                this.moveCounter.setCount(3);
+                
+            } else {
+                if (!this.squating) {
+                    if (this.faceToRight == this.stayToRight) {
+                        spriteType = MarioSprite.Move;
+                    } else {
+                        spriteType = MarioSprite.Stay;
+                    }
+                }
+
+                this.stayToRight ? this.moveToRight() : this.moveToLeft();
+            }
         }
 
         this.setSprite(spriteType);
