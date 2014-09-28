@@ -126,6 +126,7 @@
     <Content Include="SuperMario\Images\Brick.png" />
     <Content Include="SuperMario\Images\TileSet_01_01.png" />
     <Content Include="SuperMario\Images\World1_1.png" />
+    <Content Include="SuperMario\Images\副本 World1_1.png" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
     <Content Include="SuperMario\Scripts\Basic\Const.js" />
@@ -137,12 +138,16 @@
     <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
     <Content Include="SuperMario\Scripts\Hammer\hammer.js" />
+    <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
+    <Content Include="SuperMario\Scripts\Object\Floor.js" />
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
     <Content Include="SuperMario\Scripts\Object\Item.js" />
     <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
+    <Content Include="SuperMario\Scripts\Object\Question.js" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.css" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.js" />
+    <Content Include="SuperMario\Scripts\UI\GameUI.js" />
     <Content Include="SuperMario\Scripts\UI\UIBase.js" />
     <Content Include="SuperMario\UI\TestUI.html" />
   </ItemGroup>
