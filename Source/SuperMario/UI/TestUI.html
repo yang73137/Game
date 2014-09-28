@@ -28,15 +28,54 @@
         <script src="../Scripts/Basic/Layer.js"></script>
         <script src="../Scripts/Basic/Sprite.js"></script>
         <script src="../Scripts/Basic/Label.js"></script>
+        <script src="../Scripts/UI/UIBase.js"></script>
+        <script src="../Scripts/UI/GameUI.js"></script>
         <script src="../Scripts/Object/GameObject.js"></script>
         <script src="../Scripts/Object/MarioBros.js"></script>
         <script src="../Scripts/Object/Enemy.js"></script>
         <script src="../Scripts/Object/Item.js"></script>
-    
+        <script src="../Scripts/Object/Brick.js"></script>
+        <script src="../Scripts/Object/Question.js"></script>
+        <script src="../Scripts/Object/Floor.js"></script>
         <script type="text/javascript">
 
             var app = document.getElementById("app");
+            
+            var gameUI = new GameUI();
+            gameUI.setSize(6784, 448);
+            gameUI.setBackgroundImage("../Images/World1_1.png");
+            gameUI.setBackgroundPosition(0, 0);
+            gameUI.show();
+            gameUI.appendTo(app);
+            
+            var floor1 = new Floor(0, 400, 2208, 48);
+            floor1.addToGameUI(gameUI);
 
+            var mario = new MarioBors(50, 370);
+            mario.addToGameUI(gameUI);
+
+            var question_512_272 = new Question(512, 272);
+            question_512_272.addToGameUI(gameUI);
+
+            var brick_640_272 = new Brick(640, 272);
+            brick_640_272.addToGameUI(gameUI);
+
+            var question_672_272 = new Question(672, 272);
+            question_672_272.addToGameUI(gameUI);
+            
+            var question_704_144 = new Question(704, 144);
+            question_704_144.addToGameUI(gameUI);
+            
+            var brick_704_272 = new Brick(704, 272);
+            brick_704_272.addToGameUI(gameUI);
+            
+            var question_736_272 = new Question(736, 272);
+            question_736_272.addToGameUI(gameUI);
+            
+            var brick_768_272 = new Brick(768, 272);
+            brick_768_272.addToGameUI(gameUI);
+            
+            /*
             var world = new Layer();
             world.setSize(6784, 448);
             world.setBackgroundImage("../Images/World1_1.png");
@@ -177,11 +216,15 @@
             world.append(block13);
             blocks.push(block13);
 
-
+            var brick = new Brick();
+            */
             setInterval(function () {
-                item.update();
-                enemy.update();
+                //item.update();
+                //enemy.update();
                 mario.update();
+                for (var i = 0; i < gameUI.gameObjects.length; i++) {
+                    gameUI.gameObjects[i].update();
+                }
             }, 16);
         
         </script>

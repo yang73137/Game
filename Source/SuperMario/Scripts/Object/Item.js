@@ -34,7 +34,7 @@
 
         this.x -= this.speed;
         this.normalSprite.setX(this.x);
-        if (this.normalSprite.collidesWith(mario.currentSprite)) {
+        if (this.normalSprite.collidesWith(mario.sprite)) {
             this.hit = true;
             this.normalSprite.hide();
             mario.state = MarioState.ChangingBig;
