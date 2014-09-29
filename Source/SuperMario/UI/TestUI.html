@@ -37,6 +37,7 @@
         <script src="../Scripts/Object/Brick.js"></script>
         <script src="../Scripts/Object/Question.js"></script>
         <script src="../Scripts/Object/Floor.js"></script>
+        <script src="../Scripts/Object/Gold.js"></script>
         <script type="text/javascript">
 
             var app = document.getElementById("app");
@@ -54,27 +55,27 @@
             var mario = new MarioBors(50, 370);
             mario.addToGameUI(gameUI);
 
-            var question_512_272 = new Question(512, 272);
+            var question_512_272 = new Question(512, 272, 1);
             question_512_272.addToGameUI(gameUI);
 
             var brick_640_272 = new Brick(640, 272);
             brick_640_272.addToGameUI(gameUI);
 
-            var question_672_272 = new Question(672, 272);
+            var question_672_272 = new Question(672, 272, 2);
             question_672_272.addToGameUI(gameUI);
             
-            var question_704_144 = new Question(704, 144);
+            var question_704_144 = new Question(704, 144, 1);
             question_704_144.addToGameUI(gameUI);
             
             var brick_704_272 = new Brick(704, 272);
             brick_704_272.addToGameUI(gameUI);
             
-            var question_736_272 = new Question(736, 272);
+            var question_736_272 = new Question(736, 272, 1);
             question_736_272.addToGameUI(gameUI);
             
             var brick_768_272 = new Brick(768, 272);
             brick_768_272.addToGameUI(gameUI);
-            
+
             /*
             var world = new Layer();
             world.setSize(6784, 448);

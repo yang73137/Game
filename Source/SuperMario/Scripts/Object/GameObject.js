@@ -15,6 +15,9 @@
         this.width = width;
         this.height = height;
     },
+    OnCollides: function (gameObject) {
+        
+    },
     onCollidesUp: function(gameObject) {
     },
     onCollidesDown: function (gameObject) {
@@ -25,6 +28,9 @@
     },
     addToGameUI: function (gameUI) {
         
+    },
+    collidesWith: function (gameObject) {
+        return this.sprite.collidesWith(gameObject.sprite);
     },
     collidesUpWith: function (gameObject) {
         return this.sprite.collidesUpWith(gameObject.sprite);

@@ -125,7 +125,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         this.y = block.y + block.height;
                         this.jumping = false;
                         block.onCollidesDown(this);
-                        
                     }
                 }
             }

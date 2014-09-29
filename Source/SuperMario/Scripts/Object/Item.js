@@ -1,42 +1,66 @@
 ﻿Item = ClassFactory.createClass(GameObject, {
-    init: function () {
+    init: function (x, y) {
 
-        this.x = 0;
-        this.y = 0;
+        GameObject.init.call(this);
+
+        this.setPosition(x, y);
+        this.setSize(32, 32);
 
         this.speed = 2;
 
-        this.normalSprite = new Sprite();
-        this.normalSprite.setBackgroundImage("../Images/Items.png");
-        this.normalSprite.setRepeat(0);
-        this.normalSprite.setFrameCounter(5);
-        this.normalSprite.setSize(32, 32);
-        this.normalSprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
-        this.normalSprite.show();
+        this.sprite = new Sprite();
+        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setRepeat(0);
+        this.sprite.setFrameCounter(5);
+        this.sprite.setSize(32, 32);
+        this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
 
-        world.append(this.normalSprite);
-
-        this.normalSprite.start();
-
-        this.hit = false;
-    },
-    setPosition: function (x, y) {
-        this.x = x;
-        this.y = y;
+        this.enabled = false;
+        this.gameUI = null;
     },
     update: function () {
-        if (this.hit) {
+
+        if (!this.enabled) {
             return;
         }
 
-        this.normalSprite.setPosition(this.x, this.y);
-        this.normalSprite.moveToNextFrame();
+        this.sprite.setPosition(this.x, this.y);
+        this.sprite.moveToNextFrame();
+
+        this.fallDown();
 
         this.x -= this.speed;
-        this.normalSprite.setX(this.x);
-        if (this.normalSprite.collidesWith(mario.sprite)) {
-            this.hit = true;
-            this.normalSprite.hide();
+        this.sprite.setX(this.x);
+
+        if (this.collidesWith(mario)) {
+            this.enabled = false;
+            this.sprite.hide();
+            mario.state = MarioState.ChangingBig;
+        }
+    },
+    addToGameUI: function (gameUI) {
+        gameUI.append(this.sprite);
+        gameUI.addGameObject(this);
+        this.gameUI = gameUI;
+    },
+    fallDown: function () {
+        for (var i = 0; i < 7; i++) {
+            this.y += 1;
+            this.sprite.y = this.y;
+            for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
+                var block = this.gameUI.gameObjects[blockIndex];
+                if (block != this && this.collidesDownWith(block)) {
+                    this.y = block.y - this.sprite.height;
+                    this.sprite.y = this.y;
+                    return;
+                }
+            }
+        }
+    },
+    onCollidesWith: function(gameObject) {
+        if (gameObject == mario) {
+            this.enabled = false;
+            this.sprite.hide();
             mario.state = MarioState.ChangingBig;
         }
     }
