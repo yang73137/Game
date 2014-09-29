@@ -83,7 +83,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         if (Input.isPressed(InputAction.GAME_D)) {
             if (!this.falling && this.jumpPressedTime == 0) {
-                this.maxJumpHeight = 160;
+                this.maxJumpHeight = 150;
+                this.currentJumpHeight = 0;
                 this.jumpPressedTime = 0;
                 this.jumping = true;
             }
