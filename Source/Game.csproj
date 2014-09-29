@@ -142,6 +142,7 @@
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\Floor.js" />
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
+    <Content Include="SuperMario\Scripts\Object\Gold.js" />
     <Content Include="SuperMario\Scripts\Object\Item.js" />
     <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
     <Content Include="SuperMario\Scripts\Object\Question.js" />
