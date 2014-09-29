@@ -8,11 +8,11 @@
         this.sprite = new Sprite();
         this.sprite.setSize(width, height);
         this.sprite.setPosition(x, y);
-        this.sprite.setBackgroundImage("../Images/TileSet_01_01.png");
+        //this.sprite.setBackgroundImage("../Images/TileSet_01_01.png");
         this.sprite.show();
     },
     addToGameUI: function (gameUI) {
         gameUI.append(this.sprite);
-        gameUI.gameObjects.push(this);
+        gameUI.staticObjects.push(this);
     }
 });

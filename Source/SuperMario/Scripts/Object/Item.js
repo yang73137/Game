@@ -47,8 +47,8 @@
         for (var i = 0; i < 7; i++) {
             this.y += 1;
             this.sprite.y = this.y;
-            for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
-                var block = this.gameUI.gameObjects[blockIndex];
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
                 if (block != this && this.collidesDownWith(block)) {
                     this.y = block.y - this.sprite.height;
                     this.sprite.y = this.y;
@@ -56,12 +56,29 @@
                 }
             }
         }
+        for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+            var block = this.gameUI.staticObjects[blockIndex];
+            if (this.collidesDownWith(block)) {
+                this.y = block.y - this.sprite.height;
+                this.sprite.y = this.y;
+                this.falling = false;
+                return;
+            }
+        }
     },
-    onCollidesWith: function(gameObject) {
+    onCollides: function(gameObject) {
         if (gameObject == mario) {
             this.enabled = false;
             this.sprite.hide();
             mario.state = MarioState.ChangingBig;
         }
+    }, onCollidesUp: function (gameObject) {
+        this.onCollides(gameObject);
+    }, onCollidesDown: function (gameObject) {
+        this.onCollides(gameObject);
+    }, onCollidesLeftWith: function (gameObject) {
+        this.onCollides(gameObject);
+    }, onCollidesRightWith: function(gameObject) {
+        this.onCollides(gameObject);
     }
 });

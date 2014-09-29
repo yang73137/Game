@@ -119,11 +119,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.jumping = false;
                 }
                 
-                for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
-                    var block = this.gameUI.gameObjects[blockIndex];
+                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                    var block = this.gameUI.animateObjects[blockIndex];
                     if (this.collidesUpWith(block)) {
                         this.y = block.y + block.height;
                         this.jumping = false;
+                        block.onCollides(this);
                         block.onCollidesDown(this);
                     }
                 }
@@ -355,9 +356,22 @@ MarioBors = ClassFactory.createClass(GameObject, {
             for (var i = 0; i < 7; i++) {
                 this.y += 1;
                 this.sprite.y = this.y;
-                for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
-                    var block = this.gameUI.gameObjects[blockIndex];
+                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                    var block = this.gameUI.animateObjects[blockIndex];
                     if (this.collidesDownWith(block)) {
+                        block.onCollides(this);
+                        block.onCollidesDown(this);
+                        this.y = block.y - this.sprite.height;
+                        this.sprite.y = this.y;
+                        this.falling = false;
+                        return;
+                    }
+                }
+                for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                    var block = this.gameUI.staticObjects[blockIndex];
+                    if (this.collidesDownWith(block)) {
+                        block.onCollides(this);
+                        block.onCollidesDown(this);
                         this.y = block.y - this.sprite.height;
                         this.sprite.y = this.y;
                         this.falling = false;
@@ -371,9 +385,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
         for (var i = 0; i < this.speed; i++) {
             this.x -= 1;
             this.sprite.x -= 1;
-            for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
-                var block = this.gameUI.gameObjects[blockIndex];
-                if (this.collidesLeftWith(block)) {
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
+                if (this.collidesLeftWith(this)) {
+                    block.onCollides(this);
+                    block.onCollidesLeft(this);
                     this.x += 1;
                     this.sprite.x += 1;
                     break;
@@ -390,9 +406,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
         for (var i = 0; i < this.speed; i++) {
             this.x += 1;
             this.sprite.x += 1;
-            for (var blockIndex = 0; blockIndex < this.gameUI.gameObjects.length; blockIndex++) {
-                var block = this.gameUI.gameObjects[blockIndex];
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
                 if (this.collidesRightWith(block)) {
+                    block.onCollides(this);
+                    block.onCollidesRight(this);
                     this.x -= 1;
                     this.sprite.x -= 1;
                     break;

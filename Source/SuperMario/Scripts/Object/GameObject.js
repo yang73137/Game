@@ -15,7 +15,7 @@
         this.width = width;
         this.height = height;
     },
-    OnCollides: function (gameObject) {
+    onCollides: function (gameObject) {
         
     },
     onCollidesUp: function(gameObject) {

@@ -18,6 +18,6 @@
     },
     addToGameUI: function (gameUI) {
         gameUI.append(this.sprite);
-        gameUI.gameObjects.push(this);
+        gameUI.animateObjects.push(this);
     }
 });

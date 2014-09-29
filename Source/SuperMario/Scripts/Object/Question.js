@@ -36,7 +36,7 @@
             this.item.addToGameUI(gameUI);
         }
         gameUI.append(this.sprite);
-        gameUI.gameObjects.push(this);
+        gameUI.animateObjects.push(this);
     },
     update: function () {
         if (this.type == 1) {
