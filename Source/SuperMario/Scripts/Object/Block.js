@@ -1,4 +1,4 @@
-﻿Floor = ClassFactory.createClass(GameObject, {
+﻿Block = ClassFactory.createClass(GameObject, {
     init: function (x, y, width, height) {
         GameObject.init.call(this);
         

@@ -140,7 +140,7 @@
     <Content Include="SuperMario\Scripts\Hammer\hammer.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
-    <Content Include="SuperMario\Scripts\Object\Floor.js" />
+    <Content Include="SuperMario\Scripts\Object\Block.js" />
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
     <Content Include="SuperMario\Scripts\Object\Gold.js" />
     <Content Include="SuperMario\Scripts\Object\Item.js" />

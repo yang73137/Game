@@ -1,4 +1,11 @@
-﻿Question = ClassFactory.createClass(GameObject, {
+﻿QuestionState = {
+    None: 0,
+    Normal: 1,
+    Up: 2,
+    Break: 3
+};
+
+Question = ClassFactory.createClass(GameObject, {
     init: function (x, y, type) {
         GameObject.init.call(this);
         
@@ -20,16 +27,18 @@
 
         if (type == 1) {
             this.item = new Gold(x, y - 48);
-            this.item.sprite.hide();
-            this.item.sprite.frameCounter = new Counter(15, false, true);
         }
         else if (type == 2) {
             this.item = new Item(x, y - 32);
-            this.item.sprite.hide();
         }
 
-        this.collidesCount = 1; 
-        this.delayCounter = new Counter(1, true, true);
+        this.item.sprite.hide();
+
+        this.collidesCount = 1;
+
+        this.upCounter = new Counter(16, false, true);
+
+        this.state = QuestionState.Normal;
     },
     addToGameUI: function (gameUI) {
         if (this.item) {
@@ -39,10 +48,23 @@
         gameUI.animateObjects.push(this);
     },
     update: function () {
-        if (this.type == 1) {
-            if (this.item && this.item.sprite.visible && !this.item.sprite.frameCounter.countdown()) {
-                this.item.sprite.setVisible(false);
-            }
+        switch (this.state) {
+            case QuestionState.Normal:
+                this.sprite.moveToNextFrame();
+                break;
+            case QuestionState.Up:
+                if (this.upCounter.countdown()) {
+                    if (this.upCounter.currentCount >= 8) {
+                        this.setPosition(this.x, this.y - 2);
+                    } else {
+                        this.setPosition(this.x, this.y + 2);
+                    }
+                    this.sprite.setPosition(this.x, this.y);
+                }
+                else {
+                    this.state = BrickState.None;
+                }
+                break;
         }
 
         this.sprite.moveToNextFrame();
@@ -52,10 +74,8 @@
         if (this.collidesCount == 0) {
             this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
             this.sprite.moveToFrame(0);
-
-            this.item.sprite.setVisible(true);
-            this.item.sprite.start();
-            this.item.enabled = true;
+            this.state = QuestionState.Up;
+            this.item.animate();
         }
     }
 });
