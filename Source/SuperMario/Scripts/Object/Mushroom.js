@@ -68,7 +68,9 @@ Mushroom = ClassFactory.createClass(GameObject, {
         if (this.collidesWith(mario)) {
             this.enabled = false;
             this.sprite.hide();
-            mario.state = MarioState.ChangingBig;
+            if (this.type == MushroomType.Big) {
+                mario.state = MarioState.ChangingBig;
+            }
         }   
     },
     addToGameUI: function (gameUI) {
