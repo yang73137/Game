@@ -142,6 +142,7 @@
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\Block.js" />
+    <Content Include="SuperMario\Scripts\Object\Flower.js" />
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
     <Content Include="SuperMario\Scripts\Object\Gold.js" />
     <Content Include="SuperMario\Scripts\Object\Mushroom.js" />
