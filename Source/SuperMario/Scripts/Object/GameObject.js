@@ -76,15 +76,10 @@
                     this.y = block.y - this.sprite.height;
                     this.sprite.y = this.y;
                     this.falling = false;
-                    break;
+                    return false;
                 }
             }
-            if (!this.onFallDown()) {
-                return;
-            }
         }
-    },
-    onFallDown: function() {
-        
+        return true;
     }
 });

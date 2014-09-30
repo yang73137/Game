@@ -13,8 +13,11 @@
         this.sprite.setRepeat(0);
         this.sprite.show();
 
-        this.upCounter = new Counter(32, false, true);
+        this.upCounter = new Counter(24, false, true);
         this.enabled = false;
+
+        this.originalX = x;
+        this.originalY = y;
     },
     addToGameUI: function(gameUI) {
         gameUI.append(this.sprite);
@@ -26,7 +29,7 @@
         }
         
         if (this.upCounter.countdown()) {
-            if (this.upCounter.currentCount >= 14) {
+            if (this.upCounter.currentCount >= 10) {
                 this.sprite.moveBy(0, -2);
             } else {
                 this.sprite.moveBy(0, 2);
@@ -38,6 +41,8 @@
         }
     },
     animate: function () {
+        this.setPosition(this.originalX, this.originalY);
+        this.sprite.setPosition(this.originalX, this.originalY);
         this.enabled = true;
         this.sprite.show();
         this.sprite.start();

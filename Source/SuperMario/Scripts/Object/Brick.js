@@ -71,6 +71,7 @@ Brick = ClassFactory.createClass(GameObject, {
 
         gameUI.append(this.sprite);
         gameUI.animateObjects.push(this);
+        gameUI.staticObjects.push(this);
     },
     update: function () {
         switch (this.state) {

@@ -24,20 +24,24 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.start();
 
         this.type = type;
+        this.collideCount = 1;
 
         if (type == 1) {
             this.item = new Gold(x, y - 48);
         }
         else if (type == 2) {
-            this.item = new Mushroom(x, y - 32, MushroomType.Big);
+            this.item = new Gold(x, y - 48);
+            this.sprite.setFrameSequence([{ x: 32, y: 0 }]);
+            this.collideCount = 10;
         }
         else if (type == 3) {
+            this.item = new Mushroom(x, y - 32, MushroomType.Big);
+        }
+        else if (type == 4) {
             this.item = new Mushroom(x, y - 32, MushroomType.Bonus);
         }
 
         this.item.sprite.hide();
-
-        this.collidesCount = 1;
 
         this.upCounter = new Counter(16, false, true);
 
@@ -49,6 +53,7 @@ Question = ClassFactory.createClass(GameObject, {
         }
         gameUI.append(this.sprite);
         gameUI.animateObjects.push(this);
+        gameUI.staticObjects.push(this);
     },
     update: function () {
         switch (this.state) {
@@ -65,7 +70,7 @@ Question = ClassFactory.createClass(GameObject, {
                     this.sprite.setPosition(this.x, this.y);
                 }
                 else {
-                    this.state = BrickState.None;
+                    this.state = this.collideCount > 0 ? QuestionState.Normal : QuestionState.None;
                 }
                 break;
         }
@@ -73,11 +78,13 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.moveToNextFrame();
     },
     onCollidesDown: function (gameObject) {
-        this.collidesCount--;
-        if (this.collidesCount == 0) {
-            this.sprite.setBackgroundImage("../Images/TileSet.png");
-            this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
-            this.sprite.moveToFrame(0);
+        if (this.state == QuestionState.Normal) {
+            this.collideCount--;
+            if (this.collideCount == 0) {
+                this.sprite.setBackgroundImage("../Images/TileSet.png");
+                this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
+                this.sprite.moveToFrame(0);
+            }
             this.state = QuestionState.Up;
             this.item.animate();
         }

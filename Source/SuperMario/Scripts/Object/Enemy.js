@@ -46,15 +46,16 @@ Enemy = ClassFactory.createClass(GameObject, {
     },
     onLive: function () {
 
-        this.fallDown();
-        
         if (this.x < Math.abs(gameUI.x) - this.width - 20 || this.x >= (Math.abs(gameUI.x) + 512)) {
             return;
         }
 
-        this.x += this.movingToRight ? 1 : -1;
-        this.sprite.setX(this.x);
+        if (!this.fallDown()) {
+            this.x += this.movingToRight ? 1 : -1;
+            this.sprite.setX(this.x);
+        }
 
+        this.sprite.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
 
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {

@@ -189,7 +189,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesDownWith(block)) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
-                        if (!(block instanceof Enemy || block instanceof Item)) {
+                        if (!(block instanceof Enemy || block instanceof Mushroom)) {
                             this.y = block.y - this.sprite.height;
                             this.sprite.y = this.y;
                             this.falling = false;

@@ -78,20 +78,6 @@ Mushroom = ClassFactory.createClass(GameObject, {
         gameUI.addGameObject(this);
         this.gameUI = gameUI;
     },
-    onFallDown: function () {
-        for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-            var block = this.gameUI.animateObjects[blockIndex];
-            if (this.collidesDownWith(block)) {
-                block.onCollides(this);
-                block.onCollidesUp(this);
-                this.y = block.y - this.sprite.height;
-                this.sprite.y = this.y;
-                this.falling = false;
-                return false;
-            }
-        }
-        return true;
-    },
     onCollides: function(gameObject) {
         if (gameObject == mario) {
             this.enabled = false;
