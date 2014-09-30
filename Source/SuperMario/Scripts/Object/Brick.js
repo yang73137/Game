@@ -89,7 +89,11 @@ Brick = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case BrickState.Break:
-                this.sprite.hide();
+                //this.sprite.hide();
+                this.sprite.setBackground("");
+                this.y -= 10;
+                this.sprite.setY(this.y);
+
                 if (this.breakCounter.countdown()) {
                     if (this.breakCounter.currentCount >= 50) {
                         this.fragment1.moveBy(-2, -6);

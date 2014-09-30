@@ -61,8 +61,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.spriteType = MarioSprite.Stand;
 
-        this.type = MarioType.Small;
-        this.setType(MarioType.Small);
+        this.type = MarioType.Big;
+        this.setType(this.type);
         this.setSprite(MarioSprite.Stand);
 
         this.changeCounter = new Counter(50, false, true);

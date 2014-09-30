@@ -29,6 +29,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.gameUI = null;
 
         this.movingToRight = true;
+        this.changeMovingCounter = new Counter(10, true, true);
     },
     update: function () {
 
@@ -48,7 +49,8 @@ Mushroom = ClassFactory.createClass(GameObject, {
         
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
-            if (this.collidesDownWith(block) && block != mario) {
+            if (this.collidesDownWith(block) && block != mario && !this.changeMovingCounter.countdown()) {
+                console.log(2);
                 block.onCollides(this);
                 block.onCollidesLeft(this);
                 this.movingToRight = !this.movingToRight;
