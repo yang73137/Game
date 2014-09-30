@@ -118,6 +118,7 @@
     <Content Include="BattleCity\UI\ScoreUI.html" />
     <Content Include="BattleCity\UI\StageUI.html" />
     <Content Include="BattleCity\UI\Test.html" />
+    <Content Include="Index.html" />
     <Content Include="SuperMario\Images\Enemies.png" />
     <Content Include="SuperMario\Images\MarioBros4.png" />
     <Content Include="SuperMario\Images\Items.png" />
