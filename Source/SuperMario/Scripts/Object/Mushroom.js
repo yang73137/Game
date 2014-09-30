@@ -1,8 +1,14 @@
-﻿Item = ClassFactory.createClass(GameObject, {
-    init: function (x, y) {
+﻿MushroomType = {
+    Big: 1,
+    Bonus: 2
+};
+
+Mushroom = ClassFactory.createClass(GameObject, {
+    init: function (x, y, type) {
 
         GameObject.init.call(this);
 
+        this.type = type;
         this.setPosition(x, y);
         this.setSize(32, 32);
 
@@ -13,7 +19,11 @@
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
         this.sprite.setSize(32, 32);
-        this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
+        if (type == 1) {
+            this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
+        } else {
+            this.sprite.setFrameSequence([{ x: 32, y: 0 }, { x: 32, y: 32 }]);
+        }
 
         this.enabled = false;
         this.gameUI = null;
@@ -84,7 +94,9 @@
         if (gameObject == mario) {
             this.enabled = false;
             this.sprite.hide();
-            mario.state = MarioState.ChangingBig;
+            if (this.type == MushroomType.Big) {
+                mario.state = MarioState.ChangingBig;
+            }
         }
     },
     animate: function () {

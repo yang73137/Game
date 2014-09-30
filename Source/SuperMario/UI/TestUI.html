@@ -33,7 +33,7 @@
         <script src="../Scripts/Object/GameObject.js"></script>
         <script src="../Scripts/Object/MarioBros.js"></script>
         <script src="../Scripts/Object/Enemy.js"></script>
-        <script src="../Scripts/Object/Item.js"></script>
+        <script src="../Scripts/Object/Mushroom.js"></script>
         <script src="../Scripts/Object/Brick.js"></script>
         <script src="../Scripts/Object/Question.js"></script>
         <script src="../Scripts/Object/Block.js"></script>
@@ -84,6 +84,10 @@
             
             var brick_2464_272 = new Brick(2464, 272);
             brick_2464_272.addToGameUI(gameUI);
+
+            var question_2026_272 = new Question(2026, 272, 3);
+            question_2026_272.addToGameUI(gameUI);
+            question_2026_272.hide();
             
             var question_2496_272 = new Question(2496, 272, 1);
             question_2496_272.addToGameUI(gameUI);
@@ -190,8 +194,8 @@
             var brick_5472_272 = new Brick(5472, 272);
             brick_5472_272.addToGameUI(gameUI);
             
-            //gameUI.setX(-5200);
-            //mario.x = 5200;
+            //gameUI.setX(-2000);
+            //mario.x = 2000;
 
             
             var floor_0_400 = new Block(0, 400, 2208, 48);
@@ -311,9 +315,6 @@
 
             var iron_6336_368 = new Block(6336, 368, 32, 32);
             iron_6336_368.addToGameUI(gameUI);
-
-            
-            
 
             setInterval(function () {
                 mario.update();

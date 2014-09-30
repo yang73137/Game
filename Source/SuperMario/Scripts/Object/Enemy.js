@@ -7,6 +7,8 @@
 Enemy = ClassFactory.createClass(GameObject, {
     init: function (x, y) {
 
+        GameObject.init.call(this);
+
         this.setPosition(x, y);
         this.setSize(32, 32);
 
@@ -46,7 +48,7 @@ Enemy = ClassFactory.createClass(GameObject, {
 
         this.fallDown();
         
-        if (this.x < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512 - this.width)) {
+        if (this.x < Math.abs(gameUI.x) - this.width - 20 || this.x >= (Math.abs(gameUI.x) + 512)) {
             return;
         }
 
@@ -96,6 +98,7 @@ Enemy = ClassFactory.createClass(GameObject, {
         this.sprite.setPosition(this.x, this.y);
         this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
         this.sprite.moveToFrame(0);
+        this.collideble = false;
         this.state = EnemyState.Dead;
     }
 });

@@ -6,6 +6,9 @@
         this.height = 0;
 
         this.sprite = null;
+        this.gameUI = null;
+
+        this.collideble = true;
     },
     setPosition: function(x, y) {
         this.x = x;
@@ -30,19 +33,34 @@
         
     },
     collidesWith: function (gameObject) {
-        return this.sprite.collidesWith(gameObject.sprite);
+        if (this.collideble && gameObject.collideble) {
+            return this.sprite.collidesWith(gameObject.sprite);
+        }
+        return false;
     },
     collidesUpWith: function (gameObject) {
-        return this.sprite.collidesUpWith(gameObject.sprite);
+        if (this.collideble && gameObject.collideble) {
+            return this.sprite.collidesUpWith(gameObject.sprite);
+        }
+        return false;
     },
     collidesDownWith: function (gameObject) {
-        return this.sprite.collidesDownWith(gameObject.sprite);
+        if (this.collideble && gameObject.collideble) {
+            return this.sprite.collidesDownWith(gameObject.sprite);
+        }
+        return false;
     },
     collidesLeftWith: function (gameObject) {
-        return this.sprite.collidesLeftWith(gameObject.sprite);
+        if (this.collideble && gameObject.collideble) {
+            return this.sprite.collidesLeftWith(gameObject.sprite);
+        }
+        return false;
     },
     collidesRightWith: function (gameObject) {
-        return this.sprite.collidesRightWith(gameObject.sprite);
+        if (this.collideble && gameObject.collideble) {
+            return this.sprite.collidesRightWith(gameObject.sprite);
+        }
+        return false;
     },
     update: function() {
     },

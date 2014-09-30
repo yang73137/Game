@@ -29,7 +29,10 @@ Question = ClassFactory.createClass(GameObject, {
             this.item = new Gold(x, y - 48);
         }
         else if (type == 2) {
-            this.item = new Item(x, y - 32);
+            this.item = new Mushroom(x, y - 32, MushroomType.Big);
+        }
+        else if (type == 3) {
+            this.item = new Mushroom(x, y - 32, MushroomType.Bonus);
         }
 
         this.item.sprite.hide();
@@ -72,10 +75,14 @@ Question = ClassFactory.createClass(GameObject, {
     onCollidesDown: function (gameObject) {
         this.collidesCount--;
         if (this.collidesCount == 0) {
+            this.sprite.setBackgroundImage("../Images/TileSet.png");
             this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
             this.sprite.moveToFrame(0);
             this.state = QuestionState.Up;
             this.item.animate();
         }
+    },
+    hide: function() {
+        this.sprite.setBackgroundImage("");
     }
 });
