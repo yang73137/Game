@@ -71,6 +71,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.setPosition(x, y);
 
         this.state = MarioState.Live;
+
+        this.deadCounter = new Counter(24, false, false);
     },
     update: function () {
         switch (this.state) {
@@ -499,8 +501,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
         if (!this.sprite.moveToNextFrame()) {
         }
     },
-    onDead: function() {
-        if (this.y < Const.SCREEN_HEIGHT) {
+    onDead: function () {
+        if (this.deadCounter.countdown()) {
+            this.y -= 5;
+            this.sprite.setY(this.y);
+        }
+        else if (this.y < Const.SCREEN_HEIGHT) {
             this.y += 5;
             this.sprite.setY(this.y);
         } else {
@@ -509,10 +515,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     dead: function () {
         this.height = 32;
-        this.y -= 120;
 
         this.sprite.setSize(this.width, this.height);
-        this.sprite.setPosition(this.x, this.y);
 
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 64 }]);
         this.sprite.moveToFrame(0);
