@@ -23,7 +23,7 @@ Brick = ClassFactory.createClass(GameObject, {
         this.state = BrickState.Static;
 
         this.upCounter = new Counter(16, false, true);
-        this.breakCounter = new Counter(60, false, true);
+        this.breakCounter = new Counter(70, false, true);
 
         this.fragment1 = new Sprite();
         this.fragment1.setSize(16, 16);
@@ -95,7 +95,7 @@ Brick = ClassFactory.createClass(GameObject, {
                 this.sprite.setY(this.y);
 
                 if (this.breakCounter.countdown()) {
-                    if (this.breakCounter.currentCount >= 50) {
+                    if (this.breakCounter.currentCount >= 60) {
                         this.fragment1.moveBy(-2, -6);
                         this.fragment2.moveBy(2, -6);
                         this.fragment3.moveBy(-3, -2);

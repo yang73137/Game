@@ -354,8 +354,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         block.onCollides(this);
                         block.onCollidesDown(this);
                         this.y = block.y + block.height;
-                        this.jumping = false; 
+                        this.jumping = false;
+                        console.log(1);
+                        break;
                     }
+                }
+                if (!this.jumping) {
+                    break;
                 }
             }
         }
@@ -522,6 +527,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.sprite.moveToFrame(0);
 
         this.state = MarioState.Dead;
+        this.collideble = false;
     },
     hurt: function() {
         if (this.state == MarioState.Live) {
