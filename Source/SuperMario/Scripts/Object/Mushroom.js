@@ -39,8 +39,6 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.sprite.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
 
-        this.fallDown();
-
         if (this.movingToRight) {
             this.x += this.speed;
         }
@@ -50,7 +48,12 @@ Mushroom = ClassFactory.createClass(GameObject, {
         
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
-            
+            if (this.collidesDownWith(block) && block != mario) {
+                block.onCollides(this);
+                block.onCollidesLeft(this);
+                this.movingToRight = !this.movingToRight;
+                break;
+            }
             if (this.collidesRightWith(block)) {
                 block.onCollides(this);
                 block.onCollidesLeft(this);
@@ -65,7 +68,9 @@ Mushroom = ClassFactory.createClass(GameObject, {
                 this.x = block.x + block.width;
             }
         }
-        
+
+        this.fallDown();
+
         if (this.collidesWith(mario)) {
             this.enabled = false;
             this.sprite.hide();
