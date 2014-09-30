@@ -50,6 +50,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
         
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
+            
             if (this.collidesRightWith(block)) {
                 block.onCollides(this);
                 block.onCollidesLeft(this);
