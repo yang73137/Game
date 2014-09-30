@@ -355,7 +355,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         block.onCollidesDown(this);
                         this.y = block.y + block.height;
                         this.jumping = false;
-                        console.log(1);
                         break;
                     }
                 }
@@ -413,19 +412,23 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.movingToLeft = false;
         }
 
-        if (Input.isPressed(InputAction.GAME_C) && this.moving && !this.squating) {
-            this.speedUpPressedTime++;
-            if (this.speedUpPressedTime == 15) {
-                this.speed = 3;
-                this.speedUpLevel = 1;
+        if (Input.isPressed(InputAction.GAME_C)) {
+            if (this.moving && !this.squating0) {
+                this.speedUpPressedTime++;
+                if (this.speedUpPressedTime == 15) {
+                    this.speed = 3;
+                    this.speedUpLevel = 1;
+                } else if (this.speedUpPressedTime > 25) {
+                    this.speed = 4;
+                    this.speedUpLevel = 2;
+                }
+                if (!this.staying) {
+                    this.moveCounter.setCount(this.speedUpLevel * 8);
+                }
             }
-            else if (this.speedUpPressedTime > 25) {
-                this.speed = 4;
-                this.speedUpLevel = 2;
-            }
-            if (!this.staying) {
-                this.moveCounter.setCount(this.speedUpLevel * 8);
-            }
+        } else {
+            this.speed = 2;
+            this.speedUpLevel = 0;
         }
 
         if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT)) {
