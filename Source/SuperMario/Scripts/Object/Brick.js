@@ -91,8 +91,8 @@ Brick = ClassFactory.createClass(GameObject, {
                 this.sprite.hide();
                 if (this.breakCounter.countdown()) {
                     if (this.breakCounter.currentCount >= 50) {
-                        this.fragment1.moveBy(-2, -4);
-                        this.fragment2.moveBy(2, -4);
+                        this.fragment1.moveBy(-2, -6);
+                        this.fragment2.moveBy(2, -6);
                         this.fragment3.moveBy(-3, -2);
                         this.fragment4.moveBy(3, -2);
                     }

@@ -1,73 +1,101 @@
-﻿Enemy = ClassFactory.createClass(GameObject, {
-    init: function () {
+﻿EnemyState = {
+    None: 0,
+    Live: 1,
+    Dead: 2
+};
 
-        this.x = 0;
-        this.y = 0;
+Enemy = ClassFactory.createClass(GameObject, {
+    init: function (x, y) {
+
+        this.setPosition(x, y);
+        this.setSize(32, 32);
 
         this.speed = 1;
         
-        this.normalSprite = new Sprite();
-        this.normalSprite.setBackgroundImage("../Images/Enemies.png");
-        this.normalSprite.setRepeat(0);
-        this.normalSprite.setFrameCounter(5);
-        this.normalSprite.setSize(32, 32);
-        this.normalSprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
-        this.normalSprite.show();
+        this.sprite = new Sprite();
+        this.sprite.setBackgroundImage("../Images/Enemies.png");
+        this.sprite.setRepeat(0);
+        this.sprite.setFrameCounter(5);
+        this.sprite.setPosition(x, y);
+        this.sprite.setSize(32, 32);
+        this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
+        this.sprite.show();
+        this.sprite.start();
 
-        this.deadSprite = new Sprite();
-        this.deadSprite.setBackgroundImage("../Images/Enemies.png");
-        this.deadSprite.setRepeat(0);
-        this.deadSprite.setSize(32, 16);
-        this.deadSprite.setFrameSequence([{x:64, y: 48}]);
-        this.deadSprite.show();
+        this.deadCounter = new Counter(40, false, true);
+        this.state = EnemyState.Live;
 
-        world.append(this.normalSprite);
-        world.append(this.deadSprite);
-
-        this.sprite = this.normalSprite;
-
-        this.normalSprite.start();
-        this.deadSprite.start();
-
-        this.deadCounter = new Counter(40, false, false);
-        this.deadCounter.setEnabled(false);
-    },
-    setPosition: function (x, y) {
-        this.x = x;
-        this.y = y;
+        this.movingToRight = false;
     },
     update: function () {
-        this.normalSprite.hide();
-        this.deadSprite.hide();
+        switch (this.state) {
+            case EnemyState.Live:
+                this.onLive();
+                break;
+            case EnemyState.Dead:
+                this.onDead();
+                break;
+        }
+    },
+    addToGameUI: function(gameUI) {
+        gameUI.append(this.sprite);
+        gameUI.animateObjects.push(this);
+        this.gameUI = gameUI;
+    },
+    onLive: function () {
 
-        if (this.x < Math.abs(world.x) || this.x >= (Math.abs(world.x) + 512)) {
+        this.fallDown();
+        
+        if (this.x < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512 - this.width)) {
             return;
         }
 
-        if (this.deadCounter.enabled && !this.deadCounter.countdown()) {
-            return;
-        }
+        this.x += this.movingToRight ? 1 : -1;
+        this.sprite.setX(this.x);
 
-        this.sprite.show();
-
-        this.sprite.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
 
-
-        if (this.sprite == this.normalSprite) {
-            this.x -= 1;
-            this.normalSprite.setX(this.x);
-            if (this.normalSprite.collidesWith(mario.sprite)) {
-                if ((mario.y + mario.sprite.height < this.y + this.sprite.height / 2)) {
-                    this.sprite = this.deadSprite;
-                    this.setPosition(this.x, this.y + 16);
-                    this.deadCounter.setEnabled(true);
-                } else {
-                    if (mario.type != MarioType.Small) {
-                        mario.state = MarioState.ChangingSmall;
-                    }
-                }
+        for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+            var block = this.gameUI.staticObjects[blockIndex];
+            if (this.collidesRightWith(block)) {
+                block.onCollides(this);
+                block.onCollidesLeft(this);
+                this.movingToRight = false;
+                this.x = block.x - this.width;
+                this.sprite.setX(this.x);
+                break;
+            }
+            if (this.collidesLeftWith(block)) {
+                block.onCollides(this);
+                block.onCollidesRight(this);
+                this.movingToRight = true;
+                this.x = block.x + block.width;
+                this.sprite.setX(this.x);
+                break;
             }
         }
+
+        if (mario.state == MarioState.Live && this.collidesWith(mario)) {
+            if ((mario.y + mario.height < this.y + this.height / 2)) {
+                this.dead();
+            } else {
+                mario.hurt();
+            }
+        }
+    },
+    onDead: function() {
+        if (!this.deadCounter.countdown()) {
+            this.sprite.hide();
+            this.state = EnemyState.None;
+        }
+    },
+    dead: function () {
+        this.y = 384;
+        this.setSize(32, 16);
+        this.sprite.setSize(this.width, 16);
+        this.sprite.setPosition(this.x, this.y);
+        this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
+        this.sprite.moveToFrame(0);
+        this.state = EnemyState.Dead;
     }
 });

@@ -14,6 +14,7 @@ MarioSprite = {
 };
 
 MarioState = {
+    None: 0,
     Live: 1,
     ChangingSmall: 2,
     ChangingBig: 3,
@@ -46,9 +47,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.speedUpLevel = 0;
         this.speedUpPressedTime = 0;
 
-        this.x = 0;
-        this.y = 0;
-
         this.faceToRight = true;
         this.squating = false;
 
@@ -67,212 +65,24 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.setType(MarioType.Small);
         this.setSprite(MarioSprite.Stand);
 
-        this.changeCounter = new Counter(30, false, true);
+        this.changeCounter = new Counter(50, false, true);
         this.changeCounter.setEnabled(true);
         
         this.setPosition(x, y);
-        this.setSize(32, 64);
 
+        this.state = MarioState.Live;
     },
     update: function () {
-
-        // 初始化状态
-        this.fallDown();
-        this.sprite.hide();
-        var spriteType = MarioSprite.Stand;
-
-        if (Input.isPressed(InputAction.GAME_D)) {
-            if (!this.falling && this.jumpPressedTime == 0) {
-                this.maxJumpHeight = 150;
-                this.currentJumpHeight = 0;
-                this.jumpPressedTime = 0;
-                this.jumping = true;
-            }
-        } else {
-            if (!this.falling) {
-                this.jumpPressedTime = 0;
-            }
-        }
- 
-        if (this.jumping) {
-            spriteType = MarioSprite.Jump;
-            if (Input.isPressed(InputAction.GAME_D)) {
-                this.jumpPressedTime++;
-            }
-            else {
-                if (this.jumpPressedTime >= 30) {
-                    this.maxJumpHeight = 160;
-                }
-                else if (this.jumpPressedTime < 30 && this.jumpPressedTime >= 20) {
-                    this.maxJumpHeight = 120;
-                } else {
-                    this.maxJumpHeight = 80;
-                }
-            }
-            this.maxJumpHeight = Math.max(this.currentJumpHeight, this.maxJumpHeight);
-            if (this.maxJumpHeight > 150) {
-                this.maxJumpHeight = 150;
-            }
-
-            for (var i = 0; i < 6; i++) {
-                this.currentJumpHeight += 1;
-                this.y -= 1;
-                this.sprite.y -= 1;
-
-                if (this.currentJumpHeight >= this.maxJumpHeight) {
-                    this.currentJumpHeight = 0;
-                    this.jumping = false;
-                }
-                
-                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                    var block = this.gameUI.animateObjects[blockIndex];
-                    if (this.collidesUpWith(block)) {
-                        this.y = block.y + block.height;
-                        this.jumping = false;
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                    }
-                }
-                
-                for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                    var block = this.gameUI.staticObjects[blockIndex];
-                    if (this.collidesUpWith(block)) {
-                        this.y = block.y + block.height;
-                        this.jumping = false;
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                    }
-                }
-            }
-        }
-
-        if (Input.isPressed(InputAction.RIGHT)) {
-            if (!this.movingToLeft) {
-                if (this.moving && !this.faceToRight) {
-                    this.staying = true;
-                    this.stayToRight = false;
-                }
-
-                if (!this.jumping) {
-                    this.faceToRight = true;
-                    this.moving = true;
-                    if (!this.falling) {
-                        spriteType = MarioSprite.Move;
-                    }
-                }
-                
-                if (!this.squating && !this.staying) {
-                    this.movingToRight = true;
-                    this.moveToRight();
-                }
-            }
-        } else {
-            this.movingToRight = false;
-        }
-
-        if (Input.isPressed(InputAction.LEFT)) {
-            if (!this.movingToRight) {
-                if (this.moving && this.faceToRight) {
-                    this.staying = true;
-                    this.stayToRight = true;
-                }
-
-                if (!this.jumping) {
-                    this.faceToRight = false;
-                    this.moving = true;
-                    if (!this.falling) {
-                        spriteType = MarioSprite.Move;
-                    }
-                }
-                
-                if (!this.squating && !this.staying) {
-                    this.movingToLeft = true;
-                    this.moveToLeft();
-                }
-            }
-        } else {
-            this.movingToLeft = false;
-        }
-
-        if (Input.isPressed(InputAction.GAME_C) && this.moving && !this.squating) {
-            this.speedUpPressedTime++;
-            if (this.speedUpPressedTime == 15) {
-                this.speed = 3;
-                this.speedUpLevel = 1;
-            }
-            else if (this.speedUpPressedTime > 25) {
-                this.speed = 4;
-                this.speedUpLevel = 2;
-            }
-            if (!this.staying) {
-                this.moveCounter.setCount(this.speedUpLevel * 8);
-            }
-        } 
-
-        if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT)) {
-            this.moving = false;
-            if (this.speedUpLevel > 0) {
-                this.staying = true;
-                this.stayToRight = this.faceToRight;
-            }     
-        }
-
-        if (this.state == MarioState.ChangingSmall || this.state == MarioState.ChangingBig) {
-            if (this.changeCounter.countdown()) {
-                if (this.changeCounter.currentCount % 4 == 0) {
-                    this.setType(this.type == MarioType.Small ? MarioType.Big : MarioType.Small);
-                }
-            } else {
-                if (this.state == MarioState.ChangingSmall) {
-                    this.setType(MarioType.Small);
-                }
-                else if (this.state == MarioState.ChangingBig) {
-                    this.setType(MarioType.Big);
-                }
-                this.state = MarioState.Live;
-            }
-            spriteType = MarioSprite.Stand;
-        }
-
-        if (Input.isPressed(InputAction.DOWN)) {
-            if (this.speedUpLevel > 0) {
-                this.staying = true;
-                this.stayToRight = this.faceToRight;
-            }
-            if (this.type != MarioType.Small) {
-                this.squating = true;
-                spriteType = MarioSprite.Squat;
-            }
-        } else {
-            this.squating = false;
-        }
-
-        if (this.staying) {
-            this.speed = 2;
-            this.speedUpLevel = 0;
-            this.speedUpPressedTime = 0;
-            if (!this.moveCounter.countdown()) {
-                this.staying = false;
-                this.moveCounter.setCount(3);
-                
-            } else {
-                if (!this.squating) {
-                    if (this.faceToRight == this.stayToRight) {
-                        spriteType = MarioSprite.Move;
-                    } else {
-                        spriteType = MarioSprite.Stay;
-                    }
-                }
-
-                this.stayToRight ? this.moveToRight() : this.moveToLeft();
-            }
-        }
-
-        this.setSprite(spriteType);
-        this.sprite.setPosition(this.x, this.y);
-        this.sprite.show();
-
-        if (!this.sprite.moveToNextFrame()) {
+        switch (this.state) {
+            case MarioState.Live:
+            case MarioState.ChangingBig:
+            case MarioState.ChangingSmall:
+            case MarioState.ChangingFlower:
+                this.onLive();
+                break;
+            case MarioState.Dead:
+                this.onDead();
+                break;
         }
     },
     setPosition: function (x, y) {
@@ -281,18 +91,21 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     setType: function (type) {
         if (type == MarioType.Small) {
+            this.setSize(32, 32);
             this.sprite.setSize(32, 32);
             if (this.type != MarioType.Small) {
                 this.y += 32;
             }
         }
         else if (type == MarioType.Big) {
+            this.setSize(32, 64);
             this.sprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
             }
         }
         else if (type == MarioType.Flower) {
+            this.setSize(32, 64);
             this.sprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
@@ -376,10 +189,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesDownWith(block)) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
-                        this.y = block.y - this.sprite.height;
-                        this.sprite.y = this.y;
-                        this.falling = false;
-                        return;
+                        if (!(block instanceof Enemy || block instanceof Item)) {
+                            this.y = block.y - this.sprite.height;
+                            this.sprite.y = this.y;
+                            this.falling = false;
+                        }
+                        break;
                     }
                 }
                 for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
@@ -390,10 +205,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         this.y = block.y - this.sprite.height;
                         this.sprite.y = this.y;
                         this.falling = false;
-                        return;
+                        break;
                     }
                 }
             }
+        }
+        if (this.y > 448) {
+            this.state = MarioState.Dead;
         }
     },
     moveToLeft: function () {
@@ -468,5 +286,234 @@ MarioBors = ClassFactory.createClass(GameObject, {
     addToGameUI: function (gameUI) {
         gameUI.append(this.sprite);
         this.gameUI = gameUI;
+    },
+    onLive: function() {
+        // 初始化状态
+        this.fallDown();
+        this.sprite.hide();
+        var spriteType = MarioSprite.Stand;
+
+        if (Input.isPressed(InputAction.GAME_D)) {
+            if (!this.falling && this.jumpPressedTime == 0) {
+                this.maxJumpHeight = 150;
+                this.currentJumpHeight = 0;
+                this.jumpPressedTime = 0;
+                this.jumping = true;
+            }
+        } else {
+            if (!this.falling) {
+                this.jumpPressedTime = 0;
+            }
+        }
+
+        if (this.jumping) {
+            spriteType = MarioSprite.Jump;
+            if (Input.isPressed(InputAction.GAME_D)) {
+                this.jumpPressedTime++;
+            }
+            else {
+                if (this.jumpPressedTime >= 30) {
+                    this.maxJumpHeight = 160;
+                }
+                else if (this.jumpPressedTime < 30 && this.jumpPressedTime >= 20) {
+                    this.maxJumpHeight = 120;
+                } else {
+                    this.maxJumpHeight = 80;
+                }
+            }
+            this.maxJumpHeight = Math.max(this.currentJumpHeight, this.maxJumpHeight);
+            if (this.maxJumpHeight > 150) {
+                this.maxJumpHeight = 150;
+            }
+
+            for (var i = 0; i < 6; i++) {
+                this.currentJumpHeight += 1;
+                this.y -= 1;
+                this.sprite.y -= 1;
+
+                if (this.currentJumpHeight >= this.maxJumpHeight) {
+                    this.currentJumpHeight = 0;
+                    this.jumping = false;
+                }
+
+                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                    var block = this.gameUI.animateObjects[blockIndex];
+                    if (this.collidesUpWith(block)) {
+                        block.onCollides(this);
+                        block.onCollidesDown(this);
+                        this.y = block.y + block.height;
+                        this.jumping = false;
+                    }
+                }
+
+                for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                    var block = this.gameUI.staticObjects[blockIndex];
+                    if (this.collidesUpWith(block)) {
+                        block.onCollides(this);
+                        block.onCollidesDown(this);
+                        this.y = block.y + block.height;
+                        this.jumping = false; 
+                    }
+                }
+            }
+        }
+
+        if (Input.isPressed(InputAction.RIGHT)) {
+            if (!this.movingToLeft) {
+                if (this.moving && !this.faceToRight) {
+                    this.staying = true;
+                    this.stayToRight = false;
+                }
+
+                if (!this.jumping) {
+                    this.faceToRight = true;
+                    this.moving = true;
+                    if (!this.falling) {
+                        spriteType = MarioSprite.Move;
+                    }
+                }
+
+                if (!this.squating && !this.staying) {
+                    this.movingToRight = true;
+                    this.moveToRight();
+                }
+            }
+        } else {
+            this.movingToRight = false;
+        }
+
+        if (Input.isPressed(InputAction.LEFT)) {
+            if (!this.movingToRight) {
+                if (this.moving && this.faceToRight) {
+                    this.staying = true;
+                    this.stayToRight = true;
+                }
+
+                if (!this.jumping) {
+                    this.faceToRight = false;
+                    this.moving = true;
+                    if (!this.falling) {
+                        spriteType = MarioSprite.Move;
+                    }
+                }
+
+                if (!this.squating && !this.staying) {
+                    this.movingToLeft = true;
+                    this.moveToLeft();
+                }
+            }
+        } else {
+            this.movingToLeft = false;
+        }
+
+        if (Input.isPressed(InputAction.GAME_C) && this.moving && !this.squating) {
+            this.speedUpPressedTime++;
+            if (this.speedUpPressedTime == 15) {
+                this.speed = 3;
+                this.speedUpLevel = 1;
+            }
+            else if (this.speedUpPressedTime > 25) {
+                this.speed = 4;
+                this.speedUpLevel = 2;
+            }
+            if (!this.staying) {
+                this.moveCounter.setCount(this.speedUpLevel * 8);
+            }
+        }
+
+        if (!Input.isPressed(InputAction.RIGHT) && !Input.isPressed(InputAction.LEFT)) {
+            this.moving = false;
+            if (this.speedUpLevel > 0) {
+                this.staying = true;
+                this.stayToRight = this.faceToRight;
+            }
+        }
+
+        if (this.state == MarioState.ChangingSmall || this.state == MarioState.ChangingBig) {
+            if (this.changeCounter.countdown()) {
+                if (this.changeCounter.currentCount % 4 == 0) {
+                    this.setType(this.type == MarioType.Small ? MarioType.Big : MarioType.Small);
+                }
+            } else {
+                if (this.state == MarioState.ChangingSmall) {
+                    this.setType(MarioType.Small);
+                }
+                else if (this.state == MarioState.ChangingBig) {
+                    this.setType(MarioType.Big);
+                }
+                this.state = MarioState.Live;
+            }
+            spriteType = MarioSprite.Stand;
+        }
+
+        if (Input.isPressed(InputAction.DOWN)) {
+            if (this.speedUpLevel > 0) {
+                this.staying = true;
+                this.stayToRight = this.faceToRight;
+            }
+            if (this.type != MarioType.Small) {
+                this.squating = true;
+                spriteType = MarioSprite.Squat;
+            }
+        } else {
+            this.squating = false;
+        }
+
+        if (this.staying) {
+            this.speed = 2;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
+            if (!this.moveCounter.countdown()) {
+                this.staying = false;
+                this.moveCounter.setCount(3);
+
+            } else {
+                if (!this.squating) {
+                    if (this.faceToRight == this.stayToRight) {
+                        spriteType = MarioSprite.Move;
+                    } else {
+                        spriteType = MarioSprite.Stay;
+                    }
+                }
+
+                this.stayToRight ? this.moveToRight() : this.moveToLeft();
+            }
+        }
+
+        this.setSprite(spriteType);
+        this.sprite.setPosition(this.x, this.y);
+        this.sprite.show();
+
+        if (!this.sprite.moveToNextFrame()) {
+        }
+    },
+    onDead: function() {
+        if (this.y < Const.SCREEN_HEIGHT) {
+            this.y += 5;
+            this.sprite.setY(this.y);
+        } else {
+            this.state = MarioState.None;
+        }
+    },
+    dead: function () {
+        this.height = 32;
+        this.y -= 120;
+
+        this.sprite.setSize(this.width, this.height);
+        this.sprite.setPosition(this.x, this.y);
+
+        this.sprite.setFrameSequence([{ x: 32 * 6, y: 64 }]);
+        this.sprite.moveToFrame(0);
+
+        this.state = MarioState.Dead;
+    },
+    hurt: function() {
+        if (this.state == MarioState.Live) {
+            if (this.type == MarioType.Small) {
+                this.dead();
+            } else {
+                this.state = MarioState.ChangingSmall;
+            }
+        }
     }
 });

@@ -41,16 +41,17 @@
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
             if (this.collidesRightWith(block)) {
-                this.movingToRight = false;
-                this.x = block.x - this.width;
                 block.onCollides(this);
                 block.onCollidesLeft(this);
+                this.movingToRight = false;
+                this.x = block.x - this.width;
+                
             }
             if (this.collidesLeftWith(block)) {
-                this.movingToRight = true;
-                this.x = block.x + this.width;
                 block.onCollides(this);
                 block.onCollidesRight(this);
+                this.movingToRight = true;
+                this.x = block.x + block.width;
             }
         }
         
@@ -65,28 +66,19 @@
         gameUI.addGameObject(this);
         this.gameUI = gameUI;
     },
-    fallDown: function () {
-        for (var i = 0; i < 7; i++) {
-            this.y += 1;
-            this.sprite.y = this.y;
-            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                var block = this.gameUI.animateObjects[blockIndex];
-                if (block != this && this.collidesDownWith(block)) {
-                    this.y = block.y - this.sprite.height;
-                    this.sprite.y = this.y;
-                    return;
-                }
-            }
-        }
-        for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-            var block = this.gameUI.staticObjects[blockIndex];
+    onFallDown: function () {
+        for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+            var block = this.gameUI.animateObjects[blockIndex];
             if (this.collidesDownWith(block)) {
+                block.onCollides(this);
+                block.onCollidesUp(this);
                 this.y = block.y - this.sprite.height;
                 this.sprite.y = this.y;
                 this.falling = false;
-                return;
+                return false;
             }
         }
+        return true;
     },
     onCollides: function(gameObject) {
         if (gameObject == mario) {
@@ -99,5 +91,5 @@
         this.enabled = true;
         this.sprite.show();
         this.sprite.start();
-    }
+    },
 });

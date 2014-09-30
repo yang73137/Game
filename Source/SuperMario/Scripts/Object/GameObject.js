@@ -45,5 +45,28 @@
         return this.sprite.collidesRightWith(gameObject.sprite);
     },
     update: function() {
+    },
+    fallDown: function () {
+        for (var i = 0; i < 7; i++) {
+            this.y += 1;
+            this.sprite.y = this.y;
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesDownWith(block)) {
+                    block.onCollides(this);
+                    block.onCollidesUp(this);
+                    this.y = block.y - this.sprite.height;
+                    this.sprite.y = this.y;
+                    this.falling = false;
+                    break;
+                }
+            }
+            if (!this.onFallDown()) {
+                return;
+            }
+        }
+    },
+    onFallDown: function() {
+        
     }
 });

@@ -52,6 +52,15 @@
             var mario = new MarioBors(50, 370);
             mario.addToGameUI(gameUI);
 
+            var enemy_512_368 = new Enemy(512, 368);
+            enemy_512_368.addToGameUI(gameUI);
+
+            var enemy_1346_368 = new Enemy(1346, 368);
+            enemy_1346_368.addToGameUI(gameUI);
+
+            var enemy_1410_368 = new Enemy(1410, 368);
+            enemy_1410_368.addToGameUI(gameUI);
+
             var question_512_272 = new Question(512, 272, 1);
             question_512_272.addToGameUI(gameUI);
 
@@ -307,8 +316,6 @@
             
 
             setInterval(function () {
-                //item.update();
-                //enemy.update();
                 mario.update();
                 for (var i = 0; i < gameUI.animateObjects.length; i++) {
                     gameUI.animateObjects[i].update();
