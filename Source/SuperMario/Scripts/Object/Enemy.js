@@ -52,6 +52,23 @@ Enemy = ClassFactory.createClass(GameObject, {
 
         this.x += this.movingToRight ? 1 : -1;
         this.sprite.setX(this.x);
+        
+        for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+            var block = this.gameUI.animateObjects[blockIndex];
+
+            if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                block.onCollides(this);
+                block.onCollidesLeft(this);
+                this.movingToRight = false;
+                break;
+            }
+            if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                block.onCollides(this);
+                block.onCollidesRight(this);
+                this.movingToRight = true;
+                break;
+            }
+        }
 
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
@@ -65,23 +82,19 @@ Enemy = ClassFactory.createClass(GameObject, {
                 block.onCollides(this);
                 block.onCollidesLeft(this);
                 this.movingToRight = false;
-                this.x = block.x - this.width;
-                this.sprite.setX(this.x);
                 break;
             }
             if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                 block.onCollides(this);
                 block.onCollidesRight(this);
                 this.movingToRight = true;
-                this.x = block.x + block.width;
-                this.sprite.setX(this.x);
                 break;
             }
         }
         this.fallDown();
         this.sprite.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
-
+        
         if (mario.state == MarioState.Live && this.collidesWith(mario)) {
             if ((mario.y + mario.height < this.y + this.height / 2)) {
                 this.dead();

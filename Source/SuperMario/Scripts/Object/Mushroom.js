@@ -3,6 +3,12 @@
     Bonus: 2
 };
 
+MushroomState = {
+    None: 0,
+    Birth: 1,
+    Move: 2
+};
+
 Mushroom = ClassFactory.createClass(GameObject, {
     init: function (x, y, type) {
 
@@ -19,13 +25,22 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
         this.sprite.setSize(32, 32);
+        this.sprite.setPosition(x, y);
         if (type == 1) {
             this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
         } else {
             this.sprite.setFrameSequence([{ x: 32, y: 0 }, { x: 32, y: 32 }]);
         }
+        this.sprite.hide();
+        this.sprite.start();
 
-        this.enabled = false;
+        this.delayCounter = new Counter(16, false, true);
+        this.delayCounter.setEnabled(false);
+        this.upCounter = new Counter(1, true, true);
+
+        this.originalX = x;
+        this.originalY = y;
+
         this.gameUI = null;
 
         this.movingToRight = true;
@@ -33,10 +48,55 @@ Mushroom = ClassFactory.createClass(GameObject, {
     },
     update: function () {
 
-        if (!this.enabled) {
-            return;
+        switch (this.state) {
+            case MushroomState.None:
+                this.sprite.hide();
+                break;
+            case MushroomState.Birth:
+                this.onBirth();
+                break;
+            case MushroomState.Move:
+                this.onMove();
+                break;
         }
-
+    },
+    addToGameUI: function (gameUI) {
+        gameUI.append(this.sprite);
+        gameUI.addGameObject(this);
+        this.gameUI = gameUI;
+    },
+    onCollides: function(gameObject) {
+        if (gameObject == mario) {
+            this.state = MushroomState.None;
+            if (this.type == MushroomType.Big && mario.type == MarioType.Small) {
+                mario.state = MarioState.ChangingBig;
+            }
+        }
+    },
+    animate: function () {
+        this.state = MushroomState.Birth;
+        this.delayCounter.setEnabled(true);
+    },
+    onBirth: function () {
+        if (this.delayCounter.enabled) {
+            if (this.delayCounter.countdown()) {
+                return;
+            } else {
+                this.delayCounter.setEnabled(false);
+            }
+        }
+        if (this.y > this.originalY - this.height) {
+            if (!this.upCounter.countdown()) {
+                this.y--;
+                this.sprite.setY(this.y);
+                this.sprite.moveToNextFrame();
+            }
+        } else {
+            this.state = MushroomState.Move;
+        }
+    },
+    onMove: function () {
+        
         this.sprite.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
 
@@ -46,11 +106,10 @@ Mushroom = ClassFactory.createClass(GameObject, {
         else {
             this.x -= this.speed;
         }
-        
+
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
             if (this.collidesDownWith(block) && block != mario && !this.changeMovingCounter.countdown()) {
-                console.log(2);
                 block.onCollides(this);
                 block.onCollidesLeft(this);
                 this.movingToRight = !this.movingToRight;
@@ -61,7 +120,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
                 block.onCollidesLeft(this);
                 this.movingToRight = false;
                 this.x = block.x - this.width;
-                
+
             }
             if (this.collidesLeftWith(block)) {
                 block.onCollides(this);
@@ -74,30 +133,11 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.fallDown();
 
         if (this.collidesWith(mario)) {
-            this.enabled = false;
+            this.state = MushroomState.None;
             this.sprite.hide();
-            if (this.type == MushroomType.Big) {
-                mario.state = MarioState.ChangingBig;
-            }
-        }   
-    },
-    addToGameUI: function (gameUI) {
-        gameUI.append(this.sprite);
-        gameUI.addGameObject(this);
-        this.gameUI = gameUI;
-    },
-    onCollides: function(gameObject) {
-        if (gameObject == mario) {
-            this.enabled = false;
-            this.sprite.hide();
-            if (this.type == MushroomType.Big) {
+            if (this.type == MushroomType.Big && mario.type == MarioType.Small) {
                 mario.state = MarioState.ChangingBig;
             }
         }
-    },
-    animate: function () {
-        this.enabled = true;
-        this.sprite.show();
-        this.sprite.start();
-    },
+    }
 });

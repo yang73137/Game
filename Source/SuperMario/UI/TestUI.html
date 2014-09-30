@@ -38,6 +38,7 @@
         <script src="../Scripts/Object/Question.js"></script>
         <script src="../Scripts/Object/Block.js"></script>
         <script src="../Scripts/Object/Gold.js"></script>
+        <script src="../Scripts/Object/Flower.js"></script>
         <script type="text/javascript">
 
             var app = document.getElementById("app");
@@ -55,11 +56,14 @@
             var enemy_512_368 = new Enemy(512, 368);
             enemy_512_368.addToGameUI(gameUI);
 
-            var enemy_1346_368 = new Enemy(1346, 368);
-            enemy_1346_368.addToGameUI(gameUI);
-
             var enemy_1410_368 = new Enemy(1410, 368);
             enemy_1410_368.addToGameUI(gameUI);
+
+            var enemy_1652_368 = new Enemy(1652, 368);
+            enemy_1652_368.addToGameUI(gameUI);
+            
+            var enemy_1684_368 = new Enemy(1684, 368);
+            enemy_1684_368.addToGameUI(gameUI);
 
             var enemy_2592_102 = new Enemy(2592, 112);
             enemy_2592_102.addToGameUI(gameUI);
@@ -110,7 +114,7 @@
             question_2026_272.addToGameUI(gameUI);
             question_2026_272.hide();
             
-            var question_2496_272 = new Question(2496, 272, 1);
+            var question_2496_272 = new Question(2496, 272, 3);
             question_2496_272.addToGameUI(gameUI);
             
             var brick_2528_272 = new Brick(2528, 272);
@@ -167,7 +171,7 @@
             var question_3488_272 = new Question(3488, 272, 1);
             question_3488_272.addToGameUI(gameUI);
             
-            var question_3488_144 = new Question(3488, 144, 1);
+            var question_3488_144 = new Question(3488, 144, 3);
             question_3488_144.addToGameUI(gameUI);
             
             var question_3584_272 = new Question(3584, 272, 1);
@@ -215,8 +219,8 @@
             var brick_5472_272 = new Brick(5472, 272);
             brick_5472_272.addToGameUI(gameUI);
             
-            //gameUI.setX(-2000);
-            //mario.x = 2000;
+            gameUI.setX(-2950);
+            mario.x = 2950;
 
             
             var floor_0_400 = new Block(0, 400, 2208, 48);

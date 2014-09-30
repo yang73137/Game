@@ -16,8 +16,8 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.setSize(32, 32);
         this.sprite.setPosition(x, y);
         this.sprite.setBackgroundImage("../Images/TileSet.png");
-        this.sprite.setBackgroundPosition(32 * 24, 0);
         this.sprite.setFrameSequence([{ x: 32 * 24, y: 0 }, { x: 32 * 25, y: 0 }, { x: 32 * 26, y: 0 }]);
+        this.sprite.setZ(2);
         this.sprite.frameCounter.setCount(15);
         this.sprite.setRepeat(0);
         this.sprite.show();
@@ -25,32 +25,18 @@ Question = ClassFactory.createClass(GameObject, {
 
         this.type = type;
         this.collideCount = 1;
-
-        if (type == 1) {
-            this.item = new Gold(x, y - 48);
-        }
-        else if (type == 2) {
-            this.item = new Gold(x, y - 48);
+        
+        if (this.type == 2) {
             this.sprite.setFrameSequence([{ x: 32, y: 0 }]);
-            this.collideCount = 10;
-        }
-        else if (type == 3) {
-            this.item = new Mushroom(x, y - 32, MushroomType.Big);
-        }
-        else if (type == 4) {
-            this.item = new Mushroom(x, y - 32, MushroomType.Bonus);
         }
 
-        this.item.sprite.hide();
+        this.item = null;
 
         this.upCounter = new Counter(16, false, true);
 
         this.state = QuestionState.Normal;
     },
     addToGameUI: function (gameUI) {
-        if (this.item) {
-            this.item.addToGameUI(gameUI);
-        }
         gameUI.append(this.sprite);
         gameUI.animateObjects.push(this);
         gameUI.staticObjects.push(this);
@@ -78,6 +64,9 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.moveToNextFrame();
     },
     onCollidesDown: function (gameObject) {
+        if (this.item == null) {
+            this.setItem();
+        }
         if (this.state == QuestionState.Normal) {
             this.collideCount--;
             if (this.collideCount == 0) {
@@ -91,5 +80,26 @@ Question = ClassFactory.createClass(GameObject, {
     },
     hide: function() {
         this.sprite.setBackgroundImage("");
+    },
+    setItem: function () {
+        if (this.type == 1) {
+            this.item = new Gold(this.x, this.y - 48);
+        }
+        else if (this.type == 2) {
+            this.item = new Gold(this.x, this.y - 48);
+            this.collideCount = 5;
+        }
+        else if (this.type == 3) {
+            if (mario.type == MarioType.Small) {
+                this.item = new Mushroom(this.x, this.y, MushroomType.Big);
+            } else {
+                this.item = new Flower(this.x, this.y);
+            }
+        }
+        else if (this.type == 4) {
+            this.item = new Mushroom(this.x, this.y, MushroomType.Bonus);
+        }
+        this.item.sprite.hide();
+        this.item.addToGameUI(gameUI);
     }
 });

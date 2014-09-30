@@ -13,7 +13,7 @@
         this.sprite.setRepeat(0);
         this.sprite.show();
 
-        this.upCounter = new Counter(24, false, true);
+        this.upCounter = new Counter(36, false, true);
         this.enabled = false;
 
         this.originalX = x;
@@ -29,7 +29,7 @@
         }
         
         if (this.upCounter.countdown()) {
-            if (this.upCounter.currentCount >= 10) {
+            if (this.upCounter.currentCount >= 16) {
                 this.sprite.moveBy(0, -2);
             } else {
                 this.sprite.moveBy(0, 2);

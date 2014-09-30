@@ -445,6 +445,18 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
             spriteType = MarioSprite.Stand;
         }
+        
+        if (this.state == MarioState.ChangingFlower) {
+            if (this.changeCounter.countdown()) {
+                if (this.changeCounter.currentCount % 4 == 0) {
+                    this.setType(this.type == MarioType.Flower ? MarioType.Big : MarioType.Flower);
+                }
+            } else {
+                this.setType(MarioType.Flower);
+                this.state = MarioState.Live;
+            }
+            spriteType = MarioSprite.Stand;
+        }
 
         if (Input.isPressed(InputAction.DOWN)) {
             if (this.speedUpLevel > 0) {
