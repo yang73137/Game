@@ -422,8 +422,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.movingToLeft = false;
         }
 
-        if (Input.isPressed(InputAction.GAME_A)) {
-            if (this.fireable && !this.squating) {
+        if (Input.isPressed(InputAction.GAME_A) && !this.squating) {
+            if (this.fireable) {
                 for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
                     var fireBall = this.fireBalls[fireBallIndex];
                     if (fireBall.state == FireBallState.None) {
