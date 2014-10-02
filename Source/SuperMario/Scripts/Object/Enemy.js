@@ -1,7 +1,8 @@
 ﻿EnemyState = {
     None: 0,
     Live: 1,
-    Dead: 2
+    Dead: 2,
+    Dead2: 3
 };
 
 Enemy = ClassFactory.createClass(GameObject, {
@@ -109,6 +110,9 @@ Enemy = ClassFactory.createClass(GameObject, {
             this.state = EnemyState.None;
         }
     },
+    onDead2: function () {
+        
+    },
     dead: function () {
         this.y += 16;
         this.setSize(32, 16);
@@ -118,5 +122,13 @@ Enemy = ClassFactory.createClass(GameObject, {
         this.sprite.moveToFrame(0);
         this.collideble = false;
         this.state = EnemyState.Dead;
+    },
+    dead2: function() {
+        
+    },
+    onCollidesWith: function (gameObject) {
+        if (gameObject instanceof MarioBors) {
+            gameObject.hurt();
+        }
     }
 });

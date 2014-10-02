@@ -56,7 +56,7 @@ FireBall = ClassFactory.createClass(GameObject, {
     onFiring: function () {
         for (var i = 0; i < 2; i++) {
             this.x += this.movingToRight ? 4 : -4;
-            this.y += this.movingToDown ? 3 : -3;
+            this.y += this.movingToDown ? 2 : -2;
             if (!this.movingToDown) {
                 this.movingUpTime++;
             }

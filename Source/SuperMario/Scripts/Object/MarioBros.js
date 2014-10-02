@@ -61,7 +61,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.spriteType = MarioSprite.Stand;
 
-        this.type = MarioType.Flower;
+        this.type = MarioType.Small;
         this.setType(this.type);
         this.setSprite(MarioSprite.Stand);
 
@@ -265,8 +265,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 if (this.collidesRightWith(block)) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
-                    this.x -= 1;
-                    this.sprite.x -= 1;
                     break;
                 }
             }
@@ -285,9 +283,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     gameUI.setX(-(6784 - 512));
                 } else {
                     gameUI.setX(gameUI.x - 1);
-                    this.x = -gameUI.x + 220;
                 }
             }
+
             if (this.x + gameUI.x + this.sprite.width > 512) {
                 this.x = -gameUI.x + 512 - this.sprite.width;
                 break;
@@ -425,7 +423,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (Input.isPressed(InputAction.GAME_C)) {
-            if (this.fireable) {
+            if (this.fireable && !this.squating) {
                 for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
                     var fireBall = this.fireBalls[fireBallIndex];
                     if (fireBall.state == FireBallState.None) {
