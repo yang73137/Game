@@ -109,7 +109,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
 
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
-            if (this.collidesDownWith(block) && block != mario && !this.changeMovingCounter.countdown()) {
+            if (this.collidesDownWith(block) && !(block instanceof MarioBors) && !this.changeMovingCounter.countdown()) {
                 block.onCollides(this);
                 block.onCollidesLeft(this);
                 this.movingToRight = !this.movingToRight;
@@ -134,9 +134,8 @@ Mushroom = ClassFactory.createClass(GameObject, {
 
         if (this.collidesWith(mario)) {
             this.state = MushroomState.None;
-            this.sprite.hide();
             if (this.type == MushroomType.Big && mario.type == MarioType.Small) {
-                mario.state = MarioState.ChangingBig;
+                mario.changeType(MarioType.Big);
             }
         }
     }

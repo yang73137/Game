@@ -73,7 +73,7 @@ Enemy = ClassFactory.createClass(GameObject, {
         for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
             var block = this.gameUI.staticObjects[blockIndex];
 
-            if (this.collidesDownWith(block) && block != mario) {
+            if (this.collidesDownWith(block) && !(block instanceof MarioBors)) {
                 this.dead();
                 return;
             }

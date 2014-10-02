@@ -39,6 +39,7 @@
         <script src="../Scripts/Object/Block.js"></script>
         <script src="../Scripts/Object/Gold.js"></script>
         <script src="../Scripts/Object/Flower.js"></script>
+        <script src="../Scripts/Object/FireBall.js"></script>
         <script type="text/javascript">
 
             var app = document.getElementById("app");
@@ -49,6 +50,8 @@
             gameUI.setBackgroundPosition(0, 0);
             gameUI.show();
             gameUI.appendTo(app);
+
+           
             
             var mario = new MarioBors(50, 370);
             mario.addToGameUI(gameUI);

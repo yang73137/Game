@@ -57,10 +57,10 @@ Flower = ClassFactory.createClass(GameObject, {
     onCollides: function (gameObject) {
         if (gameObject instanceof MarioBors) {
             this.state = FlowerState.None;
-            if (mario.type == MarioType.Small) {
-                mario.state = MarioState.ChangingBig;
-            } else if (mario.type == MarioType.Big) {
-                mario.state = MarioState.ChangingFlower;
+            if (gameObject.type == MarioType.Small) {
+                gameObject.state = MarioState.ChangingBig;
+            } else if (gameObject.type == MarioType.Big) {
+                gameObject.changeType(MarioType.Flower);
             }
         }
     },
