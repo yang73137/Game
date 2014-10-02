@@ -61,7 +61,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.spriteType = MarioSprite.Stand;
 
-        this.type = MarioType.Small;
+        this.type = MarioType.Flower;
         this.setType(this.type);
         this.setSprite(MarioSprite.Stand);
 

@@ -50,11 +50,15 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment4.setBackgroundPosition(32, 0);
     },
     onCollidesDown: function (gameObject) {
-        if (gameObject == mario) {
-            if (mario.type == MarioType.Small) {
+        if (gameObject instanceof MarioBors) {
+            if (gameObject.type == MarioType.Small) {
                 this.state = BrickState.Up;
             }
             else {
+                this.sprite.setBackground("");
+                this.y -= 1;
+                this.sprite.setY(this.y);
+                
                 this.fragment1.show();
                 this.fragment2.show();
                 this.fragment3.show();
@@ -75,6 +79,9 @@ Brick = ClassFactory.createClass(GameObject, {
     },
     update: function () {
         switch (this.state) {
+            case BrickState.None:
+                this.sprite.hide();
+                break;
             case BrickState.Up:
                 if (this.upCounter.countdown()) {
                     if (this.upCounter.currentCount >= 8) {
@@ -89,10 +96,7 @@ Brick = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case BrickState.Break:
-                //this.sprite.hide();
-                this.sprite.setBackground("");
-                this.y -= 10;
-                this.sprite.setY(this.y);
+                this.sprite.hide();
 
                 if (this.breakCounter.countdown()) {
                     if (this.breakCounter.currentCount >= 60) {
