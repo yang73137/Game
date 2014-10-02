@@ -305,7 +305,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.sprite.hide();
         var spriteType = MarioSprite.Stand;
 
-        if (Input.isPressed(InputAction.GAME_D)) {
+        if (Input.isPressed(InputAction.GAME_B)) {
             if (!this.falling && this.jumpPressedTime == 0) {
                 this.maxJumpHeight = 150;
                 this.currentJumpHeight = 0;
@@ -320,7 +320,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         if (this.jumping) {
             spriteType = MarioSprite.Jump;
-            if (Input.isPressed(InputAction.GAME_D)) {
+            if (Input.isPressed(InputAction.GAME_B)) {
                 this.jumpPressedTime++;
             }
             else {
@@ -422,7 +422,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.movingToLeft = false;
         }
 
-        if (Input.isPressed(InputAction.GAME_C)) {
+        if (Input.isPressed(InputAction.GAME_A)) {
             if (this.fireable && !this.squating) {
                 for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
                     var fireBall = this.fireBalls[fireBallIndex];
