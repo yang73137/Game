@@ -40,6 +40,7 @@
         <script src="../Scripts/Object/Gold.js"></script>
         <script src="../Scripts/Object/Flower.js"></script>
         <script src="../Scripts/Object/FireBall.js"></script>
+        <script src="../Scripts/Object/Star.js"></script>
         <script type="text/javascript">
 
             var app = document.getElementById("app");
@@ -50,6 +51,9 @@
             gameUI.setBackgroundPosition(0, 0);
             gameUI.show();
             gameUI.appendTo(app);
+
+            var star = new Star(200, 320);
+            star.addToGameUI(gameUI);
 
             var mario = new MarioBors(50, 370);
             mario.addToGameUI(gameUI);
@@ -163,8 +167,8 @@
             var brick_3200_272 = new Brick(3200, 272);
             brick_3200_272.addToGameUI(gameUI);
             
-            var brick_3232_272 = new Brick(3232, 272);
-            brick_3232_272.addToGameUI(gameUI);
+            var question_3232_272 = new Question(3232, 272, 5);
+            question_3232_272.addToGameUI(gameUI);
             
             var question_3392_272 = new Question(3392, 272, 1);
             question_3392_272.addToGameUI(gameUI);
@@ -220,8 +224,8 @@
             var brick_5472_272 = new Brick(5472, 272);
             brick_5472_272.addToGameUI(gameUI);
             
-            //gameUI.setX(-2000);
-            //mario.x = 2000;
+            //gameUI.setX(-3200);
+            //mario.x = 3200;
 
             
             var floor_0_400 = new Block(0, 400, 2208, 48);

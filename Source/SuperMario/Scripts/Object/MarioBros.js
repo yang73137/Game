@@ -78,6 +78,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.fireBalls = [new FireBall(), new FireBall()];
 
         this.hurtable = true;
+        this.invincible = false;
+        this.invincibleCounter = new Counter(600, false, true);
     },
     update: function () {
         switch (this.state) {
@@ -131,7 +133,15 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         switch (spriteType) {
             case MarioSprite.Stand:
-                this.sprite.setFrameCounter(0);
+                if (this.invincible) {
+                    var frameSequence = [];
+                    var offsetY = this.type == MarioType.Small ? 11 : 9;
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.faceToRight ? { x: 0, y: 32 * (offsetY + i * 3) } : { x: 32 * 41, y: 32 * (offsetY + i * 3) });
+                    }
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
                 if (this.type == MarioType.Small) {
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 }] : [{ x: 32 * 41, y: 64 }]);
                 }
@@ -144,6 +154,17 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 break;
             case MarioSprite.Move:
                 this.sprite.setFrameCounter(3 - this.speedUpLevel);
+                if (this.invincible) {
+                    var frameSequence = [];
+                    var offsetY = this.type == MarioType.Small ? 11 : 9;
+
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.faceToRight ? { x: 32 * (i + 1), y: 32 * (offsetY + i * 3) } : { x: 32 * (40 - i), y: 32 * (offsetY + i * 3) });
+                    }
+
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
                 if (this.type == MarioType.Small) {
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
                 }
@@ -155,6 +176,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Jump:
+                if (this.invincible) {
+                    var frameSequence = [];
+                    var offsetY = this.type == MarioType.Small ? 11 : 9;
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.faceToRight ? { x: 5 * 32, y: 32 * (offsetY + i * 3) } : { x: 36 * 32, y: 32 * (offsetY + i * 3) });
+                    }
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
+
                 this.sprite.setFrameCounter(0);
                 if (this.type == MarioType.Small) {
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 5 * 32, y: 64 }] : [{ x: 36 * 32, y: 64 }]);
@@ -167,6 +198,14 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Squat:
+                if (this.invincible) {
+                    var frameSequence = [];
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.faceToRight ? { x: 6 * 32, y: 32 * (9 + i * 3) } : { x: 35 * 32, y: 32 * (9 + i * 3) });
+                    }
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
                 this.sprite.setFrameCounter(0);
                 if (this.type == MarioType.Big) {
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 0 }] : [{ x: 35 * 32, y: 0 }]);
@@ -176,6 +215,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 break;
             case MarioSprite.Stay:
+                if (this.invincible) {
+                    var frameSequence = [];
+                    var offsetY = this.type == MarioType.Small ? 11 : 9;
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.stayToRight ? { x: 37 * 32, y: 32 * (offsetY + i * 3) } : { x: 4 * 32, y: 32 * (offsetY + i * 3) });
+                    }
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
+
                 this.sprite.setFrameCounter(0);
                 if (this.type == MarioType.Small) {
                     this.sprite.setFrameSequence(this.stayToRight ? [{ x: 37 * 32, y: 64 }] : [{ x: 4 * 32, y: 64 }]);
@@ -299,7 +348,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         this.gameUI = gameUI;
     },
-    onLive: function() {
+    onLive: function () {
+        
+        if (!this.invincibleCounter.countdown()) {
+            this.invincible = false;
+        }
+
         // 初始化状态
         this.fallDown();
         this.sprite.hide();
@@ -606,5 +660,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
         else if (marioType == MarioType.Flower) {
             this.state = MarioState.ChangingFlower;
         }
+    },
+    setInvincible: function () {
+        this.invincible = true;
     }
 });

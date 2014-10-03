@@ -53,15 +53,19 @@ Question = ClassFactory.createClass(GameObject, {
                     } else {
                         this.setPosition(this.x, this.y + 2);
                     }
-                    this.sprite.setPosition(this.x, this.y);
+                    
                 }
                 else {
                     this.state = this.collideCount > 0 ? QuestionState.Normal : QuestionState.None;
+                    if (!(this.item instanceof Gold)) {
+                        this.item.animate();
+                    }
                 }
                 break;
         }
 
         this.sprite.moveToNextFrame();
+        this.sprite.setPosition(this.x, this.y);
     },
     onCollidesDown: function (gameObject) {
         if (this.item == null) {
@@ -75,7 +79,9 @@ Question = ClassFactory.createClass(GameObject, {
                 this.sprite.moveToFrame(0);
             }
             this.state = QuestionState.Up;
-            this.item.animate();
+            if (this.item instanceof Gold) {
+                this.item.animate();
+            }
         }
     },
     hide: function() {
@@ -98,6 +104,9 @@ Question = ClassFactory.createClass(GameObject, {
         }
         else if (this.type == 4) {
             this.item = new Mushroom(this.x, this.y, MushroomType.Bonus);
+        }
+        else if (this.type == 5) {
+            this.item = new Star(this.x, this.y);
         }
         this.item.sprite.hide();
         this.item.addToGameUI(gameUI);

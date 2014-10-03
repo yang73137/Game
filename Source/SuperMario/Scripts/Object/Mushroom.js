@@ -32,10 +32,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
             this.sprite.setFrameSequence([{ x: 32, y: 0 }, { x: 32, y: 32 }]);
         }
         this.sprite.hide();
-        this.sprite.start();
 
-        this.delayCounter = new Counter(16, false, true);
-        this.delayCounter.setEnabled(false);
         this.upCounter = new Counter(1, true, true);
 
         this.originalX = x;
@@ -75,16 +72,9 @@ Mushroom = ClassFactory.createClass(GameObject, {
     },
     animate: function () {
         this.state = MushroomState.Birth;
-        this.delayCounter.setEnabled(true);
+        this.sprite.start();
     },
     onBirth: function () {
-        if (this.delayCounter.enabled) {
-            if (this.delayCounter.countdown()) {
-                return;
-            } else {
-                this.delayCounter.setEnabled(false);
-            }
-        }
         if (this.y > this.originalY - this.height) {
             if (!this.upCounter.countdown()) {
                 this.y--;
