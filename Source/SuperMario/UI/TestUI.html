@@ -46,7 +46,7 @@
             var app = document.getElementById("app");
             
             var gameUI = new GameUI();
-            gameUI.setSize(6784, 448);
+            gameUI.setSize(7296, 448);
             gameUI.setBackgroundImage("../Images/World1_1.png");
             gameUI.setBackgroundPosition(0, 0);
             gameUI.show();
@@ -60,9 +60,6 @@
 
             var enemy_512_368 = new Enemy(512, 368);
             enemy_512_368.addToGameUI(gameUI);
-
-            var enemy_1410_368 = new Enemy(1410, 368);
-            enemy_1410_368.addToGameUI(gameUI);
 
             var enemy_1652_368 = new Enemy(1652, 368);
             enemy_1652_368.addToGameUI(gameUI);
@@ -224,8 +221,8 @@
             var brick_5472_272 = new Brick(5472, 272);
             brick_5472_272.addToGameUI(gameUI);
             
-            //gameUI.setX(-3200);
-            //mario.x = 3200;
+            //gameUI.setX(-1750);
+            //mario.x = 1750;
 
             
             var floor_0_400 = new Block(0, 400, 2208, 48);
@@ -252,6 +249,11 @@
             
             var tube_1824_271 = new Block(1824, 271, 64, 128);
             tube_1824_271.addToGameUI(gameUI);
+            tube_1824_271.attachCollidesUp(function (gameObject) {
+                if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
+                    gameUI.moveToDown();
+                }
+            });
             
             var iron_4288_368 = new Block(4288, 368, 32, 32);
             iron_4288_368.addToGameUI(gameUI);
@@ -346,11 +348,43 @@
             var iron_6336_368 = new Block(6336, 368, 32, 32);
             iron_6336_368.addToGameUI(gameUI);
 
-            setInterval(function () {
-                mario.update();
-                for (var i = 0; i < gameUI.animateObjects.length; i++) {
-                    gameUI.animateObjects[i].update();
+
+
+            var floor_6784_400 = new Block(6784, 400, 512, 48);
+            floor_6784_400.addToGameUI(gameUI);
+            
+            var brick_6784_48 = new Block(6784, 48, 32, 32 * 11);
+            brick_6784_48.addToGameUI(gameUI);
+            
+            var brick_6944_320 = new Block(6912, 304, 32 * 7, 32 * 3 - 16);
+            brick_6944_320.addToGameUI(gameUI);
+            
+            var brick_6944_320 = new Block(6912, 48, 32 * 7, 32);
+            brick_6944_320.addToGameUI(gameUI);
+            
+            var tube_7200_338 = new Block(7200, 338, 72, 64);
+            tube_7200_338.addToGameUI(gameUI);
+            tube_7200_338.attachCollidesLeft(function (gameObject) {
+                if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
+                    gameUI.moveToUp();
                 }
+            });
+            
+            var tube_7200_338 = new Block(7270, 48, 26, 32 * 11);
+            tube_7200_338.addToGameUI(gameUI);
+
+            for (var goldIndexY = 0; goldIndexY < 3; goldIndexY++) {
+                for (var goldIndexX = 0; goldIndexX < 7; goldIndexX++) {
+                    if (goldIndexY == 0 && (goldIndexX == 0 || goldIndexX == 6)) {
+                        continue;
+                    }
+                    var gold_xy = new Gold2(6912 + 32 * goldIndexX, 144 + 64 * goldIndexY);
+                    gold_xy.addToGameUI(gameUI);
+                }
+            }
+            
+            setInterval(function () {
+                gameUI.update();
             }, 16);
         
         </script>

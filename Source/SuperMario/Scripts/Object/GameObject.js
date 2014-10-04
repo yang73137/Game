@@ -9,6 +9,7 @@
         this.gameUI = null;
 
         this.collideble = true;
+        this.stoppable = false;
     },
     setPosition: function(x, y) {
         this.x = x;

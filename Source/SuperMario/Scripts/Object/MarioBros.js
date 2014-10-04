@@ -249,7 +249,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesDownWith(block)) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
-                        if (!(block instanceof Enemy || block instanceof Mushroom)) {
+                        if (block.stoppable) {
                             this.y = block.y - this.sprite.height;
                             this.sprite.y = this.y;
                             this.falling = false;
@@ -262,9 +262,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesDownWith(block)) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
-                        this.y = block.y - this.sprite.height;
-                        this.sprite.y = this.y;
-                        this.falling = false;
+                        if (block.stoppable) {
+                            this.y = block.y - this.sprite.height;
+                            this.sprite.y = this.y;
+                            this.falling = false;
+                        }
+
                         break;
                     }
                 }
@@ -280,11 +283,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.sprite.x -= 1;
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesLeftWith(this)) {
+                if (this.collidesLeftWith(block)) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
-                    this.x += 1;
-                    this.sprite.x += 1;
+                    if (block.stoppable) {
+                        this.x += 1;
+                        this.sprite.x += 1;
+                    }
                     break;
                 }
             }
@@ -293,8 +298,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 if (this.collidesLeftWith(block)) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
-                    this.x += 1;
-                    this.sprite.x += 1;
+                    if (block.stoppable) {
+                        this.x += 1;
+                        this.sprite.x += 1;
+                    }
+
                     break;
                 }
             }
@@ -314,6 +322,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 if (this.collidesRightWith(block)) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
+                    if (block.stoppable) {
+                        this.x -= 1;
+                        this.sprite.x -= 1;
+                    }
                     break;
                 }
             }
@@ -322,23 +334,30 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 if (this.collidesRightWith(block)) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
-                    this.x -= 1;
-                    this.sprite.x -= 1;
+                    if (block.stoppable) {
+                        this.x -= 1;
+                        this.sprite.x -= 1;
+                    }
                     break;
                 }
             }
-            if (this.x + gameUI.x > 220) {
-                if (-gameUI.x >= 6784 - 512) {
-                    gameUI.setX(-(6784 - 512));
-                } else {
-                    gameUI.setX(gameUI.x - 1);
+            if (this.x > 6784) {
+
+            } else {
+                if (this.x + gameUI.x > 220) {
+                    if (-gameUI.x >= 6784 - 512) {
+                        gameUI.setX(-(6784 - 512));
+                    } else {
+                        gameUI.setX(gameUI.x - 1);
+                    }
+                }
+
+                if (this.x + gameUI.x + this.sprite.width > 512) {
+                    this.x = -gameUI.x + 512 - this.sprite.width;
+                    break;
                 }
             }
 
-            if (this.x + gameUI.x + this.sprite.width > 512) {
-                this.x = -gameUI.x + 512 - this.sprite.width;
-                break;
-            }
         }
     },
     addToGameUI: function (gameUI) {
@@ -407,8 +426,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesUpWith(block)) {
                         block.onCollides(this);
                         block.onCollidesDown(this);
-                        this.y = block.y + block.height;
-                        this.jumping = false;
+                        if (block.stoppable) {
+                            this.y = block.y + block.height;
+                            this.jumping = false;
+                        }
                     }
                 }
 
@@ -417,8 +438,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     if (this.collidesUpWith(block)) {
                         block.onCollides(this);
                         block.onCollidesDown(this);
-                        this.y = block.y + block.height;
-                        this.jumping = false;
+                        if (block.stoppable) {
+                            this.y = block.y + block.height;
+                            this.jumping = false;
+                        }
                         break;
                     }
                 }

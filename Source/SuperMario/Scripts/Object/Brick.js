@@ -10,6 +10,8 @@ Brick = ClassFactory.createClass(GameObject, {
     init: function (x, y) {
         GameObject.init.call(this);
 
+        this.stoppable = true;
+
         this.setPosition(x, y);
         this.setSize(32, 32);
 

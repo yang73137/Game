@@ -9,6 +9,8 @@ Question = ClassFactory.createClass(GameObject, {
     init: function (x, y, type) {
         GameObject.init.call(this);
         
+        this.stoppable = true;
+
         this.setPosition(x, y);
         this.setSize(32, 32);
 
@@ -26,7 +28,7 @@ Question = ClassFactory.createClass(GameObject, {
         this.type = type;
         this.collideCount = 1;
         
-        if (this.type == 2) {
+        if (this.type == 2 || type == 5) {
             this.sprite.setFrameSequence([{ x: 32, y: 0 }]);
         }
 

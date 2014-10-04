@@ -48,3 +48,50 @@
         this.sprite.start();
     }
 });
+
+GoldState = {
+    None: 0,
+    Live: 1
+};
+
+Gold2 = ClassFactory.createClass(GameObject, {
+    init: function (x, y) {
+        GameObject.init.call(this);
+
+        this.setPosition(x, y);
+        this.setSize(32, 32);
+
+        this.sprite = new Sprite();
+        this.sprite.setSize(32, 32);
+        this.sprite.setPosition(x, y);
+        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setFrameSequence([{ x: 0, y: 32 * 6 }, { x: 0, y: 32 * 6 }, { x: 32, y: 32 * 6 }, { x: 32 * 2, y: 32 * 6 }, { x: 32 * 3, y: 32 * 6 }]);
+        this.sprite.setRepeat(0);
+        this.sprite.setFrameCounter(10);
+        this.sprite.show();
+        this.sprite.start();
+
+        this.state = GoldState.Live;
+    },
+    addToGameUI: function (gameUI) {
+        gameUI.append(this.sprite);
+        gameUI.animateObjects.push(this);
+    },
+    update: function () {
+        switch (this.state) {
+            case GoldState.None:
+                this.sprite.hide();
+                break;
+            case GoldState.Live:
+                this.sprite.moveToNextFrame();
+                break;
+        }
+        
+    },
+    onCollides: function (gameObject) {
+        if (gameObject instanceof MarioBors) {
+            this.sprite.hide();
+            this.state = GoldState.None;
+        }
+    }
+});
