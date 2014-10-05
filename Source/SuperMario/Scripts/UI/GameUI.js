@@ -10,15 +10,17 @@ GameUI = ClassFactory.createClass(UIBase, {
     init: function () {
         UIBase.init.call(this);
 
+        this.mario = null;
         this.staticObjects = [];
         this.animateObjects = [];
 
         this.state = GameUIState.Normal;
+
     },
-    addStaticObjects: function (gameObject) {
-        this.animateObjects.push(gameObject);
+    addStaticObject: function (gameObject) {
+        this.staticObjects.push(gameObject);
     },
-    addGameObject: function (gameObject) {
+    addAnimateObject: function (gameObject) {
         this.animateObjects.push(gameObject);
     },
     onUpdate: function () {
@@ -27,32 +29,32 @@ GameUI = ClassFactory.createClass(UIBase, {
         }
     },
     moveToDown: function () {
-        mario.collideble = false;
+        this.mario.collidable = false;
         this.state = GameUIState.MoveToDown;
     },
     moveToUp: function () {
-        mario.collideble = false;
+        this.mario.collidable = false;
         this.state = GameUIState.MoveToUp;
     },
     update: function() {
         switch (this.state) {
         case GameUIState.Normal:
-            mario.update();
+            this.mario.update();
             for (var i = 0; i < gameUI.animateObjects.length; i++) {
                 gameUI.animateObjects[i].update();
             }
             break;
         case GameUIState.MoveToUp:
             this.setPosition(-5120, 0);
-            mario.setPosition(5232, 304);
-            mario.collideble = true;
+            this.mario.setPosition(5232, 304);
+            this.mario.collidable = true;
             this.state = GameUIState.Normal;
 
             break;
         case GameUIState.MoveToDown:
             this.setPosition(-6784, 0);
-            mario.setPosition(6834, 0);
-            mario.collideble = true;
+            this.mario.setPosition(6834, 0);
+            this.mario.collidable = true;
             this.state = GameUIState.Normal;
 
             break;

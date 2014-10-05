@@ -26,8 +26,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
     init: function (x, y) {
         GameObject.init.call(this);
 
-        this.gameUI = null;
-
         this.jumpPressedTime = 0;
         this.jumping = false;
         this.jumpEnabled = true;
@@ -56,8 +54,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.sprite.setRepeat([0]);
         this.sprite.show();
         this.sprite.start();
-
-        this.sprite.setPosition(x, y);
 
         this.spriteType = MarioSprite.Stand;
 
@@ -93,10 +89,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.onDead();
                 break;
         }
-    },
-    setPosition: function (x, y) {
-        this.x = x;
-        this.y = y;
     },
     setType: function (type) {
 
@@ -238,7 +230,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 break;
         }
     },
-    fallDown: function () {
+    freefall: function () {
         this.falling = true;
         if (!this.jumping) {
             for (var i = 0; i < 7; i++) {
@@ -246,7 +238,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.sprite.y = this.y;
                 for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                     var block = this.gameUI.animateObjects[blockIndex];
-                    if (this.collidesDownWith(block) && block.upCollideble) {
+                    if (this.collidesDownWith(block) && block.upCollidable) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
                         if (block.stoppable) {
@@ -259,7 +251,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                     var block = this.gameUI.staticObjects[blockIndex];
-                    if (this.collidesDownWith(block) && block.upCollideble) {
+                    if (this.collidesDownWith(block) && block.upCollidable) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
                         if (block.stoppable) {
@@ -283,7 +275,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.sprite.x -= 1;
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollideble) {
+                if (this.collidesLeftWith(block) && block.rightCollidable) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
                     if (block.stoppable) {
@@ -295,7 +287,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollideble) {
+                if (this.collidesLeftWith(block) && block.rightCollidable) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
                     if (block.stoppable) {
@@ -319,7 +311,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.sprite.x += 1;
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesRightWith(block) && block.leftCollideble) {
+                if (this.collidesRightWith(block) && block.leftCollidable) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
@@ -331,7 +323,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesRightWith(block) && block.leftCollideble) {
+                if (this.collidesRightWith(block) && block.leftCollidable) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
@@ -361,11 +353,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
     },
     addToGameUI: function (gameUI) {
-        gameUI.append(this.sprite);
+        GameObject.prototype.addToGameUI.call(this, gameUI);
         for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
             this.fireBalls[fireBallIndex].addToGameUI(gameUI);
         }
-        this.gameUI = gameUI;
+        gameUI.mario = this;
     },
     onLive: function () {
         
@@ -374,7 +366,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         // 初始化状态
-        this.fallDown();
+        this.freefall();
         this.sprite.hide();
         var spriteType = MarioSprite.Stand;
 
@@ -604,7 +596,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         this.setSprite(spriteType);
-        this.sprite.setPosition(this.x, this.y);
+        this.setPosition(this.x, this.y);
         this.sprite.show();
 
         this.sprite.moveToNextFrame();
@@ -612,11 +604,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
     onDead: function () {
         if (this.deadCounter.countdown()) {
             this.y -= 5;
-            this.sprite.setY(this.y);
+            this.setY(this.y);
         }
         else if (this.y < Const.SCREEN_HEIGHT) {
             this.y += 5;
-            this.sprite.setY(this.y);
+            this.setY(this.y);
         } else {
             this.state = MarioState.None;
         }
@@ -656,13 +648,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
     dead: function () {
         this.height = 32;
 
-        this.sprite.setSize(this.width, this.height);
+        this.setSize(this.width, this.height);
 
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 64 }]);
         this.sprite.moveToFrame(0);
 
         this.state = MarioState.Dead;
-        this.collideble = false;
+        this.collidable = false;
     },
     hurt: function() {
         if (this.hurtable && this.state == MarioState.Live) {

@@ -7,28 +7,23 @@
 
 Enemy = ClassFactory.createClass(GameObject, {
     init: function (x, y) {
-
         GameObject.init.call(this);
 
-        this.setPosition(x, y);
-        this.setSize(32, 32);
-
         this.speed = 1;
+        this.state = EnemyState.Live;
+        this.movingToRight = false;
+        this.deadCounter = new Counter(40, false, true);
         
         this.sprite = new Sprite();
         this.sprite.setBackgroundImage("../Images/Enemies.png");
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
-        this.sprite.setPosition(x, y);
-        this.sprite.setSize(32, 32);
         this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
         this.sprite.show();
         this.sprite.start();
-
-        this.deadCounter = new Counter(40, false, true);
-        this.state = EnemyState.Live;
-
-        this.movingToRight = false;
+        
+        this.setPosition(x, y);
+        this.setSize(32, 32);
     },
     update: function () {
         switch (this.state) {
@@ -40,10 +35,9 @@ Enemy = ClassFactory.createClass(GameObject, {
                 break;
         }
     },
-    addToGameUI: function(gameUI) {
-        gameUI.append(this.sprite);
-        gameUI.animateObjects.push(this);
-        this.gameUI = gameUI;
+    addToGameUI: function (gameUI) {
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+        gameUI.addAnimateObject(this);
     },
     onLive: function () {
 
@@ -52,12 +46,12 @@ Enemy = ClassFactory.createClass(GameObject, {
         }
 
         this.x += this.movingToRight ? 1 : -1;
-        this.sprite.setX(this.x);
+        this.setX(this.x);
         
         for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
             var block = this.gameUI.animateObjects[blockIndex];
 
-            if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+            if (block instanceof Enemy && this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                 block.onCollides(this);
                 block.onCollidesLeft(this);
                 this.movingToRight = false;
@@ -92,10 +86,11 @@ Enemy = ClassFactory.createClass(GameObject, {
                 break;
             }
         }
-        this.fallDown();
-        this.sprite.setPosition(this.x, this.y);
+        this.freefall();
+        this.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
-        
+
+        var mario = this.gameUI.mario;
         if (mario.state == MarioState.Live && this.collidesWith(mario)) {
             if (mario.invincible || (mario.y + mario.height < this.y + this.height / 2)) {
                 this.dead();
@@ -116,15 +111,12 @@ Enemy = ClassFactory.createClass(GameObject, {
     dead: function () {
         this.y += 16;
         this.setSize(32, 16);
-        this.sprite.setSize(this.width, 16);
-        this.sprite.setPosition(this.x, this.y);
+        this.setSize(this.width, 16);
+        this.setPosition(this.x, this.y);
         this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
         this.sprite.moveToFrame(0);
-        this.collideble = false;
+        this.setCollidable(false, false, false, false);
         this.state = EnemyState.Dead;
-    },
-    dead2: function() {
-        
     },
     onCollidesWith: function (gameObject) {
         if (gameObject instanceof MarioBors) {

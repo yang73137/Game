@@ -10,7 +10,7 @@
 
         this.width = 0;
         this.height = 0;
-        this.visible = false;
+        this.visible = true;
 
         this.div = document.createElement("div");
         this.style = this.div.style;

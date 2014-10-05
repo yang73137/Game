@@ -9,16 +9,14 @@ FireBall = ClassFactory.createClass(GameObject, {
     init: function () {
         GameObject.init.call(this);
         
-        this.setSize(16, 16);
-
         this.sprite = new Sprite();
-        this.sprite.setSize(16, 16);
         this.sprite.setBackgroundImage("../Images/Items.png");
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 32 * 9 }, { x: 32 * 6 + 16, y: 32 * 9 }, { x: 32 * 6, y: 32 * 9 + 16 }, { x: 32 * 6 + 16, y: 32 * 9 + 16 }]);
         this.sprite.setRepeat(0);
-
         this.sprite.show();
         this.sprite.start();
+        
+        this.setSize(16, 16);
 
         this.movingToRight = true;
         this.movingToDown = true;
@@ -26,10 +24,9 @@ FireBall = ClassFactory.createClass(GameObject, {
         this.movingUpTime = 0;
         this.bombCounter = new Counter(5, false, true);
     },
-    addToGameUI: function(gameUI) {
-        this.gameUI = gameUI;
-        gameUI.append(this.sprite);
-        gameUI.animateObjects.push(this);
+    addToGameUI: function (gameUI) {
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+        gameUI.addAnimateObject(this);
     },
     update: function () {
         
@@ -47,7 +44,6 @@ FireBall = ClassFactory.createClass(GameObject, {
     },
     fire: function(x, y, movingToRight) {
         this.setPosition(x, y);
-        this.sprite.setPosition(x, y);
         this.movingToRight = movingToRight;
         this.movingToDown = true;
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 32 * 9 }, { x: 32 * 6 + 16, y: 32 * 9 }, { x: 32 * 6, y: 32 * 9 + 16 }, { x: 32 * 6 + 16, y: 32 * 9 + 16 }]);
@@ -65,7 +61,7 @@ FireBall = ClassFactory.createClass(GameObject, {
                 this.movingUpTime = 0;
                 this.movingToDown = true;
             }
-            this.sprite.setPosition(this.x, this.y);
+            this.setPosition(this.x, this.y);
 
             var bomb = false;
             
@@ -75,7 +71,7 @@ FireBall = ClassFactory.createClass(GameObject, {
                 if (this.collidesDownWith(block) || this.collidesUpWith(block)) {
                     this.movingToDown = !this.movingToDown;
                     this.y += this.movingToDown ? 2 : -2;
-                    this.sprite.setY(this.y);
+                    this.setY(this.y);
                 }
                 if (this.collidesLeftWith(block) || this.collidesRightWith(block)) {
                     bomb = true;
@@ -110,12 +106,12 @@ FireBall = ClassFactory.createClass(GameObject, {
     },
     onBomb: function () {
         if (!this.bombCounter.countdown()) {
-            this.sprite.setSize(16, 16);
+            this.setSize(16, 16);
             this.state = FireBallState.None;
         }
     },
     bomb: function () {
-        this.sprite.setSize(32, 32);
+        this.setSize(32, 32);
         this.sprite.setFrameSequence([{ x: 32 * 7, y: 32 * 10 }]);
         this.sprite.moveToFrame(0);
         this.state = FireBallState.Bomb;

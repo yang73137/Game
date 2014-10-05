@@ -1,6 +1,6 @@
 ﻿BrickState = {
     None: 0,
-    Static: 1,
+    Normal: 1,
     Up: 2,
     Break: 3
 };
@@ -11,18 +11,15 @@ Brick = ClassFactory.createClass(GameObject, {
         GameObject.init.call(this);
 
         this.stoppable = true;
-
-        this.setPosition(x, y);
-        this.setSize(32, 32);
-
+        this.state = BrickState.Normal;
+        
         this.sprite = new Sprite();
-        this.sprite.setSize(32, 32);
-        this.sprite.setPosition(x, y);
         this.sprite.setBackgroundImage("../Images/TileSet.png");
         this.sprite.setBackgroundPosition(32, 0);
         this.sprite.show();
-
-        this.state = BrickState.Static;
+        
+        this.setPosition(x, y);
+        this.setSize(32, 32);
 
         this.upCounter = new Counter(16, false, true);
         this.breakCounter = new Counter(70, false, true);
@@ -58,8 +55,7 @@ Brick = ClassFactory.createClass(GameObject, {
             }
             else {
                 this.sprite.setBackground("");
-                this.y -= 1;
-                this.sprite.setY(this.y);
+                this.setY(this.y - 1);
                 
                 this.fragment1.show();
                 this.fragment2.show();
@@ -70,53 +66,58 @@ Brick = ClassFactory.createClass(GameObject, {
         }
     },
     addToGameUI: function (gameUI) {
+
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+
         gameUI.append(this.fragment1);
         gameUI.append(this.fragment2);
         gameUI.append(this.fragment3);
         gameUI.append(this.fragment4);
 
-        gameUI.append(this.sprite);
-        gameUI.animateObjects.push(this);
-        gameUI.staticObjects.push(this);
+        gameUI.addAnimateObject(this);
+        gameUI.addStaticObject(this);
     },
     update: function () {
         switch (this.state) {
             case BrickState.None:
-                this.sprite.hide();
                 break;
             case BrickState.Up:
-                if (this.upCounter.countdown()) {
-                    if (this.upCounter.currentCount >= 8) {
-                        this.setPosition(this.x, this.y - 2);
-                    } else {
-                        this.setPosition(this.x, this.y + 2);
-                    }
-                    this.sprite.setPosition(this.x, this.y);
-                }
-                else {
-                    this.state = BrickState.Static;
-                }
+                this.onUp();
                 break;
             case BrickState.Break:
-                this.sprite.hide();
-
-                if (this.breakCounter.countdown()) {
-                    if (this.breakCounter.currentCount >= 58) {
-                        this.fragment1.moveBy(-3, -8);
-                        this.fragment2.moveBy(3, -8);
-                        this.fragment3.moveBy(-4, 0);
-                        this.fragment4.moveBy(4, 0);
-                    }
-                    else {
-                        this.fragment1.moveBy(0, 7);
-                        this.fragment2.moveBy(0, 7);
-                        this.fragment3.moveBy(0, 7);
-                        this.fragment4.moveBy(0, 7);
-                    }
-                } else {
-                    this.state = BrickState.None;
-                }
+                this.onBreak();
                 break;
+        }
+    },
+    onUp: function() {
+        if (this.upCounter.countdown()) {
+            if (this.upCounter.currentCount >= 8) {
+                this.setPosition(this.x, this.y - 2);
+            } else {
+                this.setPosition(this.x, this.y + 2);
+            }
+            this.sprite.setPosition(this.x, this.y);
+        } else {
+            this.state = BrickState.Normal;
+        }
+    },
+    onBreak: function () {
+        this.sprite.hide();
+        this.setCollidable(false, false, false, false);
+        if (this.breakCounter.countdown()) {
+            if (this.breakCounter.currentCount >= 58) {
+                this.fragment1.moveBy(-3, -8);
+                this.fragment2.moveBy(3, -8);
+                this.fragment3.moveBy(-4, 0);
+                this.fragment4.moveBy(4, 0);
+            } else {
+                this.fragment1.moveBy(0, 7);
+                this.fragment2.moveBy(0, 7);
+                this.fragment3.moveBy(0, 7);
+                this.fragment4.moveBy(0, 7);
+            }
+        } else {
+            this.state = BrickState.None;
         }
     }
 });

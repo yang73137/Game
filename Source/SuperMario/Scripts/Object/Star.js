@@ -9,35 +9,27 @@ Star = ClassFactory.createClass(GameObject, {
     init: function (x, y) {
         GameObject.init.call(this);
 
-        this.setSize(32, 32);
-        this.setPosition(x, y);
-        
         this.sprite = new Sprite();
-        this.sprite.setSize(32, 32);
-        this.sprite.setPosition(x, y);
         this.sprite.setBackgroundImage("../Images/Items.png");
         this.sprite.setFrameSequence([{ x: 0, y: 32 * 3 }, { x: 32, y: 32 * 3 }, { x: 32 * 2, y: 32 * 3 }, { x: 32 * 3, y: 32 * 3 }]);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(1);
-
         this.sprite.hide();
+
+        this.setSize(32, 32);
+        this.setPosition(x, y);
         
         this.state = StarState.None;
-
         this.movingToRight = true;
         this.movingToDown = true;
-
         this.movingUpTime = 0;
-        
         this.upCounter = new Counter(1, true, true);
-
         this.originalX = x;
         this.originalY = y;
     },
     addToGameUI: function (gameUI) {
-        gameUI.append(this.sprite);
-        gameUI.animateObjects.push(this);
-        this.gameUI = gameUI;
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+        gameUI.addAnimateObject(this);
     },
     update: function () {
         switch (this.state) {
@@ -64,7 +56,7 @@ Star = ClassFactory.createClass(GameObject, {
                 this.movingUpTime = 0;
                 this.movingToDown = true;
             }
-            this.sprite.setPosition(this.x, this.y);
+            this.setPosition(this.x, this.y);
 
             for (var index = 0; index < this.gameUI.staticObjects.length; index++) {
                 var block = this.gameUI.staticObjects[index];
@@ -72,7 +64,7 @@ Star = ClassFactory.createClass(GameObject, {
                 if (this.collidesDownWith(block) || this.collidesUpWith(block)) {
                     this.movingToDown = !this.movingToDown;
                     this.y += this.movingToDown ? 3 : -3;
-                    this.sprite.setY(this.y);
+                    this.setY(this.y);
                 }
                 if (this.collidesLeftWith(block) || this.collidesRightWith(block)) {
                     this.movingToRight = !this.movingToRight;
@@ -91,8 +83,7 @@ Star = ClassFactory.createClass(GameObject, {
     onBirth: function () {
         if (this.y > this.originalY - this.height) {
             if (!this.upCounter.countdown()) {
-                this.y--;
-                this.sprite.setY(this.y);
+                this.setY(this.y - 1);
                 this.sprite.moveToNextFrame();
             }
         } else {

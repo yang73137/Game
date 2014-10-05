@@ -10,38 +10,33 @@ Question = ClassFactory.createClass(GameObject, {
         GameObject.init.call(this);
         
         this.stoppable = true;
-
-        this.setPosition(x, y);
-        this.setSize(32, 32);
+        this.type = type;
+        this.collideCount = 1;
+        this.item = null;
+        this.upCounter = new Counter(16, false, true);
+        this.state = QuestionState.Normal;
 
         this.sprite = new Sprite();
-        this.sprite.setSize(32, 32);
-        this.sprite.setPosition(x, y);
         this.sprite.setBackgroundImage("../Images/TileSet.png");
-        this.sprite.setFrameSequence([{ x: 32 * 24, y: 0 }, { x: 32 * 25, y: 0 }, { x: 32 * 26, y: 0 }]);
         this.sprite.setZ(2);
-        this.sprite.frameCounter.setCount(15);
+        this.sprite.frameCounter.setCount(12);
         this.sprite.setRepeat(0);
         this.sprite.show();
         this.sprite.start();
-
-        this.type = type;
-        this.collideCount = 1;
         
+        this.setPosition(x, y);
+        this.setSize(32, 32);
+
         if (this.type == 2 || type == 5) {
             this.sprite.setFrameSequence([{ x: 32, y: 0 }]);
+        } else {
+            this.sprite.setFrameSequence([{ x: 32 * 24, y: 0 }, { x: 32 * 25, y: 0 }, { x: 32 * 26, y: 0 }]);
         }
-
-        this.item = null;
-
-        this.upCounter = new Counter(16, false, true);
-
-        this.state = QuestionState.Normal;
     },
     addToGameUI: function (gameUI) {
-        gameUI.append(this.sprite);
-        gameUI.animateObjects.push(this);
-        gameUI.staticObjects.push(this);
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+        gameUI.addAnimateObject(this);
+        gameUI.addStaticObject(this);
     },
     update: function () {
         switch (this.state) {
@@ -63,20 +58,17 @@ Question = ClassFactory.createClass(GameObject, {
                         this.item.animate();
                     }
                 }
+                this.sprite.moveToNextFrame();
                 break;
         }
-
-        this.sprite.moveToNextFrame();
-        this.sprite.setPosition(this.x, this.y);
     },
     onCollidesDown: function (gameObject) {
+
         if (this.item == null) {
             this.setItem();
         }
-        this.upCollideble = true;
-        this.downCollideble = true;
-        this.leftCollideble = true;
-        this.rightCollideble = true;
+
+        this.setCollidable(true, true, true, true);
 
         if (this.state == QuestionState.Normal) {
             this.collideCount--;

@@ -4,17 +4,15 @@
         
         this.stoppable = true;
 
+        this.sprite = new Sprite();
+        this.sprite.show();
+        
         this.setPosition(x, y);
         this.setSize(width, height);
-
-        this.sprite = new Sprite();
-        this.sprite.setSize(width, height);
-        this.sprite.setPosition(x, y);
-        this.sprite.show();
     },
     addToGameUI: function (gameUI) {
-        gameUI.append(this.sprite);
-        gameUI.staticObjects.push(this);
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+        gameUI.addStaticObject(this);
     },
     attachCollidesUp: function (fun) {
         this.onCollidesUp = fun;
