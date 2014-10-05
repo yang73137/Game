@@ -74,7 +74,7 @@ FireBall = ClassFactory.createClass(GameObject, {
 
                 if (this.collidesDownWith(block) || this.collidesUpWith(block)) {
                     this.movingToDown = !this.movingToDown;
-                    this.y += this.movingToDown ? 3 : -3;
+                    this.y += this.movingToDown ? 2 : -2;
                     this.sprite.setY(this.y);
                 }
                 if (this.collidesLeftWith(block) || this.collidesRightWith(block)) {

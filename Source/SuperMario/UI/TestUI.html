@@ -114,6 +114,9 @@
 
             var question_2026_272 = new Question(2026, 272, 4);
             question_2026_272.addToGameUI(gameUI);
+            question_2026_272.upCollideble = false;
+            question_2026_272.leftCollideble = false;
+            question_2026_272.rightCollideble = false;
             question_2026_272.hide();
             
             var question_2496_272 = new Question(2496, 272, 3);
@@ -221,8 +224,8 @@
             var brick_5472_272 = new Brick(5472, 272);
             brick_5472_272.addToGameUI(gameUI);
             
-            //gameUI.setX(-1750);
-            //mario.x = 1750;
+            gameUI.setX(-1750);
+            mario.x = 1750;
 
             
             var floor_0_400 = new Block(0, 400, 2208, 48);

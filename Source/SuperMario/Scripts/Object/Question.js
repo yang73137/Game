@@ -73,6 +73,11 @@ Question = ClassFactory.createClass(GameObject, {
         if (this.item == null) {
             this.setItem();
         }
+        this.upCollideble = true;
+        this.downCollideble = true;
+        this.leftCollideble = true;
+        this.rightCollideble = true;
+
         if (this.state == QuestionState.Normal) {
             this.collideCount--;
             if (this.collideCount == 0) {

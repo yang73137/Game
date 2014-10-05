@@ -8,8 +8,29 @@
         this.sprite = null;
         this.gameUI = null;
 
+        this.upCollideble = true;
+        this.downCollideble = true;
+        this.leftCollideble = true;
+        this.rightCollideble = true;
+
         this.collideble = true;
         this.stoppable = false;
+    },
+    addToGameUI: function (gameUI) {
+        this.gameUI = gameUI;
+        gameUI.append(this.sprite);
+    },
+    getX: function() {
+        return this.sprite.x;
+    },
+    setX: function (x) {
+        this.sprite.setX(x);
+    },
+    getY: function () {
+        return this.sprite.y;
+    },
+    setY: function (y) {
+        this.sprite.setY(y);
     },
     setPosition: function(x, y) {
         this.x = x;
@@ -29,9 +50,6 @@
     onCollidesLeft: function (gameObject) {
     },
     onCollidesRight: function (gameObject) {
-    },
-    addToGameUI: function (gameUI) {
-        
     },
     collidesWith: function (gameObject) {
         if (this.collideble && gameObject.collideble) {
@@ -71,7 +89,7 @@
             this.sprite.y = this.y;
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesDownWith(block)) {
+                if (this.collidesDownWith(block) && block.upCollideble) {
                     block.onCollides(this);
                     block.onCollidesUp(this);
                     this.y = block.y - this.sprite.height;

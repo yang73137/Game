@@ -4,14 +4,12 @@
         
         this.stoppable = true;
 
-       
         this.setPosition(x, y);
         this.setSize(width, height);
 
         this.sprite = new Sprite();
         this.sprite.setSize(width, height);
         this.sprite.setPosition(x, y);
-        //this.sprite.setBackgroundImage("../Images/TileSet_01_01.png");
         this.sprite.show();
     },
     addToGameUI: function (gameUI) {
@@ -29,5 +27,5 @@
     },
     attachCollidesRight: function (fun) {
         this.onCollidesRight = fun;
-    },
+    }
 });

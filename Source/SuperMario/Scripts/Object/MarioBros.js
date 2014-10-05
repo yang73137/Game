@@ -79,7 +79,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.hurtable = true;
         this.invincible = false;
-        this.invincibleCounter = new Counter(600, false, true);
+        this.invincibleCounter = new Counter(480, false, true);
     },
     update: function () {
         switch (this.state) {
@@ -246,7 +246,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.sprite.y = this.y;
                 for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                     var block = this.gameUI.animateObjects[blockIndex];
-                    if (this.collidesDownWith(block)) {
+                    if (this.collidesDownWith(block) && block.upCollideble) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
                         if (block.stoppable) {
@@ -259,7 +259,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                     var block = this.gameUI.staticObjects[blockIndex];
-                    if (this.collidesDownWith(block)) {
+                    if (this.collidesDownWith(block) && block.upCollideble) {
                         block.onCollides(this);
                         block.onCollidesUp(this);
                         if (block.stoppable) {
@@ -283,7 +283,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.sprite.x -= 1;
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesLeftWith(block)) {
+                if (this.collidesLeftWith(block) && block.rightCollideble) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
                     if (block.stoppable) {
@@ -295,7 +295,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesLeftWith(block)) {
+                if (this.collidesLeftWith(block) && block.rightCollideble) {
                     block.onCollides(this);
                     block.onCollidesRight(this);
                     if (block.stoppable) {
@@ -319,7 +319,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.sprite.x += 1;
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesRightWith(block)) {
+                if (this.collidesRightWith(block) && block.leftCollideble) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
@@ -331,7 +331,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesRightWith(block)) {
+                if (this.collidesRightWith(block) && block.leftCollideble) {
                     block.onCollides(this);
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
@@ -369,7 +369,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     onLive: function () {
         
-        if (!this.invincibleCounter.countdown()) {
+        if (this.invincible && !this.invincibleCounter.countdown()) {
             this.invincible = false;
         }
 
