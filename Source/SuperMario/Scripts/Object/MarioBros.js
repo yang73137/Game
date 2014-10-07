@@ -75,7 +75,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.hurtable = true;
         this.invincible = false;
-        this.invincibleCounter = new Counter(480, false, true);
+        this.invincibleCounter = new Counter(600, false, true);
     },
     update: function () {
         switch (this.state) {
@@ -360,9 +360,15 @@ MarioBors = ClassFactory.createClass(GameObject, {
         gameUI.mario = this;
     },
     onLive: function () {
-        
-        if (this.invincible && !this.invincibleCounter.countdown()) {
-            this.invincible = false;
+
+        if (this.invincible) {
+            if (this.invincibleCounter.countdown()) {
+                if (this.invincibleCounter.currentCount <= 120) {
+                    this.sprite.setFrameCounter(8);
+                }
+            } else {
+                this.invincible = false;
+            }
         }
 
         // 初始化状态
