@@ -57,7 +57,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.spriteType = MarioSprite.Stand;
 
-        this.type = MarioType.Small;
+        this.type = MarioType.Big;
         this.setType(this.type);
         this.setSprite(MarioSprite.Stand);
 
@@ -645,16 +645,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
             }
         }
         else if (this.state == MarioState.ChangingFlower) {
-            if (this.changeCounter.countdown()) {
-                if (this.changeCounter.currentCount % 4 == 0) {
-                    this.sprite.moveToNextFrame();
-                }
-            } else {
+            if (!this.changeCounter.countdown()) {
                 this.setType(MarioType.Flower);
                 this.state = MarioState.Live;
                 this.hurtable = true;
                 this.setCollidable(true, true, true, true);
             }
+            this.sprite.moveToNextFrame();
         }
         this.sprite.show();
     },
@@ -680,7 +677,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     changeType: function (marioType) {
         if (marioType == MarioType.Small || marioType == MarioType.Big) {
-            this.state = marioType == MarioType.Small ?  MarioState.ChangingSmall : MarioState.ChangingBig;
+            this.state = marioType == MarioType.Small ? MarioState.ChangingSmall : MarioState.ChangingBig;
+            this.sprite.setFrameCounter(0);
             switch (this.spriteType) {
                 case MarioSprite.Stand:
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 }, { x: 0, y: 0 }] : [{ x: 32 * 41, y: 64 }, { x: 32 * 41, y: 0 }]);
@@ -701,6 +699,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
         else if (marioType == MarioType.Flower) {
             this.state = MarioState.ChangingFlower;
+            this.sprite.setFrameCounter(4);
             switch (this.spriteType) {
                 case MarioSprite.Stand:
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 0 }, { x: 0, y: 64 * 3 }] : [{ x: 32 * 41, y: 0 }, { x: 32 * 41, y: 64 * 3 }]);
@@ -722,7 +721,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.hurt = false;
         this.setCollidable(false, false, false, false);
-        this.sprite.setFrameCounter(0);
         this.sprite.moveToFrame(0);
     },
     setInvincible: function () {

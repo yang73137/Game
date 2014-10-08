@@ -138,7 +138,6 @@
     <Content Include="SuperMario\Scripts\Basic\Layer.js" />
     <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
-    <Content Include="SuperMario\Scripts\Hammer\hammer.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\Block.js" />
