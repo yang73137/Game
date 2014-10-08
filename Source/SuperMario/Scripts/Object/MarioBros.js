@@ -641,7 +641,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 this.state = MarioState.Live;
                 this.hurtable = true;
-                this.sprite.hide();
+                this.setCollidable(true, true, true, true);
             }
         }
         else if (this.state == MarioState.ChangingFlower) {
@@ -653,6 +653,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.setType(MarioType.Flower);
                 this.state = MarioState.Live;
                 this.hurtable = true;
+                this.setCollidable(true, true, true, true);
             }
         }
         this.sprite.show();
@@ -720,8 +721,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         this.hurt = false;
-        //this.collidable = false;
-        //this.downCollidable = true;
+        this.setCollidable(false, false, false, false);
         this.sprite.setFrameCounter(0);
         this.sprite.moveToFrame(0);
     },
