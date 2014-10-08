@@ -96,14 +96,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         if (type == MarioType.Small) {
             this.setSize(32, 32);
-            this.sprite.setSize(32, 32);
             if (this.type != MarioType.Small) {
                 this.y += 32;
             }
         }
         else if (type == MarioType.Big) {
             this.setSize(32, 64);
-            this.sprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
             }
@@ -111,7 +109,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         else if (type == MarioType.Flower) {
             this.fireable = true;
             this.setSize(32, 64);
-            this.sprite.setSize(32, 64);
             if (this.type == MarioType.Small) {
                 this.y -= 32;
             }

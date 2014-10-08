@@ -87,6 +87,7 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.setBackgroundImage("");
     },
     setItem: function () {
+        var mario = this.gameUI.mario;
         if (this.type == 1) {
             this.item = new Gold(this.x, this.y - 48);
         }

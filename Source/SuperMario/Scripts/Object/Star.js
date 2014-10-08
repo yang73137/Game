@@ -95,10 +95,10 @@ Star = ClassFactory.createClass(GameObject, {
         this.sprite.start();
     },
     onCollides: function (gameObject) {
-        if (gameObject == mario) {
+        if (gameObject instanceof  MarioBors) {
             this.sprite.hide();
             this.state = StarState.None;
-            mario.setInvincible();
+            gameObject.setInvincible();
         }
     },
 });
