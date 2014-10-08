@@ -598,12 +598,14 @@ MarioBors = ClassFactory.createClass(GameObject, {
         if (this.deadCounter.countdown()) {
             this.y -= 5;
             this.setY(this.y);
+            
         }
         else if (this.y < Const.SCREEN_HEIGHT) {
             this.y += 5;
             this.setY(this.y);
         } else {
             this.state = MarioState.None;
+            this.gameUI.restart();
         }
     },
     onChanging: function () {

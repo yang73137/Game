@@ -60,6 +60,18 @@ GameUI = ClassFactory.createClass(UIBase, {
             break;
         }
     },
+    restart: function() {
+        var x = this.mario.x;
+        this.setX(0);
+        this.div.innerHTML = "";
+        this.staticObjects = [];
+        this.animateObjects = [];
+        this.createWorld1_1();
+        if (x >= 2752) {
+            this.setX(-2602);
+            this.mario.setX(2634);
+        }
+    },
     createWorld1_1: function () {
         var gameUI = this;
 
