@@ -53,7 +53,7 @@ Flower = ClassFactory.createClass(GameObject, {
             this.state = FlowerState.None;
             this.collidable = false;
             if (gameObject.type == MarioType.Small) {
-                gameObject.changeType(MarioType.ChangingBig);
+                gameObject.changeType(MarioType.Big);
             } else if (gameObject.type == MarioType.Big) {
                 gameObject.changeType(MarioType.Flower);
             }
