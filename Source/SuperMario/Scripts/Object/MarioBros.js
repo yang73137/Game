@@ -736,7 +736,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.speed = 1;
     },
     onReJump: function () {
-        if (this.currentJumpHeight < 50) {
+        if (this.currentJumpHeight < 45) {
             for (var i = 0; i < 6; i++) {
                 this.currentJumpHeight += 1;
                 this.setY(this.y - 1);
