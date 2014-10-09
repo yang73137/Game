@@ -736,7 +736,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.speed = 1;
     },
     onReJump: function () {
-        if (this.currentJumpHeight < 60) {
+        if (this.currentJumpHeight < 50) {
             for (var i = 0; i < 6; i++) {
                 this.currentJumpHeight += 1;
                 this.setY(this.y - 1);
@@ -746,7 +746,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         this.moveToRight();
                     }
                     else if (this.movingToLeft) {
-                        this.moveToLeft(this.x - 1);
+                        this.moveToLeft();
                     }
                 }
 
@@ -780,6 +780,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.speed = 2;
             this.currentJumpHeight = 0;
             this.state = MarioState.Live;
+        }
+    },
+    onCollidesUpWith: function(gameObject) {
+        if (gameObject instanceof Enemy) {
+            this.hurt();
         }
     }
 });
