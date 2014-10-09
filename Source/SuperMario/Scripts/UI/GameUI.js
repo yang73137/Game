@@ -132,7 +132,7 @@ GameUI = ClassFactory.createClass(UIBase, {
         var brick_2464_272 = new Brick(2464, 272);
         brick_2464_272.addToGameUI(gameUI);
 
-        var question_2026_272 = new Question(2058, 240, 4);
+        var question_2026_272 = new Question(2026, 240, 4);
         question_2026_272.addToGameUI(gameUI);
         question_2026_272.upCollidable = false;
         question_2026_272.leftCollidable = false;
