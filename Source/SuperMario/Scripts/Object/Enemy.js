@@ -94,6 +94,7 @@ Enemy = ClassFactory.createClass(GameObject, {
         if (mario.state == MarioState.Live && this.collidesWith(mario)) {
             if (mario.invincible || (mario.y + mario.height < this.y + this.height / 2)) {
                 this.dead();
+                mario.reJump();
             } else {
                 mario.hurt();
             }
