@@ -79,6 +79,16 @@ Enemy = ClassFactory.createClass(GameObject, {
         if (gameObject instanceof MarioBors) {
             gameObject.invincible ? this.dead() : gameObject.hurt();
         }
+        else if (gameObject instanceof Brick) {
+            if (gameObject.state == BrickState.Up || gameObject.state == BrickState.Break) {
+                this.dead();
+            }
+        }
+        else if (gameObject instanceof Question) {
+            if (gameObject.state == QuestionState.Up) {
+                this.dead();
+            }
+        }
     },
     onCollidesLeft: function (gameObject) {
         if (gameObject.stoppable || gameObject instanceof Enemy) {
