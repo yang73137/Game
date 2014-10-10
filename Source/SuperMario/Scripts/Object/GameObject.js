@@ -5,7 +5,7 @@
         this.width = 0;
         this.height = 0;
 
-        this.sprite = new Sprite();
+        this.sprite = null;
         this.gameUI = null;
 
         this.falling = false;
@@ -22,26 +22,34 @@
     },
     addToGameUI: function (gameUI) {
         this.gameUI = gameUI;
-        gameUI.append(this.sprite);
+        if (this.sprite != null) {
+            gameUI.append(this.sprite);
+        }
     },
     getX: function() {
         return this.x;
     },
     setX: function (x) {
         this.x = x;
-        this.sprite.setX(x);
+        if (this.sprite != null) {
+            this.sprite.setX(x);
+        }
     },
     getY: function () {
         return this.y;
     },
     setY: function (y) {
         this.y = y;
-        this.sprite.setY(y);
+        if (this.sprite != null) {
+            this.sprite.setY(y);
+        }
     },
     setPosition: function(x, y) {
         this.setX(x);
         this.setY(y);
-        this.sprite.setPosition(x, y);
+        if (this.sprite != null) {
+            this.sprite.setPosition(x, y);
+        }
     },
     setWidth: function (width) {
         this.width = width;
@@ -56,24 +64,6 @@
         this.setHeight(height);
         this.sprite.setSize(width, height);
     },
-    update: function() {
-    },
-    freefall: function () {
-        for (var i = 0; i < 7; i++) {
-            this.setY(this.y + 1);
-            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesDownWith(block) && block.upCollidable) {
-                    block.onCollides(this);
-                    block.onCollidesUp(this);
-                    this.setY(block.y - this.sprite.height);
-                    this.falling = false;
-                    return false;
-                }
-            }
-        }
-        return true;
-    },
     setStoppable: function (stoppable) {
         this.stoppable = stoppable;
     },
@@ -86,6 +76,10 @@
     },
     collidesWith: function (gameObject) {
         
+        if (this == gameObject) {
+            return false;
+        }
+
         if (!this.collidable || !gameObject.collidable) {
             return false;
         }
@@ -105,6 +99,10 @@
         return (x1 - x2 < w2 && x2 < x1 + w1) && (y1 - y2 < h2 && y2 < y1 + h1);
     },
     collidesUpWith: function (gameObject) {
+        if (this == gameObject) {
+            return false;
+        }
+
         if (!this.upCollidable || !gameObject.downCollidable) {
             return false;
         }
@@ -116,7 +114,10 @@
         return (this.y > gameObject.y) && (this.y < gameObject.y + gameObject.height);
     },
     collidesDownWith: function (gameObject) {
-        
+        if (this == gameObject) {
+            return false;
+        }
+
         if (!this.downCollidable || !gameObject.upCollidable) {
             return false;
         }
@@ -128,7 +129,10 @@
         return (this.y < gameObject.y) && (this.y + this.height > gameObject.y);
     },
     collidesLeftWith: function (gameObject) {
-        
+        if (this == gameObject) {
+            return false;
+        }
+
         if (!this.leftCollidable || !gameObject.rightCollidable) {
             return false;
         }
@@ -140,7 +144,10 @@
         return this.x > gameObject.x && this.x < gameObject.x + gameObject.width;
     },
     collidesRightWith: function (gameObject) {
-        
+        if (this == gameObject) {
+            return false;
+        }
+
         if (!this.rightCollidable || !gameObject.leftCollidable) {
             return false;
         }
@@ -161,5 +168,95 @@
     onCollidesLeft: function (gameObject) {
     },
     onCollidesRight: function (gameObject) {
+    },
+    update: function () {
+    },
+    freefall: function () {
+        this.falling = true;
+        for (var i = 0; i < 7; i++) {
+            this.setY(this.y + 1);
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesDownWith(block)) {
+
+                    this.onCollides(block);
+                    this.onCollidesDown(block);
+
+                    block.onCollides(this);
+                    block.onCollidesUp(this);
+
+                    if (block.stoppable) {
+                        this.falling = false;
+                        this.setY(block.y - this.sprite.height);
+                        return false;
+                    }
+
+                    return true;
+                }
+            }
+        }
+        return true;
+    },
+    moveLeft: function () {
+        for (var i = 0; i < this.speed; i++) {
+            this.setX(this.x - 1);
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
+                if (this.collidesLeftWith(block) && block.rightCollidable) {
+                    this.onCollides(block);
+                    this.onCollidesLeft(block);
+                    block.onCollides(this);
+                    block.onCollidesRight(this);
+                    if (block.stoppable) {
+                        this.setX(this.x + 1);
+                        break;
+                    }
+                }
+            }
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesLeftWith(block) && block.rightCollidable) {
+                    this.onCollides(block);
+                    this.onCollidesLeft(block);
+                    block.onCollides(this);
+                    block.onCollidesRight(this);
+                    if (block.stoppable) {
+                        this.setX(this.x + 1);
+                        break;
+                    }
+                }
+            }
+        }
+    },
+    moveRight: function () {
+        for (var i = 0; i < this.speed; i++) {
+            this.setX(this.x + 1);
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
+                if (this.collidesRightWith(block)) {
+                    this.onCollides(block);
+                    this.onCollidesRight(block);
+                    block.onCollides(this);
+                    block.onCollidesLeft(this);
+                    if (block.stoppable) {
+                        this.setX(this.x - 1);
+                        break;
+                    }
+                }
+            }
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesRightWith(block)) {
+                    this.onCollides(block);
+                    this.onCollidesRight(block);
+                    block.onCollides(this);
+                    block.onCollidesLeft(this);
+                    if (block.stoppable) {
+                        this.setX(this.x - 1);
+                        break;
+                    }
+                }
+            }
+        }
     }
 });

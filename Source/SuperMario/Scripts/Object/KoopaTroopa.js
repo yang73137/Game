@@ -54,49 +54,10 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
             return;
         }
 
-        this.x += this.movingToRight ? 1 : -1;
-        this.setX(this.x);
+        this.movingToRight ? this.moveRight() : this.moveLeft();
 
-        for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-            var block = this.gameUI.animateObjects[blockIndex];
-
-            if (block instanceof Enemy && this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesLeft(this);
-                this.movingToRight = false;
-                break;
-            }
-            if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesRight(this);
-                this.movingToRight = true;
-                break;
-            }
-        }
-
-        for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-            var block = this.gameUI.staticObjects[blockIndex];
-
-            if (this.collidesDownWith(block)) {
-                this.changeToLive2();
-                return;
-            }
-
-            if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesLeft(this);
-                this.movingToRight = false;
-                break;
-            }
-            if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesRight(this);
-                this.movingToRight = true;
-                break;
-            }
-        }
         this.freefall();
-        this.setPosition(this.x, this.y);
+
         this.sprite.moveToNextFrame();
 
         var mario = this.gameUI.mario;
@@ -123,46 +84,10 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
             }
         }
         if (this.moving) {
-            for (var i = 0; i < this.speed; i++) {
-                this.x += this.movingToRight ? 1 : -1;
-                this.setX(this.x);
-                
-                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                    var block = this.gameUI.animateObjects[blockIndex];
-
-                    if (block instanceof Enemy && this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                        block.onCollides(this);
-                        block.onCollidesLeft(this);
-                        block.dead();
-                        break;
-                    }
-                }
-
-                for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                    var block = this.gameUI.staticObjects[blockIndex];
-
-                    if (this.collidesDownWith(block)) {
-                        this.moving = false;
-                        return;
-                    }
-
-                    if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                        block.onCollides(this);
-                        block.onCollidesLeft(this);
-                        this.movingToRight = false;
-                        break;
-                    }
-                    if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                        block.onCollides(this);
-                        block.onCollidesRight(this);
-                        this.movingToRight = true;
-                        break;
-                    }
-                }
-            }
+            this.movingToRight ? this.moveRight() : this.moveLeft();
         }
         this.freefall();
-        this.setPosition(this.x, this.y);
+
         var mario = this.gameUI.mario;
         if (mario.state == MarioState.Live && this.collidesWith(mario)) {
             if ((mario.y + mario.height < this.y + this.height / 2)) {
@@ -201,12 +126,24 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
                 this.moving = true;
                 this.movingToRight = true;
             }
+            else if (gameObject instanceof Enemy) {
+                gameObject.dead();
+            }
+            if (this.moving && gameObject.stoppable) {
+                this.movingToRight = true;
+            }
         }
     },
     onCollidesRight: function (gameObject) {
         if (this.state == KoopaTroopaState.Live2) {
             if (gameObject instanceof MarioBors) {
                 this.moving = true;
+                this.movingToRight = false;
+            }
+            else if (gameObject instanceof Enemy) {
+                gameObject.dead();
+            }
+            if (this.moving && gameObject.stoppable) {
                 this.movingToRight = false;
             }
         }

@@ -240,7 +240,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
     freefall: function () {
         this.falling = true;
         if (!this.jumpingUp) {
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 7; i++) {
                 this.setY(this.y + 1);
                 for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                     var block = this.gameUI.animateObjects[blockIndex];
