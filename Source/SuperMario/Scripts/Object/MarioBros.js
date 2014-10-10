@@ -275,79 +275,28 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.state = MarioState.Dead;
         }
     },
-    moveToLeft: function () {
-        for (var i = 0; i < this.speed; i++) {
-            this.setX(this.x - 1);
-            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollidable) {
-                    block.onCollides(this);
-                    block.onCollidesRight(this);
-                    if (block.stoppable) {
-                        this.setX(this.x + 1);
-                        break;
-                    }
-                }
-            }
-            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollidable) {
-                    block.onCollides(this);
-                    block.onCollidesRight(this);
-                    if (block.stoppable) {
-                        this.setX(this.x + 1);
-                        break;
-                    }
-                }
-            }
-            if (this.x < -this.gameUI.x) {
-                this.setX(-this.gameUI.x);
-                break;
-            }
+    moveLeft: function () {
+        GameObject.prototype.moveLeft.call(this);
+        if (this.x < -this.gameUI.x) {
+            this.setX(-this.gameUI.x);
         }
     },
-    moveToRight: function() {
-        for (var i = 0; i < this.speed; i++) {
-            this.setX(this.x + 1);
-            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesRightWith(block) && block.leftCollidable) {
-                    block.onCollides(this);
-                    block.onCollidesLeft(this);
-                    if (block.stoppable) {
-                        this.setX(this.x - 1);
-                        break;
-                    }
-                }
-            }
-            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesRightWith(block) && block.leftCollidable) {
-                    block.onCollides(this);
-                    block.onCollidesLeft(this);
-                    if (block.stoppable) {
-                        this.setX(this.x - 1);
-                        break;
-                    }
-                }
-            }
-            if (this.x > 6784) {
+    moveRight: function() {
+        GameObject.prototype.moveRight.call(this);
+        if (this.x > 6784) {
 
-            } else {
-                if (this.x + this.gameUI.x > 220) {
-                    if (-this.gameUI.x >= 6784 - 512) {
-                        this.gameUI.setX(-(6784 - 512));
-                    } else {
-                        this.gameUI.setX(this.gameUI.x - 1);
-                    }
-                }
-
-                if (this.x + this.gameUI.x + this.sprite.width > 512) {
-                    this.x = -this.gameUI.x + 512 - this.sprite.width;
-                    break;
+        } else {
+            if (this.x + this.gameUI.x > 220) {
+                if (-this.gameUI.x >= 6784 - 512) {
+                    this.gameUI.setX(-(6784 - 512));
+                } else {
+                    this.gameUI.setX(this.gameUI.x - this.speed);
                 }
             }
 
+            if (this.x + this.gameUI.x + this.sprite.width > 512) {
+                this.x = -this.gameUI.x + 512 - this.sprite.width;
+            }
         }
     },
     addToGameUI: function (gameUI) {
@@ -356,6 +305,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.fireBalls[fireBallIndex].addToGameUI(gameUI);
         }
         gameUI.mario = this;
+        gameUI.addAnimateObject(this);
     },
     onLive: function () {
 
@@ -476,7 +426,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToRight = true;
-                    this.moveToRight();
+                    this.moveRight();
                 }
             }
         } else {
@@ -500,7 +450,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToLeft = true;
-                    this.moveToLeft();
+                    this.moveLeft();
                 }
             }
         } else {
@@ -579,7 +529,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     }
                 }
 
-                this.stayToRight ? this.moveToRight() : this.moveToLeft();
+                this.stayToRight ? this.moveRight() : this.moveLeft();
             }
         }
 
@@ -734,6 +684,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.speed = 1;
     },
     onReJump: function () {
+        this.speed = 1;
         if (this.currentJumpHeight < 45) {
             for (var i = 0; i < 6; i++) {
                 this.currentJumpHeight += 1;
@@ -741,10 +692,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (this.currentJumpHeight % 2 == 0) {
                     if (this.movingToRight) {
-                        this.moveToRight();
+                        this.moveRight();
                     }
                     else if (this.movingToLeft) {
-                        this.moveToLeft();
+                        this.moveLeft();
                     }
                 }
 

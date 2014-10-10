@@ -39,7 +39,6 @@ GameUI = ClassFactory.createClass(UIBase, {
     update: function() {
         switch (this.state) {
         case GameUIState.Normal:
-            this.mario.update();
             for (var i = 0; i < gameUI.animateObjects.length; i++) {
                 gameUI.animateObjects[i].update();
             }

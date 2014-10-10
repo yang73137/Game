@@ -93,10 +93,10 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
                 this.changeToLive2();
                 gameObject.reJump();
             }
-            else if (this.state == KoopaTroopaState.Live2) {
+            else if (gameObject.jumping && this.state == KoopaTroopaState.Live2) {
                 this.moving = !this.moving;
-                this.movingToRight = gameObject.x <= (this.x + this.width / 2);
                 gameObject.reJump();
+                this.movingToRight = gameObject.x <= (this.x + this.width / 2);
                 this.setX(this.movingToRight ? gameObject.x + gameObject.width : gameObject.x - this.width);
             }
         }
@@ -116,8 +116,13 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         }
         else if (this.state == KoopaTroopaState.Live2) {
             if (gameObject instanceof MarioBors) {
-                this.moving = true;
-                this.movingToRight = true;
+                if (!this.moving) {
+                    this.moving = true;
+                    this.movingToRight = true;
+                    this.setX(gameObject.x + gameObject.width + 2);
+                } else {
+                    gameObject.invincible ? this.dead() : gameObject.hurt();
+                }
             }
             else if (gameObject instanceof Enemy) {
                 gameObject.dead();
@@ -135,8 +140,13 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         }
         else if (this.state == KoopaTroopaState.Live2) {
             if (gameObject instanceof MarioBors) {
-                this.moving = true;
-                this.movingToRight = false;
+                if (!this.moving) {
+                    this.moving = true;
+                    this.movingToRight = false;
+                    this.setX(gameObject.x - this.width - 2);
+                } else {
+                    gameObject.invincible ? this.dead() : gameObject.hurt();
+                }
             }
             else if (gameObject instanceof Enemy) {
                 gameObject.dead();
