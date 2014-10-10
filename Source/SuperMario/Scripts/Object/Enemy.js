@@ -45,62 +45,10 @@ Enemy = ClassFactory.createClass(GameObject, {
             return;
         }
 
-        this.x += this.movingToRight ? 1 : -1;
-        this.setX(this.x);
+        this.movingToRight ? this.moveRight() : this.moveLeft();
         
-        for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-            var block = this.gameUI.animateObjects[blockIndex];
-
-            if (block instanceof Enemy && this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesLeft(this);
-                this.movingToRight = false;
-                break;
-            }
-            if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesRight(this);
-                this.movingToRight = true;
-                break;
-            }
-        }
-
-        for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-            var block = this.gameUI.staticObjects[blockIndex];
-
-            if (this.collidesDownWith(block)) {
-                this.dead();
-                return;
-            }
-
-            if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesLeft(this);
-                this.movingToRight = false;
-                break;
-            }
-            if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
-                block.onCollides(this);
-                block.onCollidesRight(this);
-                this.movingToRight = true;
-                break;
-            }
-        }
         this.freefall();
-        this.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
-
-        var mario = this.gameUI.mario;
-        if (mario.state == MarioState.Live && this.collidesWith(mario)) {
-            if (mario.invincible || (mario.y + mario.height < this.y + this.height / 2)) {
-                this.dead();
-                if ((mario.y + mario.height < this.y + this.height / 2)) {
-                    mario.reJump();
-                }
-            } else {
-                mario.hurt();
-            }
-        }
     },
     onDead: function() {
         if (!this.deadCounter.countdown()) {
@@ -121,9 +69,31 @@ Enemy = ClassFactory.createClass(GameObject, {
         this.setCollidable(false, false, false, false);
         this.state = EnemyState.Dead;
     },
-    onCollidesWith: function (gameObject) {
+    onCollidesUp: function(gameObject) {
         if (gameObject instanceof MarioBors) {
-            gameObject.hurt();
+            this.dead();
+            gameObject.reJump();
+        }
+    },
+    onCollidesDown: function (gameObject) {
+        if (gameObject instanceof MarioBors) {
+            gameObject.invincible ? this.dead() : gameObject.hurt();
+        }
+    },
+    onCollidesLeft: function (gameObject) {
+        if (gameObject.stoppable || gameObject instanceof Enemy) {
+            this.movingToRight = true;
+        }
+        if (gameObject instanceof MarioBors) {
+            gameObject.invincible ? this.dead() : gameObject.hurt();
+        }
+    },
+    onCollidesRight: function (gameObject) {
+        if (gameObject.stoppable || gameObject instanceof Enemy) {
+            this.movingToRight = false;
+        }
+        if (gameObject instanceof MarioBors) {
+            gameObject.invincible ? this.dead() : gameObject.hurt();
         }
     }
 });

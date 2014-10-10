@@ -202,7 +202,7 @@
             this.setX(this.x - 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollidable) {
+                if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                     this.onCollides(block);
                     this.onCollidesLeft(block);
                     block.onCollides(this);
@@ -215,7 +215,7 @@
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesLeftWith(block) && block.rightCollidable) {
+                if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                     this.onCollides(block);
                     this.onCollidesLeft(block);
                     block.onCollides(this);
@@ -233,7 +233,7 @@
             this.setX(this.x + 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
-                if (this.collidesRightWith(block)) {
+                if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                     this.onCollides(block);
                     this.onCollidesRight(block);
                     block.onCollides(this);
@@ -246,7 +246,7 @@
             }
             for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                 var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesRightWith(block)) {
+                if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
                     this.onCollides(block);
                     this.onCollidesRight(block);
                     block.onCollides(this);

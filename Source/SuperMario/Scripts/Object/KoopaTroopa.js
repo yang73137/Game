@@ -53,24 +53,12 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         if (!this.moveCounter.countdown()) {
             return;
         }
+        
+        this.freefall();
 
         this.movingToRight ? this.moveRight() : this.moveLeft();
 
-        this.freefall();
-
         this.sprite.moveToNextFrame();
-
-        var mario = this.gameUI.mario;
-        if (mario.state == MarioState.Live && this.collidesWith(mario)) {
-            if (mario.invincible || (mario.y + mario.height < this.y + this.height / 2)) {
-                this.changeToLive2();
-                if ((mario.y + mario.height < this.y + this.height / 2)) {
-                    mario.reJump();
-                }
-            } else {
-                mario.hurt();
-            }
-        }
     },
     onLive2: function () {
         if (this.x + this.width < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512)) {
@@ -83,25 +71,11 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
                 return;
             }
         }
-        if (this.moving) {
-            this.movingToRight ? this.moveRight() : this.moveLeft();
-        }
+
         this.freefall();
 
-        var mario = this.gameUI.mario;
-        if (mario.state == MarioState.Live && this.collidesWith(mario)) {
-            if ((mario.y + mario.height < this.y + this.height / 2)) {
-                if ((mario.y + mario.height < this.y + this.height / 2)) {
-                    this.moving = !this.moving;
-                    this.movingToRight = mario.x <= (this.x + this.width / 2);
-                    mario.reJump();
-                    if (this.moving) {
-                        this.setX(this.movingToRight ? mario.x + mario.width : mario.x - this.width);
-                    }
-                }
-            } else {
-                mario.hurt();
-            }
+        if (this.moving) {
+            this.movingToRight ? this.moveRight() : this.moveLeft();
         }
     },
     changeToLive2: function () {
@@ -113,15 +87,34 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         this.speed = 5;
         this.moving = false;
     },
-    onCollidesWith: function (gameObject) {
+    onCollidesUp: function (gameObject) {
         if (gameObject instanceof MarioBors) {
-            if (this.moving) {
-                gameObject.hurt();
+            if (this.state == KoopaTroopaState.Live) {
+                this.changeToLive2();
+                gameObject.reJump();
+            }
+            else if (this.state == KoopaTroopaState.Live2) {
+                this.moving = !this.moving;
+                this.movingToRight = gameObject.x <= (this.x + this.width / 2);
+                gameObject.reJump();
+                this.setX(this.movingToRight ? gameObject.x + gameObject.width : gameObject.x - this.width);
+            }
+        }
+    },
+    onCollidesDown: function (gameObject) {
+        if (this.state == KoopaTroopaState.Live) {
+            if (gameObject instanceof MarioBors) {
+                gameObject.invincible ? this.dead() : gameObject.hurt();
             }
         }
     },
     onCollidesLeft: function (gameObject) {
-        if (this.state == KoopaTroopaState.Live2) {
+        if (this.state == KoopaTroopaState.Live) {
+            if (gameObject instanceof MarioBors) {
+                gameObject.invincible ? this.dead() : gameObject.hurt();
+            }
+        }
+        else if (this.state == KoopaTroopaState.Live2) {
             if (gameObject instanceof MarioBors) {
                 this.moving = true;
                 this.movingToRight = true;
@@ -135,7 +128,12 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         }
     },
     onCollidesRight: function (gameObject) {
-        if (this.state == KoopaTroopaState.Live2) {
+        if (this.state == KoopaTroopaState.Live) {
+            if (gameObject instanceof MarioBors) {
+                gameObject.invincible ? this.dead() : gameObject.hurt();
+            }
+        }
+        else if (this.state == KoopaTroopaState.Live2) {
             if (gameObject instanceof MarioBors) {
                 this.moving = true;
                 this.movingToRight = false;

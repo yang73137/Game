@@ -16,6 +16,8 @@
 
         this.originalX = x;
         this.originalY = y;
+
+        this.setCollidable(false, false, false, false);
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
@@ -67,6 +69,7 @@ Gold2 = ClassFactory.createClass(GameObject, {
         this.setSize(32, 32);
 
         this.state = GoldState.Live;
+        this.setCollidable(true, true, true, true);
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
@@ -81,12 +84,12 @@ Gold2 = ClassFactory.createClass(GameObject, {
                 this.sprite.moveToNextFrame();
                 break;
         }
-        
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof MarioBors) {
             this.sprite.hide();
             this.state = GoldState.None;
+            this.setCollidable(false, false, false, false);
         }
     }
 });

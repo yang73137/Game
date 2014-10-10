@@ -378,7 +378,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         // 初始化状态
         this.freefall();
-        this.sprite.hide();
+
         var spriteType = MarioSprite.Stand;
 
         if (Input.isPressed(InputAction.GAME_B)) {
@@ -586,7 +586,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         if (this.state == MarioState.Live) {
             this.setSprite(spriteType);
             this.setPosition(this.x, this.y);
-            this.sprite.show();
 
             this.sprite.moveToNextFrame();
         }
@@ -611,7 +610,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.initChange = true;
             return;
         }
-        this.sprite.hide();
+
         if (this.state == MarioState.ChangingSmall || this.state == MarioState.ChangingBig) {
             if (!this.changeCounter.countdown()) {
                 if (this.state == MarioState.ChangingSmall) {
@@ -641,7 +640,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.state = MarioState.Live;
                 this.hurtCounter.setEnabled(true);
             } else {
-                this.sprite.show();
                 this.sprite.moveToNextFrame();
             }
             
@@ -659,7 +657,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.state = MarioState.Dead;
         this.collidable = false;
     },
-    hurt: function() {
+    hurt: function () {
         if (this.hurtable && this.state == MarioState.Live) {
             if (this.type == MarioType.Small) {
                 this.dead();
@@ -780,11 +778,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.speed = 2;
             this.currentJumpHeight = 0;
             this.state = MarioState.Live;
-        }
-    },
-    onCollidesUpWith: function(gameObject) {
-        if (gameObject instanceof Enemy) {
-            this.hurt();
         }
     }
 });
