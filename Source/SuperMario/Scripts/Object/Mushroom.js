@@ -84,7 +84,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
         if (this.y > this.originalY - this.height) {
             if (!this.upCounter.countdown()) {
                 this.setCollidable(true, true, true, true);
-                this.setY(this.y - 1);
+                this.moveUp(1);
                 this.sprite.moveToNextFrame();
             }
         } else {
@@ -92,9 +92,10 @@ Mushroom = ClassFactory.createClass(GameObject, {
         }
     },
     onMove: function () {
+        
         this.freefall();
         
-        this.movingToRight ? this.moveRight() : this.moveLeft();
+        this.movingToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
 
         this.sprite.moveToNextFrame();   
     }

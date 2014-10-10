@@ -45,7 +45,7 @@ Enemy = ClassFactory.createClass(GameObject, {
             return;
         }
 
-        this.movingToRight ? this.moveRight() : this.moveLeft();
+        this.movingToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
         
         this.freefall();
         this.sprite.moveToNextFrame();

@@ -56,7 +56,7 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         
         this.freefall();
 
-        this.movingToRight ? this.moveRight() : this.moveLeft();
+        this.movingToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
 
         this.sprite.moveToNextFrame();
     },
@@ -75,7 +75,7 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         this.freefall();
 
         if (this.moving) {
-            this.movingToRight ? this.moveRight() : this.moveLeft();
+            this.movingToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
         }
     },
     changeToLive2: function () {
@@ -96,8 +96,10 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
             else if (gameObject.jumping && this.state == KoopaTroopaState.Live2) {
                 this.moving = !this.moving;
                 gameObject.reJump();
-                this.movingToRight = gameObject.x <= (this.x + this.width / 2);
-                this.setX(this.movingToRight ? gameObject.x + gameObject.width : gameObject.x - this.width);
+                this.movingToRight = gameObject.x <= this.x + this.width / 2;
+                if (this.moving) {
+                    this.setX(this.movingToRight ? gameObject.x + gameObject.width + 2 : gameObject.x - this.width - 2);
+                }
             }
         }
     },
@@ -121,7 +123,8 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
                     this.movingToRight = true;
                     this.setX(gameObject.x + gameObject.width + 2);
                 } else {
-                    gameObject.invincible ? this.dead() : gameObject.hurt();
+                    
+                        gameObject.invincible ? this.dead() : gameObject.hurt();
                 }
             }
             else if (gameObject instanceof Enemy) {

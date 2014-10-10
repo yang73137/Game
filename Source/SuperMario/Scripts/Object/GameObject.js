@@ -172,33 +172,10 @@
     update: function () {
     },
     freefall: function () {
-        this.falling = true;
-        for (var i = 0; i < 7; i++) {
-            this.setY(this.y + 1);
-            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                var block = this.gameUI.staticObjects[blockIndex];
-                if (this.collidesDownWith(block)) {
-
-                    this.onCollides(block);
-                    this.onCollidesDown(block);
-
-                    block.onCollides(this);
-                    block.onCollidesUp(this);
-
-                    if (block.stoppable) {
-                        this.falling = false;
-                        this.setY(block.y - this.sprite.height);
-                        return false;
-                    }
-
-                    return true;
-                }
-            }
-        }
-        return true;
+        this.falling = this.moveDown(7);
     },
-    moveLeft: function () {
-        for (var i = 0; i < this.speed; i++) {
+    moveLeft: function (speed) {
+        for (var i = 0; i < speed; i++) {
             this.setX(this.x - 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
@@ -209,7 +186,7 @@
                     block.onCollidesRight(this);
                     if (block.stoppable) {
                         this.setX(this.x + 1);
-                        break;
+                        return false;
                     }
                 }
             }
@@ -222,14 +199,15 @@
                     block.onCollidesRight(this);
                     if (block.stoppable) {
                         this.setX(this.x + 1);
-                        break;
+                        return false;
                     }
                 }
             }
         }
+        return true;
     },
-    moveRight: function () {
-        for (var i = 0; i < this.speed; i++) {
+    moveRight: function (speed) {
+        for (var i = 0; i < speed; i++) {
             this.setX(this.x + 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
@@ -240,7 +218,7 @@
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
                         this.setX(this.x - 1);
-                        break;
+                        return false;
                     }
                 }
             }
@@ -253,10 +231,75 @@
                     block.onCollidesLeft(this);
                     if (block.stoppable) {
                         this.setX(this.x - 1);
-                        break;
+                        return false;
                     }
                 }
             }
         }
+        return true;
+    },
+    moveUp: function (speed) {
+        for (var i = 0; i < speed; i++) {
+            this.setY(this.y - 1);
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
+                if (this.collidesUpWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                    this.onCollides(block);
+                    this.onCollidesUp(block);
+                    block.onCollides(this);
+                    block.onCollidesDown(this);
+                    if (block.stoppable) {
+                        this.setY(this.y + 1);
+                        return false;;
+                    }
+                }
+            }
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesUpWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                    this.onCollides(block);
+                    this.onCollidesUp(block);
+                    block.onCollides(this);
+                    block.onCollidesDown(this);
+                    if (block.stoppable) {
+                        this.setY(this.y + 1);
+                        return false;;
+                    }
+                }
+            }
+        }
+        return true;
+    },
+    moveDown: function (speed) {
+        for (var i = 0; i < speed; i++) {
+            this.setY(this.y + 1);
+            for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
+                var block = this.gameUI.animateObjects[blockIndex];
+                if (this.collidesDownWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                    this.onCollides(block);
+                    this.onCollidesDown(block);
+                    block.onCollides(this);
+                    block.onCollidesUp(this);
+                    if (block.stoppable) {
+                        this.setY(this.y - 1);
+                        return false;
+                    }
+                }
+            }
+            for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
+                var block = this.gameUI.staticObjects[blockIndex];
+                if (this.collidesDownWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
+                    this.onCollides(block);
+                    this.onCollidesDown(block);
+                    block.onCollides(this);
+                    block.onCollidesUp(this);
+                    if (block.stoppable) {
+                        this.setY(this.y - 1);
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 });

@@ -275,14 +275,14 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.state = MarioState.Dead;
         }
     },
-    moveLeft: function () {
-        GameObject.prototype.moveLeft.call(this);
+    moveLeft: function (speed) {
+        GameObject.prototype.moveLeft.call(this, speed);
         if (this.x < -this.gameUI.x) {
             this.setX(-this.gameUI.x);
         }
     },
-    moveRight: function() {
-        GameObject.prototype.moveRight.call(this);
+    moveRight: function(speed) {
+        GameObject.prototype.moveRight.call(this, speed);
         if (this.x > 6784) {
 
         } else {
@@ -426,7 +426,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToRight = true;
-                    this.moveRight();
+                    this.moveRight(this.speed);
                 }
             }
         } else {
@@ -450,7 +450,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToLeft = true;
-                    this.moveLeft();
+                    this.moveLeft(this.speed);
                 }
             }
         } else {
@@ -529,7 +529,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     }
                 }
 
-                this.stayToRight ? this.moveRight() : this.moveLeft();
+                this.stayToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
             }
         }
 
@@ -688,40 +688,17 @@ MarioBors = ClassFactory.createClass(GameObject, {
         if (this.currentJumpHeight < 45) {
             for (var i = 0; i < 6; i++) {
                 this.currentJumpHeight += 1;
-                this.setY(this.y - 1);
+                this.moveUp(1);
 
                 if (this.currentJumpHeight % 2 == 0) {
                     if (this.movingToRight) {
-                        this.moveRight();
+                        this.moveRight(1);
                     }
                     else if (this.movingToLeft) {
-                        this.moveLeft();
+                        this.moveLeft(1);
                     }
                 }
 
-                for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
-                    var block = this.gameUI.animateObjects[blockIndex];
-                    if (this.collidesUpWith(block)) {
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                        if (block.stoppable) {
-                            this.y = block.y + block.height;
-                            break;
-                        }
-                    }
-                }
-
-                for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
-                    var block = this.gameUI.staticObjects[blockIndex];
-                    if (this.collidesUpWith(block)) {
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                        if (block.stoppable) {
-                            this.y = block.y + block.height;
-                            break;
-                        }
-                    }
-                }
                 this.sprite.moveToFrame(0);
             }
             
