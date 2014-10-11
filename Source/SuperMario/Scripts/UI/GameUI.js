@@ -77,11 +77,14 @@ GameUI = ClassFactory.createClass(UIBase, {
         var mario = new MarioBors(50, 370);
         mario.addToGameUI(gameUI);
 
-        var kt = new KoopaTroopa(300, 352);
+        var kt = new KoopaTroopa(3200, 352);
         kt.addToGameUI(gameUI);
 
         var enemy_512_368 = new Goomba(512, 368);
         enemy_512_368.addToGameUI(gameUI);
+
+        var enemy_1400_368 = new Goomba(1400, 368);
+        enemy_1400_368.addToGameUI(gameUI);
 
         var enemy_1652_368 = new Goomba(1652, 368);
         enemy_1652_368.addToGameUI(gameUI);
