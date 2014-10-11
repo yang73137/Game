@@ -58,6 +58,7 @@ Star = ClassFactory.createClass(GameObject, {
             }
             this.setPosition(this.x, this.y);
 
+
             for (var index = 0; index < this.gameUI.staticObjects.length; index++) {
                 var block = this.gameUI.staticObjects[index];
 
@@ -98,6 +99,7 @@ Star = ClassFactory.createClass(GameObject, {
         if (gameObject instanceof  MarioBors) {
             this.sprite.hide();
             this.state = StarState.None;
+            this.setCollidable(false, false, false, false);
             gameObject.setInvincible();
         }
     },
