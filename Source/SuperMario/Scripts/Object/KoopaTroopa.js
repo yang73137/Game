@@ -6,9 +6,9 @@ KoopaTroopaState = {
     Dead: 3
 };
 
-KoopaTroopa = ClassFactory.createClass(GameObject, {
+KoopaTroopa = ClassFactory.createClass(Enemy, {
     init: function (x, y) {
-        GameObject.init.call(this);
+        Enemy.init.call(this);
         
         this.speed = 1;
         this.moveCounter = new Counter(3, false, true);
@@ -29,10 +29,6 @@ KoopaTroopa = ClassFactory.createClass(GameObject, {
         this.state = KoopaTroopaState.Live;
         this.unHurtCounter = new Counter(15);
         this.unHurtCounter.setEnabled(false);
-    },
-    addToGameUI: function (gameUI) {
-        GameObject.prototype.addToGameUI.call(this, gameUI);
-        gameUI.addAnimateObject(this);
     },
     update: function () {
         switch (this.state) {

@@ -80,34 +80,34 @@ GameUI = ClassFactory.createClass(UIBase, {
         var kt = new KoopaTroopa(300, 352);
         kt.addToGameUI(gameUI);
 
-        var enemy_512_368 = new Enemy(512, 368);
+        var enemy_512_368 = new Goomba(512, 368);
         enemy_512_368.addToGameUI(gameUI);
 
-        var enemy_1652_368 = new Enemy(1652, 368);
+        var enemy_1652_368 = new Goomba(1652, 368);
         enemy_1652_368.addToGameUI(gameUI);
 
-        var enemy_1684_368 = new Enemy(1684, 368);
+        var enemy_1684_368 = new Goomba(1684, 368);
         enemy_1684_368.addToGameUI(gameUI);
 
-        var enemy_2592_102 = new Enemy(2592, 112);
+        var enemy_2592_102 = new Goomba(2592, 112);
         enemy_2592_102.addToGameUI(gameUI);
 
-        var enemy_2624_102 = new Enemy(2624, 112);
+        var enemy_2624_102 = new Goomba(2624, 112);
         enemy_2624_102.addToGameUI(gameUI);
 
-        var enemy_3584_368 = new Enemy(3584, 368);
+        var enemy_3584_368 = new Goomba(3584, 368);
         enemy_3584_368.addToGameUI(gameUI);
 
-        var enemy_3648_368 = new Enemy(3648, 368);
+        var enemy_3648_368 = new Goomba(3648, 368);
         enemy_3648_368.addToGameUI(gameUI);
 
-        var enemy_3712_368 = new Enemy(3712, 368);
+        var enemy_3712_368 = new Goomba(3712, 368);
         enemy_3712_368.addToGameUI(gameUI);
 
-        var enemy_5440_368 = new Enemy(5440, 368);
+        var enemy_5440_368 = new Goomba(5440, 368);
         enemy_5440_368.addToGameUI(gameUI);
 
-        var enemy_5504_368 = new Enemy(5504, 368);
+        var enemy_5504_368 = new Goomba(5504, 368);
         enemy_5504_368.addToGameUI(gameUI);
 
         var question_512_272 = new Question(512, 272, 1);
