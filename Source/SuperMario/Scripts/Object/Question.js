@@ -109,6 +109,6 @@ Question = ClassFactory.createClass(GameObject, {
             this.item = new Star(this.x, this.y);
         }
         this.item.sprite.hide();
-        this.item.addToGameUI(gameUI);
+        this.item.addToGameUI(this.gameUI);
     }
 });

@@ -283,21 +283,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     moveRight: function(speed) {
         GameObject.prototype.moveRight.call(this, speed);
-        if (this.x > 6784) {
-
-        } else {
-            if (this.x + this.gameUI.x > 220) {
-                if (-this.gameUI.x >= 6784 - 512) {
-                    this.gameUI.setX(-(6784 - 512));
-                } else {
-                    this.gameUI.setX(this.gameUI.x - this.speed);
-                }
-            }
-
-            if (this.x + this.gameUI.x + this.sprite.width > 512) {
-                this.x = -this.gameUI.x + 512 - this.sprite.width;
-            }
-        }
+        this.gameUI.scroll();
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);

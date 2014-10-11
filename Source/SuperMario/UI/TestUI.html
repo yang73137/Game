@@ -30,6 +30,8 @@
         <script src="../Scripts/Basic/Label.js"></script>
         <script src="../Scripts/UI/UIBase.js"></script>
         <script src="../Scripts/UI/GameUI.js"></script>
+        <script src="../Scripts/World/World.js"></script>
+        <script src="../Scripts/World/World_1_1.js"></script>
         <script src="../Scripts/Object/GameObject.js"></script>
         <script src="../Scripts/Object/MarioBros.js"></script>
         <script src="../Scripts/Object/Enemy.js"></script>
@@ -46,7 +48,7 @@
         <script type="text/javascript">
 
             var app = document.getElementById("app");
-            
+            /*
             var gameUI = new GameUI();
             gameUI.setSize(7296, 448);
             gameUI.setBackgroundImage("../Images/World1_1.png");
@@ -55,13 +57,27 @@
             gameUI.appendTo(app);
 
             gameUI.createWorld1_1();
-
+            */
             //gameUI.setX(-3000);
             //gameUI.mario.x = 3000;
             //gameUI.mario.setType(MarioType.Big);
 
+
+            var world_1_1 = new World_1_1();
+            world_1_1.build();
+
+            var gameUI = new GameUI();
+            gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
+            gameUI.show();
+            gameUI.append(world_1_1);
+            gameUI.appendTo(app);
+
+            world_1_1.setX(-5000);
+            world_1_1.mario.setX(5100);
+
             setInterval(function () {
-                gameUI.update();
+                //gameUI.update();
+                world_1_1.update();
             }, 16);
         
         </script>

@@ -37,7 +37,7 @@ Goomba = ClassFactory.createClass(Enemy, {
     },
     onLive: function () {
 
-        if (this.x + this.width < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512)) {
+        if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
             return;
         }
 

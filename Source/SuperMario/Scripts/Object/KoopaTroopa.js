@@ -42,7 +42,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
     },
     onLive: function () {
 
-        if (this.x + this.width < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512)) {
+        if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
             return;
         }
         
@@ -57,7 +57,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.sprite.moveToNextFrame();
     },
     onLive2: function () {
-        if (this.x + this.width < Math.abs(gameUI.x) || this.x >= (Math.abs(gameUI.x) + 512)) {
+        if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
             if (this.state == KoopaTroopaState.Live) {
                 return;
             }

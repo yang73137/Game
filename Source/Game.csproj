@@ -155,6 +155,8 @@
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.js" />
     <Content Include="SuperMario\Scripts\UI\GameUI.js" />
     <Content Include="SuperMario\Scripts\UI\UIBase.js" />
+    <Content Include="SuperMario\Scripts\World\World.js" />
+    <Content Include="SuperMario\Scripts\World\World_1_1.js" />
     <Content Include="SuperMario\UI\TestUI.html" />
   </ItemGroup>
   <ItemGroup>

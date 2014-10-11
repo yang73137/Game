@@ -1,77 +1,50 @@
 ﻿
-GameUIState = {
+World_1_1_State = {
     None: 0,
     Normal: 1,
-    MoveToUp: 2,
-    MoveToDown: 3
+    Scene1: 2,
+    Scene2: 3
 };
 
-GameUI = ClassFactory.createClass(UIBase, {
-    init: function () {
-        UIBase.init.call(this);
+World_1_1 = ClassFactory.createClass(World, {
+    init: function() {
+        World.init.call(this);
 
-        this.mario = null;
-        this.staticObjects = [];
-        this.animateObjects = [];
+        this.setPosition(0, 0);
+        this.setSize(7296, 448);
+        this.setBackgroundImage("../Images/World1_1.png");
+        this.setBackgroundPosition(0, 0);
+        this.show();
 
-        this.state = GameUIState.Normal;
+        this.state = World_1_1_State.Normal;
+    },
+    scroll: function () {
+        var mario = this.mario;
+        if (mario.x > 6784) {
 
-    },
-    addStaticObject: function (gameObject) {
-        this.staticObjects.push(gameObject);
-    },
-    addAnimateObject: function (gameObject) {
-        this.animateObjects.push(gameObject);
-    },
-    onUpdate: function () {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects.update();
-        }
-    },
-    moveToDown: function () {
-        this.mario.collidable = false;
-        this.state = GameUIState.MoveToDown;
-    },
-    moveToUp: function () {
-        this.mario.collidable = false;
-        this.state = GameUIState.MoveToUp;
-    },
-    update: function () {
-        switch (this.state) {
-        case GameUIState.Normal:
-            for (var i = 0; i < this.animateObjects.length; i++) {
-                gameUI.animateObjects[i].update();
+        } else {
+            if (mario.x + this.x > 220) {
+                if (-this.x >= 6784 - 512) {
+                    this.setX(-(6784 - 512));
+                } else {
+                    this.setX(this.x - mario.speed);
+                }
             }
-            break;
-        case GameUIState.MoveToUp:
-            this.setPosition(-5120, 0);
-            this.mario.setPosition(5232, 304);
-            this.mario.collidable = true;
-            this.state = GameUIState.Normal;
 
-            break;
-        case GameUIState.MoveToDown:
-            this.setPosition(-6784, 0);
-            this.mario.setPosition(6834, 0);
-            this.mario.collidable = true;
-            this.state = GameUIState.Normal;
-
-            break;
+            if (mario.x + this.x + mario.sprite.width > 512) {
+                mario.x = -this.x + 512 - mario.sprite.width;
+            }
         }
     },
-    restart: function() {
-        var x = this.mario.x;
-        this.setX(0);
-        this.div.innerHTML = "";
-        this.staticObjects = [];
-        this.animateObjects = [];
-        this.createWorld1_1();
-        if (x >= 2752) {
-            this.setX(-2602);
-            this.mario.setX(2634);
-        }
+    goToScene1: function() {
+        this.mario.collidable = false;
+        this.state = World_1_1_State.Scene1;
     },
-    createWorld1_1: function () {
+    goToScene2: function() {
+        this.mario.collidable = false;
+        this.state = World_1_1_State.Scene2;
+    },
+    build: function () {
         var gameUI = this;
 
         var mario = new MarioBors(50, 370);
@@ -276,7 +249,7 @@ GameUI = ClassFactory.createClass(UIBase, {
         tube_1824_271.addToGameUI(gameUI);
         tube_1824_271.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                gameUI.moveToDown();
+                gameUI.goToScene1();
             }
         });
 
@@ -391,7 +364,7 @@ GameUI = ClassFactory.createClass(UIBase, {
         tube_7200_338.addToGameUI(gameUI);
         tube_7200_338.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
-                gameUI.moveToUp();
+                gameUI.goToScene2();
             }
         });
 
@@ -406,6 +379,41 @@ GameUI = ClassFactory.createClass(UIBase, {
                 var gold_xy = new Gold2(6912 + 32 * goldIndexX, 144 + 64 * goldIndexY);
                 gold_xy.addToGameUI(gameUI);
             }
+        }
+    },
+    restart: function () {
+        var x = this.mario.x;
+        this.setX(0);
+        this.div.innerHTML = "";
+        this.staticObjects = [];
+        this.animateObjects = [];
+        this.build();
+        if (x >= 2752) {
+            this.setX(-2602);
+            this.mario.setX(2634);
+        }
+    },
+    update: function() {
+        switch (this.state) {
+            case World_1_1_State.Normal:
+                for (var i = 0; i < this.animateObjects.length; i++) {
+                    this.animateObjects[i].update();
+                }
+                break;
+            case World_1_1_State.Scene1:
+                this.setPosition(-6784, 0);
+                this.mario.setPosition(6834, 0);
+                this.mario.collidable = true;
+                this.state = World_1_1_State.Normal;
+
+                break;
+            case World_1_1_State.Scene2:
+                this.setPosition(-5120, 0);
+                this.mario.setPosition(5232, 304);
+                this.mario.collidable = true;
+                this.state = World_1_1_State.Normal;
+
+                break;
         }
     }
 });
