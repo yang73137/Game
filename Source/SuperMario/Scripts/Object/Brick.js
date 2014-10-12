@@ -112,19 +112,33 @@ Brick = ClassFactory.createClass(GameObject, {
                 this.fragment4.moveBy(4, 0);
             }
             else if (this.breakCounter.currentCount <= 30) {
+                this.fragment1.moveBy(0, 9);
+                this.fragment2.moveBy(0, 9);
+                this.fragment3.moveBy(0, 9);
+                this.fragment4.moveBy(0, 9);
+            }
+            else {
                 this.fragment1.moveBy(0, 8);
                 this.fragment2.moveBy(0, 8);
                 this.fragment3.moveBy(0, 8);
                 this.fragment4.moveBy(0, 8);
             }
-            else {
-                this.fragment1.moveBy(0, 7);
-                this.fragment2.moveBy(0, 7);
-                this.fragment3.moveBy(0, 7);
-                this.fragment4.moveBy(0, 7);
-            }
         } else {
             this.state = BrickState.None;
+        }
+    },
+    setType: function (type) {
+        switch (type) {
+            case 1:
+                this.sprite.setBackgroundPosition(32, 0);
+            break;
+            case 2:
+                this.sprite.setBackgroundPosition(64, 64);
+                this.fragment1.setBackgroundPosition(64, 64);
+                this.fragment2.setBackgroundPosition(64, 64);
+                this.fragment3.setBackgroundPosition(64, 64);
+                this.fragment4.setBackgroundPosition(64, 64);
+            break;
         }
     }
 });

@@ -127,6 +127,7 @@
     <Content Include="SuperMario\Images\Brick.png" />
     <Content Include="SuperMario\Images\TileSet_01_01.png" />
     <Content Include="SuperMario\Images\World1_1.png" />
+    <Content Include="SuperMario\Images\World1_2.png" />
     <Content Include="SuperMario\Images\副本 World1_1.png" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
@@ -157,6 +158,7 @@
     <Content Include="SuperMario\Scripts\UI\UIBase.js" />
     <Content Include="SuperMario\Scripts\World\World.js" />
     <Content Include="SuperMario\Scripts\World\World_1_1.js" />
+    <Content Include="SuperMario\Scripts\World\World_1_2.js" />
     <Content Include="SuperMario\UI\TestUI.html" />
   </ItemGroup>
   <ItemGroup>
