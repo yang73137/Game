@@ -558,7 +558,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.state = MarioState.Live;
                 this.hurtCounter.setEnabled(true);
             } else {
-                this.sprite.show();
                 if (!this.changeBigSmallCounter.countdown()) {
                     if (this.sprite.height == 32) {
                         this.setType(MarioType.Big);
@@ -569,7 +568,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     }
                 }
             }
-
         }
         else if (this.state == MarioState.ChangingFlower) {
             if (!this.changeCounter.countdown()) {
@@ -579,7 +577,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
             } else {
                 this.sprite.moveToNextFrame();
             }
-            
         }
         
     },
