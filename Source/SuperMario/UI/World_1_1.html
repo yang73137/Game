@@ -61,6 +61,9 @@
         gameUI.append(world_1_1);
         gameUI.appendTo(app);
 
+        world_1_1.setX(-1750);
+        world_1_1.mario.setX(1750);
+
         setInterval(function () {
             world_1_1.update();
         }, 16);

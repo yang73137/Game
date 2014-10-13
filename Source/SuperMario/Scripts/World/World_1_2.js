@@ -52,19 +52,19 @@ World_1_2 = ClassFactory.createClass(World, {
             brick.addToGameUI(gameUI);
         }
 
-        var question_844_272 = new Question(844, 272, 1);
+        var question_844_272 = new Question(844, 272, QuestionItemType.Gold, QuestionIconType.Question);
         question_844_272.addToGameUI(gameUI);
         
-        var question_876_272 = new Question(876, 272, 3);
+        var question_876_272 = new Question(876, 272, QuestionItemType.BigMushroom, QuestionIconType.Question);
         question_876_272.addToGameUI(gameUI);
         
-        var question_908_272 = new Question(908, 272, 1);
+        var question_908_272 = new Question(908, 272, QuestionItemType.Gold, QuestionIconType.Question);
         question_908_272.addToGameUI(gameUI);
         
-        var question_940_272 = new Question(940, 272, 1);
+        var question_940_272 = new Question(940, 272, QuestionItemType.Gold, QuestionIconType.Question);
         question_940_272.addToGameUI(gameUI);
         
-        var question_972_272 = new Question(972, 272, 1);
+        var question_972_272 = new Question(972, 272, QuestionItemType.Gold, QuestionIconType.Question);
         question_972_272.addToGameUI(gameUI);
         
 
@@ -88,7 +88,7 @@ World_1_2 = ClassFactory.createClass(World, {
         var iron_1388_304 = new Block(1388, 304, 32, 96);
         iron_1388_304.addToGameUI(gameUI);
 
-        var question_1452_ = new Question(1452, 240, 2);
+        var question_1452_ = new Question(1452, 240, QuestionItemType.MultiGold, QuestionIconType.BlueBrick);
         question_1452_.addToGameUI(gameUI);
         
         var iron_1516_304 = new Block(1516, 304, 32, 96);
