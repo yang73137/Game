@@ -5,9 +5,14 @@
     Break: 3
 };
 
+BrickType = {
+    Red: 1,
+    Blue: 2
+}
+
 
 Brick = ClassFactory.createClass(GameObject, {
-    init: function (x, y) {
+    init: function (x, y, type) {
         GameObject.init.call(this);
 
         this.stoppable = true;
@@ -28,25 +33,23 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment1.setSize(16, 16);
         this.fragment1.setPosition(this.x, this.y, 200);
         this.fragment1.setBackgroundImage("../Images/TileSet.png");
-        this.fragment1.setBackgroundPosition(32, 0);
         
         this.fragment2 = new Sprite();
         this.fragment2.setSize(16, 16);
         this.fragment2.setPosition(this.x + 16, this.y, 200);
         this.fragment2.setBackgroundImage("../Images/TileSet.png");
-        this.fragment2.setBackgroundPosition(32, 0);
         
         this.fragment3 = new Sprite();
         this.fragment3.setSize(16, 16);
         this.fragment3.setPosition(this.x, this.y + 16, 200);
         this.fragment3.setBackgroundImage("../Images/TileSet.png");
-        this.fragment3.setBackgroundPosition(32, 0);
         
         this.fragment4 = new Sprite();
         this.fragment4.setSize(16, 16);
         this.fragment4.setPosition(this.x + 16, this.y + 16, 200);
         this.fragment4.setBackgroundImage("../Images/TileSet.png");
-        this.fragment4.setBackgroundPosition(32, 0);
+
+        this.setType(type);
     },
     onCollidesDown: function (gameObject) {
         if (gameObject instanceof MarioBors) {
@@ -129,15 +132,19 @@ Brick = ClassFactory.createClass(GameObject, {
     },
     setType: function (type) {
         switch (type) {
-            case 1:
-                this.sprite.setBackgroundPosition(32, 0);
+        case 1:
+            this.sprite.setBackgroundPosition(32, 0);
+            this.fragment1.setBackgroundPosition(32, 0);
+            this.fragment2.setBackgroundPosition(48, 0);
+            this.fragment3.setBackgroundPosition(32, 16);
+            this.fragment4.setBackgroundPosition(48, 16);
             break;
-            case 2:
-                this.sprite.setBackgroundPosition(64, 64);
-                this.fragment1.setBackgroundPosition(64, 64);
-                this.fragment2.setBackgroundPosition(64, 64);
-                this.fragment3.setBackgroundPosition(64, 64);
-                this.fragment4.setBackgroundPosition(64, 64);
+        case 2:
+            this.sprite.setBackgroundPosition(64, 64);
+            this.fragment1.setBackgroundPosition(64, 64);
+            this.fragment2.setBackgroundPosition(80, 64);
+            this.fragment3.setBackgroundPosition(64, 80);
+            this.fragment4.setBackgroundPosition(80, 80);
             break;
         }
     }

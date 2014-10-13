@@ -89,7 +89,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_512_272 = new Question(512, 272, 1);
         question_512_272.addToGameUI(gameUI);
 
-        var brick_640_272 = new Brick(640, 272);
+        var brick_640_272 = new Brick(640, 272, BrickType.Red);
         brick_640_272.addToGameUI(gameUI);
 
         var question_672_272 = new Question(672, 272, 3);
@@ -98,16 +98,16 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_704_144 = new Question(704, 144, 1);
         question_704_144.addToGameUI(gameUI);
 
-        var brick_704_272 = new Brick(704, 272);
+        var brick_704_272 = new Brick(704, 272, BrickType.Red);
         brick_704_272.addToGameUI(gameUI);
 
-        var question_736_272 = new Question(736, 272, 1);
+        var question_736_272 = new Question(736, 272, 1, BrickType.Red);
         question_736_272.addToGameUI(gameUI);
 
-        var brick_768_272 = new Brick(768, 272);
+        var brick_768_272 = new Brick(768, 272, BrickType.Red);
         brick_768_272.addToGameUI(gameUI);
 
-        var brick_2464_272 = new Brick(2464, 272);
+        var brick_2464_272 = new Brick(2464, 272, BrickType.Red);
         brick_2464_272.addToGameUI(gameUI);
 
         var question_2026_272 = new Question(2026, 240, 4);
@@ -120,40 +120,40 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_2496_272 = new Question(2496, 272, 3);
         question_2496_272.addToGameUI(gameUI);
 
-        var brick_2528_272 = new Brick(2528, 272);
+        var brick_2528_272 = new Brick(2528, 272, BrickType.Red);
         brick_2528_272.addToGameUI(gameUI);
 
-        var brick_2560_144 = new Brick(2560, 144);
+        var brick_2560_144 = new Brick(2560, 144, BrickType.Red);
         brick_2560_144.addToGameUI(gameUI);
 
-        var brick_2592_144 = new Brick(2592, 144);
+        var brick_2592_144 = new Brick(2592, 144, BrickType.Red);
         brick_2592_144.addToGameUI(gameUI);
 
-        var brick_2624_144 = new Brick(2624, 144);
+        var brick_2624_144 = new Brick(2624, 144, BrickType.Red);
         brick_2624_144.addToGameUI(gameUI);
 
-        var brick_2656_144 = new Brick(2656, 144);
+        var brick_2656_144 = new Brick(2656, 144, BrickType.Red);
         brick_2656_144.addToGameUI(gameUI);
 
-        var brick_2688_144 = new Brick(2688, 144);
+        var brick_2688_144 = new Brick(2688, 144, BrickType.Red);
         brick_2688_144.addToGameUI(gameUI);
 
-        var brick_2720_144 = new Brick(2720, 144);
+        var brick_2720_144 = new Brick(2720, 144, BrickType.Red);
         brick_2720_144.addToGameUI(gameUI);
 
-        var brick_2752_144 = new Brick(2752, 144);
+        var brick_2752_144 = new Brick(2752, 144, BrickType.Red);
         brick_2752_144.addToGameUI(gameUI);
 
-        var brick_2784_144 = new Brick(2784, 144);
+        var brick_2784_144 = new Brick(2784, 144, BrickType.Red);
         brick_2784_144.addToGameUI(gameUI);
 
-        var brick_2912_144 = new Brick(2912, 144);
+        var brick_2912_144 = new Brick(2912, 144, BrickType.Red);
         brick_2912_144.addToGameUI(gameUI);
 
-        var brick_2944_144 = new Brick(2944, 144);
+        var brick_2944_144 = new Brick(2944, 144, BrickType.Red);
         brick_2944_144.addToGameUI(gameUI);
 
-        var brick_2976_144 = new Brick(2976, 144);
+        var brick_2976_144 = new Brick(2976, 144, BrickType.Red);
         brick_2976_144.addToGameUI(gameUI);
 
         var question_3008_144 = new Question(3008, 144, 1);
@@ -162,7 +162,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_3008_272 = new Question(3008, 272, 2);
         question_3008_272.addToGameUI(gameUI);
 
-        var brick_3200_272 = new Brick(3200, 272);
+        var brick_3200_272 = new Brick(3200, 272, BrickType.Red);
         brick_3200_272.addToGameUI(gameUI);
 
         var question_3232_272 = new Question(3232, 272, 5);
@@ -180,19 +180,19 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_3584_272 = new Question(3584, 272, 1);
         question_3584_272.addToGameUI(gameUI);
 
-        var brick_3776_272 = new Brick(3776, 272);
+        var brick_3776_272 = new Brick(3776, 272, BrickType.Red);
         brick_3776_272.addToGameUI(gameUI);
 
-        var brick_3872_144 = new Brick(3872, 144);
+        var brick_3872_144 = new Brick(3872, 144, BrickType.Red);
         brick_3872_144.addToGameUI(gameUI);
 
-        var brick_3904_144 = new Brick(3904, 144);
+        var brick_3904_144 = new Brick(3904, 144, BrickType.Red);
         brick_3904_144.addToGameUI(gameUI);
 
-        var brick_3936_144 = new Brick(3936, 144);
+        var brick_3936_144 = new Brick(3936, 144, BrickType.Red);
         brick_3936_144.addToGameUI(gameUI);
 
-        var brick_4096_144 = new Brick(4096, 144);
+        var brick_4096_144 = new Brick(4096, 144, BrickType.Red);
         brick_4096_144.addToGameUI(gameUI);
 
         var question_4128_144 = new Question(4128, 144, 1);
@@ -201,25 +201,25 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_4160_144 = new Question(4160, 144, 1);
         question_4160_144.addToGameUI(gameUI);
 
-        var brick_4192_144 = new Brick(4192, 144);
+        var brick_4192_144 = new Brick(4192, 144, BrickType.Red);
         brick_4192_144.addToGameUI(gameUI);
 
-        var brick_4128_272 = new Brick(4128, 272);
+        var brick_4128_272 = new Brick(4128, 272, BrickType.Red);
         brick_4128_272.addToGameUI(gameUI);
 
-        var brick_4160_272 = new Brick(4160, 272);
+        var brick_4160_272 = new Brick(4160, 272, BrickType.Red);
         brick_4160_272.addToGameUI(gameUI);
 
-        var brick_5376_272 = new Brick(5376, 272);
+        var brick_5376_272 = new Brick(5376, 272, BrickType.Red);
         brick_5376_272.addToGameUI(gameUI);
 
-        var brick_5408_272 = new Brick(5408, 272);
+        var brick_5408_272 = new Brick(5408, 272, BrickType.Red);
         brick_5408_272.addToGameUI(gameUI);
 
         var question_5440_272 = new Question(5440, 272, 1);
         question_5440_272.addToGameUI(gameUI);
 
-        var brick_5472_272 = new Brick(5472, 272);
+        var brick_5472_272 = new Brick(5472, 272, BrickType.Red);
         brick_5472_272.addToGameUI(gameUI);
 
 

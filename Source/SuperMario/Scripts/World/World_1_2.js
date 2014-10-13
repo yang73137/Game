@@ -35,24 +35,20 @@ World_1_2 = ClassFactory.createClass(World, {
         block_524_48.addToGameUI(gameUI);
         
         for (var i = 0; i < 133; i++) {
-            var brick = new Brick(668 + i * 32, 48);
-            brick.setType(2);
+            var brick = new Brick(668 + i * 32, 48, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
-        var brick = new Brick(668 + 133 * 32, 48);
-        brick.setType(2);
+        var brick = new Brick(668 + 133 * 32, 48, BrickType.Blue);
         brick.setSize(16, 32);
         brick.addToGameUI(gameUI);
         
         for (var i = 0; i < 7; i++) {
-            var brick = new Brick(5676 + i * 32, 48);
-            brick.setType(2);
+            var brick = new Brick(5676 + i * 32, 48, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
         
         for (var i = 0; i < 10; i++) {
-            var brick = new Brick(6188 + i * 32, 48);
-            brick.setType(2);
+            var brick = new Brick(6188 + i * 32, 48, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
 
@@ -106,8 +102,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 if (((i == 0 || i == 1) && (j == 1 || j == 6)) || ((i == 1 || i == 2) && (j == 3 || j == 4))) {
                     continue;
                 }
-                var brick = new Brick(1772 + j * 32, 208 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(1772 + j * 32, 208 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
@@ -117,8 +112,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 if (((i == 0 || i == 1 || i == 8 || i == 9) && (j == 0 || j == 1)) || ((i == 2 || i == 3 || i == 4 || i == 5) && (j == 2 || j == 3))) {
                     continue;
                 }
-                var brick = new Brick(2190 + j * 32, 80 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(2190 + j * 32, 80 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
@@ -128,8 +122,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 if (((i == 3 || i == 4 || i == 5) && (j == 0 || j == 1 || j == 2 || j == 3))) {
                     continue;
                 }
-                var brick = new Brick(2382 + j * 32, 80 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(2382 + j * 32, 80 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
@@ -139,38 +132,33 @@ World_1_2 = ClassFactory.createClass(World, {
                 if (((i > 1) && (j == 0)) || ((i > 1 && i < 6) && (j == 2)) || ((i > 1 && i < 5) && (j == 3))) {
                     continue;
                 }
-                var brick = new Brick(2638 + j * 32, 80 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(2638 + j * 32, 80 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
         
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 2; j++) {
-                var brick = new Brick(2830 + j * 32, 144 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(2830 + j * 32, 144 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
         
         for (var i = 0; i < 2; i++) {
             for (var j = 0; j < 5; j++) {
-                var brick = new Brick(2958 + j * 32, 80 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(2958 + j * 32, 80 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
         
         for (var i = 0; i < 4; i++) {
-            var brick = new Brick(2958 + i * 32, 272);
-                brick.setType(2);
+            var brick = new Brick(2958 + i * 32, 272, BrickType.Blue);
                 brick.addToGameUI(gameUI);
         }
         
         for (var i = 0; i < 2; i++) {
             for (var j = 0; j < 6; j++) {
-                var brick = new Brick(3214 + j * 32, 208 + i * 32);
-                brick.setType(2);
+                var brick = new Brick(3214 + j * 32, 208 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
         }
@@ -200,8 +188,7 @@ World_1_2 = ClassFactory.createClass(World, {
         }
         
         for (var i = 0; i < 6; i++) {
-            var brick = new Brick(5164 + i * 32, 240);
-            brick.setType(2);
+            var brick = new Brick(5164 + i * 32, 240, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
 
