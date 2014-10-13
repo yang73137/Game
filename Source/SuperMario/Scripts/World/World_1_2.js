@@ -262,14 +262,14 @@ World_1_2 = ClassFactory.createClass(World, {
         var goomba_2638_368 = new Goomba(2638, 368, GoombaIconType.Blue);
         goomba_2638_368.addToGameUI(gameUI);
 
-        var goomba_2830_368 = new Goomba(2830, 102, GoombaIconType.Blue);
-        goomba_2830_368.addToGameUI(gameUI);
+        var goomba_2830_102 = new Goomba(2830, 102, GoombaIconType.Blue);
+        goomba_2830_102.addToGameUI(gameUI);
 
-        var goomba_2958_368 = new Goomba(2958, 244, GoombaIconType.Blue);
-        goomba_2958_368.addToGameUI(gameUI);
+        var goomba_2958_244 = new Goomba(2958, 228, GoombaIconType.Blue);
+        goomba_2958_244.addToGameUI(gameUI);
 
-        var goomba_3006_368 = new Goomba(3006, 244, GoombaIconType.Blue);
-        goomba_3006_368.addToGameUI(gameUI);
+        var goomba_3006_244 = new Goomba(3006, 228, GoombaIconType.Blue);
+        goomba_3006_244.addToGameUI(gameUI);
 
         var gold_2702_240 = new Gold2(2702, 240);
         gold_2702_240.addToGameUI(gameUI);
