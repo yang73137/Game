@@ -10,6 +10,12 @@ GoombaIconType = {
     Blue: 2
 };
 
+GoombaSpriteType = {
+    MoveLeft: 1,
+    MoveRight: 2,
+    Dead: 3
+};
+
 Goomba = ClassFactory.createClass(Enemy, {
     init: function (x, y, iconType) {
         Enemy.init.call(this);
@@ -23,6 +29,10 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.sprite.setBackgroundImage("../Images/Enemies.png");
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
+
+        this.moveLeftSpriteSequence = [];
+        this.moveRightSpriteSequence = [];
+        this.deadSpriteSequence = [];
         
         this.sprite.show();
         this.sprite.start();
@@ -31,7 +41,9 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.setSize(32, 32);
 
         this.iconType = iconType;
-        this.setIconType(iconType);
+        this.iconType = iconType;
+
+        this.changeSprite(GoombaSpriteType.MoveLeft);
     },
     update: function () {
         switch (this.state) {
@@ -64,18 +76,11 @@ Goomba = ClassFactory.createClass(Enemy, {
 
     },
     dead: function () {
-        this.y += 16;
-        this.setSize(32, 16);
-        this.setSize(this.width, 16);
-        this.setPosition(this.x, this.y);
-        if (this.iconType == GoombaIconType.Red) {
-            this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
-        } else if (this.iconType == GoombaIconType.Blue)  {
-            this.sprite.setFrameSequence([{ x: 32 * 2, y: 110 }]);
-        }
-        this.sprite.moveToFrame(0);
-        this.setCollidable(false, false, false, false);
         this.state = GoombaState.Dead;
+        this.setSize(32, 16);
+        this.setY(this.y += 16);
+        this.changeSprite(GoombaSpriteType.Dead);
+        this.setCollidable(false, false, false, false);
     },
     onCollidesUp: function (gameObject) {
         if (gameObject instanceof MarioBors) {
@@ -114,14 +119,34 @@ Goomba = ClassFactory.createClass(Enemy, {
             gameObject.invincible ? this.dead() : gameObject.hurt();
         }
     },
-    setIconType: function(iconType) {
-        switch (iconType) {
-        case GoombaIconType.Red:
-            this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
-            break;
-        case GoombaIconType.Blue:
-            this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
-            break;
+    changeSprite: function (spriteType) {
+        if (this.iconType == GoombaIconType.Red) {
+            switch (spriteType) {
+            case GoombaSpriteType.MoveLeft:
+                this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
+                break;
+            case GoombaSpriteType.MoveRight:
+                this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
+                break;
+            case GoombaSpriteType.Dead:
+                this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
+                break;
+            }
         }
+        else if (this.iconType == GoombaIconType.Blue) {
+            switch (spriteType) {
+                case GoombaSpriteType.MoveLeft:
+                    this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
+                    break;
+                case GoombaSpriteType.MoveRight:
+                    this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
+                    break;
+                case GoombaSpriteType.Dead:
+                    this.sprite.setFrameSequence([{ x: 32 * 2, y: 110 }]);
+                    break;
+            }
+        }
+        
+        this.sprite.moveToFrame(0);
     }
 });

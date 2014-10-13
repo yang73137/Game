@@ -19,6 +19,8 @@
 
         // 停止其他物体移动
         this.stoppable = false;
+        // 被其他物体停止运动
+        this.stoppedable = true;
     },
     addToGameUI: function (gameUI) {
         this.gameUI = gameUI;
@@ -184,7 +186,7 @@
                     this.onCollidesLeft(block);
                     block.onCollides(this);
                     block.onCollidesRight(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setX(this.x + 1);
                         return false;
                     }
@@ -197,7 +199,7 @@
                     this.onCollidesLeft(block);
                     block.onCollides(this);
                     block.onCollidesRight(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setX(this.x + 1);
                         return false;
                     }
@@ -216,7 +218,7 @@
                     this.onCollidesRight(block);
                     block.onCollides(this);
                     block.onCollidesLeft(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setX(this.x - 1);
                         return false;
                     }
@@ -229,7 +231,7 @@
                     this.onCollidesRight(block);
                     block.onCollides(this);
                     block.onCollidesLeft(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setX(this.x - 1);
                         return false;
                     }
@@ -248,7 +250,7 @@
                     this.onCollidesUp(block);
                     block.onCollides(this);
                     block.onCollidesDown(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setY(this.y + 1);
                         return false;;
                     }
@@ -261,7 +263,7 @@
                     this.onCollidesUp(block);
                     block.onCollides(this);
                     block.onCollidesDown(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setY(this.y + 1);
                         return false;;
                     }
@@ -280,7 +282,7 @@
                     this.onCollidesDown(block);
                     block.onCollides(this);
                     block.onCollidesUp(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setY(this.y - 1);
                         return false;
                     }
@@ -293,7 +295,7 @@
                     this.onCollidesDown(block);
                     block.onCollides(this);
                     block.onCollidesUp(this);
-                    if (block.stoppable) {
+                    if (block.stoppable && this.stoppedable) {
                         this.setY(this.y - 1);
                         return false;
                     }

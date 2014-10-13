@@ -247,14 +247,17 @@ World_1_2 = ClassFactory.createClass(World, {
         var goomba_1452_368 = new Goomba(1452, 368, GoombaIconType.Blue);
         goomba_1452_368.addToGameUI(gameUI);
 
-        var koopaTroopa_1964_368 = new KoopaTroopa(1964, 336);
+        var koopaTroopa_1964_368 = new KoopaTroopa(1964, 336, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
         koopaTroopa_1964_368.addToGameUI(gameUI);
 
-        var koopaTroopa_2028_368 = new KoopaTroopa(2028, 336);
+        var koopaTroopa_2028_368 = new KoopaTroopa(2028, 336, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
         koopaTroopa_2028_368.addToGameUI(gameUI);
 
-        var koopaTroopa_2382_368 = new KoopaTroopa(2382, 336);
+        var koopaTroopa_2382_368 = new KoopaTroopa(2382, 336, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
         koopaTroopa_2382_368.addToGameUI(gameUI);
+
+        var koopaTroopa_5300_368 = new KoopaTroopa(5300, 336, KoopaTroopaType.Red, KoopaTroopaIconType.Red);
+        koopaTroopa_5300_368.addToGameUI(gameUI);
 
         var goomba_2510_368 = new Goomba(2510, 368, GoombaIconType.Blue);
         goomba_2510_368.addToGameUI(gameUI);

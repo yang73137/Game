@@ -1,4 +1,5 @@
-﻿BrickState = {
+﻿
+BrickState = {
     None: 0,
     Normal: 1,
     Up: 2,
@@ -50,6 +51,8 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment4.setBackgroundImage("../Images/TileSet.png");
 
         this.setType(type);
+
+        this.stoppedable = false;
     },
     onCollidesDown: function (gameObject) {
         if (gameObject instanceof MarioBors) {
@@ -58,7 +61,7 @@ Brick = ClassFactory.createClass(GameObject, {
             }
             else {
                 this.sprite.setBackground("");
-                this.setY(this.y - 1);
+                this.moveUp(1);
                 
                 this.fragment1.show();
                 this.fragment2.show();
@@ -95,11 +98,10 @@ Brick = ClassFactory.createClass(GameObject, {
     onUp: function() {
         if (this.upCounter.countdown()) {
             if (this.upCounter.currentCount >= 8) {
-                this.setPosition(this.x, this.y - 2);
+                this.moveUp(2);
             } else {
-                this.setPosition(this.x, this.y + 2);
+                this.moveDown(2);
             }
-            this.sprite.setPosition(this.x, this.y);
         } else {
             this.state = BrickState.Normal;
         }

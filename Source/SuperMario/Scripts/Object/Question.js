@@ -48,6 +48,7 @@ Question = ClassFactory.createClass(GameObject, {
         this.setSize(32, 32);
 
         this.setIconType(iconType);
+        this.stoppedable = false;
     },
     addToGameUI: function(gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);

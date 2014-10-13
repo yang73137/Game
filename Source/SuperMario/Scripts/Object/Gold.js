@@ -91,5 +91,19 @@ Gold2 = ClassFactory.createClass(GameObject, {
             this.state = GoldState.None;
             this.setCollidable(false, false, false, false);
         }
+        else if (gameObject instanceof Brick) {
+            if (gameObject.state == BrickState.Up || gameObject.state == BrickState.Break) {
+                this.sprite.hide();
+                this.state = GoldState.None;
+                this.setCollidable(false, false, false, false);
+            }
+        }
+        else if (gameObject instanceof Question) {
+            if (gameObject.state == QuestionState.Up) {
+                this.sprite.hide();
+                this.state = GoldState.None;
+                this.setCollidable(false, false, false, false);
+            }
+        }
     }
 });

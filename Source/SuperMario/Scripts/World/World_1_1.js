@@ -50,7 +50,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var mario = new MarioBors(50, 370);
         mario.addToGameUI(gameUI);
 
-        var kt = new KoopaTroopa(3200, 352);
+        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
         kt.addToGameUI(gameUI);
 
         var goomba_512_368 = new Goomba(512, 368, GoombaIconType.Red);
