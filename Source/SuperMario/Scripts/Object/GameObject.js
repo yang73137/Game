@@ -178,7 +178,14 @@
     },
     moveLeft: function (speed) {
         for (var i = 0; i < speed; i++) {
+            
             this.setX(this.x - 1);
+            
+            if (!this.onScreen()) {
+                this.onOffScreen();
+                return false;
+            }
+
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
                 if (this.collidesLeftWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
@@ -210,7 +217,14 @@
     },
     moveRight: function (speed) {
         for (var i = 0; i < speed; i++) {
+            
             this.setX(this.x + 1);
+            
+            if (!this.onScreen()) {
+                this.onOffScreen();
+                return false;
+            }
+            
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
                 if (this.collidesRightWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
@@ -242,6 +256,12 @@
     },
     moveUp: function (speed) {
         for (var i = 0; i < speed; i++) {
+            
+            if (!this.onScreen()) {
+                this.onOffScreen();
+                return false;
+            }
+
             this.setY(this.y - 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
@@ -274,7 +294,14 @@
     },
     moveDown: function (speed) {
         for (var i = 0; i < speed; i++) {
+            
             this.setY(this.y + 1);
+            
+            if (!this.onScreen()) {
+                this.onOffScreen();
+                return false;
+            }
+
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
                 if (this.collidesDownWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {
@@ -303,5 +330,10 @@
             }
         }
         return true;
+    },
+    onScreen: function () {
+        return this.x + this.width >= Math.abs(this.gameUI.x) && this.x <= (Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) && this.y <= Const.SCREEN_HEIGHT;
+    },
+    onOffScreen: function () {
     }
 });

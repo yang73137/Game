@@ -48,11 +48,11 @@ FireBall = ClassFactory.createClass(GameObject, {
         this.movingToDown = true;
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 32 * 9 }, { x: 32 * 6 + 16, y: 32 * 9 }, { x: 32 * 6, y: 32 * 9 + 16 }, { x: 32 * 6 + 16, y: 32 * 9 + 16 }]);
         this.state = FireBallState.Firing;
+        this.setCollidable(true, true, true, true);
     },
     onFiring: function () {
         for (var i = 0; i < 2; i++) {
-            this.x += this.movingToRight ? 4 : -4;
-            this.y += this.movingToDown ? 2 : -2;
+            
             if (!this.movingToDown) {
                 this.movingUpTime++;
             }
@@ -61,46 +61,24 @@ FireBall = ClassFactory.createClass(GameObject, {
                 this.movingUpTime = 0;
                 this.movingToDown = true;
             }
-            this.setPosition(this.x, this.y);
-
-            var bomb = false;
             
-            for (var index = 0; index < this.gameUI.staticObjects.length; index++) {
-                var block = this.gameUI.staticObjects[index];
-
-                if (this.collidesDownWith(block) || this.collidesUpWith(block)) {
-                    this.movingToDown = !this.movingToDown;
-                    this.y += this.movingToDown ? 2 : -2;
-                    this.setY(this.y);
+            if (this.movingToDown) {
+                if (!this.moveDown(3)) {
+                    this.movingToDown = false;
                 }
-                if (this.collidesLeftWith(block) || this.collidesRightWith(block)) {
-                    bomb = true;
-                    break;
-               }  
             }
-            
-            for (var index = 0; index < this.gameUI.animateObjects.length; index++) {
-                var block = this.gameUI.animateObjects[index];
-
-                if ((block instanceof Enemy) && block.collidesWith(this)) {
-                    bomb = true;
-                    block.dead();
-                    break;
+            else {
+                if (!this.moveUp(3)) {
+                    this.movingToDown = true;
                 }
-
             }
 
-            if (bomb) {
-                this.bomb();
-                break;
-            }
-            
+            this.movingToRight ? this.moveRight(4) : this.moveLeft(4);
+           
             if (this.x + 32 < Math.abs(this.gameUI.x) || this.x > Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) {
                 this.state = FireBallState.None;
                 break;
             }
-            
-            
         }
         this.sprite.moveToNextFrame();
     },
@@ -115,5 +93,26 @@ FireBall = ClassFactory.createClass(GameObject, {
         this.sprite.setFrameSequence([{ x: 32 * 7, y: 32 * 10 }]);
         this.sprite.moveToFrame(0);
         this.state = FireBallState.Bomb;
+        this.setCollidable(false, false, false, false);
+    },
+    onCollides: function (gameObject) {
+        if (gameObject instanceof Enemy) {
+            this.bomb();
+        }
+    },
+    onCollidesLeft: function (gameObject) {
+        if (gameObject.stoppable || gameObject instanceof Enemy) {
+            this.bomb();
+        }
+    },
+    onCollidesRight: function (gameObject) {
+        if (gameObject.stoppable || gameObject instanceof Enemy) {
+            this.bomb();
+        }
+    },
+    onOffScreen: function () {
+        this.sprite.hide();
+        this.setCollidable(false, false, false, false);
+        this.state = FireBallState.None;
     }
 });

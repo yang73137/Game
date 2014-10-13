@@ -64,7 +64,7 @@ Flower = ClassFactory.createClass(GameObject, {
     onBirth: function () {
         if (this.y > this.originalY - this.height) {
             if (!this.upCounter.countdown()) {
-                this.setY(this.y - 1);
+                this.moveUp(1);
                 this.sprite.moveToNextFrame();
                 this.setCollidable(true, true, true, true);
             }

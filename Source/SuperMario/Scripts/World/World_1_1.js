@@ -156,7 +156,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_3008_144 = new Question(3008, 144, QuestionItemType.Gold, QuestionIconType.Question);
         question_3008_144.addToGameUI(gameUI);
 
-        var question_3008_272 = new Question(3008, 272, QuestionItemType.Gold, QuestionIconType.RedBrick);
+        var question_3008_272 = new Question(3008, 272, QuestionItemType.MultiGold, QuestionIconType.RedBrick);
         question_3008_272.addToGameUI(gameUI);
 
         var brick_3200_272 = new Brick(3200, 272, BrickType.Red);

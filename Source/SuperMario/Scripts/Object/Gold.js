@@ -30,9 +30,9 @@
         
         if (this.upCounter.countdown()) {
             if (this.upCounter.currentCount >= 16) {
-                this.sprite.moveBy(0, -2);
+                this.moveUp(3);
             } else {
-                this.sprite.moveBy(0, 2);
+                this.moveDown(2);
             }
             this.sprite.moveToNextFrame();
         } else {

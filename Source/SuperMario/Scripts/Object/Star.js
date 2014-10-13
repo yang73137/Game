@@ -26,6 +26,8 @@ Star = ClassFactory.createClass(GameObject, {
         this.upCounter = new Counter(1, true, true);
         this.originalX = x;
         this.originalY = y;
+
+        this.setCollidable(false, false, false, false);
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
@@ -46,8 +48,7 @@ Star = ClassFactory.createClass(GameObject, {
     },
     onMove: function () {
         for (var i = 0; i < 1; i++) {
-            this.x += this.movingToRight ? 2 : -2;
-            this.y += this.movingToDown ? 3 : -3;
+
             if (!this.movingToDown) {
                 this.movingUpTime++;
             }
@@ -56,23 +57,9 @@ Star = ClassFactory.createClass(GameObject, {
                 this.movingUpTime = 0;
                 this.movingToDown = true;
             }
-            this.setPosition(this.x, this.y);
 
-
-            for (var index = 0; index < this.gameUI.staticObjects.length; index++) {
-                var block = this.gameUI.staticObjects[index];
-
-                if (this.collidesDownWith(block) || this.collidesUpWith(block)) {
-                    this.movingToDown = !this.movingToDown;
-                    this.y += this.movingToDown ? 3 : -3;
-                    this.setY(this.y);
-                }
-                if (this.collidesLeftWith(block) || this.collidesRightWith(block)) {
-                    this.movingToRight = !this.movingToRight;
-                    this.movingUpTime = 0;
-                    break;
-                }
-            }
+            this.movingToDown ? this.moveDown(5) : this.moveUp(5);
+            this.movingToRight ? this.moveRight(2) : this.moveLeft(2);
 
             if (this.x + 32 < Math.abs(this.gameUI.x) || this.x > Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) {
                 this.state = StarState.None;
@@ -82,6 +69,7 @@ Star = ClassFactory.createClass(GameObject, {
         this.sprite.moveToNextFrame();
     },
     onBirth: function () {
+        this.setCollidable(true, true, true, true);
         if (this.y > this.originalY - this.height) {
             if (!this.upCounter.countdown()) {
                 this.setY(this.y - 1);
@@ -96,11 +84,37 @@ Star = ClassFactory.createClass(GameObject, {
         this.sprite.start();
     },
     onCollides: function (gameObject) {
-        if (gameObject instanceof  MarioBors) {
+        if (gameObject instanceof MarioBors) {
             this.sprite.hide();
             this.state = StarState.None;
             this.setCollidable(false, false, false, false);
             gameObject.setInvincible();
         }
     },
+    onCollidesLeft: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.movingToRight = true;
+        }
+    },
+    onCollidesRight: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.movingToRight = false;
+        }
+    },
+    onCollidesUp: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.movingToDown = true;
+        }
+    },
+    onCollidesDown: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.movingUpTime = 0;
+            this.movingToDown = false;
+        }
+    },
+    onOffScreen: function () {
+        this.sprite.hide();
+        this.setCollidable(false, false, false, false);
+        this.state = StarState.None;
+    }
 });

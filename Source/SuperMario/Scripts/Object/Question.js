@@ -18,7 +18,7 @@ QuestionIconType = {
     Question: 1,
     RedBrick: 2,
     BlueBrick: 3
-}
+};
 
 Question = ClassFactory.createClass(GameObject, {
     init: function (x, y, itemType, iconType) {
@@ -65,11 +65,10 @@ Question = ClassFactory.createClass(GameObject, {
             case QuestionState.Up:
                 if (this.upCounter.countdown()) {
                     if (this.upCounter.currentCount >= 8) {
-                        this.setPosition(this.x, this.y - 2);
+                        this.moveUp(2);
                     } else {
-                        this.setPosition(this.x, this.y + 2);
+                        this.moveDown(2);
                     }
-                    
                 }
                 else {
                     this.state = this.collideCount > 0 ? QuestionState.Normal : QuestionState.None;
@@ -83,6 +82,10 @@ Question = ClassFactory.createClass(GameObject, {
     },
     onCollidesDown: function (gameObject) {
         
+        if (!(gameObject instanceof MarioBors)) {
+            return;
+        }
+
         if (this.item == null) {
             this.setItem();
         }

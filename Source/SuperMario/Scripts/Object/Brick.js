@@ -9,7 +9,7 @@ BrickState = {
 BrickType = {
     Red: 1,
     Blue: 2
-}
+};
 
 
 Brick = ClassFactory.createClass(GameObject, {
@@ -111,10 +111,10 @@ Brick = ClassFactory.createClass(GameObject, {
         this.setCollidable(false, false, false, false);
         if (this.breakCounter.countdown()) {
             if (this.breakCounter.currentCount >= 58) {
-                this.fragment1.moveBy(-3, -8);
-                this.fragment2.moveBy(3, -8);
-                this.fragment3.moveBy(-4, 0);
-                this.fragment4.moveBy(4, 0);
+                this.fragment1.moveBy(-5, -8);
+                this.fragment2.moveBy(5, -8);
+                this.fragment3.moveBy(-6, 2);
+                this.fragment4.moveBy(6, 2);
             }
             else if (this.breakCounter.currentCount <= 30) {
                 this.fragment1.moveBy(0, 9);
