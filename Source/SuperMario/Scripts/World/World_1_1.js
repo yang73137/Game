@@ -53,37 +53,37 @@ World_1_1 = ClassFactory.createClass(World, {
         var kt = new KoopaTroopa(3200, 352);
         kt.addToGameUI(gameUI);
 
-        var goomba_512_368 = new Goomba(512, 368);
+        var goomba_512_368 = new Goomba(512, 368, GoombaIconType.Red);
         goomba_512_368.addToGameUI(gameUI);
 
-        var goomba_1400_368 = new Goomba(1400, 368);
+        var goomba_1400_368 = new Goomba(1400, 368, GoombaIconType.Red);
         goomba_1400_368.addToGameUI(gameUI);
 
-        var goomba_1652_368 = new Goomba(1652, 368);
+        var goomba_1652_368 = new Goomba(1652, 368, GoombaIconType.Red);
         goomba_1652_368.addToGameUI(gameUI);
 
-        var goomba_1684_368 = new Goomba(1684, 368);
+        var goomba_1684_368 = new Goomba(1684, 368, GoombaIconType.Red);
         goomba_1684_368.addToGameUI(gameUI);
 
-        var goomba_2592_102 = new Goomba(2592, 112);
+        var goomba_2592_102 = new Goomba(2592, 112, GoombaIconType.Red);
         goomba_2592_102.addToGameUI(gameUI);
 
-        var goomba_2624_102 = new Goomba(2624, 112);
+        var goomba_2624_102 = new Goomba(2624, 112, GoombaIconType.Red);
         goomba_2624_102.addToGameUI(gameUI);
 
-        var goomba_3584_368 = new Goomba(3584, 368);
+        var goomba_3584_368 = new Goomba(3584, 368, GoombaIconType.Red);
         goomba_3584_368.addToGameUI(gameUI);
 
-        var goomba_3648_368 = new Goomba(3648, 368);
+        var goomba_3648_368 = new Goomba(3648, 368, GoombaIconType.Red);
         goomba_3648_368.addToGameUI(gameUI);
 
-        var goomba_3712_368 = new Goomba(3712, 368);
+        var goomba_3712_368 = new Goomba(3712, 368, GoombaIconType.Red);
         goomba_3712_368.addToGameUI(gameUI);
 
-        var goomba_5440_368 = new Goomba(5440, 368);
+        var goomba_5440_368 = new Goomba(5440, 368, GoombaIconType.Red);
         goomba_5440_368.addToGameUI(gameUI);
 
-        var goomba_5504_368 = new Goomba(5504, 368);
+        var goomba_5504_368 = new Goomba(5504, 368, GoombaIconType.Red);
         goomba_5504_368.addToGameUI(gameUI);
 
         var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionIconType.Question);
@@ -114,7 +114,7 @@ World_1_1 = ClassFactory.createClass(World, {
         question_2026_272.addToGameUI(gameUI);
         
 
-        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionIconType.RedBrick);
+        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionIconType.Question);
         question_2496_272.addToGameUI(gameUI);
 
         var brick_2528_272 = new Brick(2528, 272, BrickType.Red);

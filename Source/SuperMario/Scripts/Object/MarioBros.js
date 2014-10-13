@@ -50,6 +50,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.squating = false;
 
         this.sprite = new Sprite();
+        this.sprite.setZ(5);
         this.sprite.setBackgroundImage("../Images/MarioBros4.png");
         this.sprite.setFrameSequence([{ x: 0, y: 64 }]);
         this.sprite.setRepeat([0]);

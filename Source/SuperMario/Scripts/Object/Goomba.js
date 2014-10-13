@@ -5,8 +5,13 @@
     Dead2: 3
 };
 
+GoombaIconType = {
+    Red: 1,
+    Blue: 2
+};
+
 Goomba = ClassFactory.createClass(Enemy, {
-    init: function (x, y) {
+    init: function (x, y, iconType) {
         Enemy.init.call(this);
 
         this.speed = 1;
@@ -18,12 +23,15 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.sprite.setBackgroundImage("../Images/Enemies.png");
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
-        this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
+        
         this.sprite.show();
         this.sprite.start();
 
         this.setPosition(x, y);
         this.setSize(32, 32);
+
+        this.iconType = iconType;
+        this.setIconType(iconType);
     },
     update: function () {
         switch (this.state) {
@@ -60,7 +68,11 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.setSize(32, 16);
         this.setSize(this.width, 16);
         this.setPosition(this.x, this.y);
-        this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
+        if (this.iconType == GoombaIconType.Red) {
+            this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
+        } else if (this.iconType == GoombaIconType.Blue)  {
+            this.sprite.setFrameSequence([{ x: 32 * 2, y: 110 }]);
+        }
         this.sprite.moveToFrame(0);
         this.setCollidable(false, false, false, false);
         this.state = GoombaState.Dead;
@@ -100,6 +112,16 @@ Goomba = ClassFactory.createClass(Enemy, {
         }
         if (gameObject instanceof MarioBors) {
             gameObject.invincible ? this.dead() : gameObject.hurt();
+        }
+    },
+    setIconType: function(iconType) {
+        switch (iconType) {
+        case GoombaIconType.Red:
+            this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
+            break;
+        case GoombaIconType.Blue:
+            this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
+            break;
         }
     }
 });

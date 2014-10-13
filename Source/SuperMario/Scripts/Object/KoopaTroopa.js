@@ -154,5 +154,9 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 this.movingToRight = false;
             }
         }
+    },
+    dead: function() {
+        this.state = KoopaTroopaState.None;
+        this.sprite.hide();
     }
 });

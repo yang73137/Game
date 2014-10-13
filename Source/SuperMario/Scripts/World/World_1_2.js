@@ -237,6 +237,49 @@ World_1_2 = ClassFactory.createClass(World, {
         var floor_5644_400 = new Block(5644, 400, 1025, 48);
         floor_5644_400.addToGameUI(gameUI);
 
+
+        var goomba_960_368 = new Goomba(960, 368, GoombaIconType.Blue);
+        goomba_960_368.addToGameUI(gameUI);
+
+        var goomba_992_368 = new Goomba(992, 368, GoombaIconType.Blue);
+        goomba_992_368.addToGameUI(gameUI);
+
+        var goomba_1452_368 = new Goomba(1452, 368, GoombaIconType.Blue);
+        goomba_1452_368.addToGameUI(gameUI);
+
+        var koopaTroopa_1964_368 = new KoopaTroopa(1964, 336);
+        koopaTroopa_1964_368.addToGameUI(gameUI);
+
+        var koopaTroopa_2028_368 = new KoopaTroopa(2028, 336);
+        koopaTroopa_2028_368.addToGameUI(gameUI);
+
+        var koopaTroopa_2382_368 = new KoopaTroopa(2382, 336);
+        koopaTroopa_2382_368.addToGameUI(gameUI);
+
+        var goomba_2510_368 = new Goomba(2510, 368, GoombaIconType.Blue);
+        goomba_2510_368.addToGameUI(gameUI);
+
+        var goomba_2638_368 = new Goomba(2638, 368, GoombaIconType.Blue);
+        goomba_2638_368.addToGameUI(gameUI);
+
+        var goomba_2830_368 = new Goomba(2830, 102, GoombaIconType.Blue);
+        goomba_2830_368.addToGameUI(gameUI);
+
+        var goomba_2958_368 = new Goomba(2958, 244, GoombaIconType.Blue);
+        goomba_2958_368.addToGameUI(gameUI);
+
+        var goomba_3006_368 = new Goomba(3006, 244, GoombaIconType.Blue);
+        goomba_3006_368.addToGameUI(gameUI);
+
+        var gold_2702_240 = new Gold2(2702, 240);
+        gold_2702_240.addToGameUI(gameUI);
+
+        for (var i = 0; i < 6; i++) {
+            var gold = new Gold2(3214 + i * 32, 176);
+            gold.addToGameUI(gameUI);
+        }
+
+
         this.changeToScene2();
     },
     restart: function () {
