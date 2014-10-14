@@ -62,7 +62,6 @@ Brick = ClassFactory.createClass(GameObject, {
             else {
                 this.sprite.setBackground("");
                 this.moveUp(1);
-                
                 this.fragment1.show();
                 this.fragment2.show();
                 this.fragment3.show();

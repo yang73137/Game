@@ -62,7 +62,7 @@ Star = ClassFactory.createClass(GameObject, {
 
         this.sprite.moveToNextFrame();
 
-        if (!this.onOffScreen()) {
+        if (!this.onScreen()) {
             this.onOffScreen();
             return;
         }

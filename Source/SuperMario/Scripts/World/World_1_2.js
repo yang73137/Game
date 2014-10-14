@@ -35,6 +35,9 @@ World_1_2 = ClassFactory.createClass(World, {
         block_524_48.addToGameUI(gameUI);
         
         for (var i = 0; i < 133; i++) {
+            if (i == 84) {
+                continue;
+            }
             var brick = new Brick(668 + i * 32, 48, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
@@ -66,8 +69,21 @@ World_1_2 = ClassFactory.createClass(World, {
         
         var question_972_272 = new Question(972, 272, QuestionItemType.Gold, QuestionIconType.Question);
         question_972_272.addToGameUI(gameUI);
-        
 
+        var question_1996_208 = new Question(1996, 208, QuestionItemType.Star, QuestionIconType.BlueBrick);
+        question_1996_208.addToGameUI(gameUI);
+
+        var question_2734_240 = new Question(2734, 240, QuestionItemType.BigMushroom, QuestionIconType.BlueBrick);
+        question_2734_240.addToGameUI(gameUI);
+
+        var question_2862_240 = new Question(2862, 240, QuestionItemType.MultiGold, QuestionIconType.BlueBrick);
+        question_2862_240.addToGameUI(gameUI);
+        
+        var question_3356_48 = new Question(3356, 48, QuestionItemType.LifeMushroom, QuestionIconType.BlueBrick);
+        question_3356_48.addToGameUI(gameUI);
+
+        var question_5324_240 = new Question(5324, 240, QuestionItemType.MultiGold, QuestionIconType.BlueBrick);
+        question_5324_240.addToGameUI(gameUI);
 
 
         var iron_1068_368 = new Block(1068, 368, 32, 32);
@@ -99,7 +115,7 @@ World_1_2 = ClassFactory.createClass(World, {
 
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 8; j++) {
-                if (((i == 0 || i == 1) && (j == 1 || j == 6)) || ((i == 1 || i == 2) && (j == 3 || j == 4))) {
+                if (((i == 0 || i == 1) && (j == 1 || j == 6)) || ((i == 1 || i == 2) && (j == 3 || j == 4)) || (i == 0 && j == 7)) {
                     continue;
                 }
                 var brick = new Brick(1772 + j * 32, 208 + i * 32, BrickType.Blue);
@@ -129,7 +145,7 @@ World_1_2 = ClassFactory.createClass(World, {
         
         for (var i = 0; i < 7; i++) {
             for (var j = 0; j < 4; j++) {
-                if (((i > 1) && (j == 0)) || ((i > 1 && i < 6) && (j == 2)) || ((i > 1 && i < 5) && (j == 3))) {
+                if (((i > 1) && (j == 0)) || ((i > 1 && i < 6) && (j == 2)) || ((i > 1 && i < 5) && (j == 3)) || (i == 5 && j == 3)) {
                     continue;
                 }
                 var brick = new Brick(2638 + j * 32, 80 + i * 32, BrickType.Blue);
@@ -139,6 +155,9 @@ World_1_2 = ClassFactory.createClass(World, {
         
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 2; j++) {
+                if (i == 3 && j == 1) {
+                    continue;
+                }
                 var brick = new Brick(2830 + j * 32, 144 + i * 32, BrickType.Blue);
                 brick.addToGameUI(gameUI);
             }
@@ -187,7 +206,7 @@ World_1_2 = ClassFactory.createClass(World, {
             }
         }
         
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 5; i++) {
             var brick = new Brick(5164 + i * 32, 240, BrickType.Blue);
             brick.addToGameUI(gameUI);
         }
@@ -274,6 +293,25 @@ World_1_2 = ClassFactory.createClass(World, {
         var goomba_3006_244 = new Goomba(3006, 228, GoombaIconType.Blue);
         goomba_3006_244.addToGameUI(gameUI);
 
+        var goomba_3660_244 = new Goomba(3660, 368, GoombaIconType.Blue);
+        goomba_3660_244.addToGameUI(gameUI);
+
+        var goomba_3724_244 = new Goomba(3724, 368, GoombaIconType.Blue);
+        goomba_3724_244.addToGameUI(gameUI);
+
+        var goomba_3788_244 = new Goomba(3788, 368, GoombaIconType.Blue);
+        goomba_3788_244.addToGameUI(gameUI);
+
+        var goomba_4140_244 = new Goomba(4140, 368, GoombaIconType.Blue);
+        goomba_4140_244.addToGameUI(gameUI);
+
+        var goomba_4864_240 = new Goomba(4864, 240, GoombaIconType.Blue);
+        goomba_4864_240.addToGameUI(gameUI);
+
+        var goomba_4896_240 = new Goomba(4896, 240, GoombaIconType.Blue);
+        goomba_4896_240.addToGameUI(gameUI);
+
+
         var gold_2702_240 = new Gold2(2702, 240);
         gold_2702_240.addToGameUI(gameUI);
 
@@ -282,6 +320,21 @@ World_1_2 = ClassFactory.createClass(World, {
             gold.addToGameUI(gameUI);
         }
 
+        var gold_1804_240 = new Gold2(1804, 240);
+        gold_1804_240.addToGameUI(gameUI);
+
+        for (var i = 0; i < 4; i++) {
+            var gold = new Gold2(1836 + i * 32, 176);
+            gold.addToGameUI(gameUI);
+        }
+
+        var gold_1964_240 = new Gold2(1964, 240);
+        gold_1964_240.addToGameUI(gameUI);
+
+        for (var i = 0; i < 4; i++) {
+            var gold = new Gold2(2382 + i * 32, 240);
+            gold.addToGameUI(gameUI);
+        }
 
         this.changeToScene2();
     },
