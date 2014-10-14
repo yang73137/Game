@@ -67,7 +67,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
     },
     onLive: function () {
 
-        if (!this.onScreen()) {
+        if (this.waitForScreen()) {
             return;
         }
 
@@ -80,6 +80,10 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.faceToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
 
         this.sprite.moveToNextFrame();
+
+        if (!this.onScreen()) {
+            this.onOffScreen();
+        }
     },
     onLive2: function () {
         if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {

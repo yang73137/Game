@@ -21,6 +21,9 @@
         this.stoppable = false;
         // 被其他物体停止运动
         this.stoppedable = true;
+
+        // 等待屏幕滚动
+        this.waitingForScreen = true;
     },
     addToGameUI: function (gameUI) {
         this.gameUI = gameUI;
@@ -332,8 +335,18 @@
         return true;
     },
     onScreen: function () {
-        return this.x + this.width >= Math.abs(this.gameUI.x) && this.x <= (Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) && this.y <= Const.SCREEN_HEIGHT;
+        var flag = this.x + this.width >= Math.abs(this.gameUI.x) && this.x <= (Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) && this.y <= Const.SCREEN_HEIGHT;
+        return flag;
     },
     onOffScreen: function () {
+    },
+    waitForScreen: function () {
+        if (this.waitingForScreen) {
+            if (this.onScreen()) {
+                this.waitingForScreen = false;
+            }
+        }
+
+        return this.waitingForScreen;
     }
 });

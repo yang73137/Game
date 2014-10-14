@@ -81,6 +81,9 @@ Gold2 = ClassFactory.createClass(GameObject, {
                 this.sprite.hide();
                 break;
             case GoldState.Live:
+                if (this.waitForScreen()) {
+                    return;
+                }
                 this.sprite.moveToNextFrame();
                 break;
         }

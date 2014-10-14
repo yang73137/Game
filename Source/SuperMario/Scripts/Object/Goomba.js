@@ -61,8 +61,7 @@ Goomba = ClassFactory.createClass(Enemy, {
         }
     },
     onLive: function () {
-
-        if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
+        if (this.waitForScreen()) {
             return;
         }
 
@@ -70,6 +69,11 @@ Goomba = ClassFactory.createClass(Enemy, {
 
         this.freefall();
         this.sprite.moveToNextFrame();
+
+        if (!this.onScreen()) {
+            console.log(1);
+            this.onOffScreen();
+        }
     },
     onDead: function () {
         if (!this.deadCounter.countdown()) {

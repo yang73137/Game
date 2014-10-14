@@ -56,8 +56,12 @@ Question = ClassFactory.createClass(GameObject, {
         gameUI.addStaticObject(this);
     },
     update: function () {
+
         switch (this.state) {
             case QuestionState.Normal:
+                if (this.waitForScreen()) {
+                    return;
+                }
                 if (this.iconType != QuestionIconType.None) {
                     this.sprite.moveToNextFrame();
                 }

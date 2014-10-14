@@ -97,7 +97,11 @@ Mushroom = ClassFactory.createClass(GameObject, {
         
         this.movingToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
 
-        this.sprite.moveToNextFrame();   
+        this.sprite.moveToNextFrame();
+
+        if (!this.onScreen) {
+            this.onOffScreen();
+        }
     },
     onOffScreen: function () {
         this.sprite.hide();

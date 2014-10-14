@@ -75,8 +75,8 @@ FireBall = ClassFactory.createClass(GameObject, {
 
             this.movingToRight ? this.moveRight(4) : this.moveLeft(4);
            
-            if (this.x + 32 < Math.abs(this.gameUI.x) || this.x > Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) {
-                this.state = FireBallState.None;
+            if (!this.onScreen()) {
+                this.onOffScreen();
                 break;
             }
         }

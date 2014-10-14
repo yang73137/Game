@@ -46,27 +46,26 @@ Star = ClassFactory.createClass(GameObject, {
                 break;
         }
     },
-    onMove: function () {
-        for (var i = 0; i < 1; i++) {
+    onMove: function() {
 
-            if (!this.movingToDown) {
-                this.movingUpTime++;
-            }
-
-            if (this.movingUpTime == 16) {
-                this.movingUpTime = 0;
-                this.movingToDown = true;
-            }
-
-            this.movingToDown ? this.moveDown(5) : this.moveUp(5);
-            this.movingToRight ? this.moveRight(2) : this.moveLeft(2);
-
-            if (this.x + 32 < Math.abs(this.gameUI.x) || this.x > Math.abs(this.gameUI.x) + Const.SCREEN_WIDTH) {
-                this.state = StarState.None;
-                break;
-            }
+        if (!this.movingToDown) {
+            this.movingUpTime++;
         }
+
+        if (this.movingUpTime == 16) {
+            this.movingUpTime = 0;
+            this.movingToDown = true;
+        }
+
+        this.movingToDown ? this.moveDown(5) : this.moveUp(5);
+        this.movingToRight ? this.moveRight(2) : this.moveLeft(2);
+
         this.sprite.moveToNextFrame();
+
+        if (!this.onOffScreen()) {
+            this.onOffScreen();
+            return;
+        }
     },
     onBirth: function () {
         this.setCollidable(true, true, true, true);
