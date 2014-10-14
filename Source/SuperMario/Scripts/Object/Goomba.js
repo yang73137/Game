@@ -71,7 +71,6 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.sprite.moveToNextFrame();
 
         if (!this.onScreen()) {
-            console.log(1);
             this.onOffScreen();
         }
     },

@@ -49,40 +49,25 @@
         <script type="text/javascript">
 
             var app = document.getElementById("app");
-            /*
-            var gameUI = new GameUI();
-            gameUI.setSize(7296, 448);
-            gameUI.setBackgroundImage("../Images/World1_1.png");
-            gameUI.setBackgroundPosition(0, 0);
-            gameUI.show();
-            gameUI.appendTo(app);
-
-            gameUI.createWorld1_1();
-            */
-            //gameUI.setX(-3000);
-            //gameUI.mario.x = 3000;
-            //gameUI.mario.setType(MarioType.Big);
-
-
-            var world_1_1 = new World_1_1();
-            world_1_1.build();
 
             var gameUI = new GameUI();
             gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
             gameUI.show();
-            
-            var world_1_2 = new World_1_2();
-            world_1_2.build();
-
-            gameUI.append(world_1_2);
             gameUI.appendTo(app);
 
-            world_1_1.setX(-5000);
-            world_1_1.mario.setX(5100);
+            gameUI.setMario(new MarioBors(0, 0));
+
+            var world = new World_1_1();
+            world.addToGameUI(gameUI);
+
+            setTimeout(function () {
+                world.mario.setPosition(6000, 0);
+                world.setPosition(-6000, 0);
+            }, 100);
+            
 
             setInterval(function () {
-                //gameUI.update();
-                world_1_2.update();
+                gameUI.update();
             }, 16);
         
         </script>

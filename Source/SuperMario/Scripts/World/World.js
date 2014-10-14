@@ -7,6 +7,8 @@ World = ClassFactory.createClass(Layer, {
         this.animateObjects = [];
 
         this.mario = null;
+        this.gameUI = null;
+        this.scrollable = false;
     },
     scroll: function () {
     },
@@ -23,5 +25,13 @@ World = ClassFactory.createClass(Layer, {
     addAnimateObject: function (gameObject) {
         this.animateObjects.push(gameObject);
     },
-    restart: function() {}
+    restart: function () { },
+    addToGameUI: function (gameUI) {
+        this.gameUI = gameUI;
+        this.mario = gameUI.mario;
+        gameUI.world = this;
+        gameUI.append(this);
+        
+        this.build();
+    }
 });

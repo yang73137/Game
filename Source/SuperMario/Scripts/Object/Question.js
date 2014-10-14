@@ -15,9 +15,12 @@ QuestionItemType = {
 
 QuestionIconType = {
     None: 0,
-    Question: 1,
-    RedBrick: 2,
-    BlueBrick: 3
+    RedHidden: 1,
+    BlueHidden: 2,
+    RedQuestion: 3,
+    BlueQuestion: 4,
+    RedBrick: 5,
+    BlueBrick: 6
 };
 
 Question = ClassFactory.createClass(GameObject, {
@@ -59,7 +62,7 @@ Question = ClassFactory.createClass(GameObject, {
 
         switch (this.state) {
             case QuestionState.Normal:
-                if (this.iconType != QuestionIconType.None) {
+                if (this.iconType != QuestionIconType.None && this.iconType != QuestionIconType.RedHidden && this.iconType != QuestionIconType.BlueHidden) {
                     this.sprite.moveToNextFrame();
                 }
                 break;
@@ -98,7 +101,12 @@ Question = ClassFactory.createClass(GameObject, {
             this.collideCount--;
             if (this.collideCount == 0) {
                 this.sprite.setBackgroundImage("../Images/TileSet.png");
-                this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
+                if (this.iconType == QuestionIconType.RedBrick || this.iconType == QuestionIconType.RedQuestion || this.iconType == QuestionIconType.RedHidden) {
+                    this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
+                }
+                else if (this.iconType == QuestionIconType.BlueBrick || this.iconType == QuestionIconType.BlueQuestion || this.iconType == QuestionIconType.BlueHidden) {
+                    this.sprite.setFrameSequence([{ x: 32 * 27, y: 64 }]);
+                }
                 this.sprite.moveToFrame(0);
             }
             this.state = QuestionState.Up;
@@ -140,12 +148,16 @@ Question = ClassFactory.createClass(GameObject, {
     },
     setIconType: function (iconType) {
         switch (iconType) {
-            case QuestionIconType.None:
+            case QuestionIconType.RedHidden:
+            case QuestionIconType.BlueHidden:
                 this.setCollidable(false, true, false, false);
                 this.sprite.hide();
                 break;
-            case QuestionIconType.Question:
+            case QuestionIconType.RedQuestion:
                 this.sprite.setFrameSequence([{ x: 32 * 24, y: 0 }, { x: 32 * 25, y: 0 }, { x: 32 * 26, y: 0 }]);
+                break;
+            case QuestionIconType.BlueQuestion:
+                this.sprite.setFrameSequence([{ x: 32 * 24, y: 32 * 2 }, { x: 32 * 25, y: 32 * 2 }, { x: 32 * 26, y: 32 * 2 }]);
                 break;
             case QuestionIconType.RedBrick:
                 this.sprite.setFrameSequence([{ x: 32, y: 0 }]);

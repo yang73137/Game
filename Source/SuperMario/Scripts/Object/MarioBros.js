@@ -272,8 +272,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
             }
         }
-        if (this.y > Const.SCREEN_HEIGHT) {
-            this.state = MarioState.Dead;
+        if (this.y - this.height * 2 > Const.SCREEN_HEIGHT) {
+            this.dead();
         }
     },
     moveLeft: function (speed) {

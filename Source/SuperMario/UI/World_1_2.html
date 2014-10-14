@@ -54,19 +54,22 @@
         var gameUI = new GameUI();
         gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
         gameUI.show();
-
-        var world_1_2 = new World_1_2();
-        world_1_2.build();
-
-        gameUI.append(world_1_2);
         gameUI.appendTo(app);
 
-        //world_1_2.setX(-3300);
-        //world_1_2.mario.setPosition(3320, 100);
-        //world_1_2.mario.setType(MarioType.Flower);
+        gameUI.setMario(new MarioBors(0, 0));
+
+        var world = new World_1_2();
+        world.addToGameUI(gameUI);
+
+        /*
+        setTimeout(function () {
+            world.mario.setPosition(6000, 0);
+            world.setPosition(-6000, 0);
+        }, 100);
+        */
 
         setInterval(function () {
-            world_1_2.update();
+            gameUI.update();
         }, 16);
 
     </script>

@@ -3,14 +3,14 @@ World_1_1_State = {
     None: 0,
     Normal: 1,
     Scene1: 2,
-    Scene2: 3
+    Scene2: 3,
+    Scene3: 4
 };
 
 World_1_1 = ClassFactory.createClass(World, {
     init: function() {
         World.init.call(this);
 
-        this.setPosition(0, 0);
         this.setSize(7296, 448);
         this.setBackgroundImage("../Images/World_1_1.png");
         this.setBackgroundPosition(0, 0);
@@ -19,6 +19,9 @@ World_1_1 = ClassFactory.createClass(World, {
         this.state = World_1_1_State.Normal;
     },
     scroll: function () {
+        if (!this.scrollable) {
+            return;
+        }
         var mario = this.mario;
         if (mario.x > 6784) {
 
@@ -36,19 +39,27 @@ World_1_1 = ClassFactory.createClass(World, {
             }
         }
     },
-    goToScene1: function() {
-        this.mario.collidable = false;
+    changeToScene1: function () {
+        this.scrollable = true;
         this.state = World_1_1_State.Scene1;
     },
-    goToScene2: function() {
-        this.mario.collidable = false;
+    changeToScene2: function () {
+        this.scrollable = false;
         this.state = World_1_1_State.Scene2;
+    },
+    changeToScene3: function() {
+        this.scrollable = true;
+        this.state = World_1_1_State.Scene3;
+    },
+    changeToScene4: function () {
+        this.scrollable = true;
+        
+        this.state = World_1_1_State.Scene4;
     },
     build: function () {
         var gameUI = this;
 
-        var mario = new MarioBors(50, 370);
-        mario.addToGameUI(gameUI);
+        this.mario.addToGameUI(this);
 
         var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
         kt.addToGameUI(gameUI);
@@ -86,22 +97,22 @@ World_1_1 = ClassFactory.createClass(World, {
         var goomba_5504_368 = new Goomba(5504, 368, GoombaIconType.Red);
         goomba_5504_368.addToGameUI(gameUI);
 
-        var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_512_272.addToGameUI(gameUI);
 
         var brick_640_272 = new Brick(640, 272, BrickType.Red);
         brick_640_272.addToGameUI(gameUI);
 
-        var question_672_272 = new Question(672, 272, QuestionItemType.BigMushroom, QuestionIconType.Question);
+        var question_672_272 = new Question(672, 272, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
         question_672_272.addToGameUI(gameUI);
 
-        var question_704_144 = new Question(704, 144, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_704_144 = new Question(704, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_704_144.addToGameUI(gameUI);
 
         var brick_704_272 = new Brick(704, 272, BrickType.Red);
         brick_704_272.addToGameUI(gameUI);
 
-        var question_736_272 = new Question(736, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_736_272 = new Question(736, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_736_272.addToGameUI(gameUI);
 
         var brick_768_272 = new Brick(768, 272, BrickType.Red);
@@ -110,11 +121,11 @@ World_1_1 = ClassFactory.createClass(World, {
         var brick_2464_272 = new Brick(2464, 272, BrickType.Red);
         brick_2464_272.addToGameUI(gameUI);
 
-        var question_2026_272 = new Question(2026, 240, QuestionItemType.LifeMushroom, QuestionIconType.None);
+        var question_2026_272 = new Question(2026, 240, QuestionItemType.LifeMushroom, QuestionIconType.RedHidden);
         question_2026_272.addToGameUI(gameUI);
         
 
-        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionIconType.Question);
+        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
         question_2496_272.addToGameUI(gameUI);
 
         var brick_2528_272 = new Brick(2528, 272, BrickType.Red);
@@ -153,7 +164,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var brick_2976_144 = new Brick(2976, 144, BrickType.Red);
         brick_2976_144.addToGameUI(gameUI);
 
-        var question_3008_144 = new Question(3008, 144, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_3008_144 = new Question(3008, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_3008_144.addToGameUI(gameUI);
 
         var question_3008_272 = new Question(3008, 272, QuestionItemType.MultiGold, QuestionIconType.RedBrick);
@@ -165,16 +176,16 @@ World_1_1 = ClassFactory.createClass(World, {
         var question_3232_272 = new Question(3232, 272, QuestionItemType.Star, QuestionIconType.RedBrick);
         question_3232_272.addToGameUI(gameUI);
 
-        var question_3392_272 = new Question(3392, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_3392_272 = new Question(3392, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_3392_272.addToGameUI(gameUI);
 
-        var question_3488_272 = new Question(3488, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_3488_272 = new Question(3488, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_3488_272.addToGameUI(gameUI);
 
-        var question_3488_144 = new Question(3488, 144, QuestionItemType.BigMushroom, QuestionIconType.Question);
+        var question_3488_144 = new Question(3488, 144, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
         question_3488_144.addToGameUI(gameUI);
 
-        var question_3584_272 = new Question(3584, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_3584_272 = new Question(3584, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_3584_272.addToGameUI(gameUI);
 
         var brick_3776_272 = new Brick(3776, 272, BrickType.Red);
@@ -192,10 +203,10 @@ World_1_1 = ClassFactory.createClass(World, {
         var brick_4096_144 = new Brick(4096, 144, BrickType.Red);
         brick_4096_144.addToGameUI(gameUI);
 
-        var question_4128_144 = new Question(4128, 144, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_4128_144 = new Question(4128, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_4128_144.addToGameUI(gameUI);
 
-        var question_4160_144 = new Question(4160, 144, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_4160_144 = new Question(4160, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_4160_144.addToGameUI(gameUI);
 
         var brick_4192_144 = new Brick(4192, 144, BrickType.Red);
@@ -213,7 +224,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var brick_5408_272 = new Brick(5408, 272, BrickType.Red);
         brick_5408_272.addToGameUI(gameUI);
 
-        var question_5440_272 = new Question(5440, 272, QuestionItemType.Gold, QuestionIconType.Question);
+        var question_5440_272 = new Question(5440, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
         question_5440_272.addToGameUI(gameUI);
 
         var brick_5472_272 = new Brick(5472, 272, BrickType.Red);
@@ -245,8 +256,8 @@ World_1_1 = ClassFactory.createClass(World, {
         var tube_1824_271 = new Block(1824, 271, 64, 128);
         tube_1824_271.addToGameUI(gameUI);
         tube_1824_271.attachCollidesUp(function (gameObject) {
-            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                gameUI.goToScene1();
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN) && ((gameObject.x > this.x) && (gameObject.x + gameObject.width < this.x + this.width))) {
+                gameUI.changeToScene2();
             }
         });
 
@@ -361,7 +372,7 @@ World_1_1 = ClassFactory.createClass(World, {
         tube_7200_338.addToGameUI(gameUI);
         tube_7200_338.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
-                gameUI.goToScene2();
+                gameUI.changeToScene3();
             }
         });
 
@@ -377,6 +388,16 @@ World_1_1 = ClassFactory.createClass(World, {
                 gold_xy.addToGameUI(gameUI);
             }
         }
+
+        var flag = new Block(6348, 62, 8, 308);
+        flag.addToGameUI(gameUI);
+        flag.attachCollidesLeft(function (gameObject) {
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
+                gameUI.changeToScene4();
+            }
+        });
+
+        this.changeToScene1();
     },
     restart: function () {
         var x = this.mario.x;
@@ -398,18 +419,42 @@ World_1_1 = ClassFactory.createClass(World, {
                 }
                 break;
             case World_1_1_State.Scene1:
-                this.setPosition(-6784, 0);
-                this.mario.setPosition(6834, 0);
-                this.mario.collidable = true;
+                this.mario.setPosition(50, 400 - this.mario.height);
+                this.setPosition(0, 0);
                 this.state = World_1_1_State.Normal;
-
                 break;
             case World_1_1_State.Scene2:
+                this.setPosition(-6784, 0);
+                this.mario.setPosition(6834, 0);
+                this.state = World_1_1_State.Normal;
+                break;
+            case World_1_1_State.Scene3:
                 this.setPosition(-5120, 0);
                 this.mario.setPosition(5232, 304);
-                this.mario.collidable = true;
                 this.state = World_1_1_State.Normal;
-
+                break;
+            case World_1_1_State.Scene4:
+                if (this.mario.freefall()) {
+                    return;
+                } else {
+                    if (this.mario.spriteType != MarioSprite.Move) {
+                        this.mario.setSprite(MarioSprite.Move);
+                        this.mario.moving = true;
+                        this.mario.movingToLeft = true;
+                        this.mario.setX(this.mario.x + 32);
+                        this.mario.sprite.setFrameCounter(2);
+                    }
+                }
+                if (this.mario.x < 6528) {
+                    this.mario.moveDown(7);
+                    this.falling = false;
+                    this.mario.moveRight(2);
+                    this.mario.sprite.moveToNextFrame();
+                } else {
+                    var world_1_2 = new World_1_2();
+                    this.gameUI.setWorld(world_1_2);
+                    this.state = World_1_1_State.None;
+                }
                 break;
         }
     }

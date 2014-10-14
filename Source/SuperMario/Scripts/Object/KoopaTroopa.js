@@ -20,7 +20,8 @@ KoopaTroopaSpriteType = {
 
 KoopaTroopaIconType = {
     Green: 1,
-    Red: 2
+    Red: 2,
+    Blue: 3
 };
 
 KoopaTroopa = ClassFactory.createClass(Enemy, {
@@ -253,6 +254,22 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     break;
                 case KoopaTroopaSpriteType.Dead:
                     this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }]);
+                    break;
+            }
+        }
+        else if (this.iconType == KoopaTroopaIconType.Blue) {
+            switch (spriteType) {
+                case KoopaTroopaSpriteType.MoveLeft:
+                    this.sprite.setFrameSequence([{ x: 32 * 6, y: 80 }, { x: 32 * 7, y: 80 }]);
+                    break;
+                case KoopaTroopaSpriteType.MoveRight:
+                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 80 }, { x: 32 * 93, y: 80 }]);
+                    break;
+                case KoopaTroopaSpriteType.DownSide:
+                    this.sprite.setFrameSequence([{ x: 32 * 10, y: 96 }]);
+                    break;
+                case KoopaTroopaSpriteType.Dead:
+                    this.sprite.setFrameSequence([{ x: 32 * 10, y: 384 }]);
                     break;
             }
         }

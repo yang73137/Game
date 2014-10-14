@@ -50,23 +50,26 @@
     <script type="text/javascript">
 
         var app = document.getElementById("app");
-        
-        var world_1_1 = new World_1_1();
-        world_1_1.build();
 
         var gameUI = new GameUI();
         gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
         gameUI.show();
-
-        gameUI.append(world_1_1);
         gameUI.appendTo(app);
 
-        //world_1_1.setX(-2150);
-        //world_1_1.mario.setPosition(100, 300);
-        //world_1_1.mario.setType(MarioType.Flower);
+        gameUI.setMario(new MarioBors(0, 0));
+
+        var world = new World_1_1();
+        world.addToGameUI(gameUI);
+
+        /*
+        setTimeout(function () {
+            world.mario.setPosition(6000, 0);
+            world.setPosition(-6000, 0);
+        }, 100);
+        */
 
         setInterval(function () {
-            world_1_1.update();
+            gameUI.update();
         }, 16);
 
     </script>

@@ -11,12 +11,12 @@ FireBall = ClassFactory.createClass(GameObject, {
         
         this.sprite = new Sprite();
         this.sprite.setBackgroundImage("../Images/Items.png");
-        this.sprite.setFrameSequence([{ x: 32 * 6, y: 32 * 9 }, { x: 32 * 6 + 16, y: 32 * 9 }, { x: 32 * 6, y: 32 * 9 + 16 }, { x: 32 * 6 + 16, y: 32 * 9 + 16 }]);
         this.sprite.setRepeat(0);
         this.sprite.show();
         this.sprite.start();
-        
+        this.sprite.setZ(5);
         this.setSize(16, 16);
+        this.sprite.hide();
 
         this.movingToRight = true;
         this.movingToDown = true;
@@ -80,6 +80,7 @@ FireBall = ClassFactory.createClass(GameObject, {
                 break;
             }
         }
+
         this.sprite.moveToNextFrame();
     },
     onBomb: function () {
