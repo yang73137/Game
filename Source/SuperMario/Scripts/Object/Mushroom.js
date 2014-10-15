@@ -23,7 +23,7 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.originalY = y;
 
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
         if (type == 1) {

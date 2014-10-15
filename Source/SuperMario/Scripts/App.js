@@ -27,7 +27,7 @@ App = {
         alert("加载图片 " + src + " 出错");
     },
     run: function () {
-        ImageLoader.load(this, ["../Images/Enemies.png", "../Images/Items.png", "../Images/MarioBros4.png", "../Images/TileSet.png", "../Images/World_1_1.png", "../Images/World_1_2.png"]);
+        ImageLoader.load(this, ["./Images/Enemies.png", "./Images/Items.png", "./Images/MarioBros.png", "./Images/TileSet.png", "./Images/World_1_1.png", "./Images/World_1_2.png"]);
     },
     onTimer: function () {
         setInterval(function () {

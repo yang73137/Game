@@ -40,7 +40,7 @@ Question = ClassFactory.createClass(GameObject, {
         this.state = QuestionState.Normal;
 
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/TileSet.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_TILESET);
         this.sprite.setZ(2);
         this.sprite.frameCounter.setCount(12);
         this.sprite.setRepeat(0);

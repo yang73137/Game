@@ -16,7 +16,7 @@ World_1_2 = ClassFactory.createClass(World, {
 
         this.setPosition(0, 0);
         this.setSize(8414, 448);
-        this.setBackgroundImage("../Images/World_1_2.png");
+        this.setBackgroundImage(Const.IMAGE_WORLD_1_2);
         this.setBackgroundPosition(0, 0);
         this.show();
 

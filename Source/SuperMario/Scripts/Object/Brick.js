@@ -18,9 +18,9 @@ Brick = ClassFactory.createClass(GameObject, {
 
         this.stoppable = true;
         this.state = BrickState.Normal;
-        
+
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/TileSet.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_TILESET);
         this.sprite.setBackgroundPosition(32, 0);
         this.sprite.show();
         
@@ -33,22 +33,22 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment1 = new Sprite();
         this.fragment1.setSize(16, 16);
         this.fragment1.setPosition(this.x, this.y, 200);
-        this.fragment1.setBackgroundImage("../Images/TileSet.png");
+        this.fragment1.setBackgroundImage(Const.IMAGE_TILESET);
         
         this.fragment2 = new Sprite();
         this.fragment2.setSize(16, 16);
         this.fragment2.setPosition(this.x + 16, this.y, 200);
-        this.fragment2.setBackgroundImage("../Images/TileSet.png");
+        this.fragment2.setBackgroundImage(Const.IMAGE_TILESET);
         
         this.fragment3 = new Sprite();
         this.fragment3.setSize(16, 16);
         this.fragment3.setPosition(this.x, this.y + 16, 200);
-        this.fragment3.setBackgroundImage("../Images/TileSet.png");
+        this.fragment3.setBackgroundImage(Const.IMAGE_TILESET);
         
         this.fragment4 = new Sprite();
         this.fragment4.setSize(16, 16);
         this.fragment4.setPosition(this.x + 16, this.y + 16, 200);
-        this.fragment4.setBackgroundImage("../Images/TileSet.png");
+        this.fragment4.setBackgroundImage(Const.IMAGE_TILESET);
 
         this.setType(type);
 

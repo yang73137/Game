@@ -10,7 +10,7 @@ FireBall = ClassFactory.createClass(GameObject, {
         GameObject.init.call(this);
         
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         this.sprite.setRepeat(0);
         this.sprite.show();
         this.sprite.start();

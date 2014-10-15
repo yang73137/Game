@@ -3,7 +3,7 @@
         GameObject.init.call(this);
 
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         this.sprite.setFrameSequence([{ x: 0, y: 32 * 7 }, { x: 32, y: 32 * 7 }, { x: 32 * 2, y: 32 * 7 }, { x: 32 * 3, y: 32 * 7 }]);
         this.sprite.setRepeat(0);
         this.sprite.show();
@@ -59,7 +59,7 @@ Gold2 = ClassFactory.createClass(GameObject, {
         GameObject.init.call(this);
 
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/Items.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         this.sprite.setFrameSequence([{ x: 0, y: 32 * 6 }, { x: 0, y: 32 * 6 }, { x: 32, y: 32 * 6 }, { x: 32 * 2, y: 32 * 6 }, { x: 32 * 3, y: 32 * 6 }]);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(10);

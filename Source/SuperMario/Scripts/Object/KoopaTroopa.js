@@ -33,7 +33,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.deadCounter = new Counter(40, false, false);
 
         this.sprite = new Sprite();
-        this.sprite.setBackgroundImage("../Images/Enemies.png");
+        this.sprite.setBackgroundImage(Const.IMAGE_ENEMIES);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
         
