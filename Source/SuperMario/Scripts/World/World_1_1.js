@@ -53,7 +53,7 @@ World_1_1 = ClassFactory.createClass(World, {
     },
     changeToScene4: function () {
         this.scrollable = true;
-        
+        this.mario.setCollidable(false, true, false, false);
         this.state = World_1_1_State.Scene4;
     },
     build: function () {
@@ -454,6 +454,7 @@ World_1_1 = ClassFactory.createClass(World, {
                     var world_1_2 = new World_1_2();
                     this.gameUI.setWorld(world_1_2);
                     this.state = World_1_1_State.None;
+                    this.mario.setCollidable(true, true, true, true);
                 }
                 break;
         }
