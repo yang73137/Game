@@ -95,7 +95,7 @@ Question = ClassFactory.createClass(GameObject, {
         if (this.state == QuestionState.Normal) {
             this.collideCount--;
             if (this.collideCount == 0) {
-                this.sprite.setBackgroundImage("../Images/TileSet.png");
+                this.sprite.setBackgroundImage(Const.IMAGE_TILESET);
                 if (this.iconType == GameObjectIconType.Ground) {
                     this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
                 }
