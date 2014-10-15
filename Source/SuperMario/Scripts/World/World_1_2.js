@@ -611,7 +611,6 @@ World_1_2 = ClassFactory.createClass(World, {
         this.state = World_1_2_State.Scene5;
     },
     changeToScene6: function () {
-        this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
         this.state = World_1_2_State.Scene6;
     }
