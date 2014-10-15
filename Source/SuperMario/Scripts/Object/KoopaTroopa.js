@@ -234,7 +234,8 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
             return;
         }
 
-        if (this.iconType == GameObjectIconType.Ground.Green) {
+        if (this.iconType == GameObjectIconType.Ground) {
+            console.log(1);
             switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 16 }, { x: 32 * 7, y: 16 }]);
