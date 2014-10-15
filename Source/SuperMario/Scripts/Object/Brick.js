@@ -33,25 +33,24 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment1 = new Sprite();
         this.fragment1.setSize(16, 16);
         this.fragment1.setPosition(this.x, this.y, 200);
-        this.fragment1.setBackgroundImage(Const.IMAGE_TILESET);
+        this.fragment1.setBackgroundImage(Const.IMAGE_ITEMS);
         
         this.fragment2 = new Sprite();
         this.fragment2.setSize(16, 16);
         this.fragment2.setPosition(this.x + 16, this.y, 200);
-        this.fragment2.setBackgroundImage(Const.IMAGE_TILESET);
+        this.fragment2.setBackgroundImage(Const.IMAGE_ITEMS);
         
         this.fragment3 = new Sprite();
         this.fragment3.setSize(16, 16);
         this.fragment3.setPosition(this.x, this.y + 16, 200);
-        this.fragment3.setBackgroundImage(Const.IMAGE_TILESET);
+        this.fragment3.setBackgroundImage(Const.IMAGE_ITEMS);
         
         this.fragment4 = new Sprite();
         this.fragment4.setSize(16, 16);
         this.fragment4.setPosition(this.x + 16, this.y + 16, 200);
-        this.fragment4.setBackgroundImage(Const.IMAGE_TILESET);
+        this.fragment4.setBackgroundImage(Const.IMAGE_ITEMS);
 
         this.setType(type);
-
         this.stoppedable = false;
     },
     onCollidesDown: function (gameObject) {
@@ -110,8 +109,8 @@ Brick = ClassFactory.createClass(GameObject, {
         this.setCollidable(false, false, false, false);
         if (this.breakCounter.countdown()) {
             if (this.breakCounter.currentCount >= 58) {
-                this.fragment1.moveBy(-5, -8);
-                this.fragment2.moveBy(5, -8);
+                this.fragment1.moveBy(-6, -8);
+                this.fragment2.moveBy(6, -8);
                 this.fragment3.moveBy(-6, 2);
                 this.fragment4.moveBy(6, 2);
             }
@@ -122,10 +121,10 @@ Brick = ClassFactory.createClass(GameObject, {
                 this.fragment4.moveBy(0, 9);
             }
             else {
-                this.fragment1.moveBy(0, 8);
-                this.fragment2.moveBy(0, 8);
-                this.fragment3.moveBy(0, 8);
-                this.fragment4.moveBy(0, 8);
+                this.fragment1.moveBy(-2, 8);
+                this.fragment2.moveBy(2, 8);
+                this.fragment3.moveBy(-2, 8);
+                this.fragment4.moveBy(2, 8);
             }
         } else {
             this.state = BrickState.None;
@@ -135,17 +134,17 @@ Brick = ClassFactory.createClass(GameObject, {
         switch (type) {
         case 1:
             this.sprite.setBackgroundPosition(32, 0);
-            this.fragment1.setBackgroundPosition(32, 0);
-            this.fragment2.setBackgroundPosition(48, 0);
-            this.fragment3.setBackgroundPosition(32, 16);
-            this.fragment4.setBackgroundPosition(48, 16);
+            this.fragment1.setBackgroundPosition(128, 0);
+            this.fragment2.setBackgroundPosition(144, 0);
+            this.fragment3.setBackgroundPosition(128, 16);
+            this.fragment4.setBackgroundPosition(144, 16);
             break;
         case 2:
             this.sprite.setBackgroundPosition(64, 64);
-            this.fragment1.setBackgroundPosition(64, 64);
-            this.fragment2.setBackgroundPosition(80, 64);
-            this.fragment3.setBackgroundPosition(64, 80);
-            this.fragment4.setBackgroundPosition(80, 80);
+            this.fragment1.setBackgroundPosition(416, 0);
+            this.fragment2.setBackgroundPosition(416, 0);
+            this.fragment3.setBackgroundPosition(432, 16);
+            this.fragment4.setBackgroundPosition(432, 16);
             break;
         }
     }

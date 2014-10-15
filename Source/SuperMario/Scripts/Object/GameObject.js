@@ -1,4 +1,12 @@
-﻿GameObject = ClassFactory.createClass({
+﻿
+iconType = {
+    None: 0,
+    Ground: 1,
+    UnserGround: 2,
+    Castle: 3
+};
+
+GameObject = ClassFactory.createClass({
     init: function () {
         this.x = 0;
         this.y = 0;
@@ -24,6 +32,8 @@
 
         // 等待屏幕滚动
         this.waitingForScreen = true;
+
+        this.iconType = iconType.None;
     },
     addToGameUI: function (gameUI) {
         this.gameUI = gameUI;
@@ -348,5 +358,8 @@
         }
 
         return this.waitingForScreen;
+    },
+    setIconType: function(iconType) {
+        this.iconType = iconType;
     }
 });
