@@ -15,11 +15,17 @@
              position: relative;
              background: #000000;
              overflow: hidden;
+             color: red;
+             text-align: center;
+             vertical-align: middle;
+             line-height: 448px;
+             font-size: 26px;
+             font-weight: bold;
          }
     </style>
 </head>
     <body style="background: #ffffff;">
-        <div id="app"></div>
+        <div id="app">asda</div>
     
         <script src="../Scripts/Basic/ClassFactory.js"></script>
         <script src="../Scripts/Basic/Const.js"></script>
@@ -28,6 +34,7 @@
         <script src="../Scripts/Basic/Layer.js"></script>
         <script src="../Scripts/Basic/Sprite.js"></script>
         <script src="../Scripts/Basic/Label.js"></script>
+        <script src="../Scripts/Basic/ImgLoader.js"></script>
         <script src="../Scripts/UI/UIBase.js"></script>
         <script src="../Scripts/UI/GameUI.js"></script>
         <script src="../Scripts/World/World.js"></script>
@@ -46,29 +53,11 @@
         <script src="../Scripts/Object/Flower.js"></script>
         <script src="../Scripts/Object/FireBall.js"></script>
         <script src="../Scripts/Object/Star.js"></script>
+        <script src="../Scripts/App.js"></script>
         <script type="text/javascript">
 
-            var app = document.getElementById("app");
+            //App.run();
 
-            var gameUI = new GameUI();
-            gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
-            gameUI.show();
-            gameUI.appendTo(app);
-
-            gameUI.setMario(new MarioBors(0, 0));
-
-            var world = new World_1_1();
-            world.addToGameUI(gameUI);
-
-            //setTimeout(function () {
-            //    world.mario.setPosition(6000, 0);
-            //    world.setPosition(-6000, 0);
-            //}, 100);
-            
-            setInterval(function () {
-                gameUI.update();
-            }, 16);
-        
         </script>
     </body>
 </html>
