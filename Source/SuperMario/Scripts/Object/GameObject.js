@@ -1,8 +1,8 @@
 ﻿
-iconType = {
+GameObjectIconType = {
     None: 0,
     Ground: 1,
-    UnserGround: 2,
+    Underground: 2,
     Castle: 3
 };
 
@@ -33,7 +33,7 @@ GameObject = ClassFactory.createClass({
         // 等待屏幕滚动
         this.waitingForScreen = true;
 
-        this.iconType = iconType.None;
+        this.iconType = GameObjectIconType.None;
     },
     addToGameUI: function (gameUI) {
         this.gameUI = gameUI;

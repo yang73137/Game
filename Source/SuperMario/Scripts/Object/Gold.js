@@ -55,12 +55,11 @@ GoldState = {
 
 
 Gold2 = ClassFactory.createClass(GameObject, {
-    init: function (x, y, goldType) {
+    init: function (x, y, iconType) {
         GameObject.init.call(this);
 
         this.sprite = new Sprite();
         this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        this.sprite.setFrameSequence([{ x: 0, y: 32 * 6 }, { x: 0, y: 32 * 6 }, { x: 32, y: 32 * 6 }, { x: 32 * 2, y: 32 * 6 }, { x: 32 * 3, y: 32 * 6 }]);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(10);
         this.sprite.show();
@@ -71,6 +70,7 @@ Gold2 = ClassFactory.createClass(GameObject, {
 
         this.state = GoldState.Live;
         this.setCollidable(true, true, true, true);
+        this.setIconType(iconType);
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
@@ -99,6 +99,17 @@ Gold2 = ClassFactory.createClass(GameObject, {
             var innerGold = new Gold(this.x, this.y);
             innerGold.addToGameUI(this.gameUI);
             innerGold.animate();
+        }
+    },
+    setIconType: function (iconType) {
+        Enemy.prototype.setIconType.call(this, iconType);
+        switch (iconType) {
+            case GameObjectIconType.Ground:
+                this.sprite.setFrameSequence([{ x: 0, y: 32 * 6 }, { x: 0, y: 32 * 6 }, { x: 32, y: 32 * 6 }, { x: 32 * 2, y: 32 * 6 }, { x: 32 * 3, y: 32 * 6 }]);
+                break;
+            case GameObjectIconType.Underground:
+                this.sprite.setFrameSequence([{ x: 32 * 9, y: 32 * 6 }, { x: 32 * 9, y: 32 * 6 }, { x: 32 * 10, y: 32 * 6 }, { x: 32 * 11, y: 32 * 6 }, { x: 32 * 12, y: 32 * 6 }]);
+                break;
         }
     }
 });

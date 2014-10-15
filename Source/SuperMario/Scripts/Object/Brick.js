@@ -6,14 +6,9 @@ BrickState = {
     Break: 3
 };
 
-BrickType = {
-    Red: 1,
-    Blue: 2
-};
-
 
 Brick = ClassFactory.createClass(GameObject, {
-    init: function (x, y, type) {
+    init: function (x, y, iconType) {
         GameObject.init.call(this);
 
         this.stoppable = true;
@@ -50,7 +45,7 @@ Brick = ClassFactory.createClass(GameObject, {
         this.fragment4.setPosition(this.x + 16, this.y + 16, 200);
         this.fragment4.setBackgroundImage(Const.IMAGE_ITEMS);
 
-        this.setType(type);
+        this.setIconType(iconType);
         this.stoppedable = false;
     },
     onCollidesDown: function (gameObject) {
@@ -130,16 +125,17 @@ Brick = ClassFactory.createClass(GameObject, {
             this.state = BrickState.None;
         }
     },
-    setType: function (type) {
-        switch (type) {
-        case 1:
+    setIconType: function (iconType) {
+        GameObject.prototype.setIconType.call(this, iconType);
+        switch (iconType) {
+        case GameObjectIconType.Ground:
             this.sprite.setBackgroundPosition(32, 0);
             this.fragment1.setBackgroundPosition(128, 0);
             this.fragment2.setBackgroundPosition(144, 0);
             this.fragment3.setBackgroundPosition(128, 16);
             this.fragment4.setBackgroundPosition(144, 16);
             break;
-        case 2:
+        case GameObjectIconType.Underground:
             this.sprite.setBackgroundPosition(64, 64);
             this.fragment1.setBackgroundPosition(416, 0);
             this.fragment2.setBackgroundPosition(416, 0);

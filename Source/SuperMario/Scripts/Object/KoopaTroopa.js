@@ -18,12 +18,6 @@ KoopaTroopaSpriteType = {
     Dead: 4
 };
 
-KoopaTroopaIconType = {
-    Green: 1,
-    Red: 2,
-    Blue: 3
-};
-
 KoopaTroopa = ClassFactory.createClass(Enemy, {
     init: function (x, y, type, iconType) {
         Enemy.init.call(this);
@@ -88,14 +82,9 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
     },
     onLive2: function () {
         if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
-            if (this.state == KoopaTroopaState.Live) {
-                return;
-            }
-            if (this.state == KoopaTroopaState.Live2) {
                 this.state = KoopaTroopaState.None;
                 this.sprite.hide();
                 return;
-            }
         }
 
         this.freefall();
@@ -225,7 +214,27 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.setSpriteFrames(KoopaTroopaSpriteType.Dead);
     },
     setSpriteFrames: function (spriteType) {
-        if (this.iconType == KoopaTroopaIconType.Green) {
+
+        if (this.type == KoopaTroopaType.Red) {
+            switch (spriteType) {
+            case KoopaTroopaSpriteType.MoveLeft:
+                this.sprite.setFrameSequence([{ x: 32 * 6, y: 144 }, { x: 32 * 7, y: 144 }]);
+                break;
+            case KoopaTroopaSpriteType.MoveRight:
+                this.sprite.setFrameSequence([{ x: 32 * 94, y: 144 }, { x: 32 * 93, y: 144 }]);
+                break;
+                case KoopaTroopaSpriteType.DownSide:
+                this.sprite.setFrameSequence([{ x: 32 * 10, y: 160 }]);
+                break;
+            case KoopaTroopaSpriteType.Dead:
+                this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }]);
+                break;
+            }
+            this.sprite.moveToFrame(0);
+            return;
+        }
+
+        if (this.iconType == GameObjectIconType.Ground.Green) {
             switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 16 }, { x: 32 * 7, y: 16 }]);
@@ -241,23 +250,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     break;
             }
         }
-        else if (this.iconType == KoopaTroopaIconType.Red) {
-            switch (spriteType) {
-                case KoopaTroopaSpriteType.MoveLeft:
-                    this.sprite.setFrameSequence([{ x: 32 * 6, y: 144 }, { x: 32 * 7, y: 144 }]);
-                    break;
-                case KoopaTroopaSpriteType.MoveRight:
-                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 144 }, { x: 32 * 93, y: 144 }]);
-                    break;
-                case KoopaTroopaSpriteType.DownSide:
-                    this.sprite.setFrameSequence([{ x: 32 * 10, y: 160 }]);
-                    break;
-                case KoopaTroopaSpriteType.Dead:
-                    this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }]);
-                    break;
-            }
-        }
-        else if (this.iconType == KoopaTroopaIconType.Blue) {
+        else if (this.iconType == GameObjectIconType.Underground) {
             switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 80 }, { x: 32 * 7, y: 80 }]);

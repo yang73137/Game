@@ -5,11 +5,6 @@
     Dead2: 3
 };
 
-GoombaIconType = {
-    Red: 1,
-    Blue: 2
-};
-
 GoombaSpriteType = {
     MoveLeft: 1,
     MoveRight: 2,
@@ -155,7 +150,7 @@ Goomba = ClassFactory.createClass(Enemy, {
         }
     },
     setSpriteFrames: function (spriteType) {
-        if (this.iconType == GoombaIconType.Red) {
+        if (this.iconType == GameObjectIconType.Ground) {
             switch (spriteType) {
             case GoombaSpriteType.MoveLeft:
                 this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
@@ -171,7 +166,7 @@ Goomba = ClassFactory.createClass(Enemy, {
                 break;
             }
         }
-        else if (this.iconType == GoombaIconType.Blue) {
+        else if (this.iconType == GameObjectIconType.Underground) {
             switch (spriteType) {
                 case GoombaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);

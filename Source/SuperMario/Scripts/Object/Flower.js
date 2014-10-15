@@ -6,12 +6,11 @@ FlowerState = {
 };
 
 Flower = ClassFactory.createClass(GameObject, {
-    init: function (x, y) {
+    init: function (x, y, iconType) {
         GameObject.init.call(this);
 
         this.sprite = new Sprite();
         this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        this.sprite.setFrameSequence([{ x: 0, y: 32 * 2 }, { x: 32, y: 32 * 2 }, { x: 32 * 2, y: 32 * 2 }, { x: 32 * 3, y: 32 * 2 }]);
         this.sprite.setFrameCounter(1);
         this.sprite.setRepeat(0);
         this.sprite.hide();
@@ -27,6 +26,7 @@ Flower = ClassFactory.createClass(GameObject, {
         this.state = FlowerState.None;
 
         this.setCollidable(true, false, false, false);
+        this.setIconType(iconType);
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
@@ -70,6 +70,17 @@ Flower = ClassFactory.createClass(GameObject, {
             }
         } else {
             this.state = FlowerState.Live;
+        }
+    },
+    setIconType: function (iconType) {
+        GameObject.prototype.setIconType.call(this, iconType);
+        switch (iconType) {
+            case GameObjectIconType.Ground:
+                this.sprite.setFrameSequence([{ x: 0, y: 32 * 2 }, { x: 32, y: 32 * 2 }, { x: 32 * 2, y: 32 * 2 }, { x: 32 * 3, y: 32 * 2 }]);
+                break;
+            case GameObjectIconType.Underground:
+                this.sprite.setFrameSequence([{ x: 32 * 9, y: 32 * 2 }, { x: 32 * 10, y: 32 * 2 }, { x: 32 * 11, y: 32 * 2 }, { x: 32 * 12, y: 32 * 2 }]);
+                break;
         }
     }
 });

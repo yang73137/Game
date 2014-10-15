@@ -1,5 +1,5 @@
 ﻿Block = ClassFactory.createClass(GameObject, {
-    init: function (x, y, width, height) {
+    init: function (x, y, width, height, animate) {
         GameObject.init.call(this);
         
         this.stoppable = true;
@@ -9,10 +9,12 @@
         
         this.setPosition(x, y);
         this.setSize(width, height);
+
+        this.animate = !!animate;
     },
     addToGameUI: function (gameUI) {
         GameObject.prototype.addToGameUI.call(this, gameUI);
-        gameUI.addStaticObject(this);
+        this.animate ? gameUI.addAnimateObject(this) : gameUI.addStaticObject(this);
     },
     attachCollidesUp: function (fun) {
         this.onCollidesUp = fun;
@@ -25,5 +27,8 @@
     },
     attachCollidesRight: function (fun) {
         this.onCollidesRight = fun;
+    },
+    attachUpdate: function (update) {
+        this.update = update;
     }
 });

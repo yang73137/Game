@@ -61,173 +61,173 @@ World_1_1 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(this);
 
-        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Green, KoopaTroopaIconType.Green);
+        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Green, GameObjectIconType.Ground);
         kt.addToGameUI(gameUI);
 
-        var goomba_512_368 = new Goomba(514, 368, GoombaIconType.Red);
+        var goomba_512_368 = new Goomba(514, 368, GameObjectIconType.Ground);
         goomba_512_368.addToGameUI(gameUI);
 
-        var goomba_1400_368 = new Goomba(1400, 368, GoombaIconType.Red);
+        var goomba_1400_368 = new Goomba(1400, 368, GameObjectIconType.Ground);
         goomba_1400_368.addToGameUI(gameUI);
 
-        var goomba_1652_368 = new Goomba(1652, 368, GoombaIconType.Red);
+        var goomba_1652_368 = new Goomba(1652, 368, GameObjectIconType.Ground);
         goomba_1652_368.addToGameUI(gameUI);
 
-        var goomba_1684_368 = new Goomba(1684, 368, GoombaIconType.Red);
+        var goomba_1684_368 = new Goomba(1684, 368, GameObjectIconType.Ground);
         goomba_1684_368.addToGameUI(gameUI);
 
-        var goomba_2592_102 = new Goomba(2592, 112, GoombaIconType.Red);
+        var goomba_2592_102 = new Goomba(2592, 112, GameObjectIconType.Ground);
         goomba_2592_102.addToGameUI(gameUI);
 
-        var goomba_2624_102 = new Goomba(2624, 112, GoombaIconType.Red);
+        var goomba_2624_102 = new Goomba(2624, 112, GameObjectIconType.Ground);
         goomba_2624_102.addToGameUI(gameUI);
 
-        var goomba_3584_368 = new Goomba(3584, 368, GoombaIconType.Red);
+        var goomba_3584_368 = new Goomba(3584, 368, GameObjectIconType.Ground);
         goomba_3584_368.addToGameUI(gameUI);
 
-        var goomba_3648_368 = new Goomba(3648, 368, GoombaIconType.Red);
+        var goomba_3648_368 = new Goomba(3648, 368, GameObjectIconType.Ground);
         goomba_3648_368.addToGameUI(gameUI);
 
-        var goomba_3712_368 = new Goomba(3712, 368, GoombaIconType.Red);
+        var goomba_3712_368 = new Goomba(3712, 368, GameObjectIconType.Ground);
         goomba_3712_368.addToGameUI(gameUI);
 
-        var goomba_5440_368 = new Goomba(5440, 368, GoombaIconType.Red);
+        var goomba_5440_368 = new Goomba(5440, 368, GameObjectIconType.Ground);
         goomba_5440_368.addToGameUI(gameUI);
 
-        var goomba_5504_368 = new Goomba(5504, 368, GoombaIconType.Red);
+        var goomba_5504_368 = new Goomba(5504, 368, GameObjectIconType.Ground);
         goomba_5504_368.addToGameUI(gameUI);
 
-        var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_512_272.addToGameUI(gameUI);
 
-        var brick_640_272 = new Brick(640, 272, BrickType.Red);
+        var brick_640_272 = new Brick(640, 272, GameObjectIconType.Ground);
         brick_640_272.addToGameUI(gameUI);
 
-        var question_672_272 = new Question(672, 272, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
+        var question_672_272 = new Question(672, 272, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_672_272.addToGameUI(gameUI);
 
-        var question_704_144 = new Question(704, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_704_144 = new Question(704, 144, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_704_144.addToGameUI(gameUI);
 
-        var brick_704_272 = new Brick(704, 272, BrickType.Red);
+        var brick_704_272 = new Brick(704, 272, GameObjectIconType.Ground);
         brick_704_272.addToGameUI(gameUI);
 
-        var question_736_272 = new Question(736, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_736_272 = new Question(736, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_736_272.addToGameUI(gameUI);
 
-        var brick_768_272 = new Brick(768, 272, BrickType.Red);
+        var brick_768_272 = new Brick(768, 272, GameObjectIconType.Ground);
         brick_768_272.addToGameUI(gameUI);
 
-        var brick_2464_272 = new Brick(2464, 272, BrickType.Red);
+        var brick_2464_272 = new Brick(2464, 272, GameObjectIconType.Ground);
         brick_2464_272.addToGameUI(gameUI);
 
-        var question_2026_272 = new Question(2026, 240, QuestionItemType.LifeMushroom, QuestionIconType.RedHidden);
+        var question_2026_272 = new Question(2026, 240, QuestionItemType.LifeMushroom, QuestionDisplayType.Hidden, GameObjectIconType.Ground);
         question_2026_272.addToGameUI(gameUI);
         
 
-        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
+        var question_2496_272 = new Question(2496, 272, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_2496_272.addToGameUI(gameUI);
 
-        var brick_2528_272 = new Brick(2528, 272, BrickType.Red);
+        var brick_2528_272 = new Brick(2528, 272, GameObjectIconType.Ground);
         brick_2528_272.addToGameUI(gameUI);
 
-        var brick_2560_144 = new Brick(2560, 144, BrickType.Red);
+        var brick_2560_144 = new Brick(2560, 144, GameObjectIconType.Ground);
         brick_2560_144.addToGameUI(gameUI);
 
-        var brick_2592_144 = new Brick(2592, 144, BrickType.Red);
+        var brick_2592_144 = new Brick(2592, 144, GameObjectIconType.Ground);
         brick_2592_144.addToGameUI(gameUI);
 
-        var brick_2624_144 = new Brick(2624, 144, BrickType.Red);
+        var brick_2624_144 = new Brick(2624, 144, GameObjectIconType.Ground);
         brick_2624_144.addToGameUI(gameUI);
 
-        var brick_2656_144 = new Brick(2656, 144, BrickType.Red);
+        var brick_2656_144 = new Brick(2656, 144, GameObjectIconType.Ground);
         brick_2656_144.addToGameUI(gameUI);
 
-        var brick_2688_144 = new Brick(2688, 144, BrickType.Red);
+        var brick_2688_144 = new Brick(2688, 144, GameObjectIconType.Ground);
         brick_2688_144.addToGameUI(gameUI);
 
-        var brick_2720_144 = new Brick(2720, 144, BrickType.Red);
+        var brick_2720_144 = new Brick(2720, 144, GameObjectIconType.Ground);
         brick_2720_144.addToGameUI(gameUI);
 
-        var brick_2752_144 = new Brick(2752, 144, BrickType.Red);
+        var brick_2752_144 = new Brick(2752, 144, GameObjectIconType.Ground);
         brick_2752_144.addToGameUI(gameUI);
 
-        var brick_2784_144 = new Brick(2784, 144, BrickType.Red);
+        var brick_2784_144 = new Brick(2784, 144, GameObjectIconType.Ground);
         brick_2784_144.addToGameUI(gameUI);
 
-        var brick_2912_144 = new Brick(2912, 144, BrickType.Red);
+        var brick_2912_144 = new Brick(2912, 144, GameObjectIconType.Ground);
         brick_2912_144.addToGameUI(gameUI);
 
-        var brick_2944_144 = new Brick(2944, 144, BrickType.Red);
+        var brick_2944_144 = new Brick(2944, 144, GameObjectIconType.Ground);
         brick_2944_144.addToGameUI(gameUI);
 
-        var brick_2976_144 = new Brick(2976, 144, BrickType.Red);
+        var brick_2976_144 = new Brick(2976, 144, GameObjectIconType.Ground);
         brick_2976_144.addToGameUI(gameUI);
 
-        var question_3008_144 = new Question(3008, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_3008_144 = new Question(3008, 144, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_3008_144.addToGameUI(gameUI);
 
-        var question_3008_272 = new Question(3008, 272, QuestionItemType.MultiGold, QuestionIconType.RedBrick);
+        var question_3008_272 = new Question(3008, 272, QuestionItemType.MultiGold, QuestionDisplayType.Brick, GameObjectIconType.Ground);
         question_3008_272.addToGameUI(gameUI);
 
-        var brick_3200_272 = new Brick(3200, 272, BrickType.Red);
+        var brick_3200_272 = new Brick(3200, 272, GameObjectIconType.Ground);
         brick_3200_272.addToGameUI(gameUI);
 
-        var question_3232_272 = new Question(3232, 272, QuestionItemType.Star, QuestionIconType.RedBrick);
+        var question_3232_272 = new Question(3232, 272, QuestionItemType.Star, QuestionDisplayType.Brick, GameObjectIconType.Ground);
         question_3232_272.addToGameUI(gameUI);
 
-        var question_3392_272 = new Question(3392, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_3392_272 = new Question(3392, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_3392_272.addToGameUI(gameUI);
 
-        var question_3488_272 = new Question(3488, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_3488_272 = new Question(3488, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_3488_272.addToGameUI(gameUI);
 
-        var question_3488_144 = new Question(3488, 144, QuestionItemType.BigMushroom, QuestionIconType.RedQuestion);
+        var question_3488_144 = new Question(3488, 144, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_3488_144.addToGameUI(gameUI);
 
-        var question_3584_272 = new Question(3584, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_3584_272 = new Question(3584, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_3584_272.addToGameUI(gameUI);
 
-        var brick_3776_272 = new Brick(3776, 272, BrickType.Red);
+        var brick_3776_272 = new Brick(3776, 272, GameObjectIconType.Ground);
         brick_3776_272.addToGameUI(gameUI);
 
-        var brick_3872_144 = new Brick(3872, 144, BrickType.Red);
+        var brick_3872_144 = new Brick(3872, 144, GameObjectIconType.Ground);
         brick_3872_144.addToGameUI(gameUI);
 
-        var brick_3904_144 = new Brick(3904, 144, BrickType.Red);
+        var brick_3904_144 = new Brick(3904, 144, GameObjectIconType.Ground);
         brick_3904_144.addToGameUI(gameUI);
 
-        var brick_3936_144 = new Brick(3936, 144, BrickType.Red);
+        var brick_3936_144 = new Brick(3936, 144, GameObjectIconType.Ground);
         brick_3936_144.addToGameUI(gameUI);
 
-        var brick_4096_144 = new Brick(4096, 144, BrickType.Red);
+        var brick_4096_144 = new Brick(4096, 144, GameObjectIconType.Ground);
         brick_4096_144.addToGameUI(gameUI);
 
-        var question_4128_144 = new Question(4128, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_4128_144 = new Question(4128, 144, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_4128_144.addToGameUI(gameUI);
 
-        var question_4160_144 = new Question(4160, 144, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_4160_144 = new Question(4160, 144, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_4160_144.addToGameUI(gameUI);
 
-        var brick_4192_144 = new Brick(4192, 144, BrickType.Red);
+        var brick_4192_144 = new Brick(4192, 144, GameObjectIconType.Ground);
         brick_4192_144.addToGameUI(gameUI);
 
-        var brick_4128_272 = new Brick(4128, 272, BrickType.Red);
+        var brick_4128_272 = new Brick(4128, 272, GameObjectIconType.Ground);
         brick_4128_272.addToGameUI(gameUI);
 
-        var brick_4160_272 = new Brick(4160, 272, BrickType.Red);
+        var brick_4160_272 = new Brick(4160, 272, GameObjectIconType.Ground);
         brick_4160_272.addToGameUI(gameUI);
 
-        var brick_5376_272 = new Brick(5376, 272, BrickType.Red);
+        var brick_5376_272 = new Brick(5376, 272, GameObjectIconType.Ground);
         brick_5376_272.addToGameUI(gameUI);
 
-        var brick_5408_272 = new Brick(5408, 272, BrickType.Red);
+        var brick_5408_272 = new Brick(5408, 272, GameObjectIconType.Ground);
         brick_5408_272.addToGameUI(gameUI);
 
-        var question_5440_272 = new Question(5440, 272, QuestionItemType.Gold, QuestionIconType.RedQuestion);
+        var question_5440_272 = new Question(5440, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_5440_272.addToGameUI(gameUI);
 
-        var brick_5472_272 = new Brick(5472, 272, BrickType.Red);
+        var brick_5472_272 = new Brick(5472, 272, GameObjectIconType.Ground);
         brick_5472_272.addToGameUI(gameUI);
 
 
@@ -257,7 +257,7 @@ World_1_1 = ClassFactory.createClass(World, {
         tube_1824_271.addToGameUI(gameUI);
         tube_1824_271.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN) && ((gameObject.x > this.x) && (gameObject.x + gameObject.width < this.x + this.width))) {
-                gameUI.changeToScene2();
+                this.gameUI.changeToScene2();
             }
         });
 
@@ -372,7 +372,7 @@ World_1_1 = ClassFactory.createClass(World, {
         tube_7200_338.addToGameUI(gameUI);
         tube_7200_338.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
-                gameUI.changeToScene3();
+                this.gameUI.changeToScene3();
             }
         });
 
@@ -384,7 +384,7 @@ World_1_1 = ClassFactory.createClass(World, {
                 if (goldIndexY == 0 && (goldIndexX == 0 || goldIndexX == 6)) {
                     continue;
                 }
-                var gold_xy = new Gold2(6912 + 32 * goldIndexX, 144 + 64 * goldIndexY);
+                var gold_xy = new Gold2(6912 + 32 * goldIndexX, 144 + 64 * goldIndexY, GameObjectIconType.Underground);
                 gold_xy.addToGameUI(gameUI);
             }
         }
@@ -393,7 +393,7 @@ World_1_1 = ClassFactory.createClass(World, {
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
-                gameUI.changeToScene4();
+                this.gameUI.changeToScene4();
             }
         });
 

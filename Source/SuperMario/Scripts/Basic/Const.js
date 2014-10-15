@@ -25,4 +25,4 @@ for (var i = 1; i <= 8; i++) {
     for (var j = 1; j <= 4; j++) {
         Const["IMAGE_WORLD_" + i + "_" + j] = (window.release ? "" : ".") + "./Images/World_" + +i + "_" + j + ".png";
     }
-}console.log(Const.IMAGE_MARIOBROS);
+}

@@ -10,7 +10,7 @@ MushroomState = {
 };
 
 Mushroom = ClassFactory.createClass(GameObject, {
-    init: function (x, y, type) {
+    init: function (x, y, type, iconType) {
 
         GameObject.init.call(this);
 
@@ -26,17 +26,14 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
-        if (type == 1) {
-            this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
-        } else {
-            this.sprite.setFrameSequence([{ x: 32, y: 0 }, { x: 32, y: 32 }]);
-        }
+        
         this.sprite.hide();
         
         this.setPosition(x, y);
         this.setSize(32, 32);
 
         this.setCollidable(false, false, false, false);
+        this.setIconType(iconType);
     },
     update: function () {
 
@@ -107,5 +104,25 @@ Mushroom = ClassFactory.createClass(GameObject, {
         this.sprite.hide();
         this.setCollidable(false, false, false, false);
         this.state = MushroomState.None;
+    },
+    setIconType: function (iconType) {
+        GameObject.prototype.setIconType.call(this, iconType);
+        switch (iconType) {
+            case GameObjectIconType.Ground:
+                if (this.type == MushroomType.Big) {
+                    this.sprite.setFrameSequence([{ x: 0, y: 0 }, { x: 0, y: 32 }]);
+                } else if (this.type == MushroomType.Bonus) {
+                    this.sprite.setFrameSequence([{ x: 32, y: 0 }, { x: 32, y: 32 }]);
+                }
+                break;
+            case GameObjectIconType.Underground:
+                if (this.type == MushroomType.Big) {
+                    this.sprite.setFrameSequence([{ x: 32 * 9, y: 0 }, { x: 32 * 9, y: 32 }]);
+                } else if (this.type == MushroomType.Bonus) {
+                    this.sprite.setFrameSequence([{ x: 32 * 10, y: 0 }, { x: 32 * 10, y: 32 }]);
+                }
+                break;
+        }
+        
     }
 });
