@@ -400,15 +400,22 @@ World_1_1 = ClassFactory.createClass(World, {
         this.changeToScene1();
     },
     restart: function () {
-        var x = this.mario.x;
-        this.setX(0);
+        
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];
         this.build();
-        if (x >= 2752) {
+
+        this.mario.reborn();
+
+        this.state = World_1_1_State.Normal;
+
+        if (Math.abs(this.x) >= 2502) {
             this.setX(-2602);
-            this.mario.setX(2634);
+            this.mario.setPosition(2634, 400 - this.mario.height);
+        } else {
+            this.setX(0);
+            this.mario.setPosition(50, 400 - this.mario.height);
         }
     },
     update: function() {

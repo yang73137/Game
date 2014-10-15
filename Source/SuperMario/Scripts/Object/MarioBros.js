@@ -83,6 +83,46 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.invincible = false;
         this.invincibleCounter = new Counter(600, false, true);
     },
+    reborn: function() {
+        this.jumpPressedTime = 0;
+        this.jumping = false;
+        this.jumpingUp = false;
+
+        this.falling = true;
+        this.moving = false;
+        this.movingToLeft = false;
+        this.movingToRight = false;
+        this.staying = false;
+        this.stayToRight = false;
+
+        this.maxJumpHeight = 10;
+        this.currentJumpHeight = 0;
+
+        this.speed = 2;
+        this.speedUpLevel = 0;
+        this.speedUpPressedTime = 0;
+
+        this.faceToRight = true;
+        this.squating = false;
+
+        this.spriteType = MarioSprite.Stand;
+
+        this.type = MarioType.Small;
+        this.setType(this.type);
+        this.setSprite(MarioSprite.Stand);
+
+        this.initChange = false;
+
+        this.state = MarioState.Live;
+
+        this.fireable = false;
+
+        this.hurtable = true;
+
+        this.invincible = false;
+
+        this.setCollidable(true, true, true, true);
+    },
     update: function () {
         switch (this.state) {
             case MarioState.Live:
@@ -272,7 +312,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
             }
         }
-        if (this.y - this.height * 2 > Const.SCREEN_HEIGHT) {
+        if (this.y - 384 > Const.SCREEN_HEIGHT) {
             this.dead();
         }
     },
