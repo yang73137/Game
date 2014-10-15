@@ -5,7 +5,9 @@ World_1_2_State = {
     Scene1: 2,
     Scene2: 3,
     Scene3: 4,
-    Scene4: 5
+    Scene4: 5,
+    Scene5: 6,
+    Scene6: 7
 };
 
 World_1_2 = ClassFactory.createClass(World, {
@@ -22,6 +24,9 @@ World_1_2 = ClassFactory.createClass(World, {
     },
     scroll: function () {
         if (this.scrollable) {
+            if (Math.abs(this.x) >= 6156 &&  Math.abs(this.x) < 6156 + 512) {
+                return;
+            }
             if (this.mario.x + this.x > 220) {
                 this.setX(this.x - this.mario.speed);
             }
@@ -223,6 +228,11 @@ World_1_2 = ClassFactory.createClass(World, {
         
 
         var tube_5836_240 = new Block(5836, 240, 68, 64);
+        tube_5836_240.attachCollidesLeft(function(gameObject) {
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
+                this.changeToScene5();
+            }
+        });
         tube_5836_240.addToGameUI(gameUI);
         
         var tube_5904_48 = new Block(5904, 48, 60, 256);
@@ -233,12 +243,35 @@ World_1_2 = ClassFactory.createClass(World, {
 
         var tube_6220_304 = new Block(6220, 304, 64, 96);
         tube_6220_304.addToGameUI(gameUI);
+        tube_6220_304.tip = false;
+        tube_6220_304.attachCollidesUp(function (gameObject) {
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
+                if (!tube_6220_304.tip) {
+                    tube_6220_304.tip = true;
+                    alert("想跳关，请充值1元到作者支付宝账户");
+                }
+            }
+        });
         
         var tube_6348_304 = new Block(6348, 304, 64, 96);
         tube_6348_304.addToGameUI(gameUI);
+        tube_6220_304.tip = false;
+        tube_6348_304.attachCollidesUp(function (gameObject) {
+            if (!tube_6348_304.tip) {
+                tube_6348_304.tip = true;
+                alert("想跳关，请充值1元到作者支付宝账户");
+            }
+        });
         
         var tube_6476_304 = new Block(6476, 304, 64, 96);
         tube_6476_304.addToGameUI(gameUI);
+        tube_6220_304.tip = false;
+        tube_6476_304.attachCollidesUp(function (gameObject) {
+            if (!tube_6476_304.tip) {
+                tube_6476_304.tip = true;
+                alert("想跳关，请充值1元到作者支付宝账户");
+            }
+        });
         
         var block_6604_48 = new Block(6604, 48, 64, 352);
         block_6604_48.addToGameUI(gameUI);
@@ -388,6 +421,42 @@ World_1_2 = ClassFactory.createClass(World, {
             }
         });
 
+        var block_5468_336 = new Block(4988, 336, 128, 32);
+        block_5468_336.sprite.setBackground("red");
+        block_5468_336.addToGameUI(gameUI);
+
+        var block_5468_336 = new Block(5468, 336, 128, 32);
+        block_5468_336.sprite.setBackground("red");
+        block_5468_336.addToGameUI(gameUI);
+
+        var block_5452_208 = new Block(5468, 160, 128, 32);
+        block_5452_208.sprite.setBackground("red");
+        block_5452_208.addToGameUI(gameUI);
+
+
+        // scene5
+        var floor_7199_400 = new Block(7199, 400, 1314, 48);
+        floor_7199_400.addToGameUI(gameUI);
+
+        var tube_72964_336 = new Block(7294, 336, 64, 64);
+        tube_72964_336.addToGameUI(gameUI);
+
+        for (var i = 0; i < 9; i++) {
+            var block = new Block(7358 + 32 * i, 368 - 32 * Math.min(i, 7), 32, 32 + 32 * Math.min(i, 7));
+            block.addToGameUI(gameUI);
+        }
+
+        var block_7902_368 = new Block(7902, 368, 32, 32);
+        block_7902_368.addToGameUI(gameUI);
+
+        var flag = new Block(7902 + 12, 62, 8, 308);
+        flag.addToGameUI(gameUI);
+        flag.attachCollidesLeft(function (gameObject) {
+            if (gameObject instanceof MarioBors) {
+                gameUI.changeToScene6();
+            }
+        });
+
         this.changeToScene1();
     },
     restart: function () {
@@ -437,6 +506,34 @@ World_1_2 = ClassFactory.createClass(World, {
                 this.setPosition(-4100, 0);
                 this.state = World_1_2_State.Normal;
                 break;
+            case World_1_2_State.Scene5:
+                this.mario.setPosition(7310, 336 - this.mario.height);
+                this.setPosition(-7199, 0);
+                this.state = World_1_2_State.Normal;
+                break;
+            case World_1_2_State.Scene6:
+                console.log(1);
+                if (this.mario.freefall()) {
+                    return;
+                } else {
+                    if (this.mario.spriteType != MarioSprite.Move) {
+                        this.mario.setSprite(MarioSprite.Move);
+                        this.mario.moving = true;
+                        this.mario.movingToLeft = true;
+                        this.mario.setX(this.mario.x + 32);
+                        this.mario.sprite.setFrameCounter(2);
+                    }
+                }
+                if (this.mario.x < 8094) {
+                    this.mario.moveDown(7);
+                    this.falling = false;
+                    this.mario.moveRight(2);
+                    this.mario.sprite.moveToNextFrame();
+                } else {
+                    alert("没了");
+                    this.state = World_1_2_State.None;
+                }
+                break;
         }
     },
     changeToScene1: function () {
@@ -460,5 +557,14 @@ World_1_2 = ClassFactory.createClass(World, {
     changeToScene4: function () {
         this.scrollable = true;
         this.state = World_1_2_State.Scene4;
+    },
+    changeToScene5: function () {
+        this.scrollable = true;
+        this.state = World_1_2_State.Scene5;
+    },
+    changeToScene6: function () {
+        this.scrollable = false;
+        this.mario.setCollidable(false, true, false, false);
+        this.state = World_1_2_State.Scene6;
     }
 });

@@ -52,7 +52,7 @@ World_1_1 = ClassFactory.createClass(World, {
         this.state = World_1_1_State.Scene3;
     },
     changeToScene4: function () {
-        this.scrollable = true;
+        this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
         this.state = World_1_1_State.Scene4;
     },
@@ -392,7 +392,7 @@ World_1_1 = ClassFactory.createClass(World, {
         var flag = new Block(6348, 62, 8, 308);
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
-            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
+            if (gameObject instanceof MarioBors) {
                 gameUI.changeToScene4();
             }
         });

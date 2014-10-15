@@ -30,7 +30,7 @@
 
             // 加载进度回调
             if (typeof listener.process == "function") {
-                listener.process(img.alias, img.index + 1, img.total);
+                listener.process(img.alias, loader.loaded, img.total);
             }
 
             // 加载完成回调
