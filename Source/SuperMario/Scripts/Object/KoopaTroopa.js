@@ -263,22 +263,22 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }]);
                 break;
             }
-            this.sprite.moveToFrame(0);
-            return;
         }
-
-        if (this.type == KoopaTroopaType.Fly) {
-            this.sprite.setFrameSequence([{ x: 32 * 8, y: 144 }, { x: 32 * 9, y: 144 }]);
-            return;
+        else if (this.type == KoopaTroopaType.Fly) {
+            if (spriteType == KoopaTroopaSpriteType.Dead) {
+                this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }])
+            } else {
+                this.sprite.setFrameSequence([{ x: 32 * 8, y: 144 }, { x: 32 * 9, y: 144 }]);
+            }
         }
-
-        if (this.iconType == GameObjectIconType.Ground) {
-            switch (spriteType) {
+        else if (this.type == KoopaTroopaType.Normal) {
+            if (this.iconType == GameObjectIconType.Ground) {
+                switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 16 }, { x: 32 * 7, y: 16 }]);
                     break;
                 case KoopaTroopaSpriteType.MoveRight:
-                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 144 }, { x: 32 * 93, y: 144 }] );
+                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 144 }, { x: 32 * 93, y: 144 }]);
                     break;
                 case KoopaTroopaSpriteType.DownSide:
                     this.sprite.setFrameSequence([{ x: 32 * 10, y: 32 }]);
@@ -286,10 +286,9 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 case KoopaTroopaSpriteType.Dead:
                     this.sprite.setFrameSequence([{ x: 32 * 10, y: 448 }]);
                     break;
-            }
-        }
-        else if (this.iconType == GameObjectIconType.Underground) {
-            switch (spriteType) {
+                }
+            } else if (this.iconType == GameObjectIconType.Underground) {
+                switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 80 }, { x: 32 * 7, y: 80 }]);
                     break;
@@ -302,6 +301,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 case KoopaTroopaSpriteType.Dead:
                     this.sprite.setFrameSequence([{ x: 32 * 10, y: 384 }]);
                     break;
+                }
             }
         }
 

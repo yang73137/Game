@@ -30,7 +30,7 @@ World_1_1 = ClassFactory.createClass(World, {
                 if (-this.x >= 6784 - 512) {
                     this.setX(-(6784 - 512));
                 } else {
-                    this.setX(this.x - mario.speed);
+                    this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
                 }
             }
 

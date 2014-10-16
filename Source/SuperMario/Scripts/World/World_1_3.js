@@ -23,7 +23,7 @@ World_1_3 = ClassFactory.createClass(World, {
             return;
         }
         if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4748) {
-            this.setX(this.x - this.mario.speed);
+            this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
         }
     },
     build: function () {
@@ -35,11 +35,11 @@ World_1_3 = ClassFactory.createClass(World, {
         var koopaTroopa_900_98 = new KoopaTroopa(900, 98, KoopaTroopaType.Clever, GameObjectIconType.Ground);
         koopaTroopa_900_98.addToGameUI(gameUI);
 
-        var koopaTroopa_2388_114 = new KoopaTroopa(2388, 114, KoopaTroopaType.Fly, GameObjectIconType.Ground);
+        var koopaTroopa_2388_114 = new KoopaTroopa(2388, 272, KoopaTroopaType.Fly, GameObjectIconType.Ground);
         koopaTroopa_2388_114.addToGameUI(gameUI);
 
-        var koopaTroopa_2388_114 = new KoopaTroopa(2388, 114, KoopaTroopaType.Clever, GameObjectIconType.Ground);
-        koopaTroopa_2388_114.addToGameUI(gameUI);
+        var koopaTroopa_2490_114 = new KoopaTroopa(2490, 114, KoopaTroopaType.Clever, GameObjectIconType.Ground);
+        koopaTroopa_2490_114.addToGameUI(gameUI);
 
         var koopaTroopa_3652_340 = new KoopaTroopa(3652, 340, KoopaTroopaType.Fly, GameObjectIconType.Ground);
         koopaTroopa_3652_340.addToGameUI(gameUI);
@@ -146,7 +146,12 @@ World_1_3 = ClassFactory.createClass(World, {
                 this.movingRight = false;
             }
 
-            this.movingRight ? this.moveRight(2) : this.moveLeft(2);
+            this.movingRight ? this.moveRight(1) : this.moveLeft(1);
+            
+            var mario = this.gameUI.mario;
+            if (this.collidesUpWith(mario) && !mario.moving) {
+                mario.setX(mario.x + (this.movingRight ? 1 : -1));
+            }
         });
         block_2660_242.addToGameUI(gameUI);
 
@@ -162,7 +167,12 @@ World_1_3 = ClassFactory.createClass(World, {
                 this.movingRight = false;
             }
 
-            this.movingRight ? this.moveRight(2) : this.moveLeft(2);
+            this.movingRight ? this.moveRight(1) : this.moveLeft(1);
+            
+            var mario = this.gameUI.mario;
+            if (this.collidesWith(mario) && !mario.moving) {
+                mario.setX(mario.x + (this.movingRight ? 1 : -1));
+            }
         });
         block_3018_258.addToGameUI(gameUI);
 
@@ -178,7 +188,12 @@ World_1_3 = ClassFactory.createClass(World, {
                 this.movingRight = false;
             }
 
-            this.movingRight ? this.moveRight(2) : this.moveLeft(2);
+            this.movingRight ? this.moveRight(1) : this.moveLeft(1);
+            
+            var mario = this.gameUI.mario;
+            if (this.collidesWith(mario) && !mario.moving) {
+                mario.setX(mario.x + (this.movingRight ? 1 : -1));
+            }
         });
         block_4100_178.addToGameUI(gameUI);
         
@@ -279,7 +294,7 @@ World_1_3 = ClassFactory.createClass(World, {
         this.mario.reborn();
         this.state = World_1_3_State.Normal;
 
-        if (Math.abs(oldX) >= 2244) {
+        if (Math.abs(oldX) >= 2062) {
             this.setX(-2062);
             this.mario.setPosition(2130, 400 - this.mario.height);
         } else {
