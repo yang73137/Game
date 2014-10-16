@@ -453,7 +453,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToRight = true;
-                    this.moveRight(this.speed);
+                    this.moveRight(this.jumping ? this.speed + 1 : this.speed);
                 }
             }
         } else {
@@ -477,7 +477,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
                 if (!this.squating && !this.staying) {
                     this.movingToLeft = true;
-                    this.moveLeft(this.speed);
+                    this.moveLeft(this.jumping ? this.speed + 1 : this.speed);
                 }
             }
         } else {
