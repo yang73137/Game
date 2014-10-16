@@ -8,7 +8,8 @@ KoopaTroopaState = {
 
 KoopaTroopaType = {
     Green: 1,
-    Red: 2
+    Red: 2,
+    Fly: 3
 };
 
 KoopaTroopaSpriteType = {
@@ -30,7 +31,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.sprite.setBackgroundImage(Const.IMAGE_ENEMIES);
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
-        
+        this.sprite.setZ(2);
         this.sprite.show();
         this.sprite.start();
 
@@ -235,7 +236,6 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         }
 
         if (this.iconType == GameObjectIconType.Ground) {
-            console.log(1);
             switch (spriteType) {
                 case KoopaTroopaSpriteType.MoveLeft:
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 16 }, { x: 32 * 7, y: 16 }]);
