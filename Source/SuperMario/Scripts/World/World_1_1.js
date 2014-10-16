@@ -61,7 +61,7 @@ World_1_1 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(this);
 
-        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Green, GameObjectIconType.Ground);
+        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
         kt.addToGameUI(gameUI);
 
         var goomba_512_368 = new Goomba(514, 368, GameObjectIconType.Ground);
