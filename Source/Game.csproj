@@ -159,9 +159,11 @@
     <Content Include="SuperMario\Scripts\World\World_1_1.js" />
     <Content Include="SuperMario\Scripts\World\World_1_2.js" />
     <Content Include="SuperMario\Scripts\World\World_1_3.js" />
+    <Content Include="SuperMario\Scripts\World\World_1_4.js" />
     <Content Include="SuperMario\UI\World_1_1.html" />
     <Content Include="SuperMario\UI\World_1_2.html" />
     <Content Include="SuperMario\UI\World_1_3.html" />
+    <Content Include="SuperMario\UI\World_1_4.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SuperMario\Scripts\Test\" />
