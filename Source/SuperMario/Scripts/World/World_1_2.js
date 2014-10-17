@@ -32,7 +32,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 return;
             }
             if (this.mario.x + this.x > 220) {
-                this.setX(this.x - this.mario.speed);
+                this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
             }
         }
     },

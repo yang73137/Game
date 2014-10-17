@@ -71,7 +71,8 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.state = MarioState.Live;
 
-        this.deadCounter = new Counter(24, false, false);
+        this.deadCounter = new Counter(24, false, true);
+        this.deadCounter.setEnabled(false);
 
         this.fireable = false;
         this.fireBalls = [new FireBall(), new FireBall()];
@@ -568,17 +569,19 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
     },
     onDead: function () {
-        if (this.deadCounter.countdown()) {
+        if (this.deadCounter.enabled && this.deadCounter.countdown()) {
             this.y -= 5;
             this.setY(this.y);
-            
-        }
-        else if (this.y < Const.SCREEN_HEIGHT) {
-            this.y += 5;
-            this.setY(this.y);
         } else {
-            this.state = MarioState.None;
-            this.gameUI.restart();
+            this.deadCounter.setEnabled(false);
+            if (this.y < Const.SCREEN_HEIGHT) {
+                this.y += 5;
+                this.setY(this.y);
+            } else {
+                this.state = MarioState.None;
+                this.deadCounter.setEnabled(false);
+                this.gameUI.restart();
+            }
         }
     },
     onChanging: function () {
@@ -627,7 +630,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 64 }]);
         this.sprite.moveToFrame(0);
-
+        this.deadCounter.setEnabled(true);
         this.state = MarioState.Dead;
         this.collidable = false;
     },
