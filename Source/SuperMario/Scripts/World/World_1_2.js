@@ -252,7 +252,8 @@ World_1_2 = ClassFactory.createClass(World, {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
                 if (!this.tip) {
                     this.tip = true;
-                    alert("想跳关，请充值1元到作者支付宝账户");
+                    alert("想跳关，请充值1元到作者支付宝账户先。");
+                    gameObject.squating = false;
                     this.gameUI.changeToScene5();
                 }
             }
@@ -265,7 +266,8 @@ World_1_2 = ClassFactory.createClass(World, {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
                 if (!this.tip) {
                     this.tip = true;
-                    alert("想跳关，请充值1元到作者支付宝账户");
+                    alert("想跳关，请充值1元到作者支付宝账户先。");
+                    gameObject.squating = false;
                     this.gameUI.changeToScene5();
                 }
             }
@@ -278,7 +280,8 @@ World_1_2 = ClassFactory.createClass(World, {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
                 if (!this.tip) {
                     this.tip = true;
-                    alert("想跳关，请充值1元到作者支付宝账户");
+                    alert("想跳关，请充值1元到作者支付宝账户先。");
+                    gameObject.squating = false;
                     this.gameUI.changeToScene5();
                 }
             }
