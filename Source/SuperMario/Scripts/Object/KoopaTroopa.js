@@ -2,7 +2,7 @@
 KoopaTroopaState = {
     None: 0,
     Live: 1,
-    Live2: 2,
+    Shell: 2,
     Dead: 3
 };
 
@@ -57,8 +57,8 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         case KoopaTroopaState.Live:
             this.onLive();
             break;
-        case KoopaTroopaState.Live2:
-            this.onLive2();
+        case KoopaTroopaState.Shell:
+            this.onShell();
             break;
         case KoopaTroopaState.Dead:
             this.onDead();
@@ -101,7 +101,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
             this.onOffScreen();
         }
     },
-    onLive2: function () {
+    onShell: function () {
         if (this.x + this.width < Math.abs(this.gameUI.x) || this.x >= (Math.abs(this.gameUI.x) + 512)) {
                 this.state = KoopaTroopaState.None;
                 this.sprite.hide();
@@ -137,7 +137,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.setY(this.y + 16);
         this.setSize(32, 32);
         this.setSpriteFrames(KoopaTroopaSpriteType.DownSide);
-        this.state = KoopaTroopaState.Live2;
+        this.state = KoopaTroopaState.Shell;
         this.speed = 5;
         this.moving = false;
     },
@@ -162,7 +162,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 }
                 gameObject.reJump();
             }
-            else if (gameObject.jumping && this.state == KoopaTroopaState.Live2) {
+            else if (gameObject.jumping && this.state == KoopaTroopaState.Shell) {
                 this.moving = !this.moving;
                 gameObject.reJump();
                 this.faceToRight = gameObject.x <= this.x + this.width / 2;
@@ -198,7 +198,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 gameObject.invincible ? this.dead(gameObject.x < this.x + this.width) : gameObject.hurt();
             }
         }
-        else if (this.state == KoopaTroopaState.Live2) {
+        else if (this.state == KoopaTroopaState.Shell) {
             if (gameObject instanceof MarioBors) {
                 if (!this.moving) {
                     this.moving = true;
@@ -222,7 +222,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 gameObject.invincible ? this.dead(gameObject.x < this.x + this.width) : gameObject.hurt();
             }
         }
-        else if (this.state == KoopaTroopaState.Live2) {
+        else if (this.state == KoopaTroopaState.Shell) {
             if (gameObject instanceof MarioBors) {
                 if (!this.moving) {
                     this.moving = true;
