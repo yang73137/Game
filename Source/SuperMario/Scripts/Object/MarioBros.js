@@ -5,6 +5,7 @@
 };
 
 MarioSprite = {
+    None: 0,
     Stand: 1,
     Move: 2,
     Jump: 3,
@@ -58,6 +59,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.sprite.start();
 
         this.spriteType = MarioSprite.Stand;
+        this.prevSpriteType = MarioSprite.None;
 
         this.type = MarioType.Small;
         this.setType(this.type);
@@ -249,10 +251,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 this.sprite.setFrameCounter(0);
                 if (this.type == MarioType.Big) {
-                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 0 }] : [{ x: 35 * 32, y: 0 }]);
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 16 }] : [{ x: 35 * 32, y: 16 }]);
                 }
                 else if (this.type == MarioType.Flower) {
-                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 192 }] : [{ x: 35 * 32, y: 192 }]);
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 6 * 32, y: 192 + 16 }] : [{ x: 35 * 32, y: 192 + 16}]);
                 }
                 break;
             case MarioSprite.Stay:
@@ -506,7 +508,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.speedUpLevel = 2;
                 }
                 if (!this.staying) {
-                    this.stayCounter.setCount(this.speedUpLevel * 8);
+                    this.stayCounter.setCount(this.speedUpLevel * 10);
                 }
             }
         } else {
@@ -562,9 +564,24 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (this.state == MarioState.Live) {
+
+            if (spriteType == MarioSprite.Squat) {
+                
+                if (this.prevSpriteType != MarioSprite.Squat) {
+                    this.setSize(32, 48);
+                    this.setPosition(this.x, this.y + 16);
+                }
+            } else {
+
+                if (this.prevSpriteType == MarioSprite.Squat) {
+                    this.setSize(32, 64);
+                    this.setPosition(this.x, this.y - 16);
+                }
+            }
+            
+            this.prevSpriteType = spriteType;
             this.setSprite(spriteType);
             this.setPosition(this.x, this.y);
-
             this.sprite.moveToNextFrame();
         }
     },

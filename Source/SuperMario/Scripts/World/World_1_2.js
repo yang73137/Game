@@ -134,15 +134,39 @@ World_1_2 = ClassFactory.createClass(World, {
             }
         }
         
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 4; j++) {
-                if (((i == 0 || i == 1 || i == 7 || i == 8 || i == 9) && (j == 0 || j == 1)) || ((i == 2 || i == 3 || i == 4 || i == 5) && (j == 2 || j == 3))) {
+                if (((i == 0 || i == 1 || i == 7) && (j == 0 || j == 1)) || ((i == 2 || i == 3 || i == 4 || i == 5) && (j == 2 || j == 3))) {
                     continue;
                 }
                 var brick = new Brick(2190 + j * 32, 80 + i * 32, GameObjectIconType.Underground);
                 brick.addToGameUI(gameUI);
             }
         }
+
+        var block_2109_336 = new Block(2254, 336, 32, 16);
+        block_2109_336.sprite.setBackgroundPosition(64, 64);
+        block_2109_336.sprite.setBackgroundImage(Const.IMAGE_TILESET);
+        block_2109_336.addToGameUI(gameUI);
+
+        
+        var block_2286_336 = new Block(2286, 336, 32, 16);
+        block_2286_336.sprite.setBackgroundPosition(64, 64);
+        block_2286_336.sprite.setBackgroundImage(Const.IMAGE_TILESET);
+        block_2286_336.addToGameUI(gameUI);
+        
+        var block_2109_352 = new Block(2254, 352, 32, 16);
+        block_2109_352.sprite.setBackgroundPosition(64, 64);
+        block_2109_352.sprite.setBackgroundImage(Const.IMAGE_TILESET);
+        block_2109_352.setCollidable(false, false, false, false);
+        block_2109_352.addToGameUI(gameUI);
+        
+        var block_2286_352 = new Block(2286, 352, 32, 16);
+        block_2286_352.sprite.setBackgroundPosition(64, 64);
+        block_2286_352.sprite.setBackgroundImage(Const.IMAGE_TILESET);
+        block_2286_352.setCollidable(false, false, false, false);
+        block_2286_352.addToGameUI(gameUI);
+        
         
         for (var i = 0; i < 7; i++) {
             for (var j = 0; j < 6; j++) {
@@ -537,6 +561,10 @@ World_1_2 = ClassFactory.createClass(World, {
             case World_1_2_State.Normal:
                 for (var i = 0; i < this.animateObjects.length; i++) {
                     this.animateObjects[i].update();
+                }
+                if (this.mario.x + this.mario.width > 2254 && this.mario.x <= 2318 && this.mario.spriteType == MarioSprite.Squat) {
+                    this.mario.squating = true;
+                    this.mario.faceToRight ? this.mario.moveRight(3) : this.mario.moveLeft(3);
                 }
                 break;
             case World_1_2_State.Scene1:

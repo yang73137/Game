@@ -62,11 +62,12 @@
         var world = new World_1_2();
         world.addToGameUI(gameUI);
 
-        //world.changeToScene4();
-        //setTimeout(function () {
-        //    world.mario.setPosition(5300, 0);
-        //    world.setPosition(-4800, 0);
-        //}, 100);
+        world.changeToScene2();
+        setTimeout(function () {
+            world.mario.setType(MarioType.Big);
+            world.mario.setPosition(2100, 300);
+            world.setPosition(-2000 , 0);
+        }, 100);
 
         setInterval(function () {
             gameUI.update();
