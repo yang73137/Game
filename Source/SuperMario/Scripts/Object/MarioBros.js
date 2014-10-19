@@ -244,7 +244,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 if (this.invincible) {
                     var frameSequence = [];
                     for (var i = 0; i < 3; i++) {
-                        frameSequence.push(this.faceToRight ? { x: 6 * 32, y: 32 * (9 + i * 3) } : { x: 35 * 32, y: 32 * (9 + i * 3) });
+                        frameSequence.push(this.faceToRight ? { x: 6 * 32, y: 32 * (9 + i * 3) + 16 } : { x: 35 * 32, y: 32 * (9 + i * 3) + 16 });
                     }
                     this.sprite.setFrameSequence(frameSequence);
                     break;
