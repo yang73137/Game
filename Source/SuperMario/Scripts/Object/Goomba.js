@@ -70,12 +70,6 @@ Goomba = ClassFactory.createClass(Enemy, {
         }
     },
     onDead: function () {
-        if (!this.deadCounter.countdown()) {
-            this.sprite.hide();
-            this.state = GoombaState.None;
-        }
-    },
-    onDead2: function () {
         if (this.deadCounter.countdown()) {
             if (this.deadCounter.currentCount > 30) {
                 this.moveUp(4);
@@ -94,42 +88,48 @@ Goomba = ClassFactory.createClass(Enemy, {
             }
         }
     },
-    dead: function () {
+    onDead2: function () {
+        if (!this.deadCounter.countdown()) {
+            this.sprite.hide();
+            this.state = GoombaState.None;
+        }
+    },
+    dead: function (faceToRight) {
+        this.faceToRight = faceToRight;
         this.state = GoombaState.Dead;
-        this.setSize(32, 16);
-        this.setY(this.y += 16);
         this.setSpriteFrames(GoombaSpriteType.Dead);
         this.setCollidable(false, false, false, false);
     },
-    dead2: function (faceToRight) {
-        this.faceToRight = faceToRight;
+    dead2: function () {
         this.state = GoombaState.Dead2;
+        this.setSize(32, 16);
+        this.setY(this.y += 16);
         this.setSpriteFrames(GoombaSpriteType.Dead2);
         this.setCollidable(false, false, false, false);
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof FireBall) {
-            this.dead2(gameObject.x <= this.x + this.width / 2);
+            this.dead(gameObject.x <= this.x + this.width / 2);
         }
     },
     onCollidesUp: function (gameObject) {
         if (gameObject instanceof MarioBors) {
-            this.dead();
+            this.dead2();
             gameObject.reJump();
         }
     },
     onCollidesDown: function (gameObject) {
         if (gameObject instanceof MarioBors) {
-            gameObject.invincible ? this.dead2() : gameObject.hurt();
+            gameObject.invincible ? this.dead() : gameObject.hurt();
         }
         else if (gameObject instanceof Brick) {
             if (gameObject.state == BrickState.Up || gameObject.state == BrickState.Break) {
-                this.dead2(gameObject.x < this.x + this.width / 2);
+                this.dead(gameObject.x < this.x + this.width / 2);
             }
         }
         else if (gameObject instanceof Question) {
             if (gameObject.state == QuestionState.Up) {
-                this.dead2();
+                this.dead();
             }
         }
     },
@@ -138,7 +138,7 @@ Goomba = ClassFactory.createClass(Enemy, {
             this.faceToRight = true;
         }
         if (gameObject instanceof MarioBors) {
-            gameObject.invincible ? this.dead2(true) : gameObject.hurt();
+            gameObject.invincible ? this.dead(true) : gameObject.hurt();
         }
     },
     onCollidesRight: function (gameObject) {
@@ -146,7 +146,7 @@ Goomba = ClassFactory.createClass(Enemy, {
             this.faceToRight = false;
         }
         if (gameObject instanceof MarioBors) {
-            gameObject.invincible ? this.dead2(false) : gameObject.hurt();
+            gameObject.invincible ? this.dead(false) : gameObject.hurt();
         }
     },
     setSpriteFrames: function (spriteType) {
@@ -159,30 +159,30 @@ Goomba = ClassFactory.createClass(Enemy, {
                 this.sprite.setFrameSequence([{ x: 0, y: 32 }, { x: 32, y: 32 }]);
                 break;
             case GoombaSpriteType.Dead:
-                this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
-                break;
-            case GoombaSpriteType.Dead2:
                 this.sprite.setFrameSequence([{ x: 0, y: 448 }]);
+                break;
+                case GoombaSpriteType.Dead2:
+                    this.sprite.setFrameSequence([{ x: 32 * 2, y: 48 }]);
                 break;
             }
         }
         else if (this.iconType == GameObjectIconType.Underground) {
             switch (spriteType) {
-                case GoombaSpriteType.MoveLeft:
-                    this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
-                    break;
-                case GoombaSpriteType.MoveRight:
-                    this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
-                    break;
-                case GoombaSpriteType.Dead:
-                    this.sprite.setFrameSequence([{ x: 32 * 2, y: 110 }]);
-                    break;
-                case GoombaSpriteType.Dead2:
-                    this.sprite.setFrameSequence([{ x: 0, y: 386 }]);
-                    break;
+            case GoombaSpriteType.MoveLeft:
+                this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
+                break;
+            case GoombaSpriteType.MoveRight:
+                this.sprite.setFrameSequence([{ x: 0, y: 96 }, { x: 32, y: 96 }]);
+                break;
+            case GoombaSpriteType.Dead:
+                this.sprite.setFrameSequence([{ x: 0, y: 386 }]);
+                break;
+            case GoombaSpriteType.Dead2:
+                this.sprite.setFrameSequence([{ x: 32 * 2, y: 110 }]);
+                break;
             }
         }
-        
+
         this.sprite.moveToFrame(0);
     },
     onOffScreen: function () {

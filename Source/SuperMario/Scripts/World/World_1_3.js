@@ -329,8 +329,10 @@ World_1_3 = ClassFactory.createClass(World, {
                     this.mario.moveRight(2);
                     this.mario.sprite.moveToNextFrame();
                 } else {
-                    alert("后续关卡正在制作中......");
+                    var world = new World_1_4();
+                    this.gameUI.setWorld(world);
                     this.state = World_1_3_State.None;
+                    this.mario.setCollidable(true, true, true, true);
                 }
                 break;
         }

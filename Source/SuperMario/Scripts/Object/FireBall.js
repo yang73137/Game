@@ -117,3 +117,11 @@ FireBall = ClassFactory.createClass(GameObject, {
         this.state = FireBallState.None;
     }
 });
+
+FireBall2 = ClassFactory.createClass(GameObject, {
+    init: function (x, y, numberOfFireballs) {
+        GameObject.init.call(this);
+
+        this.fireBalls = [];
+    }
+});

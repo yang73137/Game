@@ -66,7 +66,6 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         }
     },
     onLive: function () {
-
         if (this.waitForScreen()) {
             return;
         }
@@ -157,19 +156,21 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     this.changeToLive2();
                 }
                 else if (this.type == KoopaTroopaType.Fly) {
-                    this.setSpriteFrames(KoopaTroopaSpriteType.MoveLeft);
+                    gameObject.setY(this.y - gameObject.height - 5);
                     this.type = KoopaTroopaType.Clever;
+                    this.setSpriteFrames(this.faceToRight ? KoopaTroopaSpriteType.MoveLeft : KoopaTroopaSpriteType.MoveLeft);
                 }
-                gameObject.setX(this.x + gameObject.height);
+                
                 gameObject.reJump();
             }
             else if (gameObject.jumping && this.state == KoopaTroopaState.Shell) {
                 this.moving = !this.moving;
-                gameObject.reJump();
                 this.faceToRight = gameObject.x <= this.x + this.width / 2;
                 if (this.moving) {
                     this.setX(this.faceToRight ? gameObject.x + gameObject.width + 2 : gameObject.x - this.width - 2);
                 }
+                gameObject.setY(this.y - gameObject.height - 5);
+                gameObject.reJump();
             }
         }
         else if (gameObject.stoppable) {
@@ -248,10 +249,9 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         this.setSpriteFrames(KoopaTroopaSpriteType.Dead);
     },
     setSpriteFrames: function (spriteType) {
-
         if (this.type == KoopaTroopaType.Clever) {
             switch (spriteType) {
-            case KoopaTroopaSpriteType.MoveLeft:
+                case KoopaTroopaSpriteType.MoveLeft:
                 this.sprite.setFrameSequence([{ x: 32 * 6, y: 144 }, { x: 32 * 7, y: 144 }]);
                 break;
             case KoopaTroopaSpriteType.MoveRight:

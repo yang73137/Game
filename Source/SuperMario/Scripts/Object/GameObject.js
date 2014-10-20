@@ -269,11 +269,6 @@ GameObject = ClassFactory.createClass({
     },
     moveUp: function (speed) {
         for (var i = 0; i < speed; i++) {
-            
-            if (!this.onScreen()) {
-                this.onOffScreen();
-                return false;
-            }
 
             this.setY(this.y - 1);
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
@@ -310,11 +305,6 @@ GameObject = ClassFactory.createClass({
             
             this.setY(this.y + 1);
             
-            if (!this.onScreen()) {
-                this.onOffScreen();
-                return false;
-            }
-
             for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                 var block = this.gameUI.animateObjects[blockIndex];
                 if (this.collidesDownWith(block) && (block.x + block.width >= Math.abs(this.gameUI.x))) {

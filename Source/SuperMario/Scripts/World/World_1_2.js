@@ -453,7 +453,7 @@ World_1_2 = ClassFactory.createClass(World, {
         var block_7096_48 = new Block(7096, 48, 96, 288);
         block_7096_48.addToGameUI(gameUI);
         
-        var tube_7096_336 = new Block(7096, 336, 96, 64);
+        var tube_7096_336 = new Block(7102, 336, 90, 64);
         tube_7096_336.addToGameUI(gameUI);
         
         tube_7096_336.attachCollidesLeft(function (gameObject) {

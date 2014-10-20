@@ -11,7 +11,7 @@
         this.setPosition(x, y);
         this.setSize(32, 32);
 
-        this.upCounter = new Counter(36, false, true);
+        this.upCounter = new Counter(28, false, true);
         this.enabled = false;
 
         this.originalX = x;
@@ -29,7 +29,7 @@
         }
         
         if (this.upCounter.countdown()) {
-            if (this.upCounter.currentCount >= 16) {
+            if (this.upCounter.currentCount >= 12) {
                 this.moveUp(3);
             } else {
                 this.moveDown(2);

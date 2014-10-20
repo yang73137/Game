@@ -16,6 +16,9 @@
         GameObject.prototype.addToGameUI.call(this, gameUI);
         this.animate ? gameUI.addAnimateObject(this) : gameUI.addStaticObject(this);
     },
+    attachCollides: function (fun) {
+        this.onCollides = fun;
+    },
     attachCollidesUp: function (fun) {
         this.onCollidesUp = fun;
     },

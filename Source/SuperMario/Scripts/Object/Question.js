@@ -89,10 +89,14 @@ Question = ClassFactory.createClass(GameObject, {
             return;
         }
 
+        if (this.item instanceof Gold && this.item.enabled) {
+            return;
+        }
+
         if (this.item == null) {
             this.setItem();
         }
-
+        
         this.sprite.show();
         this.setCollidable(true, true, true, true);
 
