@@ -562,7 +562,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 for (var i = 0; i < this.animateObjects.length; i++) {
                     this.animateObjects[i].update();
                 }
-                if (this.mario.x + this.mario.width > 2254 && this.mario.x <= 2318 && this.mario.spriteType == MarioSprite.Squat) {
+                if (this.mario.x + this.mario.width > 2254 && this.mario.x < 2318 && this.mario.spriteType == MarioSprite.Squat) {
                     this.mario.squating = true;
                     this.mario.faceToRight ? this.mario.moveRight(3) : this.mario.moveLeft(3);
                 }

@@ -65,7 +65,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.setType(this.type);
         this.setSprite(MarioSprite.Stand);
 
-        this.changeCounter = new Counter(50, false, true);
+        this.changeCounter = new Counter(45, false, true);
         this.changeBigSmallCounter = new Counter(4, false, true);
         this.initChange = false;
         
@@ -602,6 +602,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
     },
     onChanging: function () {
+
         if (!this.initChange) {
             this.setChangeSprite();
             this.initChange = true;
@@ -655,7 +656,13 @@ MarioBors = ClassFactory.createClass(GameObject, {
         if (this.hurtable && this.state == MarioState.Live) {
             if (this.type == MarioType.Small) {
                 this.dead();
-            } else {
+            }
+            else {
+                if (this.prevSpriteType == MarioSprite.Squat) {
+                    this.setSize(32, 64);
+                    this.setPosition(this.x, this.y - 16);
+                    this.prevSpriteType = MarioSprite.None;
+                }
                 this.changeType(MarioType.Small);
             }
         }
