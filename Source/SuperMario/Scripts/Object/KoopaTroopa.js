@@ -160,6 +160,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     this.setSpriteFrames(KoopaTroopaSpriteType.MoveLeft);
                     this.type = KoopaTroopaType.Clever;
                 }
+                gameObject.setX(this.x + gameObject.height);
                 gameObject.reJump();
             }
             else if (gameObject.jumping && this.state == KoopaTroopaState.Shell) {

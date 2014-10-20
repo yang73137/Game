@@ -88,6 +88,7 @@ World_1_2 = ClassFactory.createClass(World, {
         question_2734_240.addToGameUI(gameUI);
 
         var question_2862_240 = new Question(2862, 240, QuestionItemType.MultiGold, QuestionDisplayType.Brick, GameObjectIconType.Underground);
+        question_2862_240.setCollideCount(5);
         question_2862_240.addToGameUI(gameUI);
         
         var question_3356_48 = new Question(3356, 48, QuestionItemType.LifeMushroom, QuestionDisplayType.Brick, GameObjectIconType.Underground);
@@ -116,6 +117,7 @@ World_1_2 = ClassFactory.createClass(World, {
         iron_1388_304.addToGameUI(gameUI);
 
         var question_1452_ = new Question(1452, 240, QuestionItemType.MultiGold, QuestionDisplayType.Brick, GameObjectIconType.Underground);
+        question_1452_.setCollideCount(5);
         question_1452_.addToGameUI(gameUI);
         
         var iron_1516_304 = new Block(1516, 304, 32, 96);
@@ -445,6 +447,7 @@ World_1_2 = ClassFactory.createClass(World, {
         }
 
         var question_7062_272 = new Question(7062, 272, QuestionItemType.MultiGold, QuestionDisplayType.Brick, GameObjectIconType.Underground);
+        question_7062_272.setCollideCount(10);
         question_7062_272.addToGameUI(gameUI);
         
         var block_7096_48 = new Block(7096, 48, 96, 288);

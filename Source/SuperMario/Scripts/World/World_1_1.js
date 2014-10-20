@@ -168,6 +168,7 @@ World_1_1 = ClassFactory.createClass(World, {
         question_3008_144.addToGameUI(gameUI);
 
         var question_3008_272 = new Question(3008, 272, QuestionItemType.MultiGold, QuestionDisplayType.Brick, GameObjectIconType.Ground);
+        question_3008_272.setCollideCount(5);
         question_3008_272.addToGameUI(gameUI);
 
         var brick_3200_272 = new Brick(3200, 272, GameObjectIconType.Ground);

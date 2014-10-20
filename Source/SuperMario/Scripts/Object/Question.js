@@ -79,9 +79,13 @@ Question = ClassFactory.createClass(GameObject, {
                 break;
         }
     },
-    onCollidesDown: function (gameObject) {
-        
+    onCollidesDown: function(gameObject) {
+
         if (!(gameObject instanceof MarioBors)) {
+            return;
+        }
+
+        if (this.state != QuestionState.Normal) {
             return;
         }
 
@@ -92,22 +96,19 @@ Question = ClassFactory.createClass(GameObject, {
         this.sprite.show();
         this.setCollidable(true, true, true, true);
 
-        if (this.state == QuestionState.Normal) {
-            this.collideCount--;
-            if (this.collideCount == 0) {
-                this.sprite.setBackgroundImage(Const.IMAGE_TILESET);
-                if (this.iconType == GameObjectIconType.Ground) {
-                    this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
-                }
-                else if (this.iconType == GameObjectIconType.Underground) {
-                    this.sprite.setFrameSequence([{ x: 32 * 27, y: 64 }]);
-                }
-                this.sprite.moveToFrame(0);
+        this.collideCount--;
+        if (this.collideCount == 0) {
+            this.sprite.setBackgroundImage(Const.IMAGE_TILESET);
+            if (this.iconType == GameObjectIconType.Ground) {
+                this.sprite.setFrameSequence([{ x: 32 * 27, y: 0 }]);
+            } else if (this.iconType == GameObjectIconType.Underground) {
+                this.sprite.setFrameSequence([{ x: 32 * 27, y: 64 }]);
             }
-            this.state = QuestionState.Up;
-            if (this.item instanceof Gold) {
-                this.item.animate();
-            }
+            this.sprite.moveToFrame(0);
+        }
+        this.state = QuestionState.Up;
+        if (this.item instanceof Gold) {
+            this.item.animate();
         }
     },
     hide: function() {
@@ -121,7 +122,6 @@ Question = ClassFactory.createClass(GameObject, {
             break;
         case QuestionItemType.MultiGold:
             this.item = new Gold(this.x, this.y - 48, this.iconType);
-            this.collideCount = 5;
             break;
         case QuestionItemType.BigMushroom:
             if (mario.type == MarioType.Small) {
@@ -162,5 +162,8 @@ Question = ClassFactory.createClass(GameObject, {
             }
             break;
         }
+    },
+    setCollideCount: function (collideCount) {
+        this.collideCount = collideCount;
     }
 });
