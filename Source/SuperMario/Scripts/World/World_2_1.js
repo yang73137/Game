@@ -120,7 +120,10 @@ World_2_1 = ClassFactory.createClass(World, {
 
         var tube_4159_240 = new Block(4159, 240, 64, 160);
         tube_4159_240.addToGameUI(gameUI);
-        
+
+        var block_4926_302 = new Block(4926, 302, 32, 96);
+        block_4926_302.addToGameUI(gameUI);
+
         var brick_5151_272 = new Brick(5151, 272, GameObjectIconType.Ground);
         brick_5151_272.addToGameUI(gameUI);
         
