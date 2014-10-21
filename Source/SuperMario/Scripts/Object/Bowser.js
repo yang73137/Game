@@ -36,6 +36,8 @@ Bowser = ClassFactory.createClass(Enemy, {
         this.state = BowserState.Live;
         
         this.waitingForScreen = false;
+
+        this.health = 5;
     },
     addToGameUI: function (gameUI) {
         Enemy.prototype.addToGameUI.call(this, gameUI);
@@ -122,6 +124,15 @@ Bowser = ClassFactory.createClass(Enemy, {
         this.setSize(32, 32);
         this.sprite.setFrameSequence([{ x: 0, y: 320 }]);
         this.sprite.moveToFrame(0);
+        this.setCollidable(false, false, false, false);
+    },
+    onCollides: function (gameObject) {
+        if (gameObject instanceof FireBall) {
+            this.health--;
+            if (this.health == 0) {
+                this.dead(gameObject.x <= this.x + this.width / 2);
+            }
+        }
     }
 });
 

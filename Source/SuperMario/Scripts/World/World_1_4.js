@@ -1,8 +1,7 @@
 ﻿
 World_1_4_State = {
     None: 0,
-    Normal: 1,
-    Scene1: 2
+    Normal: 1
 };
 
 World_1_4 = ClassFactory.createClass(World, {
@@ -23,7 +22,7 @@ World_1_4 = ClassFactory.createClass(World, {
             return;
         }
 
-        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4748) {
+        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4595) {
             this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
         }
     },
@@ -32,6 +31,18 @@ World_1_4 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 208 - this.mario.height);
+
+        var x = new Block(4880, 352, 32, 48);
+        x.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        x.sprite.setBackgroundPosition(0, 464);
+        x.setStoppable(true);
+        x.attachCollides(function(gameObject) {
+            if (gameObject instanceof MarioBors) {
+                alert("后续关卡开发中");
+                this.gameUI.state = World_1_4_State.None;
+            }
+        });
+        x.addToGameUI(gameUI);
 
         this.bowser = new Bowser(4300, 240);
         this.bowser.addToGameUI(gameUI);
@@ -146,6 +157,8 @@ World_1_4 = ClassFactory.createClass(World, {
         floor_4498_305.addToGameUI(gameUI);
 
         var afx_4498_242 = new Block(4498, 242, 32, 32);
+        afx_4498_242.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        afx_4498_242.sprite.setBackgroundPosition(0, 255);
         afx_4498_242.addToGameUI(gameUI);
         afx_4498_242.attachCollides(function (gameObject) {
             if (gameObject instanceof MarioBors) {
@@ -176,15 +189,17 @@ World_1_4 = ClassFactory.createClass(World, {
         this.scrollable = true;
     },
     update: function () {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
+        switch (this.state) {
+        case World_1_4_State.None:
+            break;
+        case World_1_4_State.Normal:
+            for (var i = 0; i < this.animateObjects.length; i++) {
+                this.animateObjects[i].update();
+            }
+            if (this.bridge_3922_305.broken) {
+                this.bridge_3922_305.setWidth(this.bridge_3922_305 - 3);
+            }
+            break;
         }
-        if (this.bridge_3922_305.broken) {
-            this.bridge_3922_305.setWidth(this.bridge_3922_305 - 3);
-        }
-    },
-    changeToScene1: function () {
-        this.mario.setCollidable(false, true, false, false);
-        this.state = World_1_4_State.Scene1;
-    },
+    }
 });
