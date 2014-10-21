@@ -11,8 +11,8 @@ World_1_3 = ClassFactory.createClass(World, {
 
         this.setSize(5270, 448);
         this.setBackgroundImage(Const.IMAGE_WORLD_1_3);
-        this.setBackgroundPosition(0, 0);
-        this.setPosition(-4, 0);
+        this.setBackgroundPosition(4, 2);
+        this.setPosition(0, 0);
         this.show();
 
         this.scrollable = true;
@@ -22,7 +22,7 @@ World_1_3 = ClassFactory.createClass(World, {
         if (!this.scrollable) {
             return;
         }
-        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4748) {
+        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4740) {
             this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
         }
     },
@@ -32,11 +32,11 @@ World_1_3 = ClassFactory.createClass(World, {
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 400 - this.mario.height);
 
-        var koopaTroopa_900_98 = new KoopaTroopa(900, 98, KoopaTroopaType.Clever, GameObjectIconType.Ground);
-        koopaTroopa_900_98.addToGameUI(gameUI);
+        var koopaTroopa_900_96 = new KoopaTroopa(900, 96, KoopaTroopaType.Clever, GameObjectIconType.Ground);
+        koopaTroopa_900_96.addToGameUI(gameUI);
 
-        var koopaTroopa_2388_114 = new KoopaTroopa(2388, 272, KoopaTroopaType.Fly, GameObjectIconType.Ground);
-        koopaTroopa_2388_114.addToGameUI(gameUI);
+        var koopaTroopa_2388_272 = new KoopaTroopa(2388, 272, KoopaTroopaType.Fly, GameObjectIconType.Ground);
+        koopaTroopa_2388_272.addToGameUI(gameUI);
 
         var koopaTroopa_2490_114 = new KoopaTroopa(2490, 114, KoopaTroopaType.Clever, GameObjectIconType.Ground);
         koopaTroopa_2490_114.addToGameUI(gameUI);
@@ -48,82 +48,82 @@ World_1_3 = ClassFactory.createClass(World, {
         koopaTroopa_4260_352.addToGameUI(gameUI);
         
 
-        var gold_868_114 = new Gold2(868, 114, GameObjectIconType.Ground);
-        gold_868_114.addToGameUI(gameUI);
+        var gold_864_112 = new Gold2(864, 112, GameObjectIconType.Ground);
+        gold_864_112.addToGameUI(gameUI);
 
-        var gold_900_114 = new Gold2(900, 114, GameObjectIconType.Ground);
-        gold_900_114.addToGameUI(gameUI);
+        var gold_896_112 = new Gold2(896, 112, GameObjectIconType.Ground);
+        gold_896_112.addToGameUI(gameUI);
 
-        var gold_932_114 = new Gold2(932, 114, GameObjectIconType.Ground);
-        gold_932_114.addToGameUI(gameUI);
+        var gold_928_112 = new Gold2(928, 112, GameObjectIconType.Ground);
+        gold_928_112.addToGameUI(gameUI);
 
-        var gold_1060_338 = new Gold2(1060, 338, GameObjectIconType.Ground);
-        gold_1060_338.addToGameUI(gameUI);
+        var gold_1056_336 = new Gold2(1056, 336, GameObjectIconType.Ground);
+        gold_1056_336.addToGameUI(gameUI);
 
-        var gold_1380_50 = new Gold2(1188, 50, GameObjectIconType.Ground);
-        gold_1380_50.addToGameUI(gameUI);
+        var gold_1184_48 = new Gold2(1184, 48, GameObjectIconType.Ground);
+        gold_1184_48.addToGameUI(gameUI);
 
-        var gold_1412_50 = new Gold2(1220, 50, GameObjectIconType.Ground);
-        gold_1412_50.addToGameUI(gameUI);
+        var gold_1216_48 = new Gold2(1216, 48, GameObjectIconType.Ground);
+        gold_1216_48.addToGameUI(gameUI);
 
-        var goomba_1172_82 = new Goomba(1172, 82, GameObjectIconType.Ground);
-        goomba_1172_82.addToGameUI(gameUI);
+        var goomba_1168_80 = new Goomba(1168, 80, GameObjectIconType.Ground);
+        goomba_1168_80.addToGameUI(gameUI);
 
-        var goomba_1236_82 = new Goomba(1236, 82, GameObjectIconType.Ground);
-        goomba_1236_82.addToGameUI(gameUI);
+        var goomba_1232_80 = new Goomba(1232, 80, GameObjectIconType.Ground);
+        goomba_1232_80.addToGameUI(gameUI);
 
-        var gold_1604_180 = new Gold2(1604, 180, GameObjectIconType.Ground);
-        gold_1604_180.addToGameUI(gameUI);
+        var gold_1600_178 = new Gold2(1600, 178, GameObjectIconType.Ground);
+        gold_1600_178.addToGameUI(gameUI);
 
-        var gold_1636_180 = new Gold2(1636, 180, GameObjectIconType.Ground);
-        gold_1636_180.addToGameUI(gameUI);
+        var gold_1632_178 = new Gold2(1632, 178, GameObjectIconType.Ground);
+        gold_1632_178.addToGameUI(gameUI);
 
-        var gold_3620_372 = new Gold2(3620, 372, GameObjectIconType.Ground);
-        gold_3620_372.addToGameUI(gameUI);
+        var gold_3616_370 = new Gold2(3616, 370, GameObjectIconType.Ground);
+        gold_3616_370.addToGameUI(gameUI);
 
-        var gold_3652_372 = new Gold2(3652, 372, GameObjectIconType.Ground);
-        gold_3652_372.addToGameUI(gameUI);
+        var gold_3648_370 = new Gold2(3648, 370, GameObjectIconType.Ground);
+        gold_3648_370.addToGameUI(gameUI);
 
-        var gold_3688_372 = new Gold2(3688, 372, GameObjectIconType.Ground);
-        gold_3688_372.addToGameUI(gameUI);
+        var gold_3684_370 = new Gold2(3684, 370, GameObjectIconType.Ground);
+        gold_3684_370.addToGameUI(gameUI);
 
         for (var i = 0; i < 4; i++) {
-            var gold = new Gold2(1924 + 32 * i, 114, GameObjectIconType.Ground);
+            var gold = new Gold2(1920 + 32 * i, 112, GameObjectIconType.Ground);
             gold.addToGameUI(gameUI);
         }
 
-        var gold_2756_146 = new Gold2(2756, 146, GameObjectIconType.Ground);
-        gold_2756_146.addToGameUI(gameUI);
+        var gold_2752_144 = new Gold2(2752, 144, GameObjectIconType.Ground);
+        gold_2752_144.addToGameUI(gameUI);
 
-        var gold_2788_146 = new Gold2(2788, 146, GameObjectIconType.Ground);
-        gold_2788_146.addToGameUI(gameUI);
+        var gold_2784_144 = new Gold2(2784, 144, GameObjectIconType.Ground);
+        gold_2784_144.addToGameUI(gameUI);
 
-        var gold_2962_114 = new Gold2(2962, 114, GameObjectIconType.Ground);
-        gold_2962_114.addToGameUI(gameUI);
+        var gold_2958_112 = new Gold2(2958, 112, GameObjectIconType.Ground);
+        gold_2958_112.addToGameUI(gameUI);
 
-        var gold_2994_114 = new Gold2(2994, 114, GameObjectIconType.Ground);
-        gold_2994_114.addToGameUI(gameUI);
+        var gold_2990_112 = new Gold2(2990, 112, GameObjectIconType.Ground);
+        gold_2990_112.addToGameUI(gameUI);
 
-        var gold_3126_114 = new Gold2(3126, 114, GameObjectIconType.Ground);
-        gold_3126_114.addToGameUI(gameUI);
+        var gold_3122_112 = new Gold2(3122, 112, GameObjectIconType.Ground);
+        gold_3122_112.addToGameUI(gameUI);
 
-        var gold_3158_114 = new Gold2(3158, 114, GameObjectIconType.Ground);
-        gold_3158_114.addToGameUI(gameUI);
+        var gold_3154_112 = new Gold2(3154, 112, GameObjectIconType.Ground);
+        gold_3154_112.addToGameUI(gameUI);
 
-        var gold_3844_146 = new Gold2(3844, 146, GameObjectIconType.Ground);
-        gold_3844_146.addToGameUI(gameUI);
+        var gold_3840_144 = new Gold2(3840, 144, GameObjectIconType.Ground);
+        gold_3840_144.addToGameUI(gameUI);
 
-        var gold_3876_146 = new Gold2(3876, 146, GameObjectIconType.Ground);
-        gold_3876_146.addToGameUI(gameUI);
+        var gold_3872_144 = new Gold2(3872, 144, GameObjectIconType.Ground);
+        gold_3872_144.addToGameUI(gameUI);
 
 
-        var block_1748_240 = new Block(1748, 164, 128, 16, true);
-        block_1748_240.movingDown = true;
-        block_1748_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        block_1748_240.sprite.setBackgroundPosition(0, 376);
-        block_1748_240.attachUpdate(function () {
+        var block_1744_162 = new Block(1744, 162, 128, 16, true);
+        block_1744_162.movingDown = true;
+        block_1744_162.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_1744_162.sprite.setBackgroundPosition(0, 376);
+        block_1744_162.attachUpdate(function () {
 
-            if (this.y <= 164) {
+            if (this.y <= 162) {
                 this.movingDown = true;
             } else if (this.y >= this.gameUI.height - 8) {
                 this.movingDown = false;
@@ -131,18 +131,18 @@ World_1_3 = ClassFactory.createClass(World, {
 
             this.movingDown ? this.moveDown(2) : this.moveUp(2);
         });
-        block_1748_240.addToGameUI(gameUI);
+        block_1744_162.addToGameUI(gameUI);
 
 
-        var block_2660_242 = new Block(2660, 242, 128, 16, true);
-        block_2660_242.movingRight = true;
-        block_2660_242.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        block_2660_242.sprite.setBackgroundPosition(0, 376);
-        block_2660_242.attachUpdate(function () {
+        var block_2656_240 = new Block(2656, 240, 128, 16, true);
+        block_2656_240.movingRight = true;
+        block_2656_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_2656_240.sprite.setBackgroundPosition(0, 376);
+        block_2656_240.attachUpdate(function () {
 
-            if (this.x <= 2660) {
+            if (this.x <= 2656) {
                 this.movingRight = true;
-            } else if (this.x >= 2760) {
+            } else if (this.x >= 2756) {
                 this.movingRight = false;
             }
 
@@ -153,17 +153,17 @@ World_1_3 = ClassFactory.createClass(World, {
                 mario.setX(mario.x + (this.movingRight ? 1 : -1));
             }
         });
-        block_2660_242.addToGameUI(gameUI);
+        block_2656_240.addToGameUI(gameUI);
 
-        var block_3018_258 = new Block(3018, 258, 128, 16, true);
-        block_3018_258.movingRight = false;
-        block_3018_258.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        block_3018_258.sprite.setBackgroundPosition(0, 376);
-        block_3018_258.attachUpdate(function () {
+        var block_3014_256 = new Block(3014, 256, 128, 16, true);
+        block_3014_256.movingRight = false;
+        block_3014_256.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_3014_256.sprite.setBackgroundPosition(0, 376);
+        block_3014_256.attachUpdate(function () {
 
-            if (this.x <= 2878) {
+            if (this.x <= 2876) {
                 this.movingRight = true;
-            } else if (this.x >= 3018) {
+            } else if (this.x >= 3014) {
                 this.movingRight = false;
             }
 
@@ -174,17 +174,17 @@ World_1_3 = ClassFactory.createClass(World, {
                 mario.setX(mario.x + (this.movingRight ? 1 : -1));
             }
         });
-        block_3018_258.addToGameUI(gameUI);
+        block_3014_256.addToGameUI(gameUI);
 
-        var block_4100_178 = new Block(4100, 178, 128, 16, true);
-        block_4100_178.movingRight = true;
-        block_4100_178.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        block_4100_178.sprite.setBackgroundPosition(0, 376);
-        block_4100_178.attachUpdate(function () {
+        var block_4096_176 = new Block(4096, 176, 128, 16, true);
+        block_4096_176.movingRight = true;
+        block_4096_176.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_4096_176.sprite.setBackgroundPosition(0, 376);
+        block_4096_176.attachUpdate(function () {
 
-            if (this.x <= 4100) {
+            if (this.x <= 4096) {
                 this.movingRight = true;
-            } else if (this.x >= 4200) {
+            } else if (this.x >= 4196) {
                 this.movingRight = false;
             }
 
@@ -195,85 +195,85 @@ World_1_3 = ClassFactory.createClass(World, {
                 mario.setX(mario.x + (this.movingRight ? 1 : -1));
             }
         });
-        block_4100_178.addToGameUI(gameUI);
+        block_4096_176.addToGameUI(gameUI);
         
 
-        var floor_0_400 = new Block(0, 400, 516, 48);
+        var floor_0_400 = new Block(0, 400, 512, 48);
         floor_0_400.addToGameUI(gameUI);
 
-        var grass_580_370 = new Block(580, 370, 128, 32);
-        grass_580_370.addToGameUI(gameUI);
+        var grass_576_368 = new Block(576, 368, 128, 32);
+        grass_576_368.addToGameUI(gameUI);
 
-        var grass_772_274 = new Block(772, 274, 256, 32);
-        grass_772_274.addToGameUI(gameUI);
+        var grass_768_272 = new Block(768, 272, 256, 32);
+        grass_768_272.addToGameUI(gameUI);
 
-        var grass_836_146 = new Block(836, 146, 160, 32);
-        grass_836_146.addToGameUI(gameUI);
+        var grass_832_144 = new Block(832, 144, 160, 32);
+        grass_832_144.addToGameUI(gameUI);
 
-        var grass_1028_70 = new Block(1028, 370, 96, 32);
-        grass_1028_70.addToGameUI(gameUI);
+        var grass_1024_368 = new Block(1024, 368, 96, 32);
+        grass_1024_368.addToGameUI(gameUI);
 
-        var grass_1124_242 = new Block(1124, 242, 160, 32);
-        grass_1124_242.addToGameUI(gameUI);
+        var grass_1120_240 = new Block(1120, 240, 160, 32);
+        grass_1120_240.addToGameUI(gameUI);
 
-        var grass_1284_114 = new Block(1284, 114, 224, 32);
-        grass_1284_114.addToGameUI(gameUI);
+        var grass_1280_112 = new Block(1280, 112, 224, 32);
+        grass_1280_112.addToGameUI(gameUI);
 
-        var grass_1604_402 = new Block(1604, 402, 128, 32);
-        grass_1604_402.addToGameUI(gameUI);
+        var grass_1600_400 = new Block(1600, 400, 128, 32);
+        grass_1600_400.addToGameUI(gameUI);
 
-        var grass_1892_402 = new Block(1892, 402, 160, 32);
-        grass_1892_402.addToGameUI(gameUI);
+        var grass_1888_400 = new Block(1888, 400, 160, 32);
+        grass_1888_400.addToGameUI(gameUI);
 
-        var question_1892_306 = new Question(1892, 306, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
-        question_1892_306.addToGameUI(gameUI);
+        var question_1888_304 = new Question(1888, 304, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
+        question_1888_304.addToGameUI(gameUI);
 
-        var grass_1924_146 = new Block(1924, 146, 128, 32);
-        grass_1924_146.addToGameUI(gameUI);
+        var grass_1920_142 = new Block(1920, 142, 128, 32);
+        grass_1920_142.addToGameUI(gameUI);
 
-        var grass_2084_402 = new Block(2084, 402, 160, 32);
-        grass_2084_402.addToGameUI(gameUI);
+        var grass_2080_400 = new Block(2080, 400, 160, 32);
+        grass_2080_400.addToGameUI(gameUI);
 
-        var grass_2244_274 = new Block(2244, 274, 96, 32);
-        grass_2244_274.addToGameUI(gameUI);
+        var grass_2240_272 = new Block(2240, 272, 96, 32);
+        grass_2240_272.addToGameUI(gameUI);
 
-        var grass_2436_178 = new Block(2436, 178, 192, 32);
-        grass_2436_178.addToGameUI(gameUI);
+        var grass_2432_176 = new Block(2432, 176, 192, 32);
+        grass_2432_176.addToGameUI(gameUI);
 
-        var grass_3140_338 = new Block(3140, 338, 128, 32);
-        grass_3140_338.addToGameUI(gameUI);
+        var grass_3136_336 = new Block(3136, 336, 128, 32);
+        grass_3136_336.addToGameUI(gameUI);
 
-        var grass_3332_210 = new Block(3332, 210, 256, 32);
-        grass_3332_210.addToGameUI(gameUI);
+        var grass_3328_208 = new Block(3328, 208, 256, 32);
+        grass_3328_208.addToGameUI(gameUI);
 
-        var grass_3620_402 = new Block(3620, 402, 96, 32);
-        grass_3620_402.addToGameUI(gameUI);
+        var grass_3616_400 = new Block(3616, 400, 96, 32);
+        grass_3616_400.addToGameUI(gameUI);
 
-        var grass_3716_274 = new Block(3716, 274, 128, 32);
-        grass_3716_274.addToGameUI(gameUI);
+        var grass_3712_272 = new Block(3712, 272, 128, 32);
+        grass_3712_272.addToGameUI(gameUI);
 
-        var grass_3908_274 = new Block(3908, 274, 128, 32);
-        grass_3908_274.addToGameUI(gameUI);
+        var grass_3904_272 = new Block(3904, 272, 128, 32);
+        grass_3904_272.addToGameUI(gameUI);
 
-        var floor_4132_400 = new Block(4132, 400, 1128, 48);
-        floor_4132_400.addToGameUI(gameUI);
+        var floor_4128_400 = new Block(4128, 400, 1128, 48);
+        floor_4128_400.addToGameUI(gameUI);
 
-        var iron_4420_272 = new Block(4420, 272, 64, 128);
-        iron_4420_272.addToGameUI(gameUI);
+        var iron_4416_270 = new Block(4416, 270, 64, 128);
+        iron_4416_270.addToGameUI(gameUI);
 
-        var iron_4484_208 = new Block(4484, 208, 64, 192);
-        iron_4484_208.addToGameUI(gameUI);
+        var iron_4480_206 = new Block(4480, 206, 64, 192);
+        iron_4480_206.addToGameUI(gameUI);
 
-        var iron_4548_144 = new Block(4548, 144, 64, 256);
-        iron_4548_144.addToGameUI(gameUI);
+        var iron_4544_142 = new Block(4544, 142, 64, 256);
+        iron_4544_142.addToGameUI(gameUI);
 
-        var iron_4548_144 = new Block(4548, 144, 64, 256);
-        iron_4548_144.addToGameUI(gameUI);
+        var iron_4544_142 = new Block(4544, 142, 64, 256);
+        iron_4544_142.addToGameUI(gameUI);
 
-        var iron_4868_368 = new Block(4868, 368, 32, 32);
-        iron_4868_368.addToGameUI(gameUI);
+        var iron_4864_366 = new Block(4864, 366, 32, 32);
+        iron_4864_366.addToGameUI(gameUI);
 
-        var flag = new Block(4868 + 12, 62, 8, 308);
+        var flag = new Block(4864 + 12, 60, 8, 308);
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {

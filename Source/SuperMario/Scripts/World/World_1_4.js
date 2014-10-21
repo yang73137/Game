@@ -10,8 +10,8 @@ World_1_4 = ClassFactory.createClass(World, {
 
         this.setSize(5126, 448);
         this.setBackgroundImage(Const.IMAGE_WORLD_1_4);
-        this.setBackgroundPosition(0, 0);
-        this.setPosition(-3, -3);
+        this.setBackgroundPosition(3, 2);
+        this.setPosition(0, 0);
         this.show();
 
         this.scrollable = true;
@@ -22,7 +22,7 @@ World_1_4 = ClassFactory.createClass(World, {
             return;
         }
 
-        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4595) {
+        if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4590) {
             this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
         }
     },
@@ -30,9 +30,9 @@ World_1_4 = ClassFactory.createClass(World, {
         var gameUI = this;
 
         this.mario.addToGameUI(gameUI);
-        this.mario.setPosition(84, 208 - this.mario.height);
+        this.mario.setPosition(84, 206 - this.mario.height);
 
-        var x = new Block(4880, 352, 32, 48);
+        var x = new Block(4880, 350, 32, 48);
         x.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         x.sprite.setBackgroundPosition(0, 464);
         x.setStoppable(true);
@@ -47,131 +47,132 @@ World_1_4 = ClassFactory.createClass(World, {
         this.bowser = new Bowser(4300, 240);
         this.bowser.addToGameUI(gameUI);
 
-        var roof_3_96 = new Block(3, 48, 718, 96);
-        roof_3_96.addToGameUI(gameUI);
+        var roof_0_46 = new Block(0, 46, 718, 96);
+        roof_0_46.addToGameUI(gameUI);
 
-        var roof_721_96 = new Block(722, 48, 32, 128);
-        roof_721_96.addToGameUI(gameUI);
+        var roof_719_46 = new Block(719, 46, 32, 128);
+        roof_719_46.addToGameUI(gameUI);
 
-        var roof_755_48 = new Block(755, 48, 414, 32);
-        roof_755_48.addToGameUI(gameUI);
+        var roof_752_46 = new Block(752, 46, 414, 32);
+        roof_752_46.addToGameUI(gameUI);
 
-        var roof_1170_48 = new Block(1170, 48, 1120, 128);
-        roof_1170_48.addToGameUI(gameUI);
+        var roof_1167_46 = new Block(1167, 46, 1120, 128);
+        roof_1167_46.addToGameUI(gameUI);
 
-        var roof_2291_48 = new Block(2291, 48, 2818, 32);
-        roof_2291_48.addToGameUI(gameUI);
+        var roof_2288_46 = new Block(2288, 46, 2818, 32);
+        roof_2288_46.addToGameUI(gameUI);
 
-        var roof_3090_80 = new Block(3090, 80, 224, 64);
-        roof_3090_80.addToGameUI(gameUI);
+        var roof_3087_78 = new Block(3087, 78, 224, 64);
+        roof_3087_78.addToGameUI(gameUI);
 
-        var roof_3922_80 = new Block(3922, 80, 160, 64);
-        roof_3922_80.addToGameUI(gameUI);
+        var roof_3919_78 = new Block(3919, 78, 160, 64);
+        roof_3919_78.addToGameUI(gameUI);
 
-        var roof_4530_80 = new Block(4530, 80, 64, 96);
-        roof_4530_80.addToGameUI(gameUI);
-
-
-        var block_722_178 = new Block(722, 178, 32, 32);
-        block_722_178.addToGameUI(gameUI);
-
-        var block_1170_178 = new Block(1170, 178, 32, 24);
-        block_1170_178.addToGameUI(gameUI);
-
-        var block_1554_178 = new Block(1554, 178, 32, 24);
-        block_1554_178.addToGameUI(gameUI);
-
-        var block_1906_178 = new Block(1906, 178, 32, 24);
-        block_1906_178.addToGameUI(gameUI);
-
-        var block_1906_178 = new Block(1906, 178, 32, 24);
-        block_1906_178.addToGameUI(gameUI);
-
-        var block_2130_178 = new Block(2130, 178, 32, 24);
-        block_2130_178.addToGameUI(gameUI);
-
-        var block_2418_274 = new Block(2418, 274, 32, 32);
-        block_2418_274.addToGameUI(gameUI);
-
-        var block_2674_274 = new Block(2674, 274, 32, 32);
-        block_2674_274.addToGameUI(gameUI);
-
-        var block_2546_96 = new Block(2546, 80, 32, 66);
-        block_2546_96.addToGameUI(gameUI);
-
-        var block_2802_96 = new Block(2802, 80, 32, 66);
-        block_2802_96.addToGameUI(gameUI);
+        var roof_4527_78 = new Block(4527, 78, 64, 96);
+        roof_4527_78.addToGameUI(gameUI);
 
 
-        var question_946_178 = new Question(946, 178, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
-        question_946_178.addToGameUI(gameUI);
+        var block_719_176 = new Block(719, 176, 32, 32);
+        block_719_176.addToGameUI(gameUI);
+
+        var block_1167_176 = new Block(1167, 176, 32, 24);
+        block_1167_176.addToGameUI(gameUI);
+
+        var block_1551_176 = new Block(1551, 176, 32, 24);
+        block_1551_176.addToGameUI(gameUI);
+
+        var block_1903_176 = new Block(1903, 176, 32, 24);
+        block_1903_176.addToGameUI(gameUI);
+
+
+        var block_2127_176 = new Block(2127, 176, 32, 24);
+        block_2127_176.addToGameUI(gameUI);
+
+        var block_2415_272 = new Block(2415, 272, 32, 32);
+        block_2415_272.addToGameUI(gameUI);
+
+        var block_2671_272 = new Block(2671, 272, 32, 32);
+        block_2671_272.addToGameUI(gameUI);
+
+        var block_2543_78 = new Block(2543, 78, 32, 66);
+        block_2543_78.addToGameUI(gameUI);
+
+        var block_2799_78 = new Block(2799, 78, 32, 66);
+        block_2799_78.addToGameUI(gameUI);
+        
+        var block_2927_272 = new Block(2927, 272, 32, 32);
+        block_2927_272.addToGameUI(gameUI);
+
+
+        var question_943_176 = new Question(943, 176, QuestionItemType.BigMushroom, QuestionDisplayType.Question, GameObjectIconType.Ground);
+        question_943_176.addToGameUI(gameUI);
 
 
 
 
-        var floor_3_280 = new Block(3, 208, 96, 32);
-        floor_3_280.addToGameUI(gameUI);
+        var floor_0_206 = new Block(0, 206, 96, 32);
+        floor_0_206.addToGameUI(gameUI);
 
-        var floor_3_240 = new Block(3, 240, 128, 32);
-        floor_3_240.addToGameUI(gameUI);
+        var floor_0_228 = new Block(0, 238, 128, 32);
+        floor_0_228.addToGameUI(gameUI);
 
-        var floor_3_272 = new Block(3, 272, 160, 32);
-        floor_3_272.addToGameUI(gameUI);
+        var floor_0_270 = new Block(0, 270, 160, 32);
+        floor_0_270.addToGameUI(gameUI);
 
-        var floor_3_305 = new Block(3, 304, 416, 143);
-        floor_3_305.addToGameUI(gameUI);
+        var floor_0_302 = new Block(0, 302, 416, 143);
+        floor_0_302.addToGameUI(gameUI);
 
-        var floor_466_305 = new Block(466, 304, 352, 144);
-        floor_466_305.addToGameUI(gameUI);
+        var floor_463_302 = new Block(463, 302, 352, 144);
+        floor_463_302.addToGameUI(gameUI);
 
-        var floor_914_305 = new Block(914, 304, 96, 144);
-        floor_914_305.addToGameUI(gameUI);
+        var floor_911_302 = new Block(911, 302, 96, 144);
+        floor_911_302.addToGameUI(gameUI);
 
-        var floor_1006_274 = new Block(1106, 272, 1185, 176);
-        floor_1006_274.addToGameUI(gameUI);
+        var floor_1103_270 = new Block(1103, 270, 1185, 176);
+        floor_1103_270.addToGameUI(gameUI);
 
-        var floor_2291_305 = new Block(2291, 304, 1024, 144);
-        floor_2291_305.addToGameUI(gameUI);
+        var floor_2288_302 = new Block(2288, 302, 1024, 144);
+        floor_2288_302.addToGameUI(gameUI);
 
-        var floor_3315_400 = new Block(3315, 400, 382, 48);
-        floor_3315_400.addToGameUI(gameUI);
+        var floor_3312_398 = new Block(3312, 398, 382, 48);
+        floor_3312_398.addToGameUI(gameUI);
 
-        var floor_3698_305 = new Block(3698, 304, 128, 144);
-        floor_3698_305.addToGameUI(gameUI);
+        var floor_3695_302 = new Block(3695, 302, 128, 144);
+        floor_3695_302.addToGameUI(gameUI);
 
-        var floor_3827_400 = new Block(3827, 400, 94, 48);
-        floor_3827_400.addToGameUI(gameUI);
+        var floor_3824_398 = new Block(3824, 398, 94, 48);
+        floor_3824_398.addToGameUI(gameUI);
 
-        var floor_3922_305 = new Block(3922, 304, 160, 144);
-        floor_3922_305.addToGameUI(gameUI);
+        var floor_3919_302 = new Block(3919, 302, 160, 144);
+        floor_3919_302.addToGameUI(gameUI);
 
-        this.bridge_3922_305 = new Block(4082, 304, 416, 32);
-        this.bridge_3922_305.broken = false;
-        this.bridge_3922_305.addToGameUI(gameUI);
+        this.bridge_4079_302 = new Block(4079, 302, 416, 34);
+        this.bridge_4079_302.broken = false;
+        this.bridge_4079_302.addToGameUI(gameUI);
 
-        var lian_4466_274 = new Block(4466, 272, 32, 32);
-        lian_4466_274.addToGameUI(gameUI);
-        lian_4466_274.setCollidable(false, false, false, false);
+        var lian_4463_270 = new Block(4463, 270, 32, 32);
+        lian_4463_270.addToGameUI(gameUI);
+        lian_4463_270.setCollidable(false, false, false, false);
 
-        var floor_4498_305 = new Block(4498, 272, 96, 173);
-        floor_4498_305.addToGameUI(gameUI);
+        var floor_4495_272 = new Block(4495, 272, 96, 173);
+        floor_4495_272.addToGameUI(gameUI);
 
-        var afx_4498_242 = new Block(4498, 242, 32, 32);
-        afx_4498_242.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        afx_4498_242.sprite.setBackgroundPosition(0, 255);
-        afx_4498_242.addToGameUI(gameUI);
-        afx_4498_242.attachCollides(function (gameObject) {
+        var afx_4495_240 = new Block(4495, 240, 32, 32);
+        afx_4495_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        afx_4495_240.sprite.setBackgroundPosition(0, 255);
+        afx_4495_240.addToGameUI(gameUI);
+        afx_4495_240.attachCollides(function (gameObject) {
             if (gameObject instanceof MarioBors) {
-                this.broken = true;
                 this.setCollidable(false, false, false);
                 this.sprite.hide();
-                this.gameUI.bridge_3922_305.broken = true;
+                this.gameUI.bridge_4079_302.sprite.setBackground("#000000");
+                this.gameUI.bridge_4079_302.setCollidable(false, false, false, false);
                 this.gameUI.bowser.dead();
             }
         });
 
-        var floor_4671_400 = new Block(4594, 400, 515, 48);
-        floor_4671_400.addToGameUI(gameUI);
+        var floor_4592_400 = new Block(4592, 400, 515, 48);
+        floor_4592_400.addToGameUI(gameUI);
 
     },
     restart: function () {
@@ -195,9 +196,6 @@ World_1_4 = ClassFactory.createClass(World, {
         case World_1_4_State.Normal:
             for (var i = 0; i < this.animateObjects.length; i++) {
                 this.animateObjects[i].update();
-            }
-            if (this.bridge_3922_305.broken) {
-                this.bridge_3922_305.setWidth(this.bridge_3922_305 - 3);
             }
             break;
         }
