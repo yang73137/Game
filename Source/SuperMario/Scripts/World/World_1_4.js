@@ -157,19 +157,29 @@ World_1_4 = ClassFactory.createClass(World, {
         var floor_4495_272 = new Block(4495, 272, 96, 173);
         floor_4495_272.addToGameUI(gameUI);
 
-        var afx_4495_240 = new Block(4495, 240, 32, 32);
+        var afx_4495_240 = new Block(4498, 240, 32, 32, true);
         afx_4495_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
-        afx_4495_240.sprite.setBackgroundPosition(0, 255);
-        afx_4495_240.addToGameUI(gameUI);
+        afx_4495_240.sprite.setFrameSequence([{ x: 0, y: 255 }, { x: 32, y: 255 }, { x: 32 * 2, y: 255 }, { x: 32 * 3, y: 255 }]);
+        afx_4495_240.sprite.setFrameCounter(8);
+        afx_4495_240.sprite.setRepeat(0);
+        afx_4495_240.sprite.start();
+        afx_4495_240.used = false;
+        afx_4495_240.attachUpdate(function () {
+            if (!this.used) {
+                this.sprite.moveToNextFrame();
+            }
+        });
         afx_4495_240.attachCollides(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 this.setCollidable(false, false, false);
                 this.sprite.hide();
+                this.used = true;
                 this.gameUI.bridge_4079_302.sprite.setBackground("#000000");
                 this.gameUI.bridge_4079_302.setCollidable(false, false, false, false);
                 this.gameUI.bowser.dead();
             }
         });
+        afx_4495_240.addToGameUI(gameUI);
 
         var floor_4592_400 = new Block(4592, 400, 515, 48);
         floor_4592_400.addToGameUI(gameUI);
