@@ -184,13 +184,24 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 gameObject.invincible ? this.dead(gameObject.x < this.x + this.width) : gameObject.hurt();
             }
             else if (gameObject.stoppable) {
-                if (this.type == KoopaTroopaType.Clever) {
-                    if ((this.x < gameObject.x) || (this.x + this.width > gameObject.x + gameObject.width)) {
-                        this.setFaceDirection(!this.faceToRight);
+                if (gameObject instanceof Brick) {
+                    if (gameObject.state == BrickState.Up || gameObject.state == BrickState.Break) {
+                        this.dead();
                     }
                 }
-                this.movingUp = !this.movingUp;
-                this.movingUpLength = 0;
+                else if (gameObject instanceof Question) {
+                    if (gameObject.state == QuestionState.Up) {
+                        this.dead();
+                    }
+                } else {
+                    if (this.type == KoopaTroopaType.Clever) {
+                        if ((this.x < gameObject.x) || (this.x + this.width > gameObject.x + gameObject.width)) {
+                            this.setFaceDirection(!this.faceToRight);
+                        }
+                    }
+                    this.movingUp = !this.movingUp;
+                    this.movingUpLength = 0;
+                }
             }
         }
     },
@@ -213,9 +224,10 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
             else if (gameObject instanceof Enemy) {
                 gameObject.dead();
             }
-            if (this.moving && gameObject.stoppable) {
-                this.setFaceDirection(true);
-            }
+            
+        }
+        if (this.moving && gameObject.stoppable) {
+            this.setFaceDirection(true);
         }
     },
     onCollidesRight: function (gameObject) {
@@ -237,9 +249,9 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
             else if (gameObject instanceof Enemy) {
                 gameObject.dead();
             }
-            if (this.moving && gameObject.stoppable) {
-                this.setFaceDirection(false);
-            }
+        }
+        if (this.moving && gameObject.stoppable) {
+            this.setFaceDirection(false);
         }
     },
     dead: function (faceToRight) {
@@ -279,7 +291,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     this.sprite.setFrameSequence([{ x: 32 * 6, y: 16 }, { x: 32 * 7, y: 16 }]);
                     break;
                 case KoopaTroopaSpriteType.MoveRight:
-                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 144 }, { x: 32 * 93, y: 144 }]);
+                    this.sprite.setFrameSequence([{ x: 32 * 94, y: 16 }, { x: 32 * 93, y: 16 }]);
                     break;
                 case KoopaTroopaSpriteType.DownSide:
                     this.sprite.setFrameSequence([{ x: 32 * 10, y: 32 }]);

@@ -404,15 +404,29 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.jumpingUp = false;
                 }
 
+                var collideObject1 = null;
+                var collideObject2 = null;
+
                 for (var blockIndex = 0; blockIndex < this.gameUI.animateObjects.length; blockIndex++) {
                     var block = this.gameUI.animateObjects[blockIndex];
                     if (this.collidesUpWith(block)) {
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                        if (block.stoppable) {
-                            //this.y = block.y + block.height;
+                        
+                        if (collideObject1 == null) {
+                            collideObject1 = block;
+                        } else {
+                            collideObject2 = block;
+                        }
+                        
+                        if (collideObject1 && collideObject2) {
+                            block = collideObject1;
+                            if (Math.abs(collideObject1.x - this.x) > Math.abs(collideObject2.x - this.x)) {
+                                block = collideObject2;
+                            }
+                            block.onCollides(this);
+                            block.onCollidesDown(this);
+                            this.y = block.y + block.height;
                             this.jumpingUp = false;
-                            //break;
+                            break;
                         }
                     }
                 }
@@ -420,12 +434,22 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 for (var blockIndex = 0; blockIndex < this.gameUI.staticObjects.length; blockIndex++) {
                     var block = this.gameUI.staticObjects[blockIndex];
                     if (this.collidesUpWith(block)) {
-                        block.onCollides(this);
-                        block.onCollidesDown(this);
-                        if (block.stoppable) {
-                            //this.y = block.y + block.height;
+                        if (collideObject1 == null) {
+                            collideObject1 = block;
+                        } else {
+                            collideObject2 = block;
+                        }
+                        
+                        if (collideObject1 && collideObject2) {
+                            block = collideObject1;
+                            if (Math.abs(collideObject1.x - this.x) > Math.abs(collideObject2.x - this.x)) {
+                                block = collideObject2;
+                            }
+                            block.onCollides(this);
+                            block.onCollidesDown(this);
+                            this.y = block.y + block.height;
                             this.jumpingUp = false;
-                            //break;
+                            break;
                         }
                     }
                 }
