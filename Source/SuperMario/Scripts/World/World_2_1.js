@@ -36,9 +36,18 @@ World_2_1 = ClassFactory.createClass(World, {
         
         // scene1
         for (var i = 0; i < 3; i++) {
+            if (i == 1) {
+                continue;
+            }
             var brick = new Brick(480 + 32 * i, 272, GameObjectIconType.Ground);
             brick.addToGameUI(gameUI);
         }
+
+        var goomba_766_208 = new Goomba(766, 208, GameObjectIconType.Ground);
+        goomba_766_208.addToGameUI(gameUI);
+
+        var question_512_272 = new Question(512, 272, QuestionItemType.BigMushroom, QuestionDisplayType.Brick, GameObjectIconType.Ground);
+        question_512_272.addToGameUI(gameUI);
         
         for (var i = 0; i < 3; i++) {
             var brick = new Brick(926 + 32 * i, 144, GameObjectIconType.Ground);
@@ -47,13 +56,23 @@ World_2_1 = ClassFactory.createClass(World, {
 
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 6; j++) {
-                if ((i == 0 && j < 4) || (i == 1 && j < 3) || (i == 2 && j < 2) || (i == 1 && j < 1)) {
+                if ((i == 0 && j < 4) || (i == 1 && j < 3) || (i == 2 && j < 2) || (i == 3 && j < 1)) {
                     continue;
                 }
                 var iron = new Block(638 + j * 32, 240 + i * 32, 32, 32);
                 iron.addToGameUI(gameUI);
             }
         }
+
+        var question_894_272 = new Question(894, 272, QuestionItemType.Gold, QuestionDisplayType.Hidden, GameObjectIconType.Ground);
+        question_894_272.addToGameUI(gameUI);
+
+        var koopaTroopa_990_352 = new KoopaTroopa(990, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_990_352.addToGameUI(gameUI);
+
+        var koopaTroopa_1054_352 = new KoopaTroopa(1054, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_1054_352.addToGameUI(gameUI);
+
 
         var iron_1086_240 = new Block(1086, 240, 32, 160);
         iron_1086_240.addToGameUI(gameUI);

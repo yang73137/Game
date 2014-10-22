@@ -410,9 +410,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         block.onCollides(this);
                         block.onCollidesDown(this);
                         if (block.stoppable) {
-                            this.y = block.y + block.height;
+                            //this.y = block.y + block.height;
                             this.jumpingUp = false;
-                            break;
+                            //break;
                         }
                     }
                 }
@@ -423,9 +423,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
                         block.onCollides(this);
                         block.onCollidesDown(this);
                         if (block.stoppable) {
-                            this.y = block.y + block.height;
+                            //this.y = block.y + block.height;
                             this.jumpingUp = false;
-                            break;
+                            //break;
                         }
                     }
                 }
