@@ -129,7 +129,7 @@ Goomba = ClassFactory.createClass(Enemy, {
         }
         else if (gameObject instanceof Question) {
             if (gameObject.state == QuestionState.Up) {
-                this.dead();
+                this.dead(gameObject.x < this.x + this.width / 2);
             }
         }
     },
