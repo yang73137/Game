@@ -38,8 +38,10 @@ World_1_4 = ClassFactory.createClass(World, {
         x.setStoppable(true);
         x.attachCollides(function(gameObject) {
             if (gameObject instanceof MarioBors) {
-                alert("后续关卡开发中");
+                var world = new World_2_1();
+                this.gameUI.gameUI.setWorld(world);
                 this.gameUI.state = World_1_4_State.None;
+                this.gameUI.mario.setCollidable(true, true, true, true);
             }
         });
         x.addToGameUI(gameUI);
@@ -146,7 +148,7 @@ World_1_4 = ClassFactory.createClass(World, {
         var floor_3919_302 = new Block(3919, 302, 160, 144);
         floor_3919_302.addToGameUI(gameUI);
 
-        this.bridge_4079_302 = new Block(4079, 302, 416, 34);
+        this.bridge_4079_302 = new Block(4079, 302, 416, 35);
         this.bridge_4079_302.broken = false;
         this.bridge_4079_302.addToGameUI(gameUI);
 

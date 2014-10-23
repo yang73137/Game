@@ -21,6 +21,10 @@ World_1_2 = ClassFactory.createClass(World, {
         this.show();
 
         this.state = World_1_2_State.Normal;
+
+        this.changeToWorld_2_1 = false;
+        this.changeToWorld_3_1 = false;
+        this.changeToWorld_4_1 = false;
     },
     scroll: function () {
 
@@ -304,12 +308,9 @@ World_1_2 = ClassFactory.createClass(World, {
         tube_6476_304.tip = false;
         tube_6476_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                if (!this.tip) {
-                    this.tip = true;
-                    alert("想跳关，请充值1元到作者支付宝账户先。");
-                    gameObject.squating = false;
-                    this.gameUI.changeToScene5();
-                }
+                this.gameUI.changeToWorld_2_1 = true;
+
+                this.gameUI.changeToScene5();
             }
         });
         
@@ -615,8 +616,13 @@ World_1_2 = ClassFactory.createClass(World, {
                     this.mario.moveRight(2);
                     this.mario.sprite.moveToNextFrame();
                 } else {
-                    var world_1_3 = new World_1_3();
-                    this.gameUI.setWorld(world_1_3);
+                    var world = new World_1_3();
+                    if (this.changeToWorld_2_1) {
+                        
+                        world = new World_2_1();
+                    }
+                    
+                    this.gameUI.setWorld(world);
                     this.state = World_1_2_State.None;
                     this.mario.setCollidable(true, true, true, true);
                 }

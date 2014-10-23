@@ -1,9 +1,11 @@
 ﻿
 World_2_1_State = {
     None: 0,
-    Scene1: 1,
-    Scene2: 2,
-    Scene3: 3
+    Normal: 1,
+    Scene1: 2,
+    Scene2: 3,
+    Scene3: 4,
+    Scene4: 5
 };
 
 World_2_1 = ClassFactory.createClass(World, {
@@ -23,6 +25,10 @@ World_2_1 = ClassFactory.createClass(World, {
         if (!this.scrollable) {
             return;
         }
+        
+        if (Math.abs(this.x) >= 6318) {
+            return;
+        }
 
         if (this.mario.x - Math.abs(this.x) > 220) {
             this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
@@ -33,6 +39,9 @@ World_2_1 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 208 - this.mario.height);
+
+        var spring = new Spring(6015, 352);
+        spring.addToGameUI(gameUI);
         
         // scene1
         for (var i = 0; i < 3; i++) {
@@ -288,6 +297,19 @@ World_2_1 = ClassFactory.createClass(World, {
                 gold_xy.addToGameUI(gameUI);
             }
         }
+        
+        var iron_6399_366 = new Block(6399, 366, 32, 32);
+        iron_6399_366 .addToGameUI(gameUI);
+
+        var flag = new Block(6399 + 12, 60, 8, 308);
+        flag.addToGameUI(gameUI);
+        flag.attachCollidesLeft(function (gameObject) {
+            if (gameObject instanceof MarioBors) {
+                if (gameObject instanceof MarioBors) {
+                    this.gameUI.changeToScene4();
+                }
+            }
+        });
 
         this.state = World_2_1_State.Scene1;
     },
@@ -329,6 +351,29 @@ World_2_1 = ClassFactory.createClass(World, {
             this.setPosition(-3560, 0);
             this.state = World_2_1_State.Normal;
             break;
+        case World_2_1_State.Scene4:
+            if (this.mario.freefall()) {
+                return;
+            } else {
+                if (this.mario.spriteType != MarioSprite.Move) {
+                    this.mario.setSprite(MarioSprite.Move);
+                    this.mario.moving = true;
+                    this.mario.movingToLeft = true;
+                    this.mario.setX(this.mario.x + 32);
+                    this.mario.sprite.setFrameCounter(2);
+                }
+            }
+            if (this.mario.x < 6589) {
+                this.mario.moveDown(7);
+                this.falling = false;
+                this.mario.moveRight(2);
+                this.mario.sprite.moveToNextFrame();
+            } else {
+                this.mario.setCollidable(true, true, true, true);
+                this.state = World_2_1_State.None;
+                alert("后续关卡正在开发中......");
+            }
+            break;
         }
     },
     changeToScene1: function () {
@@ -342,5 +387,10 @@ World_2_1 = ClassFactory.createClass(World, {
     changeToScene3: function () {
         this.scrollable = true;
         this.state = World_2_1_State.Scene3;
+    },
+    changeToScene4: function () {
+        this.mario.setCollidable(false, true, false, false);
+        this.scrollable = true;
+        this.state = World_2_1_State.Scene4;
     }
 });

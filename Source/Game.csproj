@@ -152,6 +152,7 @@
     <Content Include="SuperMario\Scripts\Object\Mushroom.js" />
     <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
     <Content Include="SuperMario\Scripts\Object\Question.js" />
+    <Content Include="SuperMario\Scripts\Object\Spring.js" />
     <Content Include="SuperMario\Scripts\Object\Star.js" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.css" />
     <Content Include="SuperMario\Scripts\QUnit\qunit-1.15.0.js" />
