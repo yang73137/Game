@@ -5,7 +5,8 @@ World_2_1_State = {
     Scene1: 2,
     Scene2: 3,
     Scene3: 4,
-    Scene4: 5
+    Scene4: 5,
+    Scene5: 6
 };
 
 World_2_1 = ClassFactory.createClass(World, {
@@ -25,8 +26,12 @@ World_2_1 = ClassFactory.createClass(World, {
         if (!this.scrollable) {
             return;
         }
-        
-        if (Math.abs(this.x) >= 6318) {
+
+        if ((Math.abs(this.x) >= 6318 && Math.abs(this.x) <= 6832)) {
+            return;
+        }
+
+        if ((Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8292)) {
             return;
         }
 
@@ -42,7 +47,49 @@ World_2_1 = ClassFactory.createClass(World, {
 
         var spring = new Spring(6015, 352);
         spring.addToGameUI(gameUI);
-        
+
+        var tree = new Block(2655, 0, 21, 138);
+        tree.addToGameUI(gameUI);
+        tree.attachCollides(function(gameObject) {
+            if (gameObject instanceof MarioBors) {
+                this.gameUI.changeToScene5();
+            }
+        });
+
+        //scene5
+        var floor_6850_400 = new Block(6850, 400, 1952, 48);
+        floor_6850_400.addToGameUI(gameUI);
+
+        var block_7100_240 = new Block(7100, 304, 128, 16, true);
+        block_7100_240.enabled = false;
+        block_7100_240.movingRight = true;
+        block_7100_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_7100_240.sprite.setBackgroundPosition(0, 376);
+        block_7100_240.attachUpdate(function () {
+
+            if (!this.enabled) {
+                return;
+            }
+
+            if (this.x > 9000) {
+                this.sprite.hide();
+                this.setCollidable(false, false, false, false);
+                return;
+            }
+            this.moveRight(1);
+        });
+        block_7100_240.attachCollidesUp(function (gameObject) {
+            if (gameObject instanceof MarioBors && !this.enabled) {
+                this.enabled = true;
+            }
+        });
+        block_7100_240.addToGameUI(gameUI);
+
+        for (var i = 0; i < 56; i++) {
+            var gold = new Gold2(7100 + i * 32, 160, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+
         // scene1
         for (var i = 0; i < 3; i++) {
             if (i == 1) {
@@ -332,6 +379,15 @@ World_2_1 = ClassFactory.createClass(World, {
         case World_2_1_State.None:
             break;
         case World_2_1_State.Normal:
+            if ((Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8700)) {
+                this.setX(this.x - 5);
+                if (this.mario.x < Math.abs(this.x)) {
+                    this.mario.setX(Math.abs(this.x));
+                }
+            }
+            if (this.mario.x > 8700 && this.mario.x <= 9212 && this.mario.y > Const.SCREEN_HEIGHT + this.mario.height) {
+                this.changeToScene6();
+            }
             for (var i = 0; i < this.animateObjects.length; i++) {
                 this.animateObjects[i].update();
             }
@@ -374,6 +430,16 @@ World_2_1 = ClassFactory.createClass(World, {
                 alert("后续关卡正在开发中......");
             }
             break;
+        case World_2_1_State.Scene5:
+            this.mario.setPosition(7010, 400 - this.mario.height);
+            this.setPosition(-6850, 0);
+            this.state = World_2_1_State.Normal;
+            break;
+        case World_2_1_State.Scene6:
+            this.mario.setPosition(5240, -this.mario.height);
+            this.setPosition(-5000, 0);
+            this.state = World_2_1_State.Normal;
+            break;
         }
     },
     changeToScene1: function () {
@@ -392,5 +458,13 @@ World_2_1 = ClassFactory.createClass(World, {
         this.mario.setCollidable(false, true, false, false);
         this.scrollable = true;
         this.state = World_2_1_State.Scene4;
+    },
+    changeToScene5: function() {
+        this.scrollable = true;
+        this.state = World_2_1_State.Scene5;
+    },
+    changeToScene6: function () {
+        this.scrollable = true;
+        this.state = World_2_1_State.Scene6;
     }
 });
