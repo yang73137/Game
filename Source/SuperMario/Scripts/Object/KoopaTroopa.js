@@ -279,7 +279,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
         }
         else if (this.type == KoopaTroopaType.Fly) {
             if (spriteType == KoopaTroopaSpriteType.Dead) {
-                this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }])
+                this.sprite.setFrameSequence([{ x: 32 * 10, y: 320 }]);
             } else {
                 this.sprite.setFrameSequence([{ x: 32 * 8, y: 144 }, { x: 32 * 9, y: 144 }]);
             }

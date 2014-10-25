@@ -40,6 +40,10 @@ World_4_1 = ClassFactory.createClass(World, {
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 400 - this.mario.height);
 
+        var spiny = new Spiny();
+        spiny.addToGameUI(gameUI);
+        spiny.birth(300, 200);
+
         var floor_0_400 = new Block(0, 400, 1025, 48);
         floor_0_400.addToGameUI(gameUI);
 
@@ -106,7 +110,7 @@ World_4_1 = ClassFactory.createClass(World, {
         var tube_4224_272 = new Block(4224, 272, 64, 128);
         tube_4224_272.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                this.changeToScene2();
+                this.gameUI.changeToScene2();
             }
         });
         tube_4224_272.addToGameUI(gameUI);

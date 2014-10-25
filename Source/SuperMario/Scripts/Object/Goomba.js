@@ -26,10 +26,6 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.sprite.setRepeat(0);
         this.sprite.setFrameCounter(5);
 
-        this.moveLeftSpriteSequence = [];
-        this.moveRightSpriteSequence = [];
-        this.deadSpriteSequence = [];
-        
         this.sprite.show();
         this.sprite.start();
 
