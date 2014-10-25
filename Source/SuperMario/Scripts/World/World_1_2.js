@@ -277,15 +277,12 @@ World_1_2 = ClassFactory.createClass(World, {
 
         var tube_6220_304 = new Block(6220, 304, 64, 96);
         tube_6220_304.addToGameUI(gameUI);
-        tube_6220_304.tip = false;
         tube_6220_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                if (!this.tip) {
-                    this.tip = true;
-                    alert("想跳关，请充值1元到作者支付宝账户先。");
-                    gameObject.squating = false;
-                    this.gameUI.changeToScene5();
-                }
+                var world = new World_4_1();
+                this.gameUI.state = World_1_2_State.None;
+                this.gameUI.mario.setCollidable(true, true, true, true);
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         
@@ -305,12 +302,12 @@ World_1_2 = ClassFactory.createClass(World, {
         
         var tube_6476_304 = new Block(6476, 304, 64, 96);
         tube_6476_304.addToGameUI(gameUI);
-        tube_6476_304.tip = false;
         tube_6476_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                this.gameUI.changeToWorld_2_1 = true;
-
-                this.gameUI.changeToScene5();
+                var world = new World_2_1();
+                this.gameUI.state = World_1_2_State.None;
+                this.gameUI.mario.setCollidable(true, true, true, true);
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         
@@ -572,7 +569,7 @@ World_1_2 = ClassFactory.createClass(World, {
                 }
                 break;
             case World_1_2_State.Scene1:
-                this.mario.moveRight(1);
+                this.mario.moveRight(2);
                 this.mario.sprite.moveToNextFrame();
                 if (this.mario.x >= 292) {
                     this.changeToScene2();
@@ -617,14 +614,9 @@ World_1_2 = ClassFactory.createClass(World, {
                     this.mario.sprite.moveToNextFrame();
                 } else {
                     var world = new World_1_3();
-                    if (this.changeToWorld_2_1) {
-                        
-                        world = new World_2_1();
-                    }
-                    
-                    this.gameUI.setWorld(world);
                     this.state = World_1_2_State.None;
                     this.mario.setCollidable(true, true, true, true);
+                    this.gameUI.setWorld(world);
                 }
                 break;
         }

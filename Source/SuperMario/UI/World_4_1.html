@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>World 1-1 SuperMario</title>
+    <title>World 4-1 SuperMario</title>
     <style>
         * {
             margin: 0 auto;
@@ -19,7 +19,7 @@
         }
     </style>
 </head>
-<body style="background: #ffffff;">
+<body style="background: #000000;">
     <div id="app"></div>
 
     <script src="../Scripts/Basic/ClassFactory.js"></script>
@@ -64,15 +64,17 @@
 
         gameUI.setMario(new MarioBors(0, 0));
 
-        var world = new World_1_1();
+        var world = new World_4_1();
         world.addToGameUI(gameUI);
 
+        //world.changeToScene2();
+        
         //setTimeout(function () {
-        //    world.mario.setPosition(2500, 0);
-        //    world.setPosition(-2400, 0);
+            //world.mario.setType(MarioType.Flower);
+            //world.mario.setPosition(2600, 10);
+            //world.setPosition(-2400, -2);
         //}, 100);
         
-
         setInterval(function () {
             gameUI.update();
         }, 16);
