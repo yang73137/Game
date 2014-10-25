@@ -72,7 +72,7 @@ Spiny = ClassFactory.createClass(Enemy, {
     },
     onBall: function () {
         if (!this.moveDown(5)) {
-            this.faceToRight = 0 * Math.round(Math.random());
+            this.faceToRight = this.gameUI.mario.x > this.x;
             this.state = SpinyState.Move;
             this.setSpriteFrames(SpinyState.Move);
             this.sprite.moveToFrame(0);
