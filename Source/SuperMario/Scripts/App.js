@@ -27,7 +27,7 @@ App = {
         alert("加载图片 " + src + " 出错");
     },
     run: function () {
-        ImageLoader.load(this, [Const.IMAGE_ITEMS, Const.IMAGE_ENEMIES, Const.IMAGE_MARIOBROS, Const.IMAGE_TILESET, Const.IMAGE_WORLD_1_1, Const.IMAGE_WORLD_1_2]);
+        ImageLoader.load(this, [Const.IMAGE_ITEMS, Const.IMAGE_ENEMIES, Const.IMAGE_MARIOBROS, Const.IMAGE_TILESET, Const.IMAGE_WORLD_1_1]);
     },
     onTimer: function () {
         setInterval(function () {

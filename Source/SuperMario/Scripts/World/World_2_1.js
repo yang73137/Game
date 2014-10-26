@@ -66,9 +66,13 @@ World_2_1 = ClassFactory.createClass(World, {
         block_7100_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         block_7100_240.sprite.setBackgroundPosition(0, 376);
         block_7100_240.attachUpdate(function () {
-
+           
             if (!this.enabled) {
                 return;
+            }
+
+            if (!this.gameUI.scrollable) {
+                this.gameUI.scrollable = true;
             }
 
             if (this.x > 9000) {
@@ -76,7 +80,7 @@ World_2_1 = ClassFactory.createClass(World, {
                 this.setCollidable(false, false, false, false);
                 return;
             }
-            this.moveRight(1);
+            this.moveRight(2);
         });
         block_7100_240.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && !this.enabled) {
@@ -379,8 +383,8 @@ World_2_1 = ClassFactory.createClass(World, {
         case World_2_1_State.None:
             break;
         case World_2_1_State.Normal:
-            if ((Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8700)) {
-                this.setX(this.x - 5);
+            if ((this.scrollable && Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8300)) {
+                this.setX(this.x - 2);
                 if (this.mario.x < Math.abs(this.x)) {
                     this.mario.setX(Math.abs(this.x));
                 }
@@ -460,7 +464,7 @@ World_2_1 = ClassFactory.createClass(World, {
         this.state = World_2_1_State.Scene4;
     },
     changeToScene5: function() {
-        this.scrollable = true;
+        this.scrollable = false;
         this.state = World_2_1_State.Scene5;
     },
     changeToScene6: function () {

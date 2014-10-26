@@ -21,10 +21,8 @@ World_1_2 = ClassFactory.createClass(World, {
         this.show();
 
         this.state = World_1_2_State.Normal;
-
-        this.changeToWorld_2_1 = false;
-        this.changeToWorld_3_1 = false;
-        this.changeToWorld_4_1 = false;
+        
+        ImageLoader.load(this, [Const.IMAGE_WORLD_2_1, Const.IMAGE_WORLD_4_1]);
     },
     scroll: function () {
 

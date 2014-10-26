@@ -17,6 +17,8 @@ World_1_3 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
         this.state = World_1_3_State.Normal;
+        
+        ImageLoader.load(this, [Const.IMAGE_WORLD_1_4]);
     },
     scroll: function () {
         if (!this.scrollable) {

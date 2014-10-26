@@ -21,7 +21,7 @@
 </head>
 <body style="background: #ffffff;">
     <div id="app"></div>
-
+    <script src="../Scripts/Basic/ImgLoader.js"></script>
     <script src="../Scripts/Basic/ClassFactory.js"></script>
     <script src="../Scripts/Basic/Const.js"></script>
     <script src="../Scripts/Basic/Counter.js"></script>
@@ -71,11 +71,11 @@
 
         //world.changeToScene1();
         
-        //setTimeout(function () {
-            //world.mario.setType(MarioType.Flower);
-            //world.mario.setPosition(2600, 10);
-            //world.setPosition(-2400, -2);
-        //}, 100);
+        setTimeout(function () {
+            world.mario.setType(MarioType.Flower);
+            world.mario.setPosition(2600, 10);
+            world.setPosition(-2400, -2);
+        }, 100);
         
         setInterval(function () {
             gameUI.update();
