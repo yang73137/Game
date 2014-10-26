@@ -22,7 +22,7 @@ World_1_2 = ClassFactory.createClass(World, {
 
         this.state = World_1_2_State.Normal;
         
-        ImageLoader.load(this, [Const.IMAGE_WORLD_2_1, Const.IMAGE_WORLD_4_1]);
+        ImageLoader.load(this, [Const.IMAGE_WORLD_1_3, Const.IMAGE_WORLD_2_1, Const.IMAGE_WORLD_4_1]);
     },
     scroll: function () {
 
