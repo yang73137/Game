@@ -24,12 +24,14 @@ Spiny = ClassFactory.createClass(Enemy, {
         this.sprite.hide();
 
         this.setSize(32, 32);
-        this.state = SpinyState.Ball;
-        this.setSpriteFrames(SpinyState.Ball);
+        this.state = SpinyState.None;
     },
     birth: function (x, y) {
         this.setPosition(x, y);
+        this.setCollidable(true, true, true, true);
         this.state = SpinyState.Ball;
+        this.setSpriteFrames(SpinyState.Ball);
+        this.sprite.moveToFrame(0);
         this.sprite.show();
     },
     addToGameUI: function (gameUI) {
@@ -71,6 +73,10 @@ Spiny = ClassFactory.createClass(Enemy, {
         }
     },
     onBall: function () {
+        if (!this.onScreen()) {
+            this.onOffScreen();
+            return;
+        }
         if (!this.moveDown(5)) {
             this.faceToRight = this.gameUI.mario.x > this.x;
             this.state = SpinyState.Move;

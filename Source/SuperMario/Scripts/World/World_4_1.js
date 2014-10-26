@@ -25,7 +25,14 @@ World_4_1 = ClassFactory.createClass(World, {
         if (!this.scrollable) {
             return;
         }
-        
+
+        if (Math.abs(this.x) >= 6500 && this.lakitu.active) {
+            this.lakitu.active = false;
+            this.lakitu.setCollidable(false, false, false, false);
+            this.lakitu.state = LakituState.None;
+            this.lakitu.sprite.hide();
+        }
+
         if (Math.abs(this.x)  >= 7148) {
             return;
         }
@@ -40,9 +47,9 @@ World_4_1 = ClassFactory.createClass(World, {
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 400 - this.mario.height);
 
-        var spiny = new Spiny();
-        spiny.addToGameUI(gameUI);
-        spiny.birth(300, 200);
+        this.lakitu = new Lakitu(this.mario.x + 250, 48);
+        this.lakitu.active = true;
+        this.lakitu.addToGameUI(gameUI);
 
         var floor_0_400 = new Block(0, 400, 1025, 48);
         floor_0_400.addToGameUI(gameUI);
@@ -253,6 +260,9 @@ World_4_1 = ClassFactory.createClass(World, {
             this.mario.setPosition(84, 400 - this.mario.height);
         }
 
+        this.lakitu.active = true;
+        this.lakitu.setPosition(this.mario.x + 250, 48);
+
         this.scrollable = true;
     },
     update: function () {
@@ -278,6 +288,8 @@ World_4_1 = ClassFactory.createClass(World, {
             case World_4_1_State.Scene3:
                 this.mario.setPosition(5232, 336 - this.mario.height);
                 this.setPosition(-5116, 0);
+                this.lakitu.active = true;
+                this.lakitu.setPosition(this.mario.x + 250, 48);
                 this.state = World_4_1_State.Normal;
                 break;
         case World_4_1_State.Scene4:
@@ -311,13 +323,14 @@ World_4_1 = ClassFactory.createClass(World, {
     },
     changeToScene2: function () {
         this.scrollable = false;
+        this.lakitu.active = false;
         this.state = World_4_1_State.Scene2;
     },
     changeToScene3: function () {
         this.scrollable = true;
         this.state = World_4_1_State.Scene3;
     },
-    changeToScene4: function () {
+    changeToScene4: function() {
         this.mario.setCollidable(false, true, false, false);
         this.scrollable = true;
         this.state = World_4_1_State.Scene4;

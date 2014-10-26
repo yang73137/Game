@@ -150,6 +150,7 @@
     <Content Include="SuperMario\Scripts\Object\Gold.js" />
     <Content Include="SuperMario\Scripts\Object\Goomba.js" />
     <Content Include="SuperMario\Scripts\Object\KoopaTroopa.js" />
+    <Content Include="SuperMario\Scripts\Object\Lakitu.js" />
     <Content Include="SuperMario\Scripts\Object\Mushroom.js" />
     <Content Include="SuperMario\Scripts\Object\MarioBros.js" />
     <Content Include="SuperMario\Scripts\Object\Question.js" />
