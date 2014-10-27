@@ -2,7 +2,7 @@
 LakituState = {
     None: 0,
     Move: 1,
-    Throw: 2,
+    ThrowSpiny: 2,
     Dead: 3
 };
 
@@ -50,8 +50,8 @@ Lakitu = ClassFactory.createClass(Enemy, {
             case LakituState.Move:
                 this.onMove();
                 break;
-            case LakituState.Throw:
-                this.onThrow();
+            case LakituState.ThrowSpiny:
+                this.onThrowSpiny();
                 break;
             case LakituState.Dead:
                 this.onDead();
@@ -88,20 +88,20 @@ Lakitu = ClassFactory.createClass(Enemy, {
             
             this.movingRight = false;
             this.speed = 3;
-            this.changeToThrow();
+            this.throwSpiny();
         } else if (!this.movingRight && this.x <= this.gameUI.mario.x - 130) {
             this.movingRight = true;
             this.speed = 3;
-            this.changeToThrow();
+            this.throwSpiny();
         }
     },
-    changeToThrow: function () {
+    throwSpiny: function () {
         this.sprite.setFrameSequence([{ x: 32 * 27, y: 31 }]);
         this.setY(this.y + 16);
         this.sprite.moveToFrame(0);
-        this.state = LakituState.Throw;
+        this.state = LakituState.ThrowSpiny;
     },
-    onThrow: function () {
+    onThrowSpiny: function () {
         if (this.throwCounter.countdown()) {
             return;
         }

@@ -153,5 +153,5 @@ Spiny = ClassFactory.createClass(Enemy, {
                 this.moveDown(5);
             }
         }
-    },
+    }
 });
