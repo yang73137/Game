@@ -114,8 +114,7 @@
         var left = -col * this.width;
         var top = -row * this.height;
 
-        this.style.backgroundPositionX = isNaN(left) ? 0 : left + "px";
-        this.style.backgroundPositionY = isNaN(top) ? 0 : top + "px";
+        this.style.backgroundPosition = (isNaN(left) ? 0 : left + "px") + " " + (isNaN(top) ? 0 : top + "px");
     },
     collidesWith: function (s) {
         if (!s.visible) {
