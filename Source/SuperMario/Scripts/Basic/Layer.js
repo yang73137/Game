@@ -61,15 +61,16 @@
     },
     setBackgroundX: function (x) {
         this.backgroundX = x;
-        this.style.backgroundPositionX = -x + "px";
+        this.setBackgroundPosition(x, this.backgroundY);
     },
     setBackgroundY: function (y) {
         this.backgroundY = y;
-        this.style.backgroundPositionY = -y + "px";
+        this.setBackgroundPosition(this.backgroundX, y);
     },
     setBackgroundPosition: function (x, y) {
-        this.setBackgroundX(x);
-        this.setBackgroundY(y);
+        this.backgroundX = x;
+        this.backgroundY = y;
+        this.style.backgroundPosition = (this.backgroundX) + "px" + " " + (-this.backgroundY + "px");
     },
     setBackgroundImage: function (src) {
         this.backgroundImage = src;

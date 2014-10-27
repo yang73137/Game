@@ -90,8 +90,7 @@
         var left = -currentFrame.x;
         var top = -currentFrame.y;
 
-        this.style.backgroundPositionX = isNaN(left) ? 0 : left + "px";
-        this.style.backgroundPositionY = isNaN(top) ? 0 : top + "px";
+        this.style.backgroundPosition = (isNaN(left) ? 0 : left + "px") + " " + (isNaN(top) ? 0 : top + "px");
     },
     reset: function () {
         this.frameIndex = -1;
