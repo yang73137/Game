@@ -548,41 +548,41 @@ World_1_2 = ClassFactory.createClass(World, {
         this.mario.movingToLeft = true;
         this.mario.setSprite(MarioSprite.Move);
         this.mario.sprite.setFrameCounter(4);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene2: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = true;
         this.mario.setPosition(572, 0);
         this.setPosition(-524, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene3: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setPosition(6720, 0);
         this.setPosition(-6678, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene4: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = true;
         this.mario.setPosition(4220, this.mario.type == MarioType.Small ? 304 : 272);
         this.setPosition(-4100, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene5: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = true;
         this.mario.setPosition(7310, 336 - this.mario.height);
         this.setPosition(-7199, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene6: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
-        this.state = WorldState.Finish;
+        this.state = WorldState.Ending;
     },
     onGame: function () {
         if (this.mario.x < 292) {

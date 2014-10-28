@@ -2,9 +2,10 @@
 WorldState = {
     None: 0,
     ShowTitle: 1,
+    Opening: 0,
     ChangeScene: 2,
-    Game: 3,
-    Finish: 4
+    Gaming: 3,
+    Ending: 4
 };
 
 World = ClassFactory.createClass(Layer, {
@@ -17,7 +18,14 @@ World = ClassFactory.createClass(Layer, {
         this.mario = null;
         this.gameUI = null;
         this.scrollable = false;
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
+
+        this.titleLayer = new Label();
+        titleLayer.setSize(512, 512);
+        titleLayer.setZ(9999);
+    },
+    setTitle: function(title) {
+        this.setTitle.setText(title);
     },
     scroll: function () {
     },
@@ -29,10 +37,10 @@ World = ClassFactory.createClass(Layer, {
             break;
         case WorldState.ChangeScene:
             break;
-        case WorldState.Game:
+        case WorldState.Gaming:
             this.onGame();
             break;
-        case WorldState.Finish:
+        case WorldState.Ending:
             this.onFinish();
             break;
         }

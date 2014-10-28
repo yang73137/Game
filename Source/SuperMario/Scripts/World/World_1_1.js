@@ -37,27 +37,27 @@ World_1_1 = ClassFactory.createClass(World, {
         this.scrollable = true;
         this.mario.setPosition(50, 400 - this.mario.height);
         this.setPosition(0, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene2: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.setPosition(-6784, 0);
         this.mario.setPosition(6834, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene3: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = true;
         this.setPosition(-5120, 0);
         this.mario.setPosition(5232, 304);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene4: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
-        this.state = WorldState.Finish;
+        this.state = WorldState.Ending;
     },
     build: function () {
         var gameUI = this;

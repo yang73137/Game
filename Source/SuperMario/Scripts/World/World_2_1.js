@@ -373,41 +373,41 @@ World_2_1 = ClassFactory.createClass(World, {
         this.scrollable = true;
         this.mario.setPosition(84, 400 - this.mario.height);
         this.setPosition(0, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene2: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setPosition(9375, 0);
         this.setPosition(-9325, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene3: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = true;
         this.mario.setPosition(3692, 336 - this.mario.height);
         this.setPosition(-3560, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene4: function () {
         this.state = WorldState.ChangeScene;
         this.mario.setCollidable(false, true, false, false);
         this.scrollable = true;
-        this.state = WorldState.Finish;
+        this.state = WorldState.Ending;
     },
     changeToScene5: function() {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setPosition(7010, 400 - this.mario.height);
         this.setPosition(-6850, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene6: function () {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setPosition(5240, -this.mario.height);
         this.setPosition(-5000, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     onGame: function() {
         if ((this.scrollable && Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8300)) {

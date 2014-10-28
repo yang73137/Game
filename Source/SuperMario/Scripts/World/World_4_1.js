@@ -260,7 +260,7 @@ World_4_1 = ClassFactory.createClass(World, {
         this.scrollable = true;
         this.mario.setPosition(84, 400 - this.mario.height);
         this.setPosition(0, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene2: function () {
         this.state = WorldState.ChangeScene;
@@ -268,7 +268,7 @@ World_4_1 = ClassFactory.createClass(World, {
         this.lakitu.active = false;
         this.mario.setPosition(7726, 0);
         this.setPosition(-7678, 0);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene3: function () {
         this.state = WorldState.ChangeScene;
@@ -277,13 +277,13 @@ World_4_1 = ClassFactory.createClass(World, {
         this.setPosition(-5116, 0);
         this.lakitu.active = true;
         this.lakitu.setPosition(this.mario.x + 250, 48);
-        this.state = WorldState.Game;
+        this.state = WorldState.Gaming;
     },
     changeToScene4: function() {
         this.state = WorldState.ChangeScene;
         this.mario.setCollidable(false, true, false, false);
         this.scrollable = true;
-        this.state = WorldState.Finish;
+        this.state = WorldState.Ending;
     },
     onGame: function () {
         for (var i = 0; i < this.animateObjects.length; i++) {

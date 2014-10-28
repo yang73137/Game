@@ -303,7 +303,7 @@ World_1_3 = ClassFactory.createClass(World, {
         this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
-        this.state = WorldState.Finish;
+        this.state = WorldState.Ending;
     },
     onGame: function() {
         for (var i = 0; i < this.animateObjects.length; i++) {
