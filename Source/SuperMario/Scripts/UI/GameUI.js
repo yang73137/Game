@@ -15,6 +15,7 @@ GameUI = ClassFactory.createClass(UIBase, {
     },
     setWorld: function (world) {
         this.div.innerHTML = "";
+        this.world = null;
         world.addToGameUI(this);
     },
     setMario: function (mario) {

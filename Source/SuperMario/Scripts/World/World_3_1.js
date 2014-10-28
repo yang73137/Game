@@ -9,6 +9,8 @@ World_3_1 = ClassFactory.createClass(World, {
         this.setBackgroundPosition(6, 4);
         this.setPosition(0, 0);
         this.show();
+        
+        this.setTitle("World  3-1");
 
         this.scrollable = true;
     },
@@ -56,6 +58,11 @@ World_3_1 = ClassFactory.createClass(World, {
         tube_1024_272.addToGameUI(gameUI);
         
         var tube_1216_272 = new Block(1216, 272, 64, 128);
+        tube_1216_272.attachCollidesUp(function (gameObject) {
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
+                this.gameUI.changeToScene2();
+            }
+        });
         tube_1216_272.addToGameUI(gameUI);
         
         
@@ -232,6 +239,20 @@ World_3_1 = ClassFactory.createClass(World, {
         this.setPosition(0, 0);
 
         this.scrollable = true;
+    },
+    changeToScene1: function () {
+        this.state = WorldState.ChangeScene;
+        this.scrollable = true;
+        this.mario.setPosition(84, 400 - this.mario.height);
+        this.setPosition(0, 0);
+        this.state = WorldState.Game;
+    },
+    changeToScene2: function () {
+        this.state = WorldState.ChangeScene;
+        this.scrollable = false;
+        this.mario.setPosition(6904, 0);
+        this.setPosition(-6854, 0);
+        this.state = WorldState.Game;
     },
     onGame: function() {
         for (var i = 0; i < this.animateObjects.length; i++) {

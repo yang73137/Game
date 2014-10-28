@@ -3,7 +3,7 @@
     Stage: 1,
     Game: 2,
     Score: 3,
-    Ending: 4
+    End: 4
 };
 
 App = {
@@ -83,7 +83,7 @@ App = {
                             app.stageUI.setStage(1);
                             app.stageUI.setStageChangedEnabled(true);
                             app.endingUI.enter();
-                            app.mode = UIMode.Ending;
+                            app.mode = UIMode.End;
                         } else {
                             app.stageUI.setStage(++app.stageUI.stage);
                             app.stageUI.enter();
@@ -91,7 +91,7 @@ App = {
                         }
                     }
                     break;
-                case UIMode.Ending:
+                case UIMode.End:
                     if (!app.endingUI.update()) {
                         app.endingUI.level();
                         app.openingUI.enter();

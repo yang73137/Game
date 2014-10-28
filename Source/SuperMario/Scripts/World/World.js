@@ -1,11 +1,10 @@
 ﻿
 WorldState = {
     None: 0,
-    ShowTitle: 1,
-    Opening: 0,
+    Open: 1,
     ChangeScene: 2,
-    Gaming: 3,
-    Ending: 4
+    Game: 3,
+    End: 4
 };
 
 World = ClassFactory.createClass(Layer, {
@@ -18,14 +17,21 @@ World = ClassFactory.createClass(Layer, {
         this.mario = null;
         this.gameUI = null;
         this.scrollable = false;
-        this.state = WorldState.Gaming;
+        this.state = WorldState.Open;
 
         this.titleLayer = new Label();
-        titleLayer.setSize(512, 512);
-        titleLayer.setZ(9999);
+        this.titleLayer.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
+        this.titleLayer.setZ(9999);
+        this.titleLayer.setCSS({ "line-height":  Const.SCREEN_HEIGHT + "px", "text-align": "center", "vertical-align": "middle", "color": "#ffffff", "background": "#000000" });
+        this.titleLayer.show();
+
+        this.append(this.titleLayer);
+
+        this.openCounter = new Counter(60, false, true);
+        this.changeSceneCounter = new Counter(0, false, true);
     },
     setTitle: function(title) {
-        this.setTitle.setText(title);
+        this.titleLayer.setText(title);
     },
     scroll: function () {
     },
@@ -33,15 +39,17 @@ World = ClassFactory.createClass(Layer, {
     },
     update: function () {
         switch (this.state) {
-        case WorldState.ShowTitle:
+        case WorldState.Open:
+            this.onOpen();
             break;
         case WorldState.ChangeScene:
+            this.onChangeScene();
             break;
-        case WorldState.Gaming:
+        case WorldState.Game:
             this.onGame();
             break;
-        case WorldState.Ending:
-            this.onFinish();
+        case WorldState.End:
+            this.onEnd();
             break;
         }
     },
@@ -60,8 +68,79 @@ World = ClassFactory.createClass(Layer, {
         
         this.build();
     },
-    onGame: function () { },
-    onFinish: function() {
-        
+    changeState: function (state) {
+        var stateChanged = this.state != state;
+        if (stateChanged) {
+            switch (this.state) {
+            case WorldState.Open:
+                this.onOpened();
+                break;
+                case WorldState.ChangeScene:
+                this.onChangedScene();
+                break;
+            case WorldState.Game:
+                this.onGamed();
+                break;
+            case WorldState.End:
+                this.onEnded();
+                break;
+            }
+        }
+        switch (state) {
+        case WorldState.Open:
+            this.onOpening();
+            break;
+        case WorldState.ChangeScene:
+            this.onChangingScene();
+            break;
+        case WorldState.Game:
+            this.onGaming();
+            break;
+        case WorldState.End:
+            this.onEnding();
+            break;
+        }
+        this.state = state;
+    },
+    open: function () {
+        this.changeState(WorldState.Open);
+    },
+    onOpen: function () {
+        if (!this.openCounter.countdown()) {
+            this.titleLayer.hide();
+            this.changeState(WorldState.ChangeScene);
+        }
+    },
+    onOpening: function() {
+    },
+    onOpened: function() {
+    },
+    changeScene: function () {
+        this.changeState(WorldState.ChangeScene);
+    },
+    onChangingScene: function () {
+    },
+    onChangeScene: function () {
+        this.changeState(WorldState.Game);
+    },
+    onChangedScene: function () {
+    },
+    game: function () {
+        this.changeState(WorldState.Game);
+    },
+    onGaming: function() {
+    },
+    onGame: function() {
+    },
+    onGamed: function() {
+    },
+    end: function () {
+        this.changeState(WorldState.End);
+    },
+    onEnding: function() {
+    },
+    onEnd: function() {
+    },
+    onEnded: function() {
     }
 });

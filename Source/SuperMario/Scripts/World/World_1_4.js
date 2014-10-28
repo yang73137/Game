@@ -11,6 +11,7 @@ World_1_4 = ClassFactory.createClass(World, {
         this.show();
 
         this.scrollable = true;
+        this.setTitle("World  1-4");
         
         ImageLoader.load(this, [Const.IMAGE_WORLD_2_1]);
     },
@@ -181,10 +182,8 @@ World_1_4 = ClassFactory.createClass(World, {
 
         var floor_4592_400 = new Block(4592, 400, 515, 48);
         floor_4592_400.addToGameUI(gameUI);
-
     },
     restart: function () {
-        console.log(1);
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];

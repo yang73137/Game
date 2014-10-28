@@ -11,7 +11,8 @@ MarioSprite = {
     Jump: 3,
     Squat: 4,
     Stay: 5,
-    Dead: 6
+    Dead: 6,
+    SlideDown: 7
 };
 
 MarioState = {
@@ -278,6 +279,18 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 else if (this.type == MarioType.Flower) {
                     this.sprite.setFrameSequence(this.stayToRight ? [{ x: 37 * 32, y: 192 }] : [{ x: 4 * 32, y: 192 }]);
+                }
+                break;
+            case MarioSprite.SlideDown:
+                this.sprite.setFrameCounter(0);
+                if (this.type == MarioType.Small) {
+                    this.sprite.setFrameSequence([{ x: 32 * 8, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.sprite.setFrameSequence([{ x: 32 * 8, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.sprite.setFrameSequence([{ x: 32 * 8, y: 192 }]);
                 }
                 break;
         }

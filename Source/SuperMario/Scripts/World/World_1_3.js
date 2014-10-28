@@ -11,7 +11,8 @@ World_1_3 = ClassFactory.createClass(World, {
         this.show();
 
         this.scrollable = true;
-        
+        this.setTitle("World  1-3");
+
         ImageLoader.load(this, [Const.IMAGE_WORLD_1_4]);
     },
     scroll: function () {
@@ -274,7 +275,7 @@ World_1_3 = ClassFactory.createClass(World, {
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 if (gameObject instanceof MarioBors) {
-                    this.gameUI.changeToScene1();
+                    this.gameUI.end();
                 }
             }
         });
@@ -299,19 +300,18 @@ World_1_3 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
     },
-    changeToScene1: function () {
-        this.state = WorldState.ChangeScene;
-        this.scrollable = false;
-        this.mario.setCollidable(false, true, false, false);
-        this.state = WorldState.Ending;
-    },
     onGame: function() {
         for (var i = 0; i < this.animateObjects.length; i++) {
             this.animateObjects[i].update();
         }
     },
-    onFinish: function() {
-        if (this.mario.freefall()) {
+    onEnd: function() {
+        if (this.mario.moveDown(3)) {
+            if (this.mario.spriteType != MarioSprite.SlideDown) {
+                this.mario.setX(this.mario.x + 5);
+                this.mario.setSprite(MarioSprite.SlideDown);
+                this.mario.sprite.moveToFrame(0);
+            }
             return;
         } else {
             if (this.mario.spriteType != MarioSprite.Move) {
@@ -330,7 +330,6 @@ World_1_3 = ClassFactory.createClass(World, {
         } else {
             var world = new World_1_4();
             this.gameUI.setWorld(world);
-            this.mario.setCollidable(true, true, true, true);
         }
     }
 });
