@@ -1,8 +1,4 @@
 ﻿
-World_1_4_State = {
-    None: 0,
-    Normal: 1
-};
 
 World_1_4 = ClassFactory.createClass(World, {
     init: function () {
@@ -15,7 +11,6 @@ World_1_4 = ClassFactory.createClass(World, {
         this.show();
 
         this.scrollable = true;
-        this.state = World_1_4_State.Normal;
         
         ImageLoader.load(this, [Const.IMAGE_WORLD_2_1]);
     },
@@ -42,7 +37,6 @@ World_1_4 = ClassFactory.createClass(World, {
             if (gameObject instanceof MarioBors) {
                 var world = new World_2_1();
                 this.gameUI.gameUI.setWorld(world);
-                this.gameUI.state = World_1_4_State.None;
                 this.gameUI.mario.setCollidable(true, true, true, true);
             }
         });
@@ -190,28 +184,21 @@ World_1_4 = ClassFactory.createClass(World, {
 
     },
     restart: function () {
-
+        console.log(1);
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];
         this.build();
-        
+
+        this.setPosition(0, 0);
         this.mario.setPosition(84, 208 - this.mario.height);
         this.mario.reborn();
 
-        this.setPosition(-3, -3);
-
         this.scrollable = true;
     },
-    update: function () {
-        switch (this.state) {
-        case World_1_4_State.None:
-            break;
-        case World_1_4_State.Normal:
-            for (var i = 0; i < this.animateObjects.length; i++) {
-                this.animateObjects[i].update();
-            }
-            break;
+    onGame: function() {
+        for (var i = 0; i < this.animateObjects.length; i++) {
+            this.animateObjects[i].update();
         }
     }
 });

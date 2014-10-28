@@ -1,12 +1,4 @@
 ﻿
-World_4_1_State = {
-    None: 0,
-    Normal: 1,
-    Scene1: 2,
-    Scene2: 3,
-    Scene3: 4,
-    Scene4: 5,
-};
 
 World_4_1 = ClassFactory.createClass(World, {
     init: function () {
@@ -19,7 +11,6 @@ World_4_1 = ClassFactory.createClass(World, {
         this.show();
 
         this.scrollable = true;
-        this.state = World_4_1_State.Scene1;
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -250,7 +241,6 @@ World_4_1 = ClassFactory.createClass(World, {
         this.build();
 
         this.mario.reborn();
-        this.state = World_1_2_State.Normal;
 
         if (Math.abs(oldX) >= 3072) {
             this.setX(-3072);
@@ -265,74 +255,62 @@ World_4_1 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
     },
-    update: function () {
-
-        switch (this.state) {
-        case World_4_1_State.None:
-            break;
-        case World_4_1_State.Normal:
-            for (var i = 0; i < this.animateObjects.length; i++) {
-                this.animateObjects[i].update();
-            }
-            break;
-        case World_4_1_State.Scene1:
-            this.mario.setPosition(84, 400 - this.mario.height);
-            this.setPosition(0, 0);
-            this.state = World_4_1_State.Normal;
-            break;
-        case World_4_1_State.Scene2:
-            this.mario.setPosition(7726, 0);
-            this.setPosition(-7678, 0);
-            this.state = World_4_1_State.Normal;
-            break;
-            case World_4_1_State.Scene3:
-                this.mario.setPosition(5232, 336 - this.mario.height);
-                this.setPosition(-5116, 0);
-                this.lakitu.active = true;
-                this.lakitu.setPosition(this.mario.x + 250, 48);
-                this.state = World_4_1_State.Normal;
-                break;
-        case World_4_1_State.Scene4:
-            if (this.mario.freefall()) {
-                return;
-            } else {
-                if (this.mario.spriteType != MarioSprite.Move) {
-                    this.mario.setSprite(MarioSprite.Move);
-                    this.mario.moving = true;
-                    this.mario.movingToRight = true;
-                    this.mario.setX(this.mario.x + 32);
-                    this.mario.sprite.setFrameCounter(2);
-                }
-            }
-            if (this.mario.x < 7392) {
-                this.mario.moveDown(7);
-                this.falling = false;
-                this.mario.moveRight(2);
-                this.mario.sprite.moveToNextFrame();
-            } else {
-                this.mario.setCollidable(true, true, true, true);
-                this.state = World_4_1_State.None;
-                alert("后续关卡正在开发中......");
-            }
-            break;
-        }
-    },
     changeToScene1: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = true;
-        this.state = World_4_1_State.Scene1;
+        this.mario.setPosition(84, 400 - this.mario.height);
+        this.setPosition(0, 0);
+        this.state = WorldState.Game;
     },
     changeToScene2: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.lakitu.active = false;
-        this.state = World_4_1_State.Scene2;
+        this.mario.setPosition(7726, 0);
+        this.setPosition(-7678, 0);
+        this.state = WorldState.Game;
     },
     changeToScene3: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = true;
-        this.state = World_4_1_State.Scene3;
+        this.mario.setPosition(5232, 336 - this.mario.height);
+        this.setPosition(-5116, 0);
+        this.lakitu.active = true;
+        this.lakitu.setPosition(this.mario.x + 250, 48);
+        this.state = WorldState.Game;
     },
     changeToScene4: function() {
+        this.state = WorldState.ChangeScene;
         this.mario.setCollidable(false, true, false, false);
         this.scrollable = true;
-        this.state = World_4_1_State.Scene4;
+        this.state = WorldState.Finish;
+    },
+    onGame: function () {
+        for (var i = 0; i < this.animateObjects.length; i++) {
+            this.animateObjects[i].update();
+        }
+    },
+    onFinish: function() {
+        if (this.mario.freefall()) {
+            return;
+        } else {
+            if (this.mario.spriteType != MarioSprite.Move) {
+                this.mario.setSprite(MarioSprite.Move);
+                this.mario.moving = true;
+                this.mario.movingToRight = true;
+                this.mario.setX(this.mario.x + 32);
+                this.mario.sprite.setFrameCounter(2);
+            }
+        }
+        if (this.mario.x < 7392) {
+            this.mario.moveDown(7);
+            this.falling = false;
+            this.mario.moveRight(2);
+            this.mario.sprite.moveToNextFrame();
+        } else {
+            this.mario.setCollidable(true, true, true, true);
+            this.state = WorldState.None;
+            alert("后续关卡正在开发中......");
+        }
     }
 });

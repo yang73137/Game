@@ -1,11 +1,4 @@
 ﻿
-World_1_1_State = {
-    None: 0,
-    Normal: 1,
-    Scene1: 2,
-    Scene2: 3,
-    Scene3: 4
-};
 
 World_1_1 = ClassFactory.createClass(World, {
     init: function() {
@@ -16,8 +9,6 @@ World_1_1 = ClassFactory.createClass(World, {
         this.setBackgroundPosition(0, 0);
         this.show();
 
-        this.state = World_1_1_State.Normal;
-        
         ImageLoader.load(this, [Const.IMAGE_WORLD_1_2]);
     },
     scroll: function () {
@@ -42,21 +33,31 @@ World_1_1 = ClassFactory.createClass(World, {
         }
     },
     changeToScene1: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = true;
-        this.state = World_1_1_State.Scene1;
+        this.mario.setPosition(50, 400 - this.mario.height);
+        this.setPosition(0, 0);
+        this.state = WorldState.Game;
     },
     changeToScene2: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = false;
-        this.state = World_1_1_State.Scene2;
+        this.setPosition(-6784, 0);
+        this.mario.setPosition(6834, 0);
+        this.state = WorldState.Game;
     },
-    changeToScene3: function() {
+    changeToScene3: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = true;
-        this.state = World_1_1_State.Scene3;
+        this.setPosition(-5120, 0);
+        this.mario.setPosition(5232, 304);
+        this.state = WorldState.Game;
     },
     changeToScene4: function () {
+        this.state = WorldState.ChangeScene;
         this.scrollable = false;
         this.mario.setCollidable(false, true, false, false);
-        this.state = World_1_1_State.Scene4;
+        this.state = WorldState.Finish;
     },
     build: function () {
         var gameUI = this;
@@ -421,52 +422,32 @@ World_1_1 = ClassFactory.createClass(World, {
             this.mario.setPosition(50, 400 - this.mario.height);
         }
     },
-    update: function() {
-        switch (this.state) {
-            case World_1_1_State.Normal:
-                for (var i = 0; i < this.animateObjects.length; i++) {
-                    this.animateObjects[i].update();
-                }
-                break;
-            case World_1_1_State.Scene1:
-                this.mario.setPosition(50, 400 - this.mario.height);
-                this.setPosition(0, 0);
-                this.state = World_1_1_State.Normal;
-                break;
-            case World_1_1_State.Scene2:
-                this.setPosition(-6784, 0);
-                this.mario.setPosition(6834, 0);
-                this.state = World_1_1_State.Normal;
-                break;
-            case World_1_1_State.Scene3:
-                this.setPosition(-5120, 0);
-                this.mario.setPosition(5232, 304);
-                this.state = World_1_1_State.Normal;
-                break;
-            case World_1_1_State.Scene4:
-                if (this.mario.freefall()) {
-                    return;
-                } else {
-                    if (this.mario.spriteType != MarioSprite.Move) {
-                        this.mario.setSprite(MarioSprite.Move);
-                        this.mario.moving = true;
-                        this.mario.movingToLeft = true;
-                        this.mario.setX(this.mario.x + 32);
-                        this.mario.sprite.setFrameCounter(2);
-                    }
-                }
-                if (this.mario.x < 6528) {
-                    this.mario.moveDown(7);
-                    this.falling = false;
-                    this.mario.moveRight(2);
-                    this.mario.sprite.moveToNextFrame();
-                } else {
-                    var world_1_2 = new World_1_2();
-                    this.gameUI.setWorld(world_1_2);
-                    this.state = World_1_1_State.None;
-                    this.mario.setCollidable(true, true, true, true);
-                }
-                break;
+    onGame: function() {
+        for (var i = 0; i < this.animateObjects.length; i++) {
+            this.animateObjects[i].update();
+        }
+    },
+    onFinish: function () {
+        if (this.mario.freefall()) {
+            return;
+        } else {
+            if (this.mario.spriteType != MarioSprite.Move) {
+                this.mario.setSprite(MarioSprite.Move);
+                this.mario.moving = true;
+                this.mario.movingToLeft = true;
+                this.mario.setX(this.mario.x + 32);
+                this.mario.sprite.setFrameCounter(2);
+            }
+        }
+        if (this.mario.x < 6528) {
+            this.mario.moveDown(7);
+            this.falling = false;
+            this.mario.moveRight(2);
+            this.mario.sprite.moveToNextFrame();
+        } else {
+            var world_1_2 = new World_1_2();
+            this.gameUI.setWorld(world_1_2);
+            this.mario.setCollidable(true, true, true, true);
         }
     }
 });

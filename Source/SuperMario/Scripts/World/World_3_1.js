@@ -1,13 +1,4 @@
 ﻿
-World_3_1_State = {
-    None: 0,
-    Normal: 1,
-    Scene1: 2,
-    Scene2: 3,
-    Scene3: 4,
-    Scene4: 5,
-    Scene5: 6
-};
 
 World_3_1 = ClassFactory.createClass(World, {
     init: function () {
@@ -20,7 +11,6 @@ World_3_1 = ClassFactory.createClass(World, {
         this.show();
 
         this.scrollable = true;
-        this.state = World_3_1_State.Scene1;
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -228,8 +218,6 @@ World_3_1 = ClassFactory.createClass(World, {
                 //this.gameUI.changeToScene6();
             }
         });
-
-        this.state = World_3_1_State.Scene1;
     },
     restart: function () {
 
@@ -245,34 +233,9 @@ World_3_1 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
     },
-    update: function () {
+    onGame: function() {
         for (var i = 0; i < this.animateObjects.length; i++) {
             this.animateObjects[i].update();
         }
-    },
-    changeToScene1: function () {
-        this.scrollable = true;
-        this.state = World_3_1_State.Scene1;
-    },
-    changeToScene2: function () {
-        this.scrollable = false;
-        this.state = World_3_1_State.Scene2;
-    },
-    changeToScene3: function () {
-        this.scrollable = true;
-        this.state = World_3_1_State.Scene3;
-    },
-    changeToScene4: function () {
-        this.mario.setCollidable(false, true, false, false);
-        this.scrollable = true;
-        this.state = World_3_1_State.Scene4;
-    },
-    changeToScene5: function() {
-        this.scrollable = false;
-        this.state = World_3_1_State.Scene5;
-    },
-    changeToScene6: function () {
-        this.scrollable = true;
-        this.state = World_3_1_State.Scene6;
     }
 });
