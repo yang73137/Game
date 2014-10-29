@@ -21,7 +21,7 @@ World_1_2 = ClassFactory.createClass(World, {
         this.scene = World_1_2_Scene.Scene1;
         this.setTitle("World  1-2");
 
-        ImageLoader.load(this, [Const.IMAGE_WORLD_1_3, Const.IMAGE_WORLD_2_1, Const.IMAGE_WORLD_4_1]);
+        ImageLoader.load(this, [Const.IMAGE_WORLD_1_3, Const.IMAGE_WORLD_2_1, , Const.IMAGE_WORLD_3_1, Const.IMAGE_WORLD_4_1]);
     },
     scroll: function () {
 
