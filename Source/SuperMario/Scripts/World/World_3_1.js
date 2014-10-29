@@ -253,10 +253,5 @@ World_3_1 = ClassFactory.createClass(World, {
         this.mario.setPosition(6904, 0);
         this.setPosition(-6854, 0);
         this.state = WorldState.Game;
-    },
-    onGame: function() {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
     }
 });

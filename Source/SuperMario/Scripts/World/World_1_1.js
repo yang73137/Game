@@ -403,11 +403,6 @@ World_1_1 = ClassFactory.createClass(World, {
 
         this.changeState(WorldState.Game);
     },
-    onGame: function() {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
-    },
     onEnd: function () {
         if (this.mario.moveDown(3)) {
             if (this.mario.spriteType != MarioSprite.SlideDown) {

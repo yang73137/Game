@@ -300,11 +300,6 @@ World_1_3 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
     },
-    onGame: function() {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
-    },
     onEnd: function() {
         if (this.mario.moveDown(3)) {
             if (this.mario.spriteType != MarioSprite.SlideDown) {

@@ -567,9 +567,7 @@ World_1_2 = ClassFactory.createClass(World, {
             this.mario.squating = true;
             this.mario.faceToRight ? this.mario.moveRight(3) : this.mario.moveLeft(3);
         }
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
+        World.prototype.onGame.call(this);
     },
     onEnd: function() {
         if (this.mario.moveDown(3)) {

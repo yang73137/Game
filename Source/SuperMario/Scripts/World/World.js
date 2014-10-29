@@ -130,7 +130,10 @@ World = ClassFactory.createClass(Layer, {
     },
     onGaming: function() {
     },
-    onGame: function() {
+    onGame: function () {
+        for (var i = 0; i < this.animateObjects.length; i++) {
+            this.animateObjects[i].update();
+        }
     },
     onGamed: function() {
     },

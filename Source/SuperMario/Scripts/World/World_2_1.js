@@ -391,9 +391,7 @@ World_2_1 = ClassFactory.createClass(World, {
             this.scene = World_2_1_Scene.Scene5;
             this.changeScene();
         }
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
+        World.prototype.onGame.call(this);
     },
     onEnd: function() {
         if (this.mario.moveDown(3)) {

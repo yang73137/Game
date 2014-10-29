@@ -194,10 +194,5 @@ World_1_4 = ClassFactory.createClass(World, {
         this.mario.reborn();
 
         this.scrollable = true;
-    },
-    onGame: function() {
-        for (var i = 0; i < this.animateObjects.length; i++) {
-            this.animateObjects[i].update();
-        }
     }
 });
