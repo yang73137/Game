@@ -32,7 +32,7 @@ World_2_1 = ClassFactory.createClass(World, {
             return;
         }
 
-        if ((Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8292)) {
+        if (Math.abs(this.x) >= 8804) {
             return;
         }
 
@@ -90,11 +90,19 @@ World_2_1 = ClassFactory.createClass(World, {
             }
         });
         block_7100_240.addToGameUI(gameUI);
-
+        
         for (var i = 0; i < 56; i++) {
             var gold = new Gold2(7100 + i * 32, 160, GameObjectIconType.Ground);
             gold.addToGameUI(gameUI);
         }
+
+        var block_8770_448 = new Block(8770, 448, 512, 48);
+        block_8770_448.attachCollidesUp(function (gameObject) {
+            this.gameUI.scene = World_2_1_Scene.Scene5;
+            this.gameUI.changeScene();
+        });
+        block_8770_448.addToGameUI(gameUI);
+
 
         // scene1
         for (var i = 0; i < 3; i++) {
@@ -308,11 +316,17 @@ World_2_1 = ClassFactory.createClass(World, {
         var floor_3072_400 = new Block(3072, 400, 320, 48);
         floor_3072_400.addToGameUI(gameUI);
 
-        var floor_3088_400 = new Block(3088, 400, 1360, 48);
-        floor_3088_400.addToGameUI(gameUI);
+        var floor_3070_400 = new Block(3070, 400, 322, 48);
+        floor_3070_400.addToGameUI(gameUI);
+        
+        var floor_3070_400 = new Block(3070, 400, 322, 48);
+        floor_3070_400.addToGameUI(gameUI);
 
-        var floor_4542_400 = new Block(4542, 400, 322, 48);
-        floor_4542_400.addToGameUI(gameUI);
+        var floor_3487_400 = new Block(3487, 400, 961, 48);
+        floor_3487_400.addToGameUI(gameUI);
+
+        var floor_4543_400 = new Block(4543, 400, 321, 48);
+        floor_4543_400.addToGameUI(gameUI);
 
         var floor_4926_400 = new Block(4926, 400, 1906, 48);
         floor_4926_400.addToGameUI(gameUI);
@@ -368,30 +382,23 @@ World_2_1 = ClassFactory.createClass(World, {
     },
     restart: function () {
 
+        var oldX = this.x;
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];
         this.build();
         
-        this.mario.setPosition(84, 208 - this.mario.height);
         this.mario.reborn();
 
-        this.setPosition(-3, -3);
+        if (Math.abs(oldX) >= 3000) {
+            this.setX(-3000);
+            this.mario.setPosition(3100, 400 - this.mario.height);
+        } else {
+            this.setX(0);
+            this.mario.setPosition(84, 400 - this.mario.height);
+        }
 
         this.scrollable = true;
-    },
-    onGame: function() {
-        if ((this.scrollable && Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8300)) {
-            this.setX(this.x - 2);
-            if (this.mario.x < Math.abs(this.x)) {
-                this.mario.setX(Math.abs(this.x));
-            }
-        }
-        if (this.mario.x > 8700 && this.mario.x <= 9212 && this.mario.y > Const.SCREEN_HEIGHT + this.mario.height) {
-            this.scene = World_2_1_Scene.Scene5;
-            this.changeScene();
-        }
-        World.prototype.onGame.call(this);
     },
     onEnd: function() {
         if (this.mario.moveDown(3)) {
@@ -438,7 +445,7 @@ World_2_1 = ClassFactory.createClass(World, {
                 this.setPosition(-3560, 0);
                 break;
             case World_2_1_Scene.Scene4:
-                this.scrollable = false;
+                this.scrollable = true;
                 this.mario.setPosition(7010, 400 - this.mario.height);
                 this.setPosition(-6850, 0);
                 break;

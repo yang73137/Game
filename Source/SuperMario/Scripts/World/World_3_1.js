@@ -1,5 +1,14 @@
 ﻿
 
+World_3_1_Scene = {
+    None: 0,
+    Scene1: 1,
+    Scene2: 2,
+    Scene3: 3,
+    Scene4: 4,
+    Scene5: 5
+};
+
 World_3_1 = ClassFactory.createClass(World, {
     init: function () {
         World.init.call(this);
@@ -11,19 +20,18 @@ World_3_1 = ClassFactory.createClass(World, {
         this.show();
         
         this.setTitle("World  3-1");
-
-        this.scrollable = true;
+        this.scene = World_3_1_Scene.Scene1;
     },
     scroll: function () {
         if (!this.scrollable) {
             return;
         }
 
-        if ((Math.abs(this.x) >= 6318 && Math.abs(this.x) <= 6832)) {
+        if (Math.abs(this.x) >= 6320 && Math.abs(this.x) <= 6836) {
             return;
         }
 
-        if ((Math.abs(this.x) >= 6850 && Math.abs(this.x) <= 8292)) {
+        if (Math.abs(this.x) >= 9763) {
             return;
         }
 
@@ -36,6 +44,79 @@ World_3_1 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 208 - this.mario.height);
+        
+        var spring = new Spring(4032, 352);
+        spring.addToGameUI(gameUI);
+        
+        var tree = new Block(4192, 0, 21, 138);
+        tree.addToGameUI(gameUI);
+        tree.attachCollides(function (gameObject) {
+            if (gameObject instanceof MarioBors) {
+                this.gameUI.scene = World_3_1_Scene.Scene4;
+                this.gameUI.changeScene();
+            }
+        });
+        
+        var koopaTroopa_800_352 = new KoopaTroopa(800, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_800_352.addToGameUI(gameUI);
+        
+        var koopaTroopa_928_352 = new KoopaTroopa(928, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_928_352.addToGameUI(gameUI);
+        
+        var goomba_1126_336 = new Goomba(1126, 336, GameObjectIconType.Ground);
+        goomba_1126_336.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var goomba = new Goomba(1670 + 40 * i, 336, GameObjectIconType.Ground);
+            goomba.addToGameUI(gameUI);
+        }
+        
+        var goomba_1952_336 = new Goomba(1952, 336, GameObjectIconType.Ground);
+        goomba_1952_336.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var goomba = new Goomba(2588 + 40 * i, 240, GameObjectIconType.Ground);
+            goomba.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 2; i++) {
+            var goomba = new Goomba(3000 + 40 * i, 336, GameObjectIconType.Ground);
+            goomba.addToGameUI(gameUI);
+        }
+        
+        var koopaTroopa_3200_352 = new KoopaTroopa(3200, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_3200_352.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 2; i++) {
+            var goomba = new Goomba(4448 + 32 * i, 272 - 32 * i, GameObjectIconType.Ground);
+            goomba.addToGameUI(gameUI);
+        }
+        
+        var koopaTroopa_4728_352 = new KoopaTroopa(4728, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_4728_352.addToGameUI(gameUI);
+        
+        var koopaTroopa_4864_96 = new KoopaTroopa(4864, 96, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_4864_96.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var goomba = new Goomba(4864 + 40 * i, 336, GameObjectIconType.Ground);
+            goomba.addToGameUI(gameUI);
+        }
+
+        var koopaTroopa_5312_352 = new KoopaTroopa(5312, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_5312_352.addToGameUI(gameUI);
+        
+        var koopaTroopa_5344_352 = new KoopaTroopa(5344, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_5344_352.addToGameUI(gameUI);
+        
+        var koopaTroopa_5376_224 = new KoopaTroopa(5376, 224, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_5376_224.addToGameUI(gameUI);
+        
+        var koopaTroopa_5948_192 = new KoopaTroopa(5984, 192, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_5948_192.addToGameUI(gameUI);
+        
+        var koopaTroopa_6080_96 = new KoopaTroopa(6080, 96, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        koopaTroopa_6080_96.addToGameUI(gameUI);
 
         var floor_0_400 = new Block(0, 400, 1440, 48);
         floor_0_400.addToGameUI(gameUI);
@@ -60,7 +141,8 @@ World_3_1 = ClassFactory.createClass(World, {
         var tube_1216_272 = new Block(1216, 272, 64, 128);
         tube_1216_272.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                this.gameUI.changeToScene2();
+                this.gameUI.scene = World_3_1_Scene.Scene2;
+                this.gameUI.changeScene();
             }
         });
         tube_1216_272.addToGameUI(gameUI);
@@ -222,36 +304,208 @@ World_3_1 = ClassFactory.createClass(World, {
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
-                //this.gameUI.changeToScene6();
+                this.gameUI.end();
             }
         });
+        
+        // Scene2
+        var floor_6854_400 = new Block(6854, 400, 512, 48);
+        floor_6854_400.addToGameUI(gameUI);
+        
+        var block_6854_48 = new Block(6854, 48, 32, 32 * 11);
+        block_6854_48.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 4; j++) {
+                if (i == 0 && (j == 0 || j == 3)) {
+                    continue;
+                }
+                var gold = new Gold2(7050 + 32 * j, 80 + 32 * i, GameObjectIconType.Underground);
+                gold.addToGameUI(gameUI);
+            }
+        }
+        
+        for (var i = 0; i < 5; i++) {
+            for (var j = 0; j < 10; j++) {
+                if ((i == 0 && (j == 3 || j == 6)) || (i == 1 && (j == 2 || j == 7)) || (i == 2 && (j == 1 || j == 4 || j == 5 || j == 8)) || (i == 3 && (j >= 3 && j <= 6)) || (i == 4 && (j != 1 && j != 8))) {
+                    continue;
+                }
+                if ((i == 1 && (j == 3 || j == 6)) || (i == 2 && (j == 2 || j == 7)) || (i == 3 && (j == 1 || j == 8))) {
+                    var gold = new Gold2(6950 + 32 * j, 144 + 32 * i, GameObjectIconType.Underground);
+                    gold.addToGameUI(gameUI);
+                    continue;
+                }
+                var brick = new Brick(6950 + 32 * j, 144 + 32 * i, GameObjectIconType.Underground);
+                brick.addToGameUI(gameUI);
+            }
+        }
+
+        var tube_7270_336 = new Block(7278, 336, 90, 52);
+        tube_7270_336.addToGameUI(gameUI);
+        tube_7270_336.attachCollidesLeft(function (gameObject) {
+            if (gameObject instanceof MarioBors && Input.isPressed(InputAction.RIGHT)) {
+                this.gameUI.scene = World_3_1_Scene.Scene3;
+                this.gameUI.changeScene();
+            }
+        });
+        tube_7270_336.addToGameUI(gameUI);
+
+        var tube_7338_48 = new Block(7338, 48, 28, 288);
+        tube_7338_48.addToGameUI(gameUI);
+        
+        // Scene3
+        var floor_7372_400 = new Block(7372, 400, 2656, 48);
+        floor_7372_400.addToGameUI(gameUI);
+
+        var block_7100_240 = new Block(7700, 304, 128, 16, true);
+        block_7100_240.enabled = false;
+        block_7100_240.movingRight = true;
+        block_7100_240.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
+        block_7100_240.sprite.setBackgroundPosition(0, 376);
+        block_7100_240.attachUpdate(function () {
+
+            if (!this.enabled) {
+                return;
+            }
+
+            if (this.x > 10226) {
+                this.sprite.hide();
+                this.setCollidable(false, false, false, false);
+                return;
+            }
+            this.moveRight(2);
+        });
+        block_7100_240.attachCollidesUp(function (gameObject) {
+            if (gameObject instanceof MarioBors && !this.enabled) {
+                this.enabled = true;
+            }
+        });
+        block_7100_240.addToGameUI(gameUI);
+
+        for (var i = 0; i < 16; i++) {
+            var gold = new Gold2(7852 + i * 32, 176, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 16; i++) {
+            var gold = new Gold2(8460 + i * 32, 176, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 7; i++) {
+            var gold = new Gold2(9068 + i * 32, 144, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 10; i++) {
+            var gold = new Gold2(9644 + i * 32, 144, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(10060 + i * 32, 336, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+
+        var block_8396_240 = new Block(8396, 240, 32, 32);
+        block_8396_240.addToGameUI(gameUI);
+        
+        var block_9004_208 = new Block(9004, 208, 32, 64);
+        block_9004_208.addToGameUI(gameUI);
+        
+        var block_9324_208 = new Block(9324, 208, 32, 64);
+        block_9324_208.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 13; i++) {
+            if ((i > 2 && i % 2 != 0) || i == 2) {
+               continue;
+            }
+            var block = new Block(9516 + 32 * i, 176, 32, 32);
+            block.addToGameUI(gameUI);
+        }
+
+        var block_10028_448 = new Block(10028, 448, 400, 32);
+        block_10028_448.attachCollidesUp(function (gameObject) {
+            this.gameUI.scene = World_3_1_Scene.Scene5;
+            this.gameUI.changeScene();
+            console.log(1);
+        });
+        block_10028_448.addToGameUI(gameUI);
     },
     restart: function () {
 
+        var oldX = this.x;
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];
         this.build();
         
-        this.mario.setPosition(84, 208 - this.mario.height);
         this.mario.reborn();
 
-        this.setPosition(0, 0);
+        if (Math.abs(oldX) >= 3360) {
+            this.setX(-3200);
+            this.mario.setPosition(3400, 400 - this.mario.height);
+        } else {
+            this.setX(0);
+            this.mario.setPosition(84, 400 - this.mario.height);
+        }
 
         this.scrollable = true;
     },
-    changeToScene1: function () {
-        this.state = WorldState.ChangeScene;
-        this.scrollable = true;
-        this.mario.setPosition(84, 400 - this.mario.height);
-        this.setPosition(0, 0);
-        this.state = WorldState.Game;
+    onChangedScene: function() {
+        switch (this.scene) {
+        case World_3_1_Scene.Scene1:
+            this.scrollable = true;
+            this.mario.setPosition(84, 400 - this.mario.height);
+            this.setPosition(0, 0);
+            break;
+        case World_3_1_Scene.Scene2:
+            this.scrollable = false;
+            this.mario.setPosition(6904, 0);
+            this.setPosition(-6854, 0);
+            break;
+        case World_3_1_Scene.Scene3:
+            this.scrollable = true;
+            this.mario.setPosition(2160, 336 - this.mario.height);
+            this.setPosition(-2000, 0);
+            break;
+        case World_3_1_Scene.Scene4:
+            this.scrollable = true;
+            this.mario.setPosition(7532, 336 - this.mario.height);
+            this.setPosition(-7372, 0);
+            break;
+        case World_3_1_Scene.Scene5:
+            this.scrollable = true;
+            this.mario.setPosition(5212, 0);
+            this.setPosition(-5056, 0);
+            break;
+        }
     },
-    changeToScene2: function () {
-        this.state = WorldState.ChangeScene;
-        this.scrollable = false;
-        this.mario.setPosition(6904, 0);
-        this.setPosition(-6854, 0);
-        this.state = WorldState.Game;
-    }
+    onEnd: function () {
+        if (this.mario.moveDown(3)) {
+            if (this.mario.spriteType != MarioSprite.SlideDown) {
+                this.mario.setX(this.mario.x + 5);
+                this.mario.setSprite(MarioSprite.SlideDown);
+                this.mario.sprite.moveToFrame(0);
+            }
+            return;
+        } else {
+            if (this.mario.spriteType != MarioSprite.Move) {
+                this.mario.setSprite(MarioSprite.Move);
+                this.mario.moving = true;
+                this.mario.movingToLeft = true;
+                this.mario.setX(this.mario.x + 32);
+                this.mario.sprite.setFrameCounter(2);
+            }
+        }
+        if (this.mario.x < 6592) {
+            this.mario.moveDown(7);
+            this.falling = false;
+            this.mario.moveRight(2);
+            this.mario.sprite.moveToNextFrame();
+        } else {
+            this.state = WorldState.None;
+            alert("后续关卡正在开发中......");
+        }
+    },
 });
