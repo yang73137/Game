@@ -352,6 +352,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
         gameUI.addAnimateObject(this);
     },
     onLive: function () {
+        
+        if (Input.isPressed(17) && Input.isPressed(77)) {
+            this.setInvincible(true);
+            this.setY(this.y - 32);
+            this.changeType(MarioType.Flower);
+        }
 
         if (this.invincible) {
             if (this.invincibleCounter.countdown()) {
@@ -811,5 +817,19 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.state = MarioState.Live;
             this.reJumpHeight = 45;
         }
-    }
+    },
+    onCollidesLeft: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.speed = 2;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
+        }
+    },
+    onCollidesRight: function (gameObject) {
+        if (gameObject.stoppable) {
+            this.speed = 2;
+            this.speedUpLevel = 0;
+            this.speedUpPressedTime = 0;
+        }
+    },
 });

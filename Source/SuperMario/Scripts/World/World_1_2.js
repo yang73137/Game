@@ -21,7 +21,7 @@ World_1_2 = ClassFactory.createClass(World, {
         this.scene = World_1_2_Scene.Scene1;
         this.setTitle("World  1-2");
 
-        ImageLoader.load(this, [Const.IMAGE_WORLD_1_3, Const.IMAGE_WORLD_2_1, , Const.IMAGE_WORLD_3_1, Const.IMAGE_WORLD_4_1]);
+        ImageLoader.load(this, [Const.IMAGE_WORLD_1_3, Const.IMAGE_WORLD_2_1, Const.IMAGE_WORLD_3_1, Const.IMAGE_WORLD_4_1]);
     },
     scroll: function () {
 
@@ -342,16 +342,16 @@ World_1_2 = ClassFactory.createClass(World, {
         var goomba_1452_368 = new Goomba(1452, 368, GameObjectIconType.Underground);
         goomba_1452_368.addToGameUI(gameUI);
 
-        var koopaTroopa_1964_368 = new KoopaTroopa(1964, 336, KoopaTroopaType.Normal, GameObjectIconType.Underground);
+        var koopaTroopa_1964_368 = new KoopaTroopa(1964, 336, KoopaTroopaType.Normal, true, false, GameObjectIconType.Underground);
         koopaTroopa_1964_368.addToGameUI(gameUI);
 
-        var koopaTroopa_2028_368 = new KoopaTroopa(2028, 336, KoopaTroopaType.Normal, GameObjectIconType.Underground);
+        var koopaTroopa_2028_368 = new KoopaTroopa(2028, 336, KoopaTroopaType.Normal, true, false, GameObjectIconType.Underground);
         koopaTroopa_2028_368.addToGameUI(gameUI);
 
-        var koopaTroopa_2382_368 = new KoopaTroopa(2382, 336, KoopaTroopaType.Normal, GameObjectIconType.Underground);
+        var koopaTroopa_2382_368 = new KoopaTroopa(2382, 336, KoopaTroopaType.Normal, true, false, GameObjectIconType.Underground);
         koopaTroopa_2382_368.addToGameUI(gameUI);
 
-        var koopaTroopa_5300_368 = new KoopaTroopa(5300, 336, KoopaTroopaType.Clever, GameObjectIconType.Underground);
+        var koopaTroopa_5300_368 = new KoopaTroopa(5300, 336, KoopaTroopaType.Normal, true, true, GameObjectIconType.Sky);
         koopaTroopa_5300_368.addToGameUI(gameUI);
 
         var goomba_2510_368 = new Goomba(2510, 368, GameObjectIconType.Underground);

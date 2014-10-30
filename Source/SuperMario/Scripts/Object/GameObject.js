@@ -3,7 +3,8 @@ GameObjectIconType = {
     None: 0,
     Ground: 1,
     Underground: 2,
-    Castle: 3
+    Sky: 3,
+    Castle: 4
 };
 
 GameObject = ClassFactory.createClass({

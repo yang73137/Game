@@ -137,10 +137,10 @@ World_2_1 = ClassFactory.createClass(World, {
         var question_894_272 = new Question(894, 272, QuestionItemType.Gold, QuestionDisplayType.Hidden, GameObjectIconType.Ground);
         question_894_272.addToGameUI(gameUI);
 
-        var koopaTroopa_990_352 = new KoopaTroopa(990, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_990_352 = new KoopaTroopa(990, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_990_352.addToGameUI(gameUI);
 
-        var koopaTroopa_1054_352 = new KoopaTroopa(1054, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_1054_352 = new KoopaTroopa(1054, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_1054_352.addToGameUI(gameUI);
 
 
@@ -167,7 +167,7 @@ World_2_1 = ClassFactory.createClass(World, {
             }
         }
         
-        var koopaTroopa_1791_272 = new KoopaTroopa(1791, 224, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_1791_272 = new KoopaTroopa(1791, 224, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_1791_272.addToGameUI(gameUI);
         
         var goomba_1922_368 = new Goomba(1922, 368, GameObjectIconType.Ground);
@@ -177,7 +177,7 @@ World_2_1 = ClassFactory.createClass(World, {
         goomba_1970_368.addToGameUI(gameUI);
         
         
-        var koopaTroopa_2030_272 = new KoopaTroopa(2030, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_2030_272 = new KoopaTroopa(2030, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_2030_272.addToGameUI(gameUI);
         
         var goomba_2175_368 = new Goomba(2175, 368, GameObjectIconType.Ground);
@@ -207,10 +207,10 @@ World_2_1 = ClassFactory.createClass(World, {
         var goomba_3808_368 = new Goomba(3808, 368, GameObjectIconType.Ground);
         goomba_3808_368.addToGameUI(gameUI);
         
-        var koopaTroopa_4332_352 = new KoopaTroopa(4332, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_4332_352 = new KoopaTroopa(4332, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_4332_352.addToGameUI(gameUI);
         
-        var koopaTroopa_4775_352 = new KoopaTroopa(4775, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_4775_352 = new KoopaTroopa(4775, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
         koopaTroopa_4775_352.addToGameUI(gameUI);
         
         var goomba_5274_368 = new Goomba(5274, 368, GameObjectIconType.Ground);
@@ -218,11 +218,17 @@ World_2_1 = ClassFactory.createClass(World, {
         
         var goomba_5322_368 = new Goomba(5322, 368, GameObjectIconType.Ground);
         goomba_5322_368.addToGameUI(gameUI);
+        
+        var koopaTroopa_5439_352 = new KoopaTroopa(5439, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
+        koopaTroopa_5439_352.addToGameUI(gameUI);
+        
+        var koopaTroopa_5503_352 = new KoopaTroopa(5503, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
+        koopaTroopa_5503_352.addToGameUI(gameUI);
 
         var brick_2175_272 = new Brick(2175, 272, GameObjectIconType.Ground);
         brick_2175_272.addToGameUI(gameUI);
         
-        var koopaTroopa_5900_352 = new KoopaTroopa(5900, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
+        var koopaTroopa_5900_352 = new KoopaTroopa(5900, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_5900_352.addToGameUI(gameUI);
 
         var question_2207_144 = new Question(2207, 144, QuestionItemType.Star, QuestionDisplayType.Brick, GameObjectIconType.Ground);

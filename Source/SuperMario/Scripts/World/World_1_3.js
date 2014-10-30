@@ -29,19 +29,19 @@ World_1_3 = ClassFactory.createClass(World, {
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 400 - this.mario.height);
 
-        var koopaTroopa_900_96 = new KoopaTroopa(900, 96, KoopaTroopaType.Clever, GameObjectIconType.Ground);
+        var koopaTroopa_900_96 = new KoopaTroopa(900, 96, KoopaTroopaType.Normal, true, true, GameObjectIconType.Sky);
         koopaTroopa_900_96.addToGameUI(gameUI);
 
-        var koopaTroopa_2388_272 = new KoopaTroopa(2388, 272, KoopaTroopaType.Fly, GameObjectIconType.Ground);
+        var koopaTroopa_2388_272 = new KoopaTroopa(2388, 272, KoopaTroopaType.Fly, false, true, GameObjectIconType.Sky);
         koopaTroopa_2388_272.addToGameUI(gameUI);
 
-        var koopaTroopa_2490_114 = new KoopaTroopa(2490, 114, KoopaTroopaType.Clever, GameObjectIconType.Ground);
+        var koopaTroopa_2490_114 = new KoopaTroopa(2490, 114, KoopaTroopaType.Normal, true, true, GameObjectIconType.Sky);
         koopaTroopa_2490_114.addToGameUI(gameUI);
 
-        var koopaTroopa_3652_340 = new KoopaTroopa(3652, 340, KoopaTroopaType.Fly, GameObjectIconType.Ground);
+        var koopaTroopa_3652_340 = new KoopaTroopa(3652, 340, KoopaTroopaType.Fly, false, true, GameObjectIconType.Sky);
         koopaTroopa_3652_340.addToGameUI(gameUI);
 
-        var koopaTroopa_4260_352 = new KoopaTroopa(4260, 352, KoopaTroopaType.Clever, GameObjectIconType.Ground);
+        var koopaTroopa_4260_352 = new KoopaTroopa(4260, 352, KoopaTroopaType.Normal, true, true, GameObjectIconType.Sky);
         koopaTroopa_4260_352.addToGameUI(gameUI);
         
 
@@ -282,15 +282,21 @@ World_1_3 = ClassFactory.createClass(World, {
     },
     restart: function () {
 
+        var oldX = this.x;
         this.div.innerHTML = "";
         this.staticObjects = [];
         this.animateObjects = [];
         this.build();
 
-        this.mario.setPosition(84, 208 - this.mario.height);
         this.mario.reborn();
 
-        this.setPosition(-3, -3);
+        if (Math.abs(oldX) >= 2062) {
+            this.setX(-2062);
+            this.mario.setPosition(2130, 400 - this.mario.height);
+        } else {
+            this.setX(-4);
+            this.mario.setPosition(84, 400 - this.mario.height);
+        }
 
         this.scrollable = true;
     },

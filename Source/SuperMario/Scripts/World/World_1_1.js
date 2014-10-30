@@ -46,8 +46,8 @@ World_1_1 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(this);
 
-        var kt = new KoopaTroopa(3200, 352, KoopaTroopaType.Normal, GameObjectIconType.Ground);
-        kt.addToGameUI(gameUI);
+        var koopaTroopa_3264_652 = new KoopaTroopa(3264, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
+        koopaTroopa_3264_652.addToGameUI(gameUI);
 
         var goomba_512_368 = new Goomba(514, 368, GameObjectIconType.Ground);
         goomba_512_368.addToGameUI(gameUI);
@@ -66,21 +66,36 @@ World_1_1 = ClassFactory.createClass(World, {
 
         var goomba_2624_102 = new Goomba(2624, 112, GameObjectIconType.Ground);
         goomba_2624_102.addToGameUI(gameUI);
+        
+        var goomba_3040_368 = new Goomba(3040, 368, GameObjectIconType.Ground);
+        goomba_3040_368.addToGameUI(gameUI);
+        
+        var goomba_3072_368 = new Goomba(3072, 368, GameObjectIconType.Ground);
+        goomba_3072_368.addToGameUI(gameUI);
 
-        var goomba_3584_368 = new Goomba(3584, 368, GameObjectIconType.Ground);
-        goomba_3584_368.addToGameUI(gameUI);
+        var goomba_3616_368 = new Goomba(3616, 368, GameObjectIconType.Ground);
+        goomba_3616_368.addToGameUI(gameUI);
 
         var goomba_3648_368 = new Goomba(3648, 368, GameObjectIconType.Ground);
         goomba_3648_368.addToGameUI(gameUI);
 
-        var goomba_3712_368 = new Goomba(3712, 368, GameObjectIconType.Ground);
-        goomba_3712_368.addToGameUI(gameUI);
+        var goomba_3936_368 = new Goomba(3936, 368, GameObjectIconType.Ground);
+        goomba_3936_368.addToGameUI(gameUI);
+        
+        var goomba_3968_368 = new Goomba(3968, 368, GameObjectIconType.Ground);
+        goomba_3968_368.addToGameUI(gameUI);
+        
+        var goomba_4128_368 = new Goomba(4128, 368, GameObjectIconType.Ground);
+        goomba_4128_368.addToGameUI(gameUI);
+        
+        var goomba_4160_368 = new Goomba(4160, 368, GameObjectIconType.Ground);
+        goomba_4160_368.addToGameUI(gameUI);
 
         var goomba_5440_368 = new Goomba(5440, 368, GameObjectIconType.Ground);
         goomba_5440_368.addToGameUI(gameUI);
 
-        var goomba_5504_368 = new Goomba(5504, 368, GameObjectIconType.Ground);
-        goomba_5504_368.addToGameUI(gameUI);
+        var goomba_5472_368 = new Goomba(5472, 368, GameObjectIconType.Ground);
+        goomba_5472_368.addToGameUI(gameUI);
 
         var question_512_272 = new Question(512, 272, QuestionItemType.Gold, QuestionDisplayType.Question, GameObjectIconType.Ground);
         question_512_272.addToGameUI(gameUI);
