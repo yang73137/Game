@@ -430,7 +430,7 @@ World_2_1 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            alert("后续关卡正在开发中......");
+            alert("To be continued......");
         }
     },
     onChangedScene: function () {

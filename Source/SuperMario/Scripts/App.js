@@ -16,7 +16,7 @@ App = {
         this.gameUI = gameUI;
     },
     process: function (src, loaded, total) {
-        document.getElementById("app").innerHTML = "已经加载: " + loaded + "/" + total;
+        document.getElementById("app").innerHTML = "Loaded: " + loaded + "/" + total;
     },
     complete: function () {
         document.getElementById("app").innerHTML = "";
@@ -24,7 +24,7 @@ App = {
         App.onTimer();
     },
     error: function (src, loaded, total) {
-        alert("加载图片 " + src + " 出错");
+        alert("Load " + src + " error");
     },
     run: function () {
         ImageLoader.load(this, [Const.IMAGE_ITEMS, Const.IMAGE_ENEMIES, Const.IMAGE_MARIOBROS, Const.IMAGE_TILESET, Const.IMAGE_WORLD_1_1]);
