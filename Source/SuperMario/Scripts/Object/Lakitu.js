@@ -127,17 +127,14 @@ Lakitu = ClassFactory.createClass(Enemy, {
         if (this.deadCounter.countdown()) {
             if (this.deadCounter.currentCount > 30) {
                 this.moveUp(4);
-                this.faceToRight ? this.moveRight(2) : this.moveLeft(2);
             }
             else {
-                this.faceToRight ? this.moveRight(2) : this.moveLeft(2);
                 this.moveDown(5);
             }
         } else {
             if (this.y > this.gameUI.height) {
                 this.state = LakituState.None;
             } else {
-                this.faceToRight ? this.moveRight(2) : this.moveLeft(2);
                 this.moveDown(5);
             }
         }
