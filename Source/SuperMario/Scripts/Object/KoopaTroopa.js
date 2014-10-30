@@ -97,10 +97,10 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                 this.movingUp = !this.movingUp;
                 this.movingUpLength = 0;
             }
-            
 
+            if (this.movable) {
                 this.faceToRight ? this.moveRight(this.speed) : this.moveLeft(this.speed);
-
+            }
         }
 
         this.sprite.moveToNextFrame();
