@@ -142,6 +142,13 @@ Brick = ClassFactory.createClass(GameObject, {
             this.fragment3.setBackgroundPosition(432, 16);
             this.fragment4.setBackgroundPosition(432, 16);
             break;
+        case GameObjectIconType.Castle:
+            this.sprite.setBackgroundPosition(64, 128);
+            this.fragment1.setBackgroundPosition(704, 0);
+            this.fragment2.setBackgroundPosition(736, 0);
+            this.fragment3.setBackgroundPosition(704, 16);
+            this.fragment4.setBackgroundPosition(736, 16);
+            break;
         }
     }
 });

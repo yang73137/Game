@@ -20,6 +20,10 @@ World_1_4 = ClassFactory.createClass(World, {
         if (!this.scrollable) {
             return;
         }
+        
+        if (Math.abs(this.x) > 4596) {
+            return;
+        }
 
         if (this.mario.x - Math.abs(this.x) > 220 && Math.abs(this.x) <= 4590) {
             this.setX(this.x - (this.mario.jumping ? this.mario.speed + 1 : this.mario.speed));
@@ -29,37 +33,30 @@ World_1_4 = ClassFactory.createClass(World, {
         var gameUI = this;
 
         this.mario.addToGameUI(gameUI);
-        this.mario.setPosition(84, 206 - this.mario.height);
+        this.mario.setPosition(84, 208 - this.mario.height);
 
         var x = new Block(4880, 350, 32, 48);
         x.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         x.sprite.setBackgroundPosition(0, 464);
         x.setStoppable(true);
-        x.attachCollides(function(gameObject) {
-            if (gameObject instanceof MarioBors) {
-                var world = new World_2_1();
-                this.gameUI.gameUI.setWorld(world);
-                this.gameUI.mario.setCollidable(true, true, true, true);
-            }
-        });
         x.addToGameUI(gameUI);
 
         this.bowser = new Bowser(4300, 240);
         this.bowser.addToGameUI(gameUI);
 
-        var roof_0_46 = new Block(0, 46, 718, 96);
+        var roof_0_46 = new Block(0, 48, 718, 96);
         roof_0_46.addToGameUI(gameUI);
 
-        var roof_719_46 = new Block(719, 46, 32, 128);
+        var roof_719_46 = new Block(719, 48, 32, 128);
         roof_719_46.addToGameUI(gameUI);
 
-        var roof_752_46 = new Block(752, 46, 414, 32);
+        var roof_752_46 = new Block(752, 48, 414, 32);
         roof_752_46.addToGameUI(gameUI);
 
-        var roof_1167_46 = new Block(1167, 46, 1120, 128);
+        var roof_1167_46 = new Block(1167, 48, 1120, 128);
         roof_1167_46.addToGameUI(gameUI);
 
-        var roof_2288_46 = new Block(2288, 46, 2818, 32);
+        var roof_2288_46 = new Block(2288, 48, 2818, 32);
         roof_2288_46.addToGameUI(gameUI);
 
         var roof_3087_78 = new Block(3087, 78, 224, 64);
@@ -110,13 +107,13 @@ World_1_4 = ClassFactory.createClass(World, {
 
 
 
-        var floor_0_206 = new Block(0, 206, 96, 32);
+        var floor_0_206 = new Block(0, 208, 96, 32);
         floor_0_206.addToGameUI(gameUI);
 
-        var floor_0_228 = new Block(0, 238, 128, 32);
+        var floor_0_228 = new Block(0, 240, 128, 32);
         floor_0_228.addToGameUI(gameUI);
 
-        var floor_0_270 = new Block(0, 270, 160, 32);
+        var floor_0_270 = new Block(0, 272, 160, 32);
         floor_0_270.addToGameUI(gameUI);
 
         var floor_0_302 = new Block(0, 302, 416, 143);
@@ -128,7 +125,7 @@ World_1_4 = ClassFactory.createClass(World, {
         var floor_911_302 = new Block(911, 302, 96, 144);
         floor_911_302.addToGameUI(gameUI);
 
-        var floor_1103_270 = new Block(1103, 270, 1185, 176);
+        var floor_1103_270 = new Block(1103, 272, 1185, 176);
         floor_1103_270.addToGameUI(gameUI);
 
         var floor_2288_302 = new Block(2288, 302, 1024, 144);
@@ -150,7 +147,7 @@ World_1_4 = ClassFactory.createClass(World, {
         this.bridge_4079_302.broken = false;
         this.bridge_4079_302.addToGameUI(gameUI);
 
-        var lian_4463_270 = new Block(4463, 270, 32, 32);
+        var lian_4463_270 = new Block(4463, 272, 32, 32);
         lian_4463_270.addToGameUI(gameUI);
         lian_4463_270.setCollidable(false, false, false, false);
 
@@ -177,6 +174,7 @@ World_1_4 = ClassFactory.createClass(World, {
                 this.gameUI.bridge_4079_302.sprite.setBackground("#000000");
                 this.gameUI.bridge_4079_302.setCollidable(false, false, false, false);
                 this.gameUI.bowser.dead();
+                this.gameUI.end();
             }
         });
         afx_4495_240.addToGameUI(gameUI);
@@ -195,5 +193,23 @@ World_1_4 = ClassFactory.createClass(World, {
         this.mario.reborn();
 
         this.scrollable = true;
+    },
+    onEnd: function () {
+        if (!this.initEnd) {
+            this.mario.setSprite(MarioSprite.Move);
+            this.mario.moving = true;
+            this.mario.movingToLeft = true;
+            this.mario.sprite.setFrameCounter(2);
+            this.initEnd = true;
+        }
+        if (this.mario.x < 4848) {
+            this.mario.moveDown(7);
+            this.falling = false;
+            this.mario.moveRight(2);
+            this.mario.sprite.moveToNextFrame();
+        } else {
+            var world = new World_2_1();
+            this.gameUI.setWorld(world);
+        }
     }
 });
