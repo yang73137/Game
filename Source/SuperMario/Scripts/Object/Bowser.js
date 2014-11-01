@@ -177,7 +177,7 @@ BowserFire = ClassFactory.createClass(Enemy, {
         this.setPosition(x, y);
         this.sprite.show();
         this.sprite.start();
-
+        this.setCollidable(true, true, true, true);
         this.state = BowserFireState.Firing;
     },
     onCollidesUp: function (gameObject) {
@@ -193,7 +193,9 @@ BowserFire = ClassFactory.createClass(Enemy, {
         Enemy.prototype.moveLeft.call(this, speed);
         if (this.x + this.width < Math.abs(this.gameUI.x)) {
             this.sprite.hide();
+            this.setCollidable(false, false, false, false);
             this.state = BowserFireState.None;
+            
         }
     },
     onOffScreen: function () {
