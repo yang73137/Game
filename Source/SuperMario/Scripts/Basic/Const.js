@@ -26,3 +26,9 @@ for (var i = 1; i <= 8; i++) {
         Const["IMAGE_WORLD_" + i + "_" + j] = (window.release ? "" : ".") + "./Images/World_" + +i + "_" + j + ".png";
     }
 }
+
+for (var i = 1; i <= 8; i++) {
+    for (var j = 1; j <= 4; j++) {
+        Const["SCRIPT_WORLD_" + i + "_" + j] = (window.release ? "" : ".") + "./Scripts/World/World_" + +i + "_" + j + ".js";
+    }
+}

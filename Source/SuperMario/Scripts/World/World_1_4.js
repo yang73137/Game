@@ -14,6 +14,7 @@ World_1_4 = ClassFactory.createClass(World, {
         this.setTitle("World  1-4");
         
         ImageLoader.load(this, [Const.IMAGE_WORLD_2_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_2_1]);
     },
     scroll: function () {
         if (!this.scrollable) {

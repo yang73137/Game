@@ -48,3 +48,16 @@
         }
     }
 };
+
+ScriptLoader = {
+    loaded: 0,
+    scripts: {},
+    load: function(listener, srcArr) {
+        for (var i = 0; i < srcArr.length; i++) {
+            var script = document.createElement("script");
+            script.setAttribute("type", "text/javascript");
+            script.setAttribute("src", srcArr[i]);
+            (document.body || document.documentElement.body).appendChild(script);
+        }
+    }
+}

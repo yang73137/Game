@@ -10,7 +10,7 @@ World_1_1 = ClassFactory.createClass(World, {
     init: function() {
         World.init.call(this);
 
-        this.setSize(7296, 448);
+        this.setSize(7612, 448);
         this.setBackgroundImage(Const.IMAGE_WORLD_1_1);
         this.setBackgroundPosition(0, 0);
         this.show();
@@ -19,6 +19,7 @@ World_1_1 = ClassFactory.createClass(World, {
         this.setTitle("World  1-1");
 
         ImageLoader.load(this, [Const.IMAGE_WORLD_1_2]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_1_2]);
     },
     scroll: function () {
         if (!this.scrollable) {
