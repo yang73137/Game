@@ -186,6 +186,7 @@ BowserFire = ClassFactory.createClass(Enemy, {
     onCollides: function (gameObject) {
         if (gameObject.stoppable) {
             this.sprite.hide();
+            this.setCollidable(false, false, false, false);
             this.state = BowserFireState.None;
         }
     },
