@@ -271,7 +271,7 @@ World_1_3 = ClassFactory.createClass(World, {
         var iron_4864_366 = new Block(4864, 366, 32, 32);
         iron_4864_366.addToGameUI(gameUI);
 
-        var flag = new Block(4864 + 12, 60, 8, 308);
+        var flag = new Block(4864 + 12, 66, 8, 303);
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
