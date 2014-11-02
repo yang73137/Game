@@ -230,7 +230,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                         gameObject.invincible ? this.dead() : gameObject.hurt();
                 }
             }
-            else if (gameObject instanceof Enemy) {
+            else if (gameObject instanceof Enemy && this.moving) {
                 gameObject.dead();
             }
             
@@ -255,7 +255,7 @@ KoopaTroopa = ClassFactory.createClass(Enemy, {
                     gameObject.invincible ? this.dead() : gameObject.hurt();
                 }
             }
-            else if (gameObject instanceof Enemy) {
+            else if (gameObject instanceof Enemy && this.moving) {
                 gameObject.dead();
             }
         }

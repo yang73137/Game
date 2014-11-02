@@ -39,6 +39,12 @@ World_1_4 = ClassFactory.createClass(World, {
         x.sprite.setBackgroundImage(Const.IMAGE_ITEMS);
         x.sprite.setBackgroundPosition(0, 464);
         x.setStoppable(true);
+        x.attachCollides(function (gameObject) {
+            if (gameObject instanceof MarioBors) {
+                var world = new World_2_1();
+                this.gameUI.gameUI.setWorld(world);
+            }
+        });
         x.addToGameUI(gameUI);
 
         this.bowser = new Bowser(4300, 240);
@@ -194,7 +200,7 @@ World_1_4 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
     },
-    onEnd: function () {
+    onEnd: function() {
         if (!this.initEnd) {
             this.mario.setSprite(MarioSprite.Move);
             this.mario.moving = true;
@@ -202,14 +208,9 @@ World_1_4 = ClassFactory.createClass(World, {
             this.mario.sprite.setFrameCounter(2);
             this.initEnd = true;
         }
-        if (this.mario.x < 4848) {
-            this.mario.moveDown(7);
-            this.falling = false;
-            this.mario.moveRight(2);
-            this.mario.sprite.moveToNextFrame();
-        } else {
-            var world = new World_2_1();
-            this.gameUI.setWorld(world);
-        }
+        this.mario.moveDown(7);
+        this.falling = false;
+        this.mario.moveRight(2);
+        this.mario.sprite.moveToNextFrame();
     }
 });
