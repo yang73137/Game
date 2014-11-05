@@ -110,6 +110,9 @@ Gold2 = ClassFactory.createClass(GameObject, {
             case GameObjectIconType.Underground:
                 this.sprite.setFrameSequence([{ x: 32 * 9, y: 32 * 6 }, { x: 32 * 9, y: 32 * 6 }, { x: 32 * 10, y: 32 * 6 }, { x: 32 * 11, y: 32 * 6 }, { x: 32 * 12, y: 32 * 6 }]);
                 break;
+            case GameObjectIconType.Castle:
+                this.sprite.setFrameSequence([{ x: 32 * 18, y: 32 * 6 + 1 }, { x: 32 * 18, y: 32 * 6 + 1 }, { x: 32 * 19, y: 32 * 6 + 1 }, { x: 32 * 20, y: 32 * 6 + 1 }, { x: 32 * 21, y: 32 * 6 + 1 }]);
+                break;
         }
     }
 });

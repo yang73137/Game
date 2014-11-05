@@ -118,10 +118,45 @@ FireBall = ClassFactory.createClass(GameObject, {
     }
 });
 
-FireBall2 = ClassFactory.createClass(GameObject, {
-    init: function (x, y, numberOfFireballs) {
-        GameObject.init.call(this);
+EnemyFireball = ClassFactory.createClass(GameObject, {
+    init: function(x, y, up) {
+        this.sprite = new Sprite();
+        this.sprite.setBackgroundImage(Const.IMAGE_ENEMIES);
+        
+        if (up) {
+            this.sprite.setBackgroundPosition(32 * 36, 160);
+        } else {
+            this.sprite.setBackgroundPosition(32 * 36, 320);
+        }
 
-        this.fireBalls = [];
+        this.sprite.show();
+
+        this.setSize(32, 32);
+        this.setPosition(x, y);
+    },
+    addToGameUI: function (gameUI) {
+        gameUI.addAnimateObject(this);
+        GameObject.prototype.addToGameUI.call(this, gameUI);
+    },
+    update: function () {
+        if (this.y < 144) {
+            this.up = false;
+            this.sprite.setBackgroundPosition(32 * 36, 320);
+        }
+        else if (this.y > 700) {
+            this.up = true;
+            this.sprite.setBackgroundPosition(32 * 36, 160);
+        }
+
+        if (this.up) {
+            this.moveUp(6);
+        } else {
+            this.moveDown(5);
+        }
+    },
+    onCollides: function (gameObject) {
+        if (gameObject instanceof MarioBors && !gameObject.invincible) {
+            gameObject.hurt();
+        }
     }
 });

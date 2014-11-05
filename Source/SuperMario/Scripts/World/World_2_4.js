@@ -54,62 +54,10 @@ World_2_4 = ClassFactory.createClass(World, {
         var floor_0_302 = new Block(0, 304, 512, 143);
         floor_0_302.addToGameUI(gameUI);
 
-        var fire_526_700 = new Block(526, 700, 32, 32, true);
-        fire_526_700.setStoppable(false);
-        fire_526_700.sprite.setBackgroundImage(Const.IMAGE_ENEMIES);
-        fire_526_700.sprite.setBackgroundPosition(32 * 36, 160);
-        fire_526_700.up = true;
-        fire_526_700.attachUpdate(function () {
-
-            if (this.y < 144) {
-                this.up = false;
-                this.sprite.setBackgroundPosition(32 * 36, 320);
-            }
-            else if (this.y > 700) {
-                this.up = true;
-                this.sprite.setBackgroundPosition(32 * 36, 160);
-            }
-
-            if (this.up) {
-                this.moveUp(6);
-            } else {
-                this.moveDown(5);
-            }
-        });
-        fire_526_700.attachCollides(function (gameObject) {
-            if (gameObject instanceof MarioBors && !gameObject.invincible) {
-                gameObject.hurt();
-            }
-        });
+        var fire_526_700 = new EnemyFireball(526, 700, true);
         fire_526_700.addToGameUI(gameUI);
         
-        var fire_958_700 = new Block(958, 700, 32, 32, true);
-        fire_958_700.setStoppable(false);
-        fire_958_700.sprite.setBackgroundImage(Const.IMAGE_ENEMIES);
-        fire_958_700.sprite.setBackgroundPosition(32 * 36, 160);
-        fire_958_700.up = true;
-        fire_958_700.attachUpdate(function () {
-
-            if (this.y < 144) {
-                this.up = false;
-                this.sprite.setBackgroundPosition(32 * 36, 320);
-            }
-            else if (this.y > 700) {
-                this.up = true;
-                this.sprite.setBackgroundPosition(32 * 36, 160);
-            }
-
-            if (this.up) {
-                this.moveUp(6);
-            } else {
-                this.moveDown(5);
-            }
-        });
-        fire_958_700.attachCollides(function (gameObject) {
-            if (gameObject instanceof MarioBors && !gameObject.invincible) {
-                gameObject.hurt();
-            }
-        });
+        var fire_958_700 = new EnemyFireball(958, 700, true);
         fire_958_700.addToGameUI(gameUI);
 
         var block_574_272 = new Block(574, 272, 64, 32);

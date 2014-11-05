@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SuperMario World 3-4</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #app {
+            margin-top: 100px;
+            width: 512px;
+            height: 448px;
+            position: relative;
+            background: #000000;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body style="background: #DFDFDF;">
+    <div id="app"></div>
+    <script src="../Scripts/Basic/ImgLoader.js"></script>
+    <script src="../Scripts/Basic/ClassFactory.js"></script>
+    <script src="../Scripts/Basic/Const.js"></script>
+    <script src="../Scripts/Basic/Counter.js"></script>
+    <script src="../Scripts/Basic/Input.js"></script>
+    <script src="../Scripts/Basic/Layer.js"></script>
+    <script src="../Scripts/Basic/Sprite.js"></script>
+    <script src="../Scripts/Basic/Label.js"></script>
+    <script src="../Scripts/UI/UIBase.js"></script>
+    <script src="../Scripts/UI/GameUI.js"></script>
+    <script src="../Scripts/World/World.js"></script>
+    <script src="../Scripts/Object/GameObject.js"></script>
+    <script src="../Scripts/Object/MarioBros.js"></script>
+    <script src="../Scripts/Object/Enemy.js"></script>
+    <script src="../Scripts/Object/Bowser.js"></script>
+    <script src="../Scripts/Object/Goomba.js"></script>
+    <script src="../Scripts/Object/KoopaTroopa.js"></script>
+    <script src="../Scripts/Object/Mushroom.js"></script>
+    <script src="../Scripts/Object/Brick.js"></script>
+    <script src="../Scripts/Object/Question.js"></script>
+    <script src="../Scripts/Object/Block.js"></script>
+    <script src="../Scripts/Object/Gold.js"></script>
+    <script src="../Scripts/Object/Flower.js"></script>
+    <script src="../Scripts/Object/FireBall.js"></script>
+    <script src="../Scripts/Object/Star.js"></script>
+    <script src="../Scripts/Object/Spring.js"></script>
+    <script src="../Scripts/Object/Spiny.js"></script>
+    <script src="../Scripts/Object/Lakitu.js"></script>
+    <script src="../Scripts/World/World.js"></script>
+    <script src="../Scripts/World/World_3_4.js"></script>
+    <script type="text/javascript">
+
+        var app = document.getElementById("app");
+
+        var gameUI = new GameUI();
+        gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
+        gameUI.show();
+        gameUI.appendTo(app);
+
+        gameUI.setMario(new MarioBors(0, 0));
+
+        var world = new World_3_4();
+        world.addToGameUI(gameUI);
+        
+        //setTimeout(function () {
+        //    world.mario.setType(MarioType.Flower);
+        //    world.mario.setPosition(6000, 10);
+        //    world.setPosition(-5800, 0);
+        //}, 2000);
+        
+        setInterval(function () {
+            gameUI.update();
+        }, 16);
+
+    </script>
+</body>
+</html>
