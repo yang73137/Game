@@ -141,11 +141,9 @@ World = ClassFactory.createClass(Layer, {
         this.changeState(WorldState.End);
     },
     onEnding: function () {
-        this.mario.setCollidable(true, true, true, false);
     },
     onEnd: function() {
     },
     onEnded: function () {
-        this.mario.setCollidable(true, true, true, true);
     }
 });
