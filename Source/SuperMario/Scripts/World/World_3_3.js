@@ -335,6 +335,7 @@ World_3_3 = ClassFactory.createClass(World, {
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 if (gameObject instanceof MarioBors) {
+                    this.setCollidable(false, false, false, false);
                     this.gameUI.end();
                 }
             }

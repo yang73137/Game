@@ -186,6 +186,7 @@ World_4_1 = ClassFactory.createClass(World, {
         flag.addToGameUI(gameUI);
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
+                this.setCollidable(false, false, false, false);
                 this.gameUI.end();
             }
         });
