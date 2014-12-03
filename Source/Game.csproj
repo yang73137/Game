@@ -137,6 +137,7 @@
     <Content Include="SuperMario\Images\World_4_1.png" />
     <Content Include="SuperMario\Images\World_4_2.png" />
     <Content Include="SuperMario\Images\World_4_3.png" />
+    <Content Include="SuperMario\Images\World_5_1.png" />
     <Content Include="SuperMario\Index.html" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
@@ -150,6 +151,7 @@
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
     <Content Include="SuperMario\Scripts\Object\Bowser.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
+    <Content Include="SuperMario\Scripts\Object\BuzzyBeetle.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\Block.js" />
     <Content Include="SuperMario\Scripts\Object\FireBall.js" />
@@ -175,6 +177,7 @@
     <Content Include="SuperMario\Scripts\World\World_1_3.js" />
     <Content Include="SuperMario\Scripts\World\World_1_4.js" />
     <Content Include="SuperMario\Scripts\World\World_2_1.js" />
+    <Content Include="SuperMario\Scripts\World\World_5_1.js" />
     <Content Include="SuperMario\Scripts\World\World_4_3.js" />
     <Content Include="SuperMario\Scripts\World\World_4_2.js" />
     <Content Include="SuperMario\Scripts\World\World_4_1.js" />
@@ -189,6 +192,7 @@
     <Content Include="SuperMario\UI\World_1_3.html" />
     <Content Include="SuperMario\UI\World_1_4.html" />
     <Content Include="SuperMario\UI\World_2_1.html" />
+    <Content Include="SuperMario\UI\World_5_1.html" />
     <Content Include="SuperMario\UI\World_4_3.html" />
     <Content Include="SuperMario\UI\World_4_2.html" />
     <Content Include="SuperMario\UI\World_4_1.html" />
