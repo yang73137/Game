@@ -170,7 +170,7 @@ World_4_2 = ClassFactory.createClass(World, {
         var tube_2819_304 = new Block(2819, 304, 64, 96);
         tube_2819_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN) && ((gameObject.x > this.x) && (gameObject.x + gameObject.width < this.x + this.width))) {
-                this.gameUI.scene = World_2_1_Scene.Scene2;
+                this.gameUI.scene = World_4_2_Scene.Scene3;
                 this.gameUI.changeScene();
             }
         });
