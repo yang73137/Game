@@ -149,6 +149,7 @@
     <Content Include="SuperMario\Scripts\Basic\Layer.js" />
     <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
+    <Content Include="SuperMario\Scripts\Object\BillBlaster.js" />
     <Content Include="SuperMario\Scripts\Object\Bowser.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\BuzzyBeetle.js" />

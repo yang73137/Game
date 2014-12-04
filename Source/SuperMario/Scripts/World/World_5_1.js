@@ -112,6 +112,9 @@ World_5_1 = ClassFactory.createClass(World, {
             goomba.addToGameUI(gameUI);
         }
 
+        var billBlaster_3552_336 = new BillBlaster(3552, 336, GameObjectIconType.Ground);
+        billBlaster_3552_336.addToGameUI(gameUI);
+
         var iron_3712_304 = new Block(3712, 304, 32, 96);
         iron_3712_304.addToGameUI(gameUI);
 
@@ -159,8 +162,14 @@ World_5_1 = ClassFactory.createClass(World, {
         });
         tube_4992_208.addToGameUI(gameUI);
 
+        var billBlaster_5088_336 = new BillBlaster(5088, 336, GameObjectIconType.Ground);
+        billBlaster_5088_336.addToGameUI(gameUI);
+
         var tube_5216_336 = new Block(5216, 336, 64, 64);
         tube_5216_336.addToGameUI(gameUI);
+
+        var billBlaster_5440_336 = new BillBlaster(5440, 336, GameObjectIconType.Ground);
+        billBlaster_5440_336.addToGameUI(gameUI);
 
         var koopaTroopa_5636_352 = new KoopaTroopa(5636, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
         koopaTroopa_5636_352.addToGameUI(gameUI);
