@@ -89,12 +89,18 @@ World_3_1 = ClassFactory.createClass(World, {
         
         var koopaTroopa_3200_352 = new KoopaTroopa(3200, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_3200_352.addToGameUI(gameUI);
+
+        var hammerBrother_3648_96 = new HammerBrother(3648, 96);
+        hammerBrother_3648_96.addToGameUI(gameUI);
+
+        var hammerBrother_3744_224 = new HammerBrother(3744, 224);
+        hammerBrother_3744_224.addToGameUI(gameUI);
         
         for (var i = 0; i < 2; i++) {
             var goomba = new Goomba(4448 + 32 * i, 272 - 32 * i, GameObjectIconType.Ground);
             goomba.addToGameUI(gameUI);
         }
-        
+
         var koopaTroopa_4728_352 = new KoopaTroopa(4728, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
         koopaTroopa_4728_352.addToGameUI(gameUI);
         

@@ -151,6 +151,7 @@
     <Content Include="SuperMario\Scripts\Basic\Layer.js" />
     <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
+    <Content Include="SuperMario\Scripts\Object\BaseScript.js" />
     <Content Include="SuperMario\Scripts\Object\BillBlaster.js" />
     <Content Include="SuperMario\Scripts\Object\Bowser.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
@@ -162,6 +163,7 @@
     <Content Include="SuperMario\Scripts\Object\GameObject.js" />
     <Content Include="SuperMario\Scripts\Object\Gold.js" />
     <Content Include="SuperMario\Scripts\Object\Goomba.js" />
+    <Content Include="SuperMario\Scripts\Object\HammerBrother.js" />
     <Content Include="SuperMario\Scripts\Object\KoopaTroopa.js" />
     <Content Include="SuperMario\Scripts\Object\Lakitu.js" />
     <Content Include="SuperMario\Scripts\Object\Mushroom.js" />
