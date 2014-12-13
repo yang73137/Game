@@ -11,6 +11,9 @@ World_5_3 = ClassFactory.createClass(World, {
         
         this.setTitle("World  5-3");
         this.scrollable = true;
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_5_4]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_5_4]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -285,7 +288,8 @@ World_5_3 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            alert("To be countinue......");
+            var world = new World_5_4();
+            this.gameUI.setWorld(world);
         }
     }
 });

@@ -12,6 +12,9 @@ World_5_4 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
         this.setTitle("World  5-4");
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_6_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_6_1]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -225,6 +228,8 @@ World_5_4 = ClassFactory.createClass(World, {
         x.setStoppable(true);
         x.attachCollides(function (gameObject) {
             if (gameObject instanceof MarioBors) {
+                var world = new World_6_1();
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         x.addToGameUI(gameUI);
