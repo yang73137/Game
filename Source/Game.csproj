@@ -142,6 +142,7 @@
     <Content Include="SuperMario\Images\World_5_4.png" />
     <Content Include="SuperMario\Images\World_6_1.png" />
     <Content Include="SuperMario\Images\World_7_1.png" />
+    <Content Include="SuperMario\Images\World_8_1.png" />
     <Content Include="SuperMario\Index.html" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
