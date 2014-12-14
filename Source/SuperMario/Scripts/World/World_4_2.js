@@ -26,6 +26,15 @@ World_4_2 = ClassFactory.createClass(World, {
 
         ImageLoader.load(this, [Const.IMAGE_WORLD_4_3]);
         ScriptLoader.load(this, [Const.SCRIPT_WORLD_4_3]);
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_5_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_5_1]);
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_6_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_6_1]);
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_7_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_7_1]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -415,13 +424,11 @@ World_4_2 = ClassFactory.createClass(World, {
         }
 
         var tube_7395_304 = new Block(7395, 304, 64, 96);
-        tube_7395_304.tip = false;
         tube_7395_304.attachCollidesUp(function(gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                if (!this.tip) {
-                    this.tip = true;
-                    alert("To be continued......");
-                }
+                this.state = WorldState.None;
+                var world = new World_5_1();
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         tube_7395_304.addToGameUI(gameUI);
@@ -527,25 +534,21 @@ World_4_2 = ClassFactory.createClass(World, {
         tube_10545_304.addToGameUI(gameUI);
 
         var tube_10673_304 = new Block(10673, 304, 64, 96);
-        tube_10673_304.tip = false;
         tube_10673_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                if (!this.tip) {
-                    this.tip = true;
-                    alert("To be continued......");
-                }
+                this.state = WorldState.None;
+                var world = new World_7_1();
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         tube_10673_304.addToGameUI(gameUI);
 
         var tube_10801_304 = new Block(10801, 304, 64, 96);
-        tube_10801_304.tip = false;
         tube_10801_304.attachCollidesUp(function (gameObject) {
             if (gameObject instanceof MarioBors && Input.isPressed(InputAction.DOWN)) {
-                if (!this.tip) {
-                    this.tip = true;
-                    alert("To be continued......");
-                }
+                this.state = WorldState.None;
+                var world = new World_6_1();
+                this.gameUI.gameUI.setWorld(world);
             }
         });
         tube_10801_304.addToGameUI(gameUI);
