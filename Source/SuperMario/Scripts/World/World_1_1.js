@@ -463,7 +463,7 @@ World_1_1 = ClassFactory.createClass(World, {
         case World_1_1_Scene.Scene3:
             this.scrollable = true;
             this.setPosition(-5120, 0);
-            this.mario.setPosition(5232, 304);
+            this.mario.setPosition(5232, 304 - this.mario.height);
             break;
         }
     }

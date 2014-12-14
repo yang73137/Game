@@ -4,10 +4,8 @@ World_2_3 = ClassFactory.createClass(World, {
     init: function () {
         World.init.call(this);
 
-        this.setSize(10275, 448);
+        this.setSize(7602, 448);
         this.setBackgroundImage(Const.IMAGE_WORLD_2_3);
-        this.setBackgroundPosition(4, 4);
-        this.setPosition(0, 0);
         this.show();
 
         this.setTitle("World  2-3");

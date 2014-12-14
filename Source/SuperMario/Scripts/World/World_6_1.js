@@ -267,5 +267,5 @@ World_6_1 = ClassFactory.createClass(World, {
             this.state = WorldState.None;
             alert("To be contiuned......");
         }
-    },
+    }
 });

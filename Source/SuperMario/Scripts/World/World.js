@@ -29,6 +29,9 @@ World = ClassFactory.createClass(Layer, {
 
         this.openCounter = new Counter(60, false, true);
         this.changeSceneCounter = new Counter(0, false, true);
+
+        this.setPosition(0, 0);
+        this.setBackgroundPosition(1, 1);
     },
     setTitle: function(title) {
         this.titleLayer.setText(title);

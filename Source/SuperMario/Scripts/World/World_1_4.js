@@ -4,10 +4,8 @@ World_1_4 = ClassFactory.createClass(World, {
     init: function () {
         World.init.call(this);
 
-        this.setSize(5126, 448);
+        this.setSize(5110, 448);
         this.setBackgroundImage(Const.IMAGE_WORLD_1_4);
-        this.setBackgroundPosition(3, 2);
-        this.setPosition(0, 0);
         this.show();
 
         this.scrollable = true;
