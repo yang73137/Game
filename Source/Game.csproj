@@ -185,6 +185,7 @@
     <Content Include="SuperMario\Scripts\World\World_1_3.js" />
     <Content Include="SuperMario\Scripts\World\World_1_4.js" />
     <Content Include="SuperMario\Scripts\World\World_2_1.js" />
+    <Content Include="SuperMario\Scripts\World\World_8_1.js" />
     <Content Include="SuperMario\Scripts\World\World_7_1.js" />
     <Content Include="SuperMario\Scripts\World\World_6_1.js" />
     <Content Include="SuperMario\Scripts\World\World_5_4.js" />
@@ -204,6 +205,7 @@
     <Content Include="SuperMario\UI\World_1_3.html" />
     <Content Include="SuperMario\UI\World_1_4.html" />
     <Content Include="SuperMario\UI\World_2_1.html" />
+    <Content Include="SuperMario\UI\World_8_1.html" />
     <Content Include="SuperMario\UI\World_7_1.html" />
     <Content Include="SuperMario\UI\World_6_1.html" />
     <Content Include="SuperMario\UI\World_5_4.html" />
