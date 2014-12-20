@@ -10,6 +10,9 @@ World_6_1 = ClassFactory.createClass(World, {
 
         this.scrollable = true;
         this.setTitle("World  6-1");
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_6_3]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_6_3]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -265,7 +268,8 @@ World_6_1 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            alert("To be contiuned......");
+            var world = new World_6_3();
+            this.gameUI.setWorld(world);
         }
     }
 });
