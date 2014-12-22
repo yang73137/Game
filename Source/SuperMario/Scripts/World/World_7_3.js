@@ -1,18 +1,18 @@
 ﻿
 
-World_2_3 = ClassFactory.createClass(World, {
+World_7_3 = ClassFactory.createClass(World, {
     init: function () {
         World.init.call(this);
 
         this.setSize(7602, 448);
-        this.setBackgroundImage(Const.IMAGE_WORLD_2_3);
+        this.setBackgroundImage(Const.IMAGE_WORLD_7_3);
         this.show();
 
-        this.setTitle("World  2-3");
+        this.setTitle("World  7-3");
         this.scrollable = true;
         
-        ImageLoader.load(this, [Const.IMAGE_WORLD_2_4]);
-        ScriptLoader.load(this, [Const.SCRIPT_WORLD_2_4]);
+        ImageLoader.load(this, [Const.IMAGE_WORLD_8_1]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_8_1]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -31,7 +31,7 @@ World_2_3 = ClassFactory.createClass(World, {
         var gameUI = this;
 
         this.mario.addToGameUI(gameUI);
-        this.mario.setPosition(84, 208 - this.mario.height);
+        this.mario.setPosition(84, 400 - this.mario.height);
         
         for (var i = 0; i < 4; i++) {
             var gold = new Gold2(1152 + 32 * i, 144, GameObjectIconType.Ground);
@@ -260,7 +260,7 @@ World_2_3 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            var world = new World_2_4();
+            var world = new World_8_1();
             this.gameUI.setWorld(world);
         }
     }

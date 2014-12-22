@@ -18,6 +18,9 @@ World_8_1 = ClassFactory.createClass(World, {
         this.setTitle("World  8-1");
 
         this.scene = World_8_1_Scene.Scene1;
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_8_2]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_8_2]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -427,7 +430,8 @@ World_8_1 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            alert("To be contiuned......");
+            var world = new World_8_2();
+            this.gameUI.setWorld(world);
         }
     },
     onChangedScene: function () {
