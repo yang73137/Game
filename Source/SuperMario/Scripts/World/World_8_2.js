@@ -18,6 +18,9 @@ World_8_2 = ClassFactory.createClass(World, {
         this.setTitle("World  8-2");
 
         this.scene = World_8_2_Scene.Scene1;
+
+        ImageLoader.load(this, [Const.IMAGE_WORLD_8_3]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_8_3]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -369,7 +372,8 @@ World_8_2 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            alert("To be countiuned......");
+            var world = new World_8_3();
+            this.gameUI.setWorld(world);
         }
     },
     onChangedScene: function () {
