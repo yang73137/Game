@@ -35,6 +35,9 @@ World_8_3 = ClassFactory.createClass(World, {
         var billBlaster_576_336 = new BillBlaster(576, 336, GameObjectIconType.Ground);
         billBlaster_576_336.addToGameUI(gameUI);
 
+        var koopaTroopa_900_352 = new KoopaTroopa(900, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
+        koopaTroopa_900_352.addToGameUI(gameUI);
+
         var billBlaster_1088_304 = new BillBlaster(1088, 304, GameObjectIconType.Ground);
         billBlaster_1088_304.addToGameUI(gameUI);
 
@@ -45,6 +48,11 @@ World_8_3 = ClassFactory.createClass(World, {
         tube_1696_272.addToGameUI(gameUI);
 
         for (var i = 0; i < 8; i++) {
+            if (i == 6) {
+                var question = new Question(1920 + 32 * i, 144, QuestionItemType.BigMushroom, QuestionDisplayType.Brick, GameObjectIconType.Ground);
+                question.addToGameUI(gameUI);
+                continue;
+            }
             var brick = new Brick(1920 + 32 * i, 144, GameObjectIconType.Ground);
             brick.addToGameUI(gameUI);
         }
@@ -53,6 +61,12 @@ World_8_3 = ClassFactory.createClass(World, {
             var brick = new Brick(1920 + 32 * i, 272, GameObjectIconType.Ground);
             brick.addToGameUI(gameUI);
         }
+
+        var hammerBrother_2016_224 = new HammerBrother(2016, 224);
+        hammerBrother_2016_224.addToGameUI(gameUI);
+
+        var hammerBrother_1952_96 = new HammerBrother(1952, 96);
+        hammerBrother_1952_96.addToGameUI(gameUI);
 
         for (var i = 0; i < 4; i++) {
             var block = new Block(2272 + 32 * i, 272 + 32 * i, 32, 128 - 32 * i);
@@ -67,6 +81,9 @@ World_8_3 = ClassFactory.createClass(World, {
 
         var billBlaster_2752_336 = new BillBlaster(2752, 336, GameObjectIconType.Ground);
         billBlaster_2752_336.addToGameUI(gameUI);
+
+        var koopaTroopa_2940_352 = new KoopaTroopa(2940, 352, KoopaTroopaType.Fly, true, false, GameObjectIconType.Ground);
+        koopaTroopa_2940_352.addToGameUI(gameUI);
 
         var block_3040_304 = new Block(3040, 304, 32, 96);
         block_3040_304.addToGameUI(gameUI);
@@ -84,11 +101,20 @@ World_8_3 = ClassFactory.createClass(World, {
             brick.addToGameUI(gameUI);
         }
 
+        var hammerBrother_3806_224 = new HammerBrother(3806, 224);
+        hammerBrother_3806_224.addToGameUI(gameUI);
+
+        var hammerBrother_3742_96 = new HammerBrother(3742, 96);
+        hammerBrother_3742_96.addToGameUI(gameUI);
+
         var block_4032_272 = new Block(4032, 272, 64, 176);
         block_4032_272.addToGameUI(gameUI);
 
         var floor_4160_400 = new Block(4160, 400, 2144, 48);
         floor_4160_400.addToGameUI(gameUI);
+
+        var koopaTroopa_4350_352 = new KoopaTroopa(4350, 352, KoopaTroopaType.Normal, true, false, GameObjectIconType.Ground);
+        koopaTroopa_4350_352.addToGameUI(gameUI);
 
         var tube_5376_304 = new Block(5376, 304, 64, 96);
         tube_5376_304.addToGameUI(gameUI);
