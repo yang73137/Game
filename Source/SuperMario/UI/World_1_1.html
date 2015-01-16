@@ -33,19 +33,49 @@
         gameUI.show();
         gameUI.appendTo(app);
 
-        gameUI.setMario(new MarioBors(0, 0));
+        var swimingMario = new Sprite();
+        swimingMario.setBackgroundImage(Const.IMAGE_MARIOBROS);
+        swimingMario.setSize(32, 64);
+        swimingMario.show();
+        gameUI.append(swimingMario);
 
+        swimingMario.setY(384);
+
+        swimingMario.setFrameSequence([{ x: 32 * 9, y: 0 }, { x: 32 * 10, y: 0 }, { x: 32 * 11, y: 0 }, { x: 32 * 12, y: 0 }, { x: 32 * 13, y: 0 }, { x: 32 * 14, y: 0 }]);
+        swimingMario.setFrameCounter(3);
+        swimingMario.setRepeat(-1);
+        swimingMario.start();
+
+        gameUI.setMario(new MarioBors(0, 0));
+        /*
         var world = new World_1_1();
         world.addToGameUI(gameUI);
-
+        */
         //setTimeout(function () {
         //    world.mario.setPosition(6200, 0);
         //    world.setPosition(-6000, 0);
         //}, 1200);
-        
-
+        var delay = 10;
         setInterval(function () {
-            gameUI.update();
+
+            if (Input.isPressed(InputAction.RIGHT)) {
+                swimingMario.setX(swimingMario.x + 1);
+            }
+
+            if (Input.isPressed(InputAction.GAME_A)) {
+                swimingMario.setY(swimingMario.y - 1);
+                swimingMario.moveToNextFrame();
+                delay = 10;
+            } else {
+                if (swimingMario.frameIndex != 1)
+                {
+                    swimingMario.moveToNextFrame();
+                }
+                if (--delay <= 0) {
+                    swimingMario.setY(swimingMario.y + 1);
+                }
+            }
+            //gameUI.update();
         }, 16);
 
     </script>
