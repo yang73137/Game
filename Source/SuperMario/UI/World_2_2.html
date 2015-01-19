@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SuperMario World 2-2</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #app {
+            margin-top: 100px;
+            width: 512px;
+            height: 448px;
+            position: relative;
+            background: #000000;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body style="background: #DFDFDF;">
+    <div id="app"></div>
+    <script src="../Scripts/Object/BaseScript.js"></script>
+    <script src="../Scripts/World/World.js"></script>
+    <script src="../Scripts/World/World_2_2.js"></script>
+    <script type="text/javascript">
+
+        var app = document.getElementById("app");
+
+        var gameUI = new GameUI();
+        gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
+        gameUI.show();
+        gameUI.appendTo(app);
+
+        var swimingMario = new Sprite();
+        swimingMario.setBackgroundImage(Const.IMAGE_MARIOBROS);
+        swimingMario.setSize(32, 64);
+        swimingMario.show();
+        gameUI.append(swimingMario);
+
+        swimingMario.setY(384);
+
+        swimingMario.setFrameSequence([{ x: 32 * 9, y: 0 }, { x: 32 * 10, y: 0 }, { x: 32 * 11, y: 0 }, { x: 32 * 12, y: 0 }, { x: 32 * 13, y: 0 }, { x: 32 * 14, y: 0 }]);
+        swimingMario.setFrameCounter(3);
+        swimingMario.setRepeat(-1);
+        swimingMario.start();
+
+        swimingMario.faceToRight = true;
+
+        gameUI.setMario(new MarioBors(0, 0));
+        
+        var world = new World_2_2();
+        world.addToGameUI(gameUI);
+        
+        setTimeout(function () {
+            world.mario.setPosition(1200, 0);
+            world.setPosition(-1000, 0);
+        }, 1200);
+
+        var delay = 10;
+        setInterval(function () {
+            /*
+            if (Input.isPressed(InputAction.RIGHT)) {
+                if (!swimingMario.faceToRight) {
+                    swimingMario.faceToRight = true;
+                    swimingMario.setFrameSequence([{ x: 32 * 9, y: 0 }, { x: 32 * 10, y: 0 }, { x: 32 * 11, y: 0 }, { x: 32 * 12, y: 0 }, { x: 32 * 13, y: 0 }, { x: 32 * 14, y: 0 }]);
+                    swimingMario.moveToNextFrame();
+                }
+                swimingMario.setX(swimingMario.x + 1);
+            }
+
+            if (Input.isPressed(InputAction.LEFT)) {
+                if (swimingMario.faceToRight) {
+                    swimingMario.faceToRight = false;
+                    swimingMario.setFrameSequence([{ x: 32 * 32, y: 0 }, { x: 32 * 31, y: 0 }, { x: 32 * 30, y: 0 }, { x: 32 * 29, y: 0 }, { x: 32 * 28, y: 0 }, { x: 32 * 27, y: 0 }]);
+                    swimingMario.moveToNextFrame();
+                }
+                swimingMario.setX(swimingMario.x - 1);
+            }
+
+            if (Input.isPressed(InputAction.GAME_A)) {
+                swimingMario.setY(swimingMario.y - 1);
+                swimingMario.moveToNextFrame();
+                delay = 10;
+            } else {
+                if (swimingMario.frameIndex != 1) {
+                    swimingMario.moveToNextFrame();
+                }
+            }
+
+            if (swimingMario.y + swimingMario.height < Const.SCREEN_HEIGHT && --delay <= 0) {
+                swimingMario.setY(swimingMario.y + 2);
+            }
+            */
+            gameUI.update();
+        }, 16);
+
+    </script>
+</body>
+</html>

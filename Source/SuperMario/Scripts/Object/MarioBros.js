@@ -12,7 +12,8 @@ MarioSprite = {
     Squat: 4,
     Stay: 5,
     Dead: 6,
-    SlideDown: 7
+    SlideDown: 7,
+    Swim: 8
 };
 
 MarioState = {
@@ -352,6 +353,11 @@ MarioBors = ClassFactory.createClass(GameObject, {
         gameUI.addAnimateObject(this);
     },
     onLive: function () {
+
+        if (this.isInWater) {
+            this.onWater();
+            return;
+        }
         
         if (Input.isPressed(17) && Input.isPressed(77)) {
             this.setInvincible(true);
@@ -832,4 +838,82 @@ MarioBors = ClassFactory.createClass(GameObject, {
             this.speedUpPressedTime = 0;
         }
     },
+    setInWater: function(isInWater) {
+        this.isInWater = isInWater;
+        this.collideOnBottom = false;
+    },
+    onWater: function () {
+
+        var spriteType = MarioSprite.Stand;
+
+        if (Input.isPressed(InputAction.RIGHT)) {
+            this.faceToRight = true;
+            this.x += 1;
+        }
+
+        if (Input.isPressed(InputAction.LEFT)) {
+            this.faceToRight = false;
+            this.x -= 1;
+        }
+
+        if (Input.isPressed(InputAction.GAME_A)) {
+            this.y -= 2;
+            this.collideOnBottom = false;
+        } else {
+            if (!this.moveDown(2)) {
+                this.collideOnBottom = true;
+            }
+            this.sprite.frameIndex = 1;
+        }
+
+        if (!this.collideOnBottom) {
+            spriteType = MarioSprite.Swim;
+        }
+       
+        this.setWaterSprite(spriteType);
+        this.setPosition(this.x, this.y);
+        this.sprite.moveToNextFrame();
+        
+    },
+    setWaterSprite: function (spriteType) {
+        console.log(spriteType == MarioSprite.Swim);
+        if (this.spriteType != spriteType) {
+            this.sprite.frameIndex = 0;
+            this.spriteType = spriteType;
+        } 
+        switch (spriteType) {
+            case MarioSprite.Stand:
+                if (this.invincible) {
+                    var frameSequence = [];
+                    var offsetY = this.type == MarioType.Small ? 11 : 9;
+                    for (var i = 0; i < 3; i++) {
+                        frameSequence.push(this.faceToRight ? { x: 0, y: 32 * (offsetY + i * 3) } : { x: 32 * 41, y: 32 * (offsetY + i * 3) });
+                    }
+                    this.sprite.setFrameSequence(frameSequence);
+                    break;
+                }
+                if (this.type == MarioType.Small && this.collideOnBottom) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 }] : [{ x: 32 * 41, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big && this.collideOnBottom) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 0 }] : [{ x: 32 * 41, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower && this.collideOnBottom) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 * 3 }] : [{ x: 32 * 41, y: 64 * 3 }]);
+                }
+                break;
+            case MarioSprite.Swim: 
+                if (this.type == MarioType.Small) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32 * 9, y: 64 }, { x: 32 * 10, y: 64 }, { x: 32 * 11, y: 64 }, { x: 32 * 12, y: 64 }, { x: 32 * 13, y: 64 }] : [{ x: 32 * 32, y: 64 }, { x: 32 * 31, y: 64 }, { x: 32 * 30, y: 64 }, { x: 32 * 29, y: 64 }, { x: 32 * 28, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32 * 9, y: 0 }, { x: 32 * 10, y: 0 }, { x: 32 * 11, y: 0 }, { x: 32 * 12, y: 0 }, { x: 32 * 13, y: 0 }, { x: 32 * 14, y: 0 }] : [{ x: 32 * 32, y: 0 }, { x: 32 * 31, y: 0 }, { x: 32 * 30, y: 0 }, { x: 32 * 29, y: 0 }, { x: 32 * 28, y: 0 }, { x: 32 * 27, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32 * 9, y: 32 * 6 }, { x: 32 * 10, y: 32 * 6 }, { x: 32 * 11, y: 32 * 6 }, { x: 32 * 12, y: 32 * 6 }, { x: 32 * 13, y: 32 * 6 }, { x: 32 * 14, y: 32 * 6 }] : [{ x: 32 * 32, y: 32 * 6 }, { x: 32 * 31, y: 32 * 6 }, { x: 32 * 30, y: 32 * 6 }, { x: 32 * 29, y: 32 * 6 }, { x: 32 * 28, y: 32 * 6 }, { x: 32 * 27, y: 32 * 6 }]);
+                }
+                break;
+        }
+
+    }
 });
