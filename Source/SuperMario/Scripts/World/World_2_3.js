@@ -31,7 +31,7 @@ World_2_3 = ClassFactory.createClass(World, {
         var gameUI = this;
 
         this.mario.addToGameUI(gameUI);
-        this.mario.setPosition(84, 208 - this.mario.height);
+        this.mario.setPosition(84, 400 - this.mario.height);
         
         for (var i = 0; i < 4; i++) {
             var gold = new Gold2(1152 + 32 * i, 144, GameObjectIconType.Ground);

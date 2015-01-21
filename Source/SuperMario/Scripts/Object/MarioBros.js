@@ -840,7 +840,12 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     setInWater: function(isInWater) {
         this.isInWater = isInWater;
-        this.collideOnBottom = false;
+        if (isInWater) {
+            this.collideOnBottom = false;
+            this.sprite.setFrameCounter(5);
+        } else {
+            this.sprite.setFrameCounter(5);
+        }
     },
     onWater: function () {
 
@@ -848,22 +853,32 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         if (Input.isPressed(InputAction.RIGHT)) {
             this.faceToRight = true;
-            this.x += 1;
+            this.moveRight(1);
+            if (this.collideOnBottom) {
+                spriteType = MarioSprite.Move;
+            }
         }
 
         if (Input.isPressed(InputAction.LEFT)) {
             this.faceToRight = false;
-            this.x -= 1;
+            this.moveLeft(1);
+            if (this.collideOnBottom) {
+                spriteType = MarioSprite.Move;
+            }
         }
 
         if (Input.isPressed(InputAction.GAME_A)) {
-            this.y -= 2;
+            if (this.y > 48) {
+                this.moveUp(2);
+            }
             this.collideOnBottom = false;
         } else {
             if (!this.moveDown(2)) {
                 this.collideOnBottom = true;
             }
-            this.sprite.frameIndex = 1;
+            if (spriteType != MarioSprite.Move) {
+                this.sprite.frameIndex = 1;
+            }
         }
 
         if (!this.collideOnBottom) {
@@ -876,7 +891,6 @@ MarioBors = ClassFactory.createClass(GameObject, {
         
     },
     setWaterSprite: function (spriteType) {
-        console.log(spriteType == MarioSprite.Swim);
         if (this.spriteType != spriteType) {
             this.sprite.frameIndex = 0;
             this.spriteType = spriteType;
@@ -900,6 +914,17 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
                 else if (this.type == MarioType.Flower && this.collideOnBottom) {
                     this.sprite.setFrameSequence(this.faceToRight ? [{ x: 0, y: 64 * 3 }] : [{ x: 32 * 41, y: 64 * 3 }]);
+                }
+                break;
+            case MarioSprite.Move:
+                if (this.type == MarioType.Small) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 64 }, { x: 32 * 2, y: 64 }, { x: 32 * 3, y: 64 }] : [{ x: 32 * 40, y: 64 }, { x: 32 * 39, y: 64 }, { x: 32 * 38, y: 64 }]);
+                }
+                else if (this.type == MarioType.Big) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 0 }, { x: 32 * 2, y: 0 }, { x: 32 * 3, y: 0 }] : [{ x: 32 * 40, y: 0 }, { x: 32 * 39, y: 0 }, { x: 32 * 38, y: 0 }]);
+                }
+                else if (this.type == MarioType.Flower) {
+                    this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32, y: 192 }, { x: 32 * 2, y: 192 }, { x: 32 * 3, y: 192 }] : [{ x: 32 * 40, y: 192 }, { x: 32 * 39, y: 192 }, { x: 32 * 38, y: 192 }]);
                 }
                 break;
             case MarioSprite.Swim: 

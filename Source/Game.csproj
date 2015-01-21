@@ -128,6 +128,7 @@
     <Content Include="SuperMario\Images\World_1_3.png" />
     <Content Include="SuperMario\Images\World_1_4.png" />
     <Content Include="SuperMario\Images\World_2_1.png" />
+    <Content Include="SuperMario\Images\World_2_2.png" />
     <Content Include="SuperMario\Images\World_2_3.png" />
     <Content Include="SuperMario\Images\World_2_4.png" />
     <Content Include="SuperMario\Images\World_3_1.png" />
@@ -187,6 +188,7 @@
     <Content Include="SuperMario\Scripts\UI\UIBase.js" />
     <Content Include="SuperMario\Scripts\World\World.js" />
     <Content Include="SuperMario\Scripts\World\World_1_1.js" />
+    <Content Include="SuperMario\Scripts\World\World_2_2.js" />
     <Content Include="SuperMario\Scripts\World\World_1_2.js" />
     <Content Include="SuperMario\Scripts\World\World_1_3.js" />
     <Content Include="SuperMario\Scripts\World\World_8_3.js" />
@@ -212,6 +214,7 @@
     <Content Include="SuperMario\Scripts\World\World_3_3.js" />
     <Content Include="SuperMario\Scripts\World\World_3_4.js" />
     <Content Include="SuperMario\UI\World_1_1.html" />
+    <Content Include="SuperMario\UI\World_2_2.html" />
     <Content Include="SuperMario\UI\World_1_2.html" />
     <Content Include="SuperMario\UI\World_1_3.html" />
     <Content Include="SuperMario\UI\World_1_4.html" />
