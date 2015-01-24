@@ -22,8 +22,8 @@ World_5_1 = ClassFactory.createClass(World, {
 
         this.scene = World_5_1_Scene.Scene1;
 
-        ImageLoader.load(this, [Const.IMAGE_WORLD_5_3]);
-        ScriptLoader.load(this, [Const.SCRIPT_WORLD_5_3]);
+        ImageLoader.load(this, [Const.IMAGE_WORLD_5_2]);
+        ScriptLoader.load(this, [Const.SCRIPT_WORLD_5_2]);
     },
     scroll: function () {
         if (!this.scrollable) {
@@ -297,7 +297,7 @@ World_5_1 = ClassFactory.createClass(World, {
             this.mario.sprite.moveToNextFrame();
         } else {
             this.state = WorldState.None;
-            var world = new World_5_3();
+            var world = new World_5_2();
             this.gameUI.setWorld(world);
         }
     },
