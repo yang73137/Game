@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SuperMario World 6-2</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #app {
+            margin-top: 100px;
+            width: 512px;
+            height: 448px;
+            position: relative;
+            background: #000000;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body style="background: #DFDFDF;">
+    <div id="app"></div>
+    <script src="../Scripts/Object/BaseScript.js"></script>
+    <script src="../Scripts/World/World.js"></script>
+    <script src="../Scripts/World/World_6_2.js"></script>
+    <script type="text/javascript">
+
+        var app = document.getElementById("app");
+
+        var gameUI = new GameUI();
+        gameUI.setSize(Const.SCREEN_WIDTH, Const.SCREEN_HEIGHT);
+        gameUI.show();
+        gameUI.appendTo(app);
+
+        gameUI.setMario(new MarioBors(0, 0));
+
+        var world = new World_6_2();
+        world.addToGameUI(gameUI);
+        
+        //setTimeout(function () {
+        //    world.mario.setType(MarioType.Flower);
+        //    world.mario.setPosition(6000, 10);
+        //    world.setPosition(-5800, 0);
+        //}, 2000);
+        
+        setInterval(function () {
+            gameUI.update();
+        }, 16);
+
+    </script>
+</body>
+</html>

@@ -888,6 +888,10 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.setWaterSprite(spriteType);
         this.setPosition(this.x, this.y);
         this.sprite.moveToNextFrame();
+
+        if (this.y - 10 > Const.SCREEN_HEIGHT) {
+            this.dead();
+        }
         
     },
     setWaterSprite: function (spriteType) {

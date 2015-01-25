@@ -369,14 +369,10 @@ World_5_2 = ClassFactory.createClass(World, {
         this.build();
 
         this.mario.reborn();
+        this.mario.setInWater(false);
 
-        if (Math.abs(oldX) >= 3072) {
-            this.setX(-3072);
-            this.mario.setPosition(3172, 400 - this.mario.height);
-        } else {
-            this.setX(0);
-            this.mario.setPosition(84, 400 - this.mario.height);
-        }
+        this.setX(0);
+        this.mario.setPosition(84, 400 - this.mario.height);
 
         this.scrollable = true;
     },

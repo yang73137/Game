@@ -215,13 +215,8 @@ World_7_2 = ClassFactory.createClass(World, {
 
         this.mario.reborn();
 
-        if (Math.abs(oldX) >= 3596) {
-            this.setX(-3376);
-            this.mario.setPosition(3396, 400 - this.mario.height);
-        } else {
-            this.setX(-524);
-            this.mario.setPosition(574, 400 - this.mario.height);
-        }
+        this.setX(-524);
+        this.mario.setPosition(574, 400 - this.mario.height);
 
         this.scrollable = true;
     },
