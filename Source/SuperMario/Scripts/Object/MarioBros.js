@@ -81,6 +81,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
 
         this.fireable = false;
         this.fireBalls = [new FireBall(), new FireBall()];
+        this.bubbles = [new Bubble(), new Bubble(), new Bubble()];
 
         this.hurtable = true;
         this.hurtCounter = new Counter(90, false, true);
@@ -348,6 +349,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
         GameObject.prototype.addToGameUI.call(this, gameUI);
         for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
             this.fireBalls[fireBallIndex].addToGameUI(gameUI);
+        }
+        for (var bubbleIndex = 0; bubbleIndex < this.bubbles.length; bubbleIndex++) {
+            this.bubbles[bubbleIndex].addToGameUI(gameUI);
         }
         gameUI.mario = this;
         gameUI.addAnimateObject(this);
@@ -868,6 +872,14 @@ MarioBors = ClassFactory.createClass(GameObject, {
         }
 
         if (Input.isPressed(InputAction.GAME_A)) {
+            for (var bubbleIndex = 0; bubbleIndex < this.bubbles.length; bubbleIndex++) {
+                var bubble = this.bubbles[bubbleIndex];
+                if(bubble.state == BubbleState.None)
+                {
+                    bubble.animate(this.faceToRight ? this.x + 40 : this.x - 8, this.y - 16 * bubbleIndex);
+                    break;
+                }
+            }
             if (this.y > 48) {
                 this.moveUp(2);
             }
