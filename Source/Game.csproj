@@ -171,6 +171,7 @@
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Bubble.js" />
     <Content Include="SuperMario\Scripts\Object\BuzzyBeetle.js" />
+    <Content Include="SuperMario\Scripts\Object\Cheep.js" />
     <Content Include="SuperMario\Scripts\Object\Enemy.js" />
     <Content Include="SuperMario\Scripts\Object\Block.js" />
     <Content Include="SuperMario\Scripts\Object\FireBall.js" />

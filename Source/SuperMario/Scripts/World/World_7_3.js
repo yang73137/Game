@@ -33,6 +33,36 @@ World_7_3 = ClassFactory.createClass(World, {
         this.mario.addToGameUI(gameUI);
         this.mario.setPosition(84, 400 - this.mario.height);
         
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(1200 + 64 * i + 1, this.height + 32 * i, false, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(1500 + 64 * i, this.height + 32 * (3 - i), true, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(2780 + 64 * i + 1, this.height + 32 * i, false, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(4360 + 64 * i + 1, this.height + 32 * i, false, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(5300 + 64 * i + 1, this.height + 32 * i, false, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var cheep = new Cheep(5400 + 64 * i, this.height + 32 * (3 - i), true, GameObjectIconType.Ground);
+            cheep.addToGameUI(gameUI);
+        }
+        
         for (var i = 0; i < 4; i++) {
             var gold = new Gold2(1152 + 32 * i, 144, GameObjectIconType.Ground);
             gold.addToGameUI(gameUI);
