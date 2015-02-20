@@ -155,6 +155,30 @@
     <Content Include="SuperMario\Images\World_8_3.png" />
     <Content Include="SuperMario\Images\World_8_4.png" />
     <Content Include="SuperMario\Index.html" />
+    <Content Include="SuperMario\Sound\Effect\1-UP.wav" />
+    <Content Include="SuperMario\Sound\Effect\Bowser Falls.wav" />
+    <Content Include="SuperMario\Sound\Effect\Bowser%27s Fire.wav" />
+    <Content Include="SuperMario\Sound\Effect\Break.wav" />
+    <Content Include="SuperMario\Sound\Effect\Bump.wav" />
+    <Content Include="SuperMario\Sound\Effect\Coin.wav" />
+    <Content Include="SuperMario\Sound\Effect\Death.wav" />
+    <Content Include="SuperMario\Sound\Effect\Fireball.wav" />
+    <Content Include="SuperMario\Sound\Effect\Fireworks.wav" />
+    <Content Include="SuperMario\Sound\Effect\Flagpole.wav" />
+    <Content Include="SuperMario\Sound\Effect\Gameover.wav" />
+    <Content Include="SuperMario\Sound\Effect\Hurry Up.wav" />
+    <Content Include="SuperMario\Sound\Effect\Jump_Big.wav" />
+    <Content Include="SuperMario\Sound\Effect\Jump_Small.wav" />
+    <Content Include="SuperMario\Sound\Effect\Kick.wav" />
+    <Content Include="SuperMario\Sound\Effect\Level Clear.wav" />
+    <Content Include="SuperMario\Sound\Effect\ChangeType.wav" />
+    <Content Include="SuperMario\Sound\Effect\Pause.wav" />
+    <Content Include="SuperMario\Sound\Effect\Pipe-Power Down.wav" />
+    <Content Include="SuperMario\Sound\Effect\Power Up.wav" />
+    <Content Include="SuperMario\Sound\Effect\Sprout.wav" />
+    <Content Include="SuperMario\Sound\Effect\Squish.wav" />
+    <Content Include="SuperMario\Sound\Effect\Vine.wav" />
+    <Content Include="SuperMario\Sound\Effect\World Clear.wav" />
     <Content Include="SuperMario\Scripts\App.js" />
     <Content Include="SuperMario\Scripts\Basic\ClassFactory.js" />
     <Content Include="SuperMario\Scripts\Basic\Const.js" />
@@ -163,6 +187,7 @@
     <Content Include="SuperMario\Scripts\Basic\Input.js" />
     <Content Include="SuperMario\Scripts\Basic\Label.js" />
     <Content Include="SuperMario\Scripts\Basic\Layer.js" />
+    <Content Include="SuperMario\Scripts\Basic\SoundManager.js" />
     <Content Include="SuperMario\Scripts\Basic\Sprite.js" />
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
     <Content Include="SuperMario\Scripts\Object\BaseScript.js" />
@@ -255,6 +280,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SuperMario\Scripts\Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SuperMario\Sound\Background\Castle Theme.ogg" />
+    <Content Include="SuperMario\Sound\Background\Overworld Theme.ogg" />
+    <Content Include="SuperMario\Sound\Background\Under Ground Theme.ogg" />
+    <Content Include="SuperMario\Sound\Background\Under Water Theme.ogg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
