@@ -30,7 +30,7 @@ Cheep = ClassFactory.createClass(Enemy, {
         this.originY = y;
 
         this.movingUp = true;
-        this.setStoppable(false, false, false, false);
+        this.stoppedable = false;
 
         this.state = CheepState.Live;
     },
@@ -48,7 +48,7 @@ Cheep = ClassFactory.createClass(Enemy, {
 
         this.setPosition(this.x - (this.faceToRight ? -3 : 3), this.y - (this.movingUp ? 4 : -4));
         
-        if (this.y <= 96) {
+        if (this.y <= 48) {
             this.movingUp = false;
         }
         

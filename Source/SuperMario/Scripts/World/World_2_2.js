@@ -42,17 +42,91 @@ World_2_2 = ClassFactory.createClass(World, {
 
         this.mario.addToGameUI(this);
 
+        var blurp_900_272 = new Blurp(900, 272, GameObjectIconType.Castle);
+        blurp_900_272.addToGameUI(this);
+        
+        var blurp_900_144 = new Blurp(964, 144, GameObjectIconType.Sky);
+        blurp_900_144.addToGameUI(this);
+
+        var blurp_1368_96 = new Blurp(1368, 96, GameObjectIconType.Castle);
+        blurp_1368_96.addToGameUI(this);
+        
+        var blurp_1400_208 = new Blurp(1400, 208, GameObjectIconType.Sky);
+        blurp_1400_208.addToGameUI(this);
+                
+        var blurp_2500_368 = new Blurp(2500, 368, GameObjectIconType.Sky);
+        blurp_2500_368.addToGameUI(this);
+        
+        var blurp_2500_368 = new Blurp(2500, 240, GameObjectIconType.Castle);
+        blurp_2500_368.addToGameUI(this);
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(2886 + 48 * i, 144, GameObjectIconType.Castle);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(3528, 144 + 64 * i, GameObjectIconType.Sky);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(4000 + 48 * i, 144, GameObjectIconType.Castle);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(4550, 96 + 64 * i, GameObjectIconType.Castle);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(4860 + 48 * i, 176, GameObjectIconType.Sky);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(5796 + 48 * i, 240, GameObjectIconType.Castle);
+            blurp.addToGameUI(this);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var blurp = new Blurp(5792 + 48 * i, 336, GameObjectIconType.Sky);
+            blurp.addToGameUI(this);
+        }
+        
+        var blurp_6300_240 = new Blurp(6300, 240, GameObjectIconType.Castle);
+        blurp_6300_240.addToGameUI(this);
+        
+        var blurp_6300_240 = new Blurp(6400, 96, GameObjectIconType.Sky);
+        blurp_6300_240.addToGameUI(this);
+
         var floor_0_400 = new Block(516, 400, 2146, 48);
         floor_0_400.addToGameUI(gameUI);
 
         var block_868_304 = new Block(868, 304, 32, 96);
         block_868_304.addToGameUI(gameUI);
-
+        
+        for (var i = 0; i < 2; i++) {
+            var gold = new Gold2(960 + 32 * i, 368, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
         var block_1094_272 = new Block(1094, 272, 96, 32);
         block_1094_272.addToGameUI(gameUI);
 
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(1414 + 32 * i, 144, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+
         var block_1606_240 = new Block(1606, 240, 32, 160);
         block_1606_240.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(1702 + 32 * i, 368, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
 
         var block_1894_208 = new Block(1894, 208, 32, 96);
         block_1894_208.addToGameUI(gameUI);
@@ -68,6 +142,11 @@ World_2_2 = ClassFactory.createClass(World, {
 
         var block_2630_240 = new Block(2630, 240, 32, 160);
         block_2630_240.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(2694 + 32 * i, 304, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
 
         var block_2822_240 = new Block(2822, 240, 32, 160);
         block_2822_240.addToGameUI(gameUI);
@@ -92,12 +171,22 @@ World_2_2 = ClassFactory.createClass(World, {
 
         var block_3398_304 = new Block(3398, 304, 32, 96);
         block_3398_304.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 2; i++) {
+            var gold = new Gold2(3782 + 32 * i, 336, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
 
         var block_3814_144 = new Block(3814, 144, 32, 128);
         block_3814_144.addToGameUI(gameUI);
 
         var block_3814_272 = new Block(3814, 272, 64, 32);
         block_3814_272.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(4164 + 32 * i, 176, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
 
         var block_4228_240 = new Block(4228, 240, 64, 32);
         block_4228_240.addToGameUI(gameUI);
@@ -117,6 +206,17 @@ World_2_2 = ClassFactory.createClass(World, {
         var block_4740_112 = new Block(4740, 112, 32 * 9, 32);
         block_4740_112.addToGameUI(gameUI);
 
+        var gold = new Gold2(4804, 336, GameObjectIconType.Ground);
+        gold.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(4836 + 32 * i, 368, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        var gold = new Gold2(4836 + 96, 336, GameObjectIconType.Ground);
+        gold.addToGameUI(gameUI);
+
         var block_5028_336 = new Block(5028, 336, 32, 64);
         block_5028_336.addToGameUI(gameUI);
 
@@ -134,6 +234,16 @@ World_2_2 = ClassFactory.createClass(World, {
 
         var block_5572_144 = new Block(5572, 144, 64, 32);
         block_5572_144.addToGameUI(gameUI);
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(5636 + 32 * i, 272, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var gold = new Gold2(5636 + 32 * i, 368, GameObjectIconType.Ground);
+            gold.addToGameUI(gameUI);
+        }
 
         var block_5732_144 = new Block(5732, 144, 64, 32);
         block_5732_144.addToGameUI(gameUI);

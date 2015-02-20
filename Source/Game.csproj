@@ -167,6 +167,7 @@
     <Content Include="SuperMario\Scripts\Basic\TileLayer.js" />
     <Content Include="SuperMario\Scripts\Object\BaseScript.js" />
     <Content Include="SuperMario\Scripts\Object\BillBlaster.js" />
+    <Content Include="SuperMario\Scripts\Object\Blurp.js" />
     <Content Include="SuperMario\Scripts\Object\Bowser.js" />
     <Content Include="SuperMario\Scripts\Object\Brick.js" />
     <Content Include="SuperMario\Scripts\Object\Bubble.js" />

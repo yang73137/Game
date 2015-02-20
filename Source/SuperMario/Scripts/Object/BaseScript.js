@@ -32,3 +32,4 @@ document.writeln('<script src="../Scripts/Object/BillBlaster.js"></script>');
 document.writeln(' <script src="../Scripts/Object/HammerBrother.js"></script>');
 document.writeln(' <script src="../Scripts/Object/Bubble.js"></script>');
 document.writeln(' <script src="../Scripts/Object/Cheep.js"></script>');
+document.writeln(' <script src="../Scripts/Object/Blurp.js"></script>');
