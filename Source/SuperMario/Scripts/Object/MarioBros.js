@@ -924,7 +924,9 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.fireable = false;
             }
         } else {
-            this.fireable = true;
+            if (this.type == MarioType.Flower) {
+                this.fireable = true;
+            }
         }
 
         if (!this.collideOnBottom) {
