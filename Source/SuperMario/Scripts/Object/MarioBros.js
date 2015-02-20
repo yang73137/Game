@@ -92,7 +92,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.hurtCounter.setEnabled(false);
 
         this.invincible = false;
-        this.invincibleCounter = new Counter(20, false, true);
+        this.invincibleCounter = new Counter(600, false, true);
     },
     reborn: function() {
         this.jumpPressedTime = 0;
@@ -402,6 +402,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 this.jumpPressedTime = 0;
                 this.jumping = true;
                 this.jumpingUp = true;
+                SoundManager.play(this.type == MarioType.Small ? Const.Sound.Effects.JumpSmall : Const.Sound.Effects.JumpBig);
             }
         } else {
             if (!this.falling) {
@@ -562,6 +563,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
                     var fireBall = this.fireBalls[fireBallIndex];
                     if (fireBall.state == FireBallState.None) {
+                        SoundManager.play(Const.Sound.Effects.Fireball);
                         fireBall.fire(this.faceToRight ? (this.x + this.width) : (this.x - 8), this.y, this.faceToRight);
                         break;
                     }
@@ -721,6 +723,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
         this.deadCounter.setEnabled(true);
         this.state = MarioState.Dead;
         this.collidable = false;
+        SoundManager.play(Const.Sound.Effects.Death);
     },
     hurt: function () {
         if (this.hurtable && this.state == MarioState.Live) {
@@ -734,6 +737,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                     this.prevSpriteType = MarioSprite.None;
                 }
                 this.changeType(MarioType.Small);
+                SoundManager.play(Const.Sound.Effects.Hurt);
             }
         }
     },
@@ -917,6 +921,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 for (var fireBallIndex = 0; fireBallIndex < this.fireBalls.length; fireBallIndex++) {
                     var fireBall = this.fireBalls[fireBallIndex];
                     if (fireBall.state == FireBallState.None) {
+                        SoundManager.play(Const.Sound.Effects.Fireball);
                         fireBall.fire(this.faceToRight ? (this.x + this.width) : (this.x - 8), this.y, this.faceToRight);
                         break;
                     }

@@ -52,12 +52,15 @@ Flower = ClassFactory.createClass(GameObject, {
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof MarioBors) {
-            this.state = FlowerState.None;
-            this.setCollidable(false, false, false, false);
-            if (gameObject.type == MarioType.Small) {
-                gameObject.changeType(MarioType.Big);
-            } else if (gameObject.type == MarioType.Big) {
-                gameObject.changeType(MarioType.Flower);
+            if (this.state != FlowerState.None) {
+                this.state = FlowerState.None;
+                this.setCollidable(false, false, false, false);
+                SoundManager.play(Const.Sound.Effects.ChangeType);
+                if (gameObject.type == MarioType.Small) {
+                    gameObject.changeType(MarioType.Big);
+                } else if (gameObject.type == MarioType.Big) {
+                    gameObject.changeType(MarioType.Flower);
+                }
             }
         }
     },

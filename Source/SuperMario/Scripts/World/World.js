@@ -32,6 +32,8 @@ World = ClassFactory.createClass(Layer, {
 
         this.setPosition(0, 0);
         this.setBackgroundPosition(1, 1);
+        
+        SoundManager.setBGM("");
     },
     setTitle: function(title) {
         this.titleLayer.setText(title);
@@ -114,7 +116,7 @@ World = ClassFactory.createClass(Layer, {
             this.changeState(WorldState.ChangeScene);
         }
     },
-    onOpening: function() {
+    onOpening: function () {
     },
     onOpened: function() {
     },
@@ -131,7 +133,7 @@ World = ClassFactory.createClass(Layer, {
     game: function () {
         this.changeState(WorldState.Game);
     },
-    onGaming: function() {
+    onGaming: function () {
     },
     onGame: function () {
         for (var i = 0; i < this.animateObjects.length; i++) {

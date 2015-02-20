@@ -57,9 +57,14 @@ Mushroom = ClassFactory.createClass(GameObject, {
         if (gameObject instanceof MarioBors) {
             this.setCollidable(false, false, false, false);
             this.sprite.hide();
-            this.state = MushroomState.None;
-            if (this.type == MushroomType.Big || this.type == MushroomType.Flower) {
-                gameObject.changeType(MarioType.Big);
+            if (this.state != MushroomState.None) {
+                this.state = MushroomState.None;
+                if (this.type == MushroomType.Big || this.type == MushroomType.Flower) {
+                    SoundManager.play(Const.Sound.Effects.ChangeType);
+                    gameObject.changeType(MarioType.Big);
+                } else {
+                    SoundManager.play(Const.Sound.Effects.LifeUp);
+                }
             }
         }
     },

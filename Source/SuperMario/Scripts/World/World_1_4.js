@@ -39,8 +39,7 @@ World_1_4 = ClassFactory.createClass(World, {
         x.setStoppable(true);
         x.attachCollides(function (gameObject) {
             if (gameObject instanceof MarioBors) {
-                var world = new World_2_1();
-                this.gameUI.gameUI.setWorld(world);
+                
             }
         });
         x.addToGameUI(gameUI);
@@ -200,6 +199,11 @@ World_1_4 = ClassFactory.createClass(World, {
     },
     onEnd: function() {
         if (!this.initEnd) {
+            var world = this;
+            SoundManager.setBGM(Const.Sound.Effects.WorldClear, false, function () {
+                var newWorld= new World_2_1();
+                world.gameUI.setWorld(newWorld);
+            });
             this.mario.setSprite(MarioSprite.Move);
             this.mario.moving = true;
             this.mario.movingToLeft = true;
@@ -210,5 +214,8 @@ World_1_4 = ClassFactory.createClass(World, {
         this.falling = false;
         this.mario.moveRight(2);
         this.mario.sprite.moveToNextFrame();
+    },
+    onGaming: function() {
+        SoundManager.setBGM(Const.Sound.Backgrounds.CastleTheme, true);
     }
 });

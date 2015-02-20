@@ -531,6 +531,7 @@ World_1_2 = ClassFactory.createClass(World, {
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 this.setCollidable(false, false, false, false);
+                SoundManager.setBGM(Const.Sound.Effects.Flagpole);
                 this.gameUI.end();
             }
         });
@@ -580,6 +581,14 @@ World_1_2 = ClassFactory.createClass(World, {
             }
             return;
         } else {
+            if (!this.initEnd) {
+                this.initEnd = true;
+                var world = this;
+                SoundManager.setBGM(Const.Sound.Effects.LevelClear, false, function () {
+                    var newWorld = new World_1_3();
+                    world.gameUI.setWorld(newWorld);
+                });
+            }
             if (this.mario.spriteType != MarioSprite.Move) {
                 this.mario.setSprite(MarioSprite.Move);
                 this.mario.moving = true;
@@ -593,9 +602,6 @@ World_1_2 = ClassFactory.createClass(World, {
             this.falling = false;
             this.mario.moveRight(2);
             this.mario.sprite.moveToNextFrame();
-        } else {
-            var world = new World_1_3();
-            this.gameUI.setWorld(world);
         }
     },
     onChangedScene: function() {
@@ -607,26 +613,28 @@ World_1_2 = ClassFactory.createClass(World, {
             this.mario.setSprite(MarioSprite.Move);
             this.mario.sprite.setFrameCounter(4);
             break;
-            case World_1_2_Scene.Scene2:
-                this.scrollable = true;
-                this.mario.setPosition(572, 0);
-                this.setPosition(-524, 0);
-                break;
-            case World_1_2_Scene.Scene3:
-                this.scrollable = false;
-                this.mario.setPosition(6720, 0);
-                this.setPosition(-6678, 0);
-                break;
-            case World_1_2_Scene.Scene4:
-                this.scrollable = true;
-                this.mario.setPosition(4220, this.mario.type == MarioType.Small ? 304 : 272);
-                this.setPosition(-4100, 0);
-                break;
-            case World_1_2_Scene.Scene5:
-                this.scrollable = true;
-                this.mario.setPosition(7310, 336 - this.mario.height);
-                this.setPosition(-7199, 0);
-                break;
+        case World_1_2_Scene.Scene2:
+            this.scrollable = true;
+            this.mario.setPosition(572, 0);
+            this.setPosition(-524, 0);
+            SoundManager.setBGM(Const.Sound.Backgrounds.UnderGroundTheme, true);
+            break;
+        case World_1_2_Scene.Scene3:
+            this.scrollable = false;
+            this.mario.setPosition(6720, 0);
+            this.setPosition(-6678, 0);
+            break;
+        case World_1_2_Scene.Scene4:
+            this.scrollable = true;
+            this.mario.setPosition(4220, this.mario.type == MarioType.Small ? 304 : 272);
+            this.setPosition(-4100, 0);
+            break;
+        case World_1_2_Scene.Scene5:
+            this.scrollable = true;
+            this.mario.setPosition(7310, 336 - this.mario.height);
+            this.setPosition(-7199, 0);
+            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true);
+            break;
         }
     }
 });

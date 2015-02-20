@@ -72,6 +72,7 @@ Question = ClassFactory.createClass(GameObject, {
                 else {
                     this.state = this.collideCount > 0 ? QuestionState.Normal : QuestionState.None;
                     if (!(this.item instanceof Gold)) {
+                        SoundManager.play(Const.Sound.Effects.Sprout);
                         this.item.animate();
                     }
                 }
@@ -86,6 +87,9 @@ Question = ClassFactory.createClass(GameObject, {
         }
 
         if (this.state != QuestionState.Normal) {
+            if (this.state == QuestionState.None) {
+                SoundManager.play(Const.Sound.Effects.Bump);
+            }
             return;
         }
 
@@ -113,6 +117,7 @@ Question = ClassFactory.createClass(GameObject, {
         this.state = QuestionState.Up;
         if (this.item instanceof Gold) {
             this.item.animate();
+            SoundManager.play(Const.Sound.Effects.Coin);
         }
     },
     hide: function() {

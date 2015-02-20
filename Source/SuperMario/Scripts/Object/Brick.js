@@ -51,7 +51,10 @@ Brick = ClassFactory.createClass(GameObject, {
     onCollidesDown: function (gameObject) {
         if (gameObject instanceof MarioBors) {
             if (gameObject.type == MarioType.Small) {
-                this.state = BrickState.Up;
+                if (this.state != BrickState.Up) {
+                    SoundManager.play(Const.Sound.Effects.Bump);
+                    this.state = BrickState.Up;
+                }
             }
             else {
                 this.sprite.setBackground("");
@@ -60,7 +63,10 @@ Brick = ClassFactory.createClass(GameObject, {
                 this.fragment2.show();
                 this.fragment3.show();
                 this.fragment4.show();
-                this.state = BrickState.Break;
+                if (this.state != BrickState.Break) {
+                    SoundManager.play(Const.Sound.Effects.BrickBreak);
+                    this.state = BrickState.Break;
+                }
             }
         }
     },

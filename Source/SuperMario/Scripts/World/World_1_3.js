@@ -275,6 +275,7 @@ World_1_3 = ClassFactory.createClass(World, {
             if (gameObject instanceof MarioBors) {
                 if (gameObject instanceof MarioBors) {
                     this.setCollidable(false, false, false, false);
+                    SoundManager.setBGM(Const.Sound.Effects.Flagpole);
                     this.gameUI.end();
                 }
             }
@@ -309,6 +310,14 @@ World_1_3 = ClassFactory.createClass(World, {
             }
             return;
         } else {
+            if (!this.initEnd) {
+                this.initEnd = true;
+                var world = this;
+                SoundManager.setBGM(Const.Sound.Effects.LevelClear, false, function () {
+                    var newWorld = new World_1_4();
+                    world.gameUI.setWorld(newWorld);
+                });
+            }
             if (this.mario.spriteType != MarioSprite.Move) {
                 this.mario.setSprite(MarioSprite.Move);
                 this.mario.moving = true;
@@ -322,9 +331,9 @@ World_1_3 = ClassFactory.createClass(World, {
             this.falling = false;
             this.mario.moveRight(2);
             this.mario.sprite.moveToNextFrame();
-        } else {
-            var world = new World_1_4();
-            this.gameUI.setWorld(world);
         }
+    },
+    onGaming: function () {
+        SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true);
     }
 });

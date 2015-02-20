@@ -95,6 +95,7 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.state = GoombaState.Dead;
         this.setSpriteFrames(GoombaSpriteType.Dead);
         this.setCollidable(false, false, false, false);
+        SoundManager.play(Const.Sound.Effects.Squish);
     },
     dead2: function () {
         this.state = GoombaState.Dead2;
@@ -102,6 +103,7 @@ Goomba = ClassFactory.createClass(Enemy, {
         this.setY(this.y += 16);
         this.setSpriteFrames(GoombaSpriteType.Dead2);
         this.setCollidable(false, false, false, false);
+        SoundManager.play(Const.Sound.Effects.Squish);
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof FireBall) {

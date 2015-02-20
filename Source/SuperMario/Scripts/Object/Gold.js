@@ -91,6 +91,7 @@ Gold2 = ClassFactory.createClass(GameObject, {
             this.sprite.hide();
             this.state = GoldState.None;
             this.setCollidable(false, false, false, false);
+            SoundManager.play(Const.Sound.Effects.Coin);
         }
         else if (gameObject instanceof Brick || gameObject instanceof Question) {
             this.sprite.hide();
@@ -99,6 +100,7 @@ Gold2 = ClassFactory.createClass(GameObject, {
             var innerGold = new Gold(this.x, this.y);
             innerGold.addToGameUI(this.gameUI);
             innerGold.animate();
+            SoundManager.play(Const.Sound.Effects.Coin);
         }
     },
     setIconType: function (iconType) {

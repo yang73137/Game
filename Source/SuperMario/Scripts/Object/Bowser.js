@@ -179,6 +179,7 @@ BowserFire = ClassFactory.createClass(Enemy, {
         this.sprite.start();
         this.setCollidable(true, true, true, true);
         this.state = BowserFireState.Firing;
+        SoundManager.play(Const.Sound.Effects.BowserFire);
     },
     onCollidesUp: function (gameObject) {
         this.onCollidesLeft(gameObject);

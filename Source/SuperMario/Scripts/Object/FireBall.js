@@ -93,8 +93,11 @@ FireBall = ClassFactory.createClass(GameObject, {
         this.setSize(32, 32);
         this.sprite.setFrameSequence([{ x: 32 * 7, y: 32 * 10 }]);
         this.sprite.moveToFrame(0);
-        this.state = FireBallState.Bomb;
-        this.setCollidable(false, false, false, false);
+        if (this.state != FireBallState.Bomb) {
+            SoundManager.play(Const.Sound.Effects.Bump);
+            this.state = FireBallState.Bomb;
+            this.setCollidable(false, false, false, false);
+        }
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof Enemy) {
