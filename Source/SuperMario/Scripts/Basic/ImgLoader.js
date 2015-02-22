@@ -30,12 +30,12 @@
 
             // 加载进度回调
             if (typeof listener.process == "function") {
-                listener.process(img.alias, loader.loaded, img.total);
+                listener.process(img.alias, loader.loaded, img.total, ImageLoader);
             }
 
             // 加载完成回调
             if (loader.loaded == img.total && typeof listener.complete == "function") {
-                listener.complete();
+                listener.complete(ImageLoader);
             }
         }
 
@@ -43,7 +43,7 @@
             var img = this;
             var loader = img.loader;
             if (typeof img.listener.error == "function") {
-                img.listener.error(img.alias, loader.imgs.length, img.total);
+                img.listener.error(img.alias, loader.imgs.length, img.total, ImageLoader);
             }
         }
     }
@@ -60,4 +60,48 @@ ScriptLoader = {
             (document.body || document.documentElement.body).appendChild(script);
         }
     }
-}
+};
+
+SoundLoader = {
+    loaded: 0,
+    imgs: {},
+    load: function (listener, srcArr) {
+        var total = srcArr.length;
+        for (var i = 0; i < srcArr.length; i++) {
+            var audio = document.createElement("audio");
+            audio.addEventListener("loadeddata", onload);
+            audio.addEventListener("error", onerror);
+            audio.index = i;
+            audio.total = total;
+            audio.loader = this;
+            audio.listener = listener;
+            audio.alias = srcArr[i];
+            audio.src = srcArr[i];
+        }
+
+        function onload() {
+            var instance = this;
+            var loader = instance.loader;
+            var listener = instance.listener;
+
+            ++loader.loaded;
+            // 加载进度回调
+            if (typeof listener.process == "function") {
+                listener.process(instance.alias, loader.loaded, instance.total, SoundLoader);
+            }
+
+            // 加载完成回调
+            if (loader.loaded == instance.total && typeof listener.complete == "function") {
+                listener.complete(SoundLoader);
+            }
+        }
+
+        function onerror() {
+            var instance = this;
+            var loader = instance.loader;
+            if (typeof instance.listener.error == "function") {
+                instance.listener.error(instance.alias, loader.imgs.length, instance.total, SoundLoader);
+            }
+        }
+    }
+};
