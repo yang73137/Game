@@ -155,6 +155,20 @@
     <Content Include="SuperMario\Images\World_8_3.png" />
     <Content Include="SuperMario\Images\World_8_4.png" />
     <Content Include="SuperMario\Index.html" />
+    <Content Include="SuperMario\Sound\Background\mp3\Castle Complete.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Castle.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Castle.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Overworld.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Sky.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Star.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Underwater.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry Underworld.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Hurry.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Overworld.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Sky.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Star.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Underwater.mp3" />
+    <Content Include="SuperMario\Sound\Background\mp3\Underworld.mp3" />
     <Content Include="SuperMario\Sound\Effect\1-UP.wav" />
     <Content Include="SuperMario\Sound\Effect\Bowser Falls.wav" />
     <Content Include="SuperMario\Sound\Effect\Bowser%27s Fire.wav" />
@@ -172,6 +186,33 @@
     <Content Include="SuperMario\Sound\Effect\Kick.wav" />
     <Content Include="SuperMario\Sound\Effect\Level Clear.wav" />
     <Content Include="SuperMario\Sound\Effect\ChangeType.wav" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Bowser Falls.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Bowser Fires.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Break Block.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Bump.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Coin.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Ending.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Fireball.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Firework.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Flagpole.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Gain Life.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Game Over 2.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Game Over.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Hurry.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Jump Small.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Jump Super.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Kick.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Level Complete.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Pause.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Pipe.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Player Dies.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Power Down.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Powerup Appears.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Powerup.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Stage Clear.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Vine Emerging.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\World Clear.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\You Dead.mp3" />
     <Content Include="SuperMario\Sound\Effect\Pause.wav" />
     <Content Include="SuperMario\Sound\Effect\Pipe-Power Down.wav" />
     <Content Include="SuperMario\Sound\Effect\Power Up.wav" />
@@ -286,6 +327,51 @@
     <Content Include="SuperMario\Sound\Background\Overworld Theme.ogg" />
     <Content Include="SuperMario\Sound\Background\Under Ground Theme.ogg" />
     <Content Include="SuperMario\Sound\Background\Under Water Theme.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SuperMario\Sound\Background\ogg\Castle Complete.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Castle.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Castle.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Overworld.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Sky.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Star.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Underwater.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry Underworld.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Hurry.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Overworld.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Sky.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Star.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Underwater.ogg" />
+    <Content Include="SuperMario\Sound\Background\ogg\Underworld.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SuperMario\Sound\Effect\ogg\Bowser Falls.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Bowser Fires.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Break Block.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Bump.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Coin.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Ending.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Fireball.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Firework.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Flagpole.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Gain Life.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Game Over 2.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Game Over.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Hurry.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Jump Small.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Jump Super.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Kick.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Level Complete.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Pause.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Pipe.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Player Dies.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Power Down.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Powerup Appears.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Powerup.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Stage Clear.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\Vine Emerging.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\World Clear.ogg" />
+    <Content Include="SuperMario\Sound\Effect\ogg\You Dead.ogg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

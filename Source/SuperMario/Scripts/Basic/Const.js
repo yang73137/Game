@@ -36,29 +36,29 @@ for (var i = 1; i <= 8; i++) {
 
 Const.Sound = {
     Backgrounds: {
-        "OverworldTheme": path_prefix + "./Sound/Background/Overworld Theme.ogg",
-        "UnderGroundTheme": path_prefix + "./Sound/Background/Under Ground Theme.ogg",
-        "UnderWaterTheme": path_prefix + "./Sound/Background/Under Water Theme.ogg",
-        "CastleTheme": path_prefix + "./Sound/Background/Castle Theme.ogg"
+        "OverworldTheme": path_prefix + "./Sound/Background/ogg/Overworld.ogg",
+        "UnderGroundTheme": path_prefix + "./Sound/Background/ogg/Underworld.ogg",
+        "UnderWaterTheme": path_prefix + "./Sound/Background/ogg/Underwater.ogg",
+        "CastleTheme": path_prefix + "./Sound/Background/ogg/Castle.ogg"
     },
     Effects: {
-        "BrickBreak": path_prefix + "./Sound/Effect/Break.wav",
+        "BrickBreak": path_prefix + "./Sound/Effect/ogg/Break Block.ogg",
         "Squish": path_prefix + "./Sound/Effect/Squish.wav",
-        "Coin": path_prefix + "./Sound/Effect/Coin.wav",
-        "Sprout": path_prefix + "./Sound/Effect/Sprout.wav",
-        "Death": path_prefix + "./Sound/Effect/Death.wav",
-        "Bump": path_prefix + "./Sound/Effect/Bump.wav",
-        "Fireball": path_prefix + "./Sound/Effect/Fireball.wav",
-        "LifeUp": path_prefix + "./Sound/Effect/1-UP.wav",
-        "JumpBig": path_prefix + "./Sound/Effect/Jump_Big.wav",
-        "JumpSmall": path_prefix + "./Sound/Effect/Jump_Small.wav",
-        "ChangeType": path_prefix + "./Sound/Effect/ChangeType.wav",
-        "BowserFire": path_prefix + "./Sound/Effect/Bowser's Fire.wav",
-        "Hurt": path_prefix + "./Sound/Effect/Pipe-Power Down.wav",
-        "Flagpole": path_prefix + "./Sound/Effect/Flagpole.wav",
-        "LevelClear": path_prefix + "./Sound/Effect/Level Clear.wav",
-        "WorldClear": path_prefix + "./Sound/Effect/World Clear.wav",
-        "Kick": path_prefix + "./Sound/Effect/Kick.wav"
+        "Coin": path_prefix + "./Sound/Effect/ogg/Coin.ogg",
+        "Sprout": path_prefix + "./Sound/Effect/ogg/Powerup Appears.ogg",
+        "Death": path_prefix + "./Sound/Effect/ogg/Player Dies.ogg",
+        "Bump": path_prefix + "./Sound/Effect/ogg/Bump.ogg",
+        "Fireball": path_prefix + "./Sound/Effect/ogg/Fireball.ogg",
+        "LifeUp": path_prefix + "./Sound/Effect/ogg/Gain Life.ogg",
+        "JumpBig": path_prefix + "./Sound/Effect/ogg/Jump Super.ogg",
+        "JumpSmall": path_prefix + "./Sound/Effect/ogg/Jump Small.ogg",
+        "ChangeType": path_prefix + "./Sound/Effect/ogg/Powerup.ogg",
+        "BowserFire": path_prefix + "./Sound/Effect/ogg/Bowser Fires.ogg",
+        "Hurt": path_prefix + "./Sound/Effect/ogg/Pipe.ogg",
+        "Flagpole": path_prefix + "./Sound/Effect/ogg/Flagpole.ogg",
+        "LevelClear": path_prefix + "./Sound/Effect/ogg/Stage Clear.ogg",
+        "WorldClear": path_prefix + "./Sound/Effect/ogg/World Clear.ogg",
+        "Kick": path_prefix + "./Sound/Effect/ogg/Kick.ogg"
     }
 };
 
