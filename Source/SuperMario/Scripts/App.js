@@ -40,8 +40,8 @@ App = {
     run: function () {
         ImageLoader.load(this, [Const.IMAGE_ITEMS, Const.IMAGE_ENEMIES, Const.IMAGE_MARIOBROS, Const.IMAGE_TILESET, Const.IMAGE_WORLD_1_1]);
         SoundLoader.load(this, [
-            Const.Sound.Backgrounds.OverworldTheme, Const.Sound.Backgrounds.UnderGroundTheme, Const.Sound.Backgrounds.UnderWaterTheme, Const.Sound.Backgrounds.CastleTheme,
-            Const.Sound.Effects.BrickBreak, Const.Sound.Effects.Squish, Const.Sound.Effects.Coin, Const.Sound.Effects.Sprout, Const.Sound.Effects.Death, Const.Sound.Effects.Bump, Const.Sound.Effects.Fireball, Const.Sound.Effects.LifeUp, Const.Sound.Effects.JumpBig, Const.Sound.Effects.JumpSmall, Const.Sound.Effects.ChangeType, Const.Sound.Effects.BowserFire, Const.Sound.Effects.Hurt, Const.Sound.Effects.Flagpole, Const.Sound.Effects.LevelClear, Const.Sound.Effects.WorldClear, Const.Sound.Effects.Kick
+            Const.Sound.Backgrounds.OverworldTheme, Const.Sound.Backgrounds.UnderGroundTheme, Const.Sound.Backgrounds.UnderWaterTheme, Const.Sound.Backgrounds.CastleTheme, Const.Sound.Backgrounds.Sky, Const.Sound.Backgrounds.Star,
+            Const.Sound.Effects.BrickBreak, Const.Sound.Effects.Squish, Const.Sound.Effects.Coin, Const.Sound.Effects.Sprout, Const.Sound.Effects.Death, Const.Sound.Effects.Bump, Const.Sound.Effects.Fireball, Const.Sound.Effects.LifeUp, Const.Sound.Effects.JumpBig, Const.Sound.Effects.JumpSmall, Const.Sound.Effects.ChangeType, Const.Sound.Effects.BowserFire, Const.Sound.Effects.Hurt, Const.Sound.Effects.Flagpole, Const.Sound.Effects.LevelClear, Const.Sound.Effects.WorldClear, Const.Sound.Effects.Kick, Const.Sound.Effects.BowserFalls
         ]);
     },
     onTimer: function () {

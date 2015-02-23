@@ -70,6 +70,7 @@ Cheep = ClassFactory.createClass(Enemy, {
         this.sprite.setFrameSequence(this.faceToRight ? [{ x: 32 * 61, y: 448 }] : [{ x: 32 * 39, y: 448 }]);
         this.sprite.moveToFrame(0);
         this.state = CheepState.Dead;
+        SoundManager.play(Const.Sound.Effects.Squish);
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof FireBall) {

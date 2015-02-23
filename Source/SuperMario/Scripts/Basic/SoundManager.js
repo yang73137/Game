@@ -1,6 +1,7 @@
 ﻿
 SoundManager = {
-    enabled: true
+    enabled: true,
+    prevBgm: null
 };
 SoundManager.play = function (src, loop) {
     
@@ -58,6 +59,7 @@ SoundManager.setBGM = function (src, loop, callback) {
     if (!document.getElementById("sound")) {
         return;
     }
+    
 
     var audio = document.getElementById("BackgroundMusic");
 
@@ -76,6 +78,7 @@ SoundManager.setBGM = function (src, loop, callback) {
         });
         document.getElementById("sound").appendChild(element);
     } else {
+        this.prevBgm = audio["src"];
         audio["src"] = src;
         audio["loop"] = !!loop;
         audio["callback"] = callback;

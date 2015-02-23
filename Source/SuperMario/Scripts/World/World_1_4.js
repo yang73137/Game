@@ -215,7 +215,7 @@ World_1_4 = ClassFactory.createClass(World, {
         this.mario.moveRight(2);
         this.mario.sprite.moveToNextFrame();
     },
-    onGaming: function() {
+    onChangedScene: function() {
         SoundManager.setBGM(Const.Sound.Backgrounds.CastleTheme, true);
     }
 });

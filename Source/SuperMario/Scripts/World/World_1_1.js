@@ -399,7 +399,7 @@ World_1_1 = ClassFactory.createClass(World, {
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 this.setCollidable(false, false, false, false);
-                SoundManager.setBGM(Const.Sound.Effects.Flagpole);
+                SoundManager.setBGM(Const.Sound.Effects.Flagpole, false, null);
                 this.gameUI.end();
             }
         });
@@ -460,19 +460,19 @@ World_1_1 = ClassFactory.createClass(World, {
             this.scrollable = true;
             this.mario.setPosition(50, 400 - this.mario.height);
             this.setPosition(0, 0);
-            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true);
+            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true, null);
             break;
         case World_1_1_Scene.Scene2:
             this.scrollable = false;
             this.setPosition(-6784, 0);
             this.mario.setPosition(6834, 0);
-            SoundManager.setBGM(Const.Sound.Backgrounds.UnderGroundTheme, true);
+            SoundManager.setBGM(Const.Sound.Backgrounds.UnderGroundTheme, true, null);
             break;
         case World_1_1_Scene.Scene3:
             this.scrollable = true;
             this.setPosition(-5120, 0);
             this.mario.setPosition(5232, 304 - this.mario.height);
-            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true);
+            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true, null);
             break;
         }
     }

@@ -39,7 +39,9 @@ Const.Sound = {
         "OverworldTheme": path_prefix + "./Sound/Background/ogg/Overworld.ogg",
         "UnderGroundTheme": path_prefix + "./Sound/Background/ogg/Underworld.ogg",
         "UnderWaterTheme": path_prefix + "./Sound/Background/ogg/Underwater.ogg",
-        "CastleTheme": path_prefix + "./Sound/Background/ogg/Castle.ogg"
+        "CastleTheme": path_prefix + "./Sound/Background/ogg/Castle.ogg",
+        "Sky": path_prefix + "./Sound/Background/ogg/Sky.ogg",
+        "Star": path_prefix + "./Sound/Background/ogg/Star.ogg"
     },
     Effects: {
         "BrickBreak": path_prefix + "./Sound/Effect/ogg/Break Block.ogg",
@@ -58,7 +60,8 @@ Const.Sound = {
         "Flagpole": path_prefix + "./Sound/Effect/ogg/Flagpole.ogg",
         "LevelClear": path_prefix + "./Sound/Effect/ogg/Stage Clear.ogg",
         "WorldClear": path_prefix + "./Sound/Effect/ogg/World Clear.ogg",
-        "Kick": path_prefix + "./Sound/Effect/ogg/Kick.ogg"
+        "Kick": path_prefix + "./Sound/Effect/ogg/Kick.ogg",
+        "BowserFalls": path_prefix + "./Sound/Effect/ogg/Bowser Falls.ogg"
     }
 };
 

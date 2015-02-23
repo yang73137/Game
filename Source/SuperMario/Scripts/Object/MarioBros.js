@@ -380,6 +380,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
                 }
             } else {
                 this.invincible = false;
+                SoundManager.setBGM(SoundManager.prevBgm, true, null);
             }
         }
         
@@ -669,7 +670,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
             } else {
                 this.state = MarioState.None;
                 this.deadCounter.setEnabled(false);
-                this.gameUI.restart();
+                this.gameUI.restart();   
             }
         }
     },
@@ -715,15 +716,16 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     dead: function () {
         this.height = 32;
-
         this.setSize(this.width, this.height);
-
         this.sprite.setFrameSequence([{ x: 32 * 6, y: 64 }]);
         this.sprite.moveToFrame(0);
         this.deadCounter.setEnabled(true);
         this.state = MarioState.Dead;
         this.collidable = false;
         SoundManager.play(Const.Sound.Effects.Death);
+        if (this.invincible) {
+            SoundManager.setBGM(SoundManager.prevBgm, true, null);
+        }
     },
     hurt: function () {
         if (this.hurtable && this.state == MarioState.Live) {
@@ -801,6 +803,7 @@ MarioBors = ClassFactory.createClass(GameObject, {
     },
     setInvincible: function () {
         this.invincible = true;
+        SoundManager.setBGM(Const.Sound.Backgrounds.Star, true, null);
     },
     reJump: function (reJumpHeight) {
         this.reJumpHeight = reJumpHeight || 45;

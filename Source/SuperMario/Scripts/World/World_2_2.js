@@ -311,6 +311,7 @@ World_2_2 = ClassFactory.createClass(World, {
         flag.attachCollidesLeft(function (gameObject) {
             if (gameObject instanceof MarioBors) {
                 this.setCollidable(false, false, false, false);
+                SoundManager.setBGM(Const.Sound.Effects.Flagpole, false, null);
                 this.gameUI.end();
             }
         });
@@ -352,6 +353,14 @@ World_2_2 = ClassFactory.createClass(World, {
             }
             return;
         } else {
+            if (!this.initEnd) {
+                this.initEnd = true;
+                var world = this;
+                SoundManager.setBGM(Const.Sound.Effects.LevelClear, false, function () {
+                    var newWorld = new World_2_3();
+                    world.gameUI.setWorld(newWorld);
+                });
+            }
             if (this.mario.spriteType != MarioSprite.Move) {
                 this.mario.setSprite(MarioSprite.Move);
                 this.mario.moving = true;
@@ -365,9 +374,6 @@ World_2_2 = ClassFactory.createClass(World, {
             this.falling = false;
             this.mario.moveRight(2);
             this.mario.sprite.moveToNextFrame();
-        } else {
-            var world = new World_2_3();
-            this.gameUI.setWorld(world);
         }
     },
     onChangedScene: function() {
@@ -385,12 +391,14 @@ World_2_2 = ClassFactory.createClass(World, {
             this.scrollable = true;
             this.mario.setPosition(550, 0);
             this.setPosition(-516, 0);
+            SoundManager.setBGM(Const.Sound.Backgrounds.UnderWaterTheme, true, null);
             break;
         case World_2_2_Scene.Scene3:
             this.mario.setInWater(false);
             this.scrollable = true;
             this.mario.setPosition(6836, 336 - this.mario.height);
             this.setPosition(-6726, 0);
+            SoundManager.setBGM(Const.Sound.Backgrounds.OverworldTheme, true, null);
             break;
         }
     }
