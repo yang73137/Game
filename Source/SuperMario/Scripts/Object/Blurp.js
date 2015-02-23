@@ -67,6 +67,7 @@ Blurp = ClassFactory.createClass(Enemy, {
         this.setSpriteFrames(BlurpSpriteType.Dead);
         this.sprite.moveToFrame(0);
         this.state = BlurpState.Dead;
+        SoundManager.play(Const.Sound.Effects.Squish);
     },
     onCollides: function (gameObject) {
         if (gameObject instanceof FireBall) {
