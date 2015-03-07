@@ -36,32 +36,32 @@ for (var i = 1; i <= 8; i++) {
 
 Const.Sound = {
     Backgrounds: {
-        "OverworldTheme": path_prefix + "./Sound/Background/ogg/Overworld.ogg",
-        "UnderGroundTheme": path_prefix + "./Sound/Background/ogg/Underworld.ogg",
-        "UnderWaterTheme": path_prefix + "./Sound/Background/ogg/Underwater.ogg",
-        "CastleTheme": path_prefix + "./Sound/Background/ogg/Castle.ogg",
-        "Sky": path_prefix + "./Sound/Background/ogg/Sky.ogg",
-        "Star": path_prefix + "./Sound/Background/ogg/Star.ogg"
+        "OverworldTheme": path_prefix + "./Sound/Background/mp3/Overworld.mp3",
+        "UnderGroundTheme": path_prefix + "./Sound/Background/mp3/Underworld.mp3",
+        "UnderWaterTheme": path_prefix + "./Sound/Background/mp3/Underwater.mp3",
+        "CastleTheme": path_prefix + "./Sound/Background/mp3/Castle.mp3",
+        "Sky": path_prefix + "./Sound/Background/mp3/Sky.mp3",
+        "Star": path_prefix + "./Sound/Background/mp3/Star.mp3"
     },
     Effects: {
-        "BrickBreak": path_prefix + "./Sound/Effect/ogg/Break Block.ogg",
-        "Squish": path_prefix + "./Sound/Effect/Squish.wav",
-        "Coin": path_prefix + "./Sound/Effect/ogg/Coin.ogg",
-        "Sprout": path_prefix + "./Sound/Effect/ogg/Powerup Appears.ogg",
-        "Death": path_prefix + "./Sound/Effect/ogg/Player Dies.ogg",
-        "Bump": path_prefix + "./Sound/Effect/ogg/Bump.ogg",
-        "Fireball": path_prefix + "./Sound/Effect/ogg/Fireball.ogg",
-        "LifeUp": path_prefix + "./Sound/Effect/ogg/Gain Life.ogg",
-        "JumpBig": path_prefix + "./Sound/Effect/ogg/Jump Super.ogg",
-        "JumpSmall": path_prefix + "./Sound/Effect/ogg/Jump Small.ogg",
-        "ChangeType": path_prefix + "./Sound/Effect/ogg/Powerup.ogg",
-        "BowserFire": path_prefix + "./Sound/Effect/ogg/Bowser Fires.ogg",
-        "Hurt": path_prefix + "./Sound/Effect/ogg/Pipe.ogg",
-        "Flagpole": path_prefix + "./Sound/Effect/ogg/Flagpole.ogg",
-        "LevelClear": path_prefix + "./Sound/Effect/ogg/Stage Clear.ogg",
-        "WorldClear": path_prefix + "./Sound/Effect/ogg/World Clear.ogg",
-        "Kick": path_prefix + "./Sound/Effect/ogg/Kick.ogg",
-        "BowserFalls": path_prefix + "./Sound/Effect/ogg/Bowser Falls.ogg"
+        "BrickBreak": path_prefix + "./Sound/Effect/mp3/Break Block.mp3",
+        "Squish": path_prefix + "./Sound/Effect/mp3/Squish.mp3",
+        "Coin": path_prefix + "./Sound/Effect/mp3/Coin.mp3",
+        "Sprout": path_prefix + "./Sound/Effect/mp3/Powerup Appears.mp3",
+        "Death": path_prefix + "./Sound/Effect/mp3/Player Dies.mp3",
+        "Bump": path_prefix + "./Sound/Effect/mp3/Bump.mp3",
+        "Fireball": path_prefix + "./Sound/Effect/mp3/Fireball.mp3",
+        "LifeUp": path_prefix + "./Sound/Effect/mp3/Gain Life.mp3",
+        "JumpBig": path_prefix + "./Sound/Effect/mp3/Jump Super.mp3",
+        "JumpSmall": path_prefix + "./Sound/Effect/mp3/Jump Small.mp3",
+        "ChangeType": path_prefix + "./Sound/Effect/mp3/Powerup.mp3",
+        "BowserFire": path_prefix + "./Sound/Effect/mp3/Bowser Fires.mp3",
+        "Hurt": path_prefix + "./Sound/Effect/mp3/Pipe.mp3",
+        "Flagpole": path_prefix + "./Sound/Effect/mp3/Flagpole.mp3",
+        "LevelClear": path_prefix + "./Sound/Effect/mp3/Stage Clear.mp3",
+        "WorldClear": path_prefix + "./Sound/Effect/mp3/World Clear.mp3",
+        "Kick": path_prefix + "./Sound/Effect/mp3/Kick.mp3",
+        "BowserFalls": path_prefix + "./Sound/Effect/mp3/Bowser Falls.mp3"
     }
 };
 

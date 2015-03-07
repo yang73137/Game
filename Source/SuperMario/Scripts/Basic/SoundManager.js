@@ -16,8 +16,6 @@ SoundManager.play = function (src, loop) {
     if (!document.getElementById("sound")) {
         return;
     }
-    
-    
 
     var index = 0;
     var audio = document.getElementById(src + (++index));

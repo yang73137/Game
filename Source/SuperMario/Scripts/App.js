@@ -35,7 +35,7 @@ App = {
         }
     },
     error: function (src, loaded, total, loader) {
-        alert("Load " + src + " error");
+        //alert("Load " + src + " error");
     },
     run: function () {
         ImageLoader.load(this, [Const.IMAGE_ITEMS, Const.IMAGE_ENEMIES, Const.IMAGE_MARIOBROS, Const.IMAGE_TILESET, Const.IMAGE_WORLD_1_1]);

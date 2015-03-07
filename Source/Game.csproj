@@ -209,6 +209,7 @@
     <Content Include="SuperMario\Sound\Effect\mp3\Power Down.mp3" />
     <Content Include="SuperMario\Sound\Effect\mp3\Powerup Appears.mp3" />
     <Content Include="SuperMario\Sound\Effect\mp3\Powerup.mp3" />
+    <Content Include="SuperMario\Sound\Effect\mp3\Squish.mp3" />
     <Content Include="SuperMario\Sound\Effect\mp3\Stage Clear.mp3" />
     <Content Include="SuperMario\Sound\Effect\mp3\Vine Emerging.mp3" />
     <Content Include="SuperMario\Sound\Effect\mp3\World Clear.mp3" />
