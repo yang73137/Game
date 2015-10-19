@@ -53,6 +53,11 @@ HammerBrother = ClassFactory.createClass(Enemy, {
         if (this.hammer.state == HammerState.None) {
             this.hammer.shoot(this.x - 20, this.y - 20);
         }
+    },
+    onCollides: function (gameObject) {
+        if (gameObject instanceof FireBall) {
+            this.dead();
+        }
     }
 });
 
