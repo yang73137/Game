@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -119,6 +120,13 @@
     <Content Include="BattleCity\UI\StageUI.html" />
     <Content Include="BattleCity\UI\Test.html" />
     <Content Include="Index.html" />
+    <Content Include="KOF\Characters\Iori.html" />
+    <Content Include="KOF\Images\Iori.png" />
+    <Content Include="KOF\Scripts\Common\Input.js" />
+    <Content Include="KOF\Scripts\Common\Skill.js" />
+    <Content Include="KOF\Scripts\Common\Sprite.js" />
+    <Content Include="KOF\Scripts\QUnit\qunit-1.15.0.css" />
+    <Content Include="KOF\Scripts\QUnit\qunit-1.15.0.js" />
     <Content Include="SuperMario\Images\Enemies.png" />
     <Content Include="SuperMario\Images\Items.png" />
     <Content Include="SuperMario\Images\MarioBros.png" />

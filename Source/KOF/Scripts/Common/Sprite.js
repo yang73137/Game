@@ -1,4 +1,5 @@
 ﻿
+// 判定框类型
 BoxType = {
     None: 0,
     Collide: 1,
@@ -6,6 +7,7 @@ BoxType = {
     Body: 3
 };
 
+// 碰撞框
 function Box(boxType, x, y, width, height) {
     this.type = boxType;
     this.x = x;
@@ -29,6 +31,7 @@ Box.prototype.paint = function (baseX, baseY, context) {
     context.restore();
 };
 
+// 精灵帧
 function SpriteFrame(x, y, width, height, duration, boxes) {
     this.x = x;
     this.y = y;
@@ -39,6 +42,7 @@ function SpriteFrame(x, y, width, height, duration, boxes) {
     this.boxes = boxes || [];
 }
 
+// 精灵
 function Sprite(image, frames, cancelble) {
     this.image = image;
     this.frames = frames;

@@ -1,16 +1,19 @@
 ﻿
+// 技能匹配状态
 SkillState = {
     None: 0,
     Matching: 1,
     Matched: 2
 }
 
+// 技能动作
 function SkillAction(keyCodes, duration, isRelease) {
     this.keyCodes = keyCodes || [];
     this.duration = duration;
     this.isRelease = !!isRelease;
 }
 
+// 技能
 function Skill(sprite, actions) {
     this.actions = actions || [];
     this.actionIndex = 0;
@@ -19,13 +22,13 @@ function Skill(sprite, actions) {
     this.sprite = sprite;
 }
 
+// 技能匹配
 Skill.prototype.match = function (input) {
 
     if (this.counter >= 0) {
 
         // 没有任何按键
-        if (!input.keyChanged)
-        {
+        if (!input.keyChanged) {
             this.counter--;
             if (this.counter < 0) {
                 this.actionIndex = 0;

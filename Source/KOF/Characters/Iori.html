@@ -274,6 +274,16 @@
 
         var jumpLightKickSprite = new Sprite(image, jumpLightKickFrames);
 
+        var jumpLightPunchFrames = [
+            new SpriteFrame(9, 2742, 65, 93, 3, boxes),
+            new SpriteFrame(87, 2754, 86, 81, 3, boxes),
+            new SpriteFrame(186, 2754, 87, 80, 3, boxes),
+            new SpriteFrame(286, 2758, 88, 77, 3, boxes),
+            new SpriteFrame(387, 2755, 88, 80, 3, boxes),
+            new SpriteFrame(486, 2755, 88, 80, 3, boxes)
+        ];
+        var jumpLightPunchSprite = new Sprite(image, jumpLightPunchFrames);
+
         var iori = {
             x: 200,
             y: 0,
@@ -357,11 +367,21 @@
                     if (Input.isKeyPressed(GameKeys.LEFT)) {
                         this.x -= 4;
                     }
-                    if (Input.isKeyPressed(GameKeys.GAME_B))
+                    if (this.sprite.frameIndex < 4 && Input.isKeyPressed(GameKeys.GAME_A))
                     {
-                        this.sprite = jumpLightKickSprite;
+                        var frameIndex = this.sprite.frameIndex;
+                        this.sprite.frameIndex = 0;
+                        this.matched = true;
+                        this.sprite = jumpLightPunchSprite;
+                        this.spr.frameIndex = jumpLightPunchSprite.frames.length - frameIndex;
                     }
                 };
+
+                var frame = this.sprite.frames[this.sprite.frameIndex];
+
+                if (this.sprite == jumpLightPunchSprite) {
+                    this.y += 6;
+                }
 
                 if (!this.siting && !this.moving && !this.matching && !this.matched) {
                     this.sprite = standSprite;

@@ -1,0 +1,5 @@
+C:\Users\yang73137\Documents\GitHub\Game\Source\bin\Game.dll
+C:\Users\yang73137\Documents\GitHub\Game\Source\bin\Game.pdb
+C:\Users\yang73137\Documents\GitHub\Game\Source\obj\Debug\Game.csprojResolveAssemblyReference.cache
+C:\Users\yang73137\Documents\GitHub\Game\Source\obj\Debug\Game.dll
+C:\Users\yang73137\Documents\GitHub\Game\Source\obj\Debug\Game.pdb
