@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        body {
+            background: #dddddd;
+            width: 1280px;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div style="background: url(../Images/Iori.png) 0 0; background-position-x: 1px; background-position-y: 1px; width: 192px; height: 192px;"></div>
+    <img id="img" src="../Images/Iori.png" style="display: none;" />
+    <div style="width: 950px">
+        <canvas id="canvas" width="950" height="768" style="background: #000000;"></canvas>
+    </div>
+
+    <script src="../Scripts/Common/Input.js"></script>
+    <script src="../Scripts/Common/Sprite.js"></script>
+    <script src="../Scripts/Common/Skill.js"></script>
+
+    <script type="text/javascript">
+        
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        // Sprite
+        var boxes = [
+            //new Box(BoxType.Collide, 53, 60, 60, 155),
+            //new Box(BoxType.Body, 43, 40, 80, 175),
+            //new Box(BoxType.Head, 68, 15, 49, 49)
+        ];
+
+        var image = document.getElementById("img");
+
+        var standFrames = [
+            new SpriteFrame(9, 226, 74, 102, 5, boxes),
+            new SpriteFrame(96, 226, 74, 102, 5, boxes),
+            new SpriteFrame(183, 226, 74, 102, 5, boxes),
+            new SpriteFrame(270, 226, 74, 102, 5, boxes),
+            new SpriteFrame(357, 226, 74, 102, 5, boxes),
+            new SpriteFrame(445, 226, 74, 102, 5, boxes),
+            new SpriteFrame(534, 226, 74, 102, 5, boxes),
+            new SpriteFrame(622, 226, 74, 102, 5, boxes),
+            new SpriteFrame(709, 226, 74, 102, 5, boxes)
+        ];
+        var standSprite = new Sprite(image, standFrames);
+
+        var movingRightFrames = [
+            new SpriteFrame(9, 455, 61, 104, 6, boxes),
+            new SpriteFrame(83, 455, 53, 104, 6, boxes),
+            new SpriteFrame(149, 455, 47, 104, 6, boxes),
+            new SpriteFrame(210, 455, 43, 104, 6, boxes),
+            new SpriteFrame(266, 455, 50, 104, 6, boxes),
+            new SpriteFrame(329, 455, 51, 104, 6, boxes),
+            new SpriteFrame(393, 455, 43, 104, 6, boxes),
+            new SpriteFrame(449, 455, 52, 104, 6, boxes),
+            new SpriteFrame(514, 455, 66, 104, 6, boxes),
+            new SpriteFrame(593, 455, 65, 104, 6, boxes)
+
+        ];
+        var movingRightSprite = new Sprite(image, movingRightFrames);
+
+        var movingLeftFrames = [
+            new SpriteFrame(9, 583, 75, 106, 6, boxes),
+            new SpriteFrame(87, 583, 55, 106, 6, boxes),
+            new SpriteFrame(155, 583, 49, 106, 6, boxes),
+            new SpriteFrame(204, 583, 43, 106, 6, boxes),
+            new SpriteFrame(217, 583, 48, 106, 6, boxes),
+            new SpriteFrame(278, 583, 52, 106, 6, boxes),
+            new SpriteFrame(343, 583, 46, 106, 6, boxes),
+            new SpriteFrame(402, 583, 45, 106, 6, boxes),
+            new SpriteFrame(460, 583, 47, 106, 6, boxes),
+            new SpriteFrame(520, 583, 60, 106, 6, boxes)
+        ];
+        var movingLeftSprite = new Sprite(image, movingLeftFrames);
+
+        var runFrames = [
+            new SpriteFrame(175, 703, 115, 92, 4, boxes),
+            new SpriteFrame(303, 703, 123, 92, 4, boxes),
+            new SpriteFrame(439, 703, 118, 92, 4, boxes),
+            new SpriteFrame(470, 703, 84, 92, 4, boxes),
+            new SpriteFrame(175, 804, 113, 92, 4, boxes),
+            new SpriteFrame(301, 804, 119, 92, 4, boxes),
+            new SpriteFrame(433, 804, 120, 92, 4, boxes),
+            new SpriteFrame(566, 804, 84, 92, 4, boxes)
+        ];
+        var runSprite = new Sprite(image, runFrames, true);
+
+        var jumpBackFrames = [
+            new SpriteFrame(628, 572, 65, 117, 5, boxes),
+            new SpriteFrame(706, 572, 46, 117, 5, boxes),
+            new SpriteFrame(765, 572, 54, 117, 5, boxes),
+            new SpriteFrame(832, 572, 70, 117, 5, boxes)
+        ];
+        var jumpBackSprite = new Sprite(image, jumpBackFrames);
+
+        var lightPunchFrames = [
+            new SpriteFrame(9, 1304, 65, 100, 3, boxes),
+            new SpriteFrame(87, 1304, 67, 100, 3, boxes),
+            new SpriteFrame(167, 1304, 95, 100, 3, boxes),
+            new SpriteFrame(275, 1304, 93, 100, 3, boxes),
+            new SpriteFrame(381, 1304, 67, 100, 3, boxes)
+        ];
+        var lightPunchSprite = new Sprite(image, lightPunchFrames);
+
+        var sitDownFrames = [
+            //new SpriteFrame(9, 342, 65, 99, 3, boxes),
+            //new SpriteFrame(87, 372, 66, 69, 5, boxes),
+            new SpriteFrame(166, 379, 67, 62, 5, boxes),
+            new SpriteFrame(246, 378, 67, 63, 5, boxes),
+            new SpriteFrame(326, 377, 67, 64, 5, boxes),
+            new SpriteFrame(406, 376, 67, 65, 5, boxes),
+            new SpriteFrame(486, 377, 67, 64, 5, boxes),
+            new SpriteFrame(566, 378, 67, 63, 5, boxes),
+            //new SpriteFrame(646, 372, 67, 69, 5, boxes),
+            //new SpriteFrame(725, 342, 65, 99, 3, boxes)
+        ];
+        var sitDownSprite = new Sprite(image, sitDownFrames);
+
+        var jumpFrames = [
+            new SpriteFrame(9, 969, 65, 90, 4, boxes),
+            new SpriteFrame(87, 909, 43, 150, 4, boxes),
+            new SpriteFrame(143, 939, 48, 120, 4, boxes),
+            new SpriteFrame(204, 969, 62, 90, 5, boxes),
+            new SpriteFrame(279, 988, 59, 72, 5, boxes),
+            new SpriteFrame(351, 981, 57, 78, 3, boxes),
+            new SpriteFrame(420, 969, 63, 90, 3, boxes),
+            new SpriteFrame(496, 939, 48, 120, 3, boxes),
+            new SpriteFrame(557, 969, 65, 90, 3, boxes)
+        ];
+        var jumpSprite = new Sprite(image, jumpFrames);
+
+        var heavyPunchFrames = [
+            new SpriteFrame(8, 1416, 71, 114, 4, boxes),
+            new SpriteFrame(92, 1424, 83, 105, 3, boxes),
+            new SpriteFrame(186, 1442, 107, 87, 4, boxes),
+            new SpriteFrame(304, 1439, 113, 90, 4, boxes),
+            new SpriteFrame(428, 1436, 80, 93, 3, boxes),
+            new SpriteFrame(519, 1420, 71, 110, 4, boxes),
+            new SpriteFrame(600, 1424, 69, 106, 3, boxes),
+            new SpriteFrame(680, 1426, 68, 103, 4, boxes),
+            new SpriteFrame(757, 1424, 68, 105, 4, boxes)
+        ];
+        var heavyPunchSprite = new Sprite(image, heavyPunchFrames);
+
+        var heavyKickFrames = [
+            new SpriteFrame(9, 1547, 63, 102, 4, boxes),
+            new SpriteFrame(85, 1547, 78, 102, 3, boxes),
+            new SpriteFrame(175, 1542, 76, 107, 4, boxes),
+            new SpriteFrame(264, 1543, 102, 106, 4, boxes),
+            new SpriteFrame(379, 1547, 106, 102, 3, boxes),
+            new SpriteFrame(498, 1546, 106, 103, 4, boxes),
+            new SpriteFrame(617, 1542, 74, 107, 3, boxes),
+            new SpriteFrame(704, 1543, 53, 106, 4, boxes),
+            new SpriteFrame(770, 1543, 53, 106, 4, boxes),
+            new SpriteFrame(831, 1543, 65, 106, 4, boxes)
+        ];
+        var heavyKickSprite = new Sprite(image, heavyKickFrames);
+
+        var lightKickFrames = [
+            new SpriteFrame(496, 1300, 62, 104, 3, boxes),
+            new SpriteFrame(571, 1303, 57, 101, 3, boxes),
+            new SpriteFrame(641, 1303, 91, 101, 3, boxes),
+            new SpriteFrame(745, 1303, 91, 101, 3, boxes),
+            new SpriteFrame(849, 1303, 57, 101, 3, boxes),
+            new SpriteFrame(919, 1300, 62, 104, 3, boxes)
+        ];
+        var lightKickSprite = new Sprite(image, lightKickFrames);
+
+        var runStatus = new Skill(runSprite, [new SkillAction([GameKeys.RIGHT], 10), new SkillAction([GameKeys.RIGHT], 10, true), new SkillAction([GameKeys.RIGHT], 10)]);
+        var jumpBackStatus = new Skill(jumpBackSprite, [new SkillAction([GameKeys.LEFT], 10), new SkillAction([GameKeys.LEFT], 10, true), new SkillAction([GameKeys.LEFT], 10)]);
+        var lightPunchStatus = new Skill(lightPunchSprite, [new SkillAction([GameKeys.GAME_A], 10)]);
+        var jumpStatus = new Skill(jumpSprite, [new SkillAction([GameKeys.UP], 10)]);
+        var heavyPunchStatus = new Skill(heavyPunchSprite, [new SkillAction([GameKeys.GAME_C], 10)]);
+        var heavyKickStatus = new Skill(heavyKickSprite, [new SkillAction([GameKeys.GAME_D], 10)]);
+        var lightKickStatus = new Skill(lightKickSprite, [new SkillAction([GameKeys.GAME_B], 10)]);
+
+        var downLightPunchFrames = [
+            new SpriteFrame(354, 2667, 65, 63, 3, boxes),
+            new SpriteFrame(432, 2667, 68, 63, 3, boxes),
+            new SpriteFrame(513, 2667, 99, 63, 3, boxes),
+            new SpriteFrame(624, 2667, 87, 63, 3, boxes),
+            new SpriteFrame(724, 2667, 79, 63, 3, boxes),
+            new SpriteFrame(816, 2667, 65, 63, 3, boxes)
+        ];
+        var downLightPunchSprite = new Sprite(image, downLightPunchFrames);
+        var downLightPunchStatus = new Skill(downLightPunchSprite, [new SkillAction([GameKeys.DOWN, GameKeys.GAME_A], 10)]);
+
+        var downLightKickFrames = [
+            new SpriteFrame(9, 2353, 68, 60, 3, boxes),
+            new SpriteFrame(91, 2351, 77, 62, 3, boxes),
+            new SpriteFrame(180, 2347, 104, 65, 3, boxes),
+            new SpriteFrame(296, 2347, 107, 65, 3, boxes),
+            new SpriteFrame(416, 2347, 103, 65, 3, boxes),
+            new SpriteFrame(533, 2351, 76, 62, 3, boxes),
+            new SpriteFrame(622, 2353, 68, 60, 3, boxes)
+        ];
+        var downLightKickSprite = new Sprite(image, downLightKickFrames);
+        var downLightKickStatus = new Skill(downLightKickSprite, [new SkillAction([GameKeys.DOWN, GameKeys.GAME_B], 10)]);
+
+        var downHeavyPunchFrames = [
+            new SpriteFrame(9, 2466, 74, 76, 4, boxes),
+            new SpriteFrame(96, 2448, 77, 94, 4, boxes),
+            new SpriteFrame(185, 2450, 73, 92, 4, boxes),
+            new SpriteFrame(271, 2426, 98, 116, 4, boxes),
+            new SpriteFrame(382, 2450, 80, 92, 4, boxes),
+            new SpriteFrame(475, 2457, 72, 85, 4, boxes),
+            new SpriteFrame(559, 2460, 69, 82, 4, boxes),
+            new SpriteFrame(640, 2466, 71, 76, 4, boxes),
+            new SpriteFrame(724, 2479, 71, 63, 4, boxes)
+        ];
+        var downHeavyPunchSprite = new Sprite(image, downHeavyPunchFrames);
+        var downHeavyPunchStatus = new Skill(downHeavyPunchSprite, [new SkillAction([GameKeys.DOWN, GameKeys.GAME_C], 10)]);
+
+        var downHeavyKickFrames = [
+            new SpriteFrame(9, 2584, 85, 64, 4, boxes),
+            new SpriteFrame(108, 2571, 87, 77, 4, boxes),
+            new SpriteFrame(209, 2555, 132, 93, 4, boxes),
+            new SpriteFrame(354, 2561, 126, 87, 4, boxes),
+            new SpriteFrame(493, 2578, 126, 70, 4, boxes),
+            new SpriteFrame(632, 2589, 120, 59, 4, boxes),
+            new SpriteFrame(764, 2605, 111, 43, 4, boxes),
+            new SpriteFrame(888, 2600, 114, 48, 4, boxes),
+            new SpriteFrame(9, 2675, 103, 55, 4, boxes),
+            new SpriteFrame(125, 2666, 86, 64, 4, boxes),
+            new SpriteFrame(233, 2661, 83, 69, 4, boxes),
+
+        ];
+        var downHeavyKickSprite = new Sprite(image, downHeavyKickFrames);
+        var downHeavyKickStatus = new Skill(downHeavyKickSprite, [new SkillAction([GameKeys.DOWN, GameKeys.GAME_D], 10)]);
+
+        var rollForwardFrames = [
+            new SpriteFrame(9, 1077, 65, 90, 3, boxes),
+            new SpriteFrame(87, 1077, 75, 90, 3, boxes),
+            new SpriteFrame(175, 1077, 105, 90, 3, boxes),
+            new SpriteFrame(293, 1077, 109, 90, 3, boxes),
+            new SpriteFrame(416, 1077, 120, 90, 3, boxes),
+            new SpriteFrame(549, 1077, 115, 90, 3, boxes),
+            new SpriteFrame(677, 1077, 107, 90, 3, boxes),
+            new SpriteFrame(797, 1072, 85, 95, 3, boxes)
+        ];
+        var rollForwardSprite = new Sprite(image, rollForwardFrames);
+        var rollForwardStatus = new Skill(rollForwardSprite, [new SkillAction([GameKeys.RIGHT, GameKeys.GAME_A, GameKeys.GAME_B], 10)]);
+
+        var rollBackwardFrames = [
+            new SpriteFrame(9, 1196, 66, 91, 3, boxes),
+            new SpriteFrame(88, 1196, 77, 91, 3, boxes),
+            new SpriteFrame(178, 1196, 86, 91, 3, boxes),
+            new SpriteFrame(277, 1196, 79, 91, 3, boxes),
+            new SpriteFrame(370, 1196, 54, 91, 3, boxes),
+            new SpriteFrame(437, 1196, 63, 91, 3, boxes),
+            new SpriteFrame(513, 1196, 55, 91, 3, boxes),
+            new SpriteFrame(581, 1196, 63, 91, 3, boxes),
+            new SpriteFrame(656, 1196, 85, 91, 3, boxes),
+            new SpriteFrame(752, 1180, 85, 107, 3, boxes)
+        ];
+        var rollBackwardSprite = new Sprite(image, rollBackwardFrames);
+        var rollBackwardStatus = new Skill(rollBackwardSprite, [new SkillAction([GameKeys.LEFT, GameKeys.GAME_A, GameKeys.GAME_B], 10)]);
+
+        var jumpLightKickFrames = [
+            new SpriteFrame(621, 2756, 55, 79, 10, boxes),
+            new SpriteFrame(689, 2748, 130, 87, 10, boxes)
+        ];
+
+        var jumpLightKickSprite = new Sprite(image, jumpLightKickFrames);
+
+        var iori = {
+            x: 200,
+            y: 0,
+            moving: false,
+            siting: false,
+            matching: false,
+            matched: false,
+            sprite: standSprite,
+            prevSprite: null,
+            skillStatusList: [rollBackwardStatus, rollForwardStatus, downLightPunchStatus, downLightKickStatus, downHeavyPunchStatus, downHeavyKickStatus, lightPunchStatus, heavyPunchStatus, heavyKickStatus, lightKickStatus, runStatus, jumpBackStatus, jumpStatus],
+            update: function () {
+                this.siting = false;
+                this.matching = false;
+                this.moving = false;
+
+                for (var i = 0; i < this.skillStatusList.length; i++) {
+                    var status = this.skillStatusList[i].match(Input);
+                    if (!this.matched || this.sprite.cancelble) {
+                        if (status == SkillState.Matching) {
+                            this.matching = true;
+                        }
+                        else if (status == SkillState.Matched) {
+                            this.matched = true;
+                            this.sprite = this.skillStatusList[i].sprite;
+                            break;
+                        }
+                    }
+                }
+
+                Input.setRepeat();
+
+                if (this.sprite == rollForwardSprite) {
+                    this.x += 7;
+                }
+
+                if (this.sprite == rollBackwardSprite) {
+                    this.x -= 7;
+                }
+
+                if (this.prevSprite == runSprite)
+                {
+                    if (Input.isKeyPressed(GameKeys.RIGHT)) {
+                        this.matched = true;
+                        this.sprite = runSprite;
+                    }
+                    else {
+                        this.matched = false;
+                    }
+                }
+
+                if (!this.matched && Input.isKeyPressed(GameKeys.DOWN)) {
+                    this.siting = true;
+                    this.sprite = sitDownSprite;
+                }
+                else if (!this.matched && Input.isKeyPressed(GameKeys.RIGHT)) {
+                    this.moving = true;
+                    this.sprite = movingRightSprite;
+                    this.x += 4;
+                }
+                else if (!this.matched && Input.isKeyPressed(GameKeys.LEFT)) {
+                    this.sprite = movingLeftSprite;
+                    this.moving = true;
+                    this.x -= 4;
+                }
+
+                if (this.sprite == runSprite) {
+                    this.x += 8;
+                }
+
+                if (this.sprite == jumpBackSprite) {
+                    this.y -= this.sprite.frameIndex <= 1 ? 6 : -6;
+                    this.x -= 4;
+                }
+
+                if (this.sprite == jumpSprite) {
+                    this.y -= this.sprite.frameIndex < 4 ? 6 : -6;
+                    if (Input.isKeyPressed(GameKeys.RIGHT))
+                    {
+                        this.x += 4;
+                    }
+                    if (Input.isKeyPressed(GameKeys.LEFT)) {
+                        this.x -= 4;
+                    }
+                    if (Input.isKeyPressed(GameKeys.GAME_B))
+                    {
+                        this.sprite = jumpLightKickSprite;
+                    }
+                };
+
+                if (!this.siting && !this.moving && !this.matching && !this.matched) {
+                    this.sprite = standSprite;
+                }
+
+                this.prevSprite = this.sprite;
+            },
+            paint: function (context) {
+                this.sprite.paint(this.x, this.y, context);
+                if (this.sprite.frameIndex >= this.sprite.frames.length) {
+                    this.sprite.frameIndex = 0;
+                    if (this.matched) {
+                        this.matched = false;
+                    }
+                }
+            }
+        };
+
+        setInterval(function () {
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+            iori.update();
+            iori.paint(context);
+        }, 16);
+
+    </script>
+</body>
+</html>
