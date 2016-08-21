@@ -43,12 +43,12 @@ function SpriteFrame(x, y, width, height, duration, boxes) {
 }
 
 // 精灵
-function Sprite(image, frames, cancelble) {
+function Sprite(image, frames, cancelable) {
     this.image = image;
     this.frames = frames;
     this.frameIndex = 0;
     this.animating = false;
-    this.cancelble == !!cancelble;
+    this.cancelable = !!cancelable;
 }
 
 Sprite.prototype.paint = function (x, y, context) {

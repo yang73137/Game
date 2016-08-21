@@ -301,7 +301,7 @@
 
                 for (var i = 0; i < this.skillStatusList.length; i++) {
                     var status = this.skillStatusList[i].match(Input);
-                    if (!this.matched || this.sprite.cancelble) {
+                    if (!this.matched || this.sprite.cancelable) {
                         if (status == SkillState.Matching) {
                             this.matching = true;
                         }
@@ -323,7 +323,7 @@
                     this.x -= 7;
                 }
 
-                if (this.prevSprite == runSprite)
+                if (this.sprite == runSprite)
                 {
                     if (Input.isKeyPressed(GameKeys.RIGHT)) {
                         this.matched = true;
@@ -373,11 +373,9 @@
                         this.sprite.frameIndex = 0;
                         this.matched = true;
                         this.sprite = jumpLightPunchSprite;
-                        this.spr.frameIndex = jumpLightPunchSprite.frames.length - frameIndex;
+                        this.sprite.frameIndex = jumpLightPunchSprite.frames.length - frameIndex;
                     }
                 };
-
-                var frame = this.sprite.frames[this.sprite.frameIndex];
 
                 if (this.sprite == jumpLightPunchSprite) {
                     this.y += 6;
@@ -395,6 +393,15 @@
                     this.sprite.frameIndex = 0;
                     if (this.matched) {
                         this.matched = false;
+                    }
+                } else {
+                    var frame = this.sprite.frames[this.sprite.frameIndex];
+                    if (frame.height * 2 + this.y > 400) {
+                        this.sprite = standSprite;
+                        this.sprite.frameIndex = 0;
+                        frame = this.sprite.frames[this.sprite.frameIndex];
+                        console.log(frame.height);
+                        this.y = 400 - frame.height * 2;
                     }
                 }
             }
