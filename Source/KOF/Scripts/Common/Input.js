@@ -25,7 +25,7 @@ var Input = {
         "65": new Key(65, true),
         "68": new Key(68, true),
         "74": new Key(74, true),
-        "75": new Key(75, false),
+        "75": new Key(75, true),
         "76": new Key(76, false),
         "186": new Key(186, false)
     },

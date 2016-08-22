@@ -60,7 +60,7 @@ Sprite.prototype.paint = function (x, y, context) {
     var frame = this.frames[this.frameIndex];
 
     // 帧图片
-    context.drawImage(this.image, frame.x, frame.y, frame.width, frame.height, x, 400 - frame.height * 2 + y, frame.width * 2, frame.height * 2);
+    context.drawImage(this.image, frame.x, frame.y, frame.width, frame.height, x, y, frame.width * 2, frame.height * 2);
 
     // 各种框
     for (var i = 0; i < frame.boxes.length; i++) {
