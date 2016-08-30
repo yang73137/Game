@@ -26,8 +26,8 @@ var Input = {
         "68": new Key(68, true),
         "74": new Key(74, true),
         "75": new Key(75, true),
-        "76": new Key(76, false),
-        "186": new Key(186, false)
+        "76": new Key(76, true),
+        "186": new Key(186, true)
     },
     keyChanged: false,
     pressKey: function (keyCode) {

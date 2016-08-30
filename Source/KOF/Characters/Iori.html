@@ -271,7 +271,7 @@
             new SpriteFrame(621, 2756, 55, 79, 3, boxes),
             new SpriteFrame(689, 2748, 130, 87, 3, boxes),
             new SpriteFrame(689, 2748, 130, 87, 3, boxes),
-            new SpriteFrame(689, 2748, 130, 87, 3, boxes),
+            new SpriteFrame(689, 2748, 130, 87, 3, boxes)
         ];
 
         var jumpLightKickSprite = new Sprite(image, jumpLightKickFrames);
@@ -286,7 +286,61 @@
         ];
         var jumpLightPunchSprite = new Sprite(image, jumpLightPunchFrames);
 
+        var jumpHeavyPunchFrames = [
+            new SpriteFrame(9, 2875, 59, 94, 3, boxes),
+            new SpriteFrame(80, 2848, 88, 120, 4, boxes),
+            new SpriteFrame(182, 2851, 88, 118, 5, boxes),
+            new SpriteFrame(282, 2861, 101, 108, 5, boxes),
+            new SpriteFrame(396, 2886, 98, 83, 4, boxes),
+            new SpriteFrame(508, 2891, 77, 78, 3, boxes),
+            new SpriteFrame(598, 2891, 61, 78, 3, boxes)
+        ];
+        var jumpHeavyPunchSprite = new Sprite(image, jumpHeavyPunchFrames);
 
+        var jumpHeavyKickFrames = [
+            new SpriteFrame(9, 2982, 83, 110, 3, boxes),
+            new SpriteFrame(106, 2997, 76, 95, 4, boxes),
+            new SpriteFrame(195, 3009, 80, 83, 5, boxes),
+            new SpriteFrame(288, 3010, 113, 82, 5, boxes),
+            new SpriteFrame(414, 3010, 105, 82, 4, boxes),
+            new SpriteFrame(532, 3005, 90, 87, 3, boxes)
+        ];
+        var jumpHeavyKickSprite = new Sprite(image, jumpHeavyKickFrames);
+
+        var skillAFrames = [
+            new SpriteFrame(9, 3106, 65, 114, 4, boxes),
+            new SpriteFrame(87, 3104, 66, 116, 4, boxes),
+            new SpriteFrame(167, 3110, 74, 110, 4, boxes),
+            new SpriteFrame(254, 3110, 74, 110, 5, boxes),
+            new SpriteFrame(340, 3110, 74, 110, 5, boxes),
+            new SpriteFrame(427, 3112, 72, 110, 4, boxes),
+            new SpriteFrame(512, 3109, 68, 111, 4, boxes),
+            new SpriteFrame(593, 3114, 67, 106, 4, boxes)
+        ];
+        var skillASprite = new Sprite(image, skillAFrames);
+        var skillAStatus = new Skill(skillASprite, [new SkillAction([GameKeys.DOWN], 20), new SkillAction([GameKeys.RIGHT], 20), new SkillAction([GameKeys.GAME_A], 10)]);
+
+        var skillBFrames = [
+           new SpriteFrame(9, 3800, 76, 96, 4, boxes),
+           new SpriteFrame(98, 3800, 73, 96, 4, boxes),
+           new SpriteFrame(183, 3818, 86, 78, 4, boxes),
+           new SpriteFrame(281, 3820, 92, 76, 5, boxes),
+           new SpriteFrame(385, 3786, 86, 110, 5, boxes),
+           new SpriteFrame(484, 3759, 82, 137, 4, boxes),
+           new SpriteFrame(578, 3756, 53, 140, 4, boxes),
+           new SpriteFrame(644, 3766, 77, 130, 4, boxes),
+           new SpriteFrame(734, 3766, 65, 130, 4, boxes),
+           new SpriteFrame(811, 3768, 58, 128, 4, boxes),
+           new SpriteFrame(881, 3774, 49, 122, 4, boxes),
+           new SpriteFrame(9, 3908, 77, 127, 4, boxes),
+           new SpriteFrame(107, 3909, 77, 126, 4, boxes),
+           new SpriteFrame(199, 3945, 66, 90, 4, boxes),
+           new SpriteFrame(278, 3965, 66, 70, 4, boxes),
+           new SpriteFrame(357, 3944, 66, 91, 4, boxes),
+           new SpriteFrame(357, 3944, 66, 91, 4, boxes)
+        ];
+        var skillBSprite = new Sprite(image, skillBFrames);
+        var skillBStatus = new Skill(skillBSprite, [new SkillAction([GameKeys.RIGHT], 20), new SkillAction([GameKeys.DOWN], 20), new SkillAction([GameKeys.RIGHT], 10), new SkillAction([GameKeys.GAME_C], 10)]);
 
         var iori = {
             x: 200,
@@ -299,7 +353,7 @@
             matched: false,
             sprite: standSprite,
             prevSprite: null,
-            skillStatusList: [rollBackwardStatus, rollForwardStatus, downLightPunchStatus, downLightKickStatus, downHeavyPunchStatus, downHeavyKickStatus, lightPunchStatus, heavyPunchStatus, heavyKickStatus, lightKickStatus, runStatus, jumpBackStatus, jumpStatus],
+            skillStatusList: [skillBStatus, skillAStatus, rollBackwardStatus, rollForwardStatus, downLightPunchStatus, downLightKickStatus, downHeavyPunchStatus, downHeavyKickStatus, lightPunchStatus, heavyPunchStatus, heavyKickStatus, lightKickStatus, runStatus, jumpBackStatus, jumpStatus],
             update: function () {
                 this.siting = false;
                 this.matching = false;
@@ -390,6 +444,28 @@
                     }
                 }
 
+                if (this.sprite == jumpHeavyPunchSprite) {
+                    this.jumpingUp = this.sprite.frameIndex < 2;
+                    this.jumpingDown = !this.jumpingUp;
+                    if (Input.isKeyPressed(GameKeys.RIGHT)) {
+                        this.x += 4;
+                    }
+                    if (Input.isKeyPressed(GameKeys.LEFT)) {
+                        this.x -= 4;
+                    }
+                }
+
+                if (this.sprite == jumpHeavyKickSprite) {
+                    this.jumpingUp = this.sprite.frameIndex < 2;
+                    this.jumpingDown = !this.jumpingUp;
+                    if (Input.isKeyPressed(GameKeys.RIGHT)) {
+                        this.x += 4;
+                    }
+                    if (Input.isKeyPressed(GameKeys.LEFT)) {
+                        this.x -= 4;
+                    }
+                }
+
                 if (this.sprite == jumpSprite) {
                     //this.y -= this.sprite.frameIndex < 4 ? 6 : -6;
                     this.jumpingUp = this.sprite.frameIndex < 4;
@@ -412,6 +488,16 @@
                             this.sprite.frameIndex = 0;
                             this.matched = true;
                             this.sprite = jumpLightKickSprite;
+                        }
+                        if (Input.isKeyPressed(GameKeys.GAME_C)) {
+                            this.sprite.frameIndex = 0;
+                            this.matched = true;
+                            this.sprite = jumpHeavyPunchSprite;
+                        }
+                        if (Input.isKeyPressed(GameKeys.GAME_D)) {
+                            this.sprite.frameIndex = 0;
+                            this.matched = true;
+                            this.sprite = jumpHeavyKickSprite;
                         }
                     }
                 };
